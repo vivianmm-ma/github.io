@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Paradigm of Duality - Foundational Axes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+Pro:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2 {
+            font-family: 'Source Serif Pro', serif;
+        }
+        .axis-line-y {
+            width: 3px;
+            height: 100%;
+            background-color: #9ca3af; /* gray-400 */
+        }
+        .axis-line-x {
+            width: 100%;
+            height: 3px;
+            background-color: #9ca3af; /* gray-400 */
+        }
+        .concept-item {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .cultural-label {
+            background-color: rgba(230, 230, 230, 0.7);
+            border: 1px dashed #9ca3af;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-3xl md:text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#0052D4] to-[#6FB1FC]">The Paradigm of Duality</h1>
+            <p class="text-center text-gray-600 mt-2">A Political Compass of Psychopathology</p>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
+        <div class="w-full max-w-5xl aspect-square relative">
+            
+            <!-- AXES -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 h-full">
+                <div class="axis-line-y"></div>
+            </div>
+            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full">
+                <div class="axis-line-x"></div>
+            </div>
+
+            <!-- AXIS LABELS -->
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 text-center">
+                <p class="text-xl font-semibold text-gray-700">INDIVIDUAL</p>
+                <p class="text-sm text-gray-500">(Internal Focus / Yang 陽)</p>
+            </div>
+            <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center">
+                <p class="text-xl font-semibold text-gray-700">COLLECTIVE</p>
+                <p class="text-sm text-gray-500">(External Focus / Yin 陰)</p>
+            </div>
+             <div class="absolute top-1/2 -left-32 -translate-y-1/2 text-center w-28">
+                <p class="text-xl font-semibold text-gray-700">STRUCTURE</p>
+                <p class="text-sm text-gray-500">(Conservation / '1')</p>
+            </div>
+             <div class="absolute top-1/2 -right-32 -translate-y-1/2 text-center w-28">
+                <p class="text-xl font-semibold text-gray-700">CREATIVITY</p>
+                <p class="text-sm text-gray-500">(Emergence / '0')</p>
+            </div>
+
+            <!-- CULTURAL ZONES -->
+            <div class="absolute top-0 left-0 w-full h-1/2 cultural-label flex items-center justify-center">
+                <p class="font-semibold text-gray-600 opacity-80 text-lg">Individualistic Cultures</p>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-1/2 cultural-label flex items-center justify-center">
+                <p class="font-semibold text-gray-600 opacity-80 text-lg">Collectivistic Cultures</p>
+            </div>
+
+            <!-- PLACED CONCEPTS -->
+            <div class="absolute top-[20%] left-[15%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-600">OCD</p></div>
+            <div class="absolute top-[45%] left-[10%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-600">Depression (MDD)</p></div>
+            <div class="absolute top-[35%] left-[20%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-green-700 bg-green-200">Buddhism</p></div>
+            <div class="absolute top-[20%] left-[35%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-600">Bipolar (Depression)</p></div>
+            <div class="absolute top-[15%] right-[10%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-blue-600">LGBTQ+ Identity</p></div>
+            <div class="absolute top-[40%] right-[15%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-600">Psychotic Disorders</p></div>
+            <div class="absolute top-[10%] right-[5%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-yellow-900 bg-yellow-200">Anarchy</p></div>
+            <div class="absolute top-[20%] right-[35%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-600">Bipolar (Mania)</p></div>
+            <div class="absolute top-[10%] left-1/2 -translate-x-1/2 concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-purple-600">ADHD</p></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 concept-item p-2 rounded-full shadow-lg text-center"><p class="font-bold text-sm text-black">Taoism</p></div>
+            
+            
+            <!-- Political, Religious & Economic Concepts -->
+            <div class="absolute bottom-[45%] left-[5%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-teal-700 bg-teal-200">Judaism</p></div>
+            <div class="absolute bottom-[30%] left-[15%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-teal-700 bg-teal-200">Christianity</p></div>
+            <div class="absolute bottom-[15%] left-[5%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-teal-700 bg-teal-200">Catholicism</p></div>
+            <div class="absolute bottom-[40%] left-[25%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-teal-700 bg-teal-200">Islam</p></div>
+            <div class="absolute bottom-[28%] left-[20%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-gray-700">Corporations</p></div>
+            <div class="absolute bottom-[15%] left-[35%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-600">Billionaires</p></div>
+
+            <div class="absolute bottom-[10%] left-[20%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-900 bg-red-200">Fascism</p></div>
+            <div class="absolute bottom-[15%] left-[45%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-600">ASPD / NPD</p></div>
+            <div class="absolute bottom-[45%] right-[25%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm" style="color: #003f8a;">Liberalism</p></div>
+            <div class="absolute bottom-[25%] right-[15%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm" style="color: #003f8a;">Philanthropy</p></div>
+            <div class="absolute bottom-[35%] right-[10%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-blue-800 bg-blue-200">Democratic Socialism</p></div>
+            <div class="absolute bottom-[10%] right-[5%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-red-900 bg-red-200">Communism</p></div>
+            <div class="absolute bottom-[20%] right-[35%] concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-green-700 bg-green-200">Animism</p></div>
+            <div class="absolute bottom-1/2 left-1/2 -translate-x-1/2 concept-item p-2 rounded-lg shadow-lg text-center"><p class="font-bold text-sm text-orange-700 bg-orange-200">Tribal/Gift Economies</p></div>
+
+        </div>
+
+        <!-- Summary Section -->
+        <section class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-4">Summary of the Model</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 space-y-4 text-gray-700">
+                <p>This model functions as a **political compass of psychopathology**, mapping ideologies and mental states onto a grid defined by two fundamental axes: **Focus** (Individual vs. Collective) and **Process** (Structure vs. Creativity).</p>
+                <p>This map helps locate concepts, behaviors, and ideologies to understand their dynamics. Key examples include:</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>**Economic Systems & Actors:** The model places economic forces within the collective sphere. **Corporations**, as legal entities, represent a high degree of Collective Structure. **Billionaires** and those with extreme wealth concentration are placed as a pathological form of this quadrant, using established systems for immense personal gain at the expense of the collective. In contrast, **Philanthropy** is a form of balanced Collective Creativity (Q4). Pre-monetary systems like **Tribal/Gift Economies** represent a unique balance between collective structure and creativity.</li>
+                    <li>**Spiritual Frameworks:** The major **Abrahamic Religions** are powerful forms of Collective Structure (Q3). **Animism** represents Collective Creativity (Q4). Personal disciplines like **Buddhism** blend individual structure with collective awareness, while **Taoism**, focusing on balance, sits at the center.</li>
+                    <li>**Psychological Conditions:** **OCD**, **GAD**, and **Major Depression (MDD)** represent pathological internal structure (Q1). **Bipolar Disorder** oscillates between the creative mania of Q2 and the structured depression of Q1.</li>
+                    <li>**Political Ideologies & Pathologies:** **Conservatism** resides in balanced Collective Structure (Q3), while **Liberalism** and **Democratic Socialism** represent a spectrum of Collective Creativity (Q4). **Fascism** and **Communism** are their respective pathological extremes. **Anarchy** is the pathological extreme of Individual Creativity (Q2).</li>
+                </ul>
+                <p>The goal is to understand how these forces interact and to recognize that a healthy system—whether an individual or a society—requires a dynamic balance between all four quadrants, not a rigid adherence to one.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white mt-8 border-t">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            <p>&copy; 2025 Paradigm of Duality. A conceptual model for analysis.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
