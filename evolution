@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Evolutionary History of Human Society</title>
+    <style>
+        *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}
+        html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}
+        body{margin:0;line-height:inherit}
+        h1,h2,h3,h4,p{margin:0}
+        .container{width:100%}
+        @media (min-width:640px){.container{max-width:640px}}
+        @media (min-width:768px){.container{max-width:768px}}
+        @media (min-width:1024px){.container{max-width:1024px}}
+        @media (min-width:1280px){.container{max-width:1280px}}
+        @media (min-width:1536px){.container{max-width:1536px}}
+        .absolute{position:absolute}
+        .relative{position:relative}
+        .bottom-0{bottom:0}
+        .left-4{left:1rem}
+        .-left-10{left:-2.5rem}
+        .top-0{top:0}
+        .mx-8{margin-left:2rem;margin-right:2rem}
+        .mx-auto{margin-left:auto;margin-right:auto}
+        .mb-10{margin-bottom:2.5rem}
+        .mb-12{margin-bottom:3rem}
+        .mb-4{margin-bottom:1rem}
+        .mb-6{margin-bottom:1.5rem}
+        .mb-8{margin-bottom:2rem}
+        .ml-12{margin-left:3rem}
+        .mt-1{margin-top:.25rem}
+        .mt-2{margin-top:.5rem}
+        .mt-4{margin-top:1rem}
+        .mt-6{margin-top:1.5rem}
+        .grid{display:grid}
+        .h-8{height:2rem}
+        .w-0\.5{width:.125rem}
+        .w-8{width:2rem}
+        .w-full{width:100%}
+        .max-w-3xl{max-width:48rem}
+        .max-w-4xl{max-width:56rem}
+        .max-w-md{max-width:28rem}
+        .flex{display:flex}
+        .flex-col{flex-direction:column}
+        .items-center{align-items:center}
+        .items-stretch{align-items:stretch}
+        .justify-center{justify-content:center}
+        .justify-around{justify-content:space-around}
+        .gap-8{gap:2rem}
+        .space-y-12>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(3rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(3rem * var(--tw-space-y-reverse))}
+        .space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}
+        .rounded-md{border-radius:.375rem}
+        .border-2{border-width:2px}
+        .border-b-2{border-bottom-width:2px}
+        .border-4{border-width:4px}
+        .border-amber-600{border-color:#d97706}
+        .border-gray-800{border-color:#1f2937}
+        .p-4{padding:1rem}
+        .p-6{padding:1.5rem}
+        .pb-2{padding-bottom:.5rem}
+        .text-center{text-align:center}
+        .font-bold{font-weight:700}
+        .italic{font-style:italic}
+        .leading-relaxed{line-height:1.625}
+        .leading-tight{line-height:1.25}
+        .text-2xl{font-size:1.5rem;line-height:2rem}
+        .text-3xl{font-size:1.875rem;line-height:2.25rem}
+        .text-4xl{font-size:2.25rem;line-height:2.5rem}
+        .text-5xl{font-size:3rem;line-height:1}
+        .text-lg{font-size:1.125rem;line-height:1.75rem}
+        .text-sm{font-size:.875rem;line-height:1.25rem}
+        .text-xl{font-size:1.25rem;line-height:1.75rem}
+        .text-gray-200{color:#e5e7eb}
+        .text-gray-300{color:#d1d5db}
+        .text-gray-900{color:#111827}
+        .text-white{color:#fff}
+        .opacity-20{opacity:.2}
+        @media (min-width:768px){.md\:col-span-1{grid-column:span 1 / span 1}
+        .md\:col-span-2{grid-column:span 2 / span 2}
+        .md\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+        .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+        .md\:space-y-0>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0px * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0px * var(--tw-space-y-reverse))}
+        .md\:flex-row{flex-direction:row}
+        .md\:p-8{padding:2rem}
+        .md\:text-6xl{font-size:3.75rem;line-height:1}
+        .md\:text-xl{font-size:1.25rem;line-height:1.75rem}}
+        @media (min-width:1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color: #222222;
+            color: #EAEAEA;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+            background-color: transparent;
+            border-radius: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .chart-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            background-color: #1a1a1a;
+            border: 1px solid #111;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            border-radius: 0.25rem;
+        }
+        .card {
+            background: linear-gradient(to bottom, #4a4a4a, #3a3a3a);
+            border: 1px solid #555;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .stat-icon {
+            font-size: 3rem;
+            line-height: 1;
+            color: #D4AF37;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .flow-arrow {
+            color: #D4AF37;
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .timeline-dot {
+            background-color: #D4AF37;
+            border-radius: 50%;
+        }
+        .timeline-line {
+            background-color: rgba(212, 175, 55, 0.3);
+        }
+        .font-serif-display {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-serif-display text-white leading-tight" style="text-shadow: 2px 2px 4px #000;">A <span style="color: #D4AF37;">Human</span> Story</h1>
+            <p class="text-lg md:text-xl mt-4 text-gray-300 max-w-3xl mx-auto">An infographic charting our species' journey from deep evolutionary past to the complexities of the modern world.</p>
+        </header>
+
+        <main class="space-y-12">
+            
+            <section id="deep-past">
+                <h2 class="text-3xl font-serif-display text-center mb-8 border-b-2 border-amber-600 pb-2">I. The Deep Past: Becoming Human</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                    
+                    <div class="card p-6 text-center flex flex-col justify-center">
+                        <div class="stat-icon">🚶</div>
+                        <h3 class="text-xl font-bold mt-4">The Hominid Split</h3>
+                        <p class="mt-2 text-gray-300">Millions of years ago, our ancestors stood up. Bipedalism freed our hands, setting the stage for tool use but creating a critical evolutionary challenge for childbirth.</p>
+                    </div>
+
+                    <div class="card p-6 text-center flex flex-col justify-center">
+                        <div class="stat-icon">🧠</div>
+                        <h3 class="text-2xl font-bold mt-4">3x Brain Expansion</h3>
+                        <p class="mt-2 text-gray-300">Our brains tripled in size, a process called encephalization. This massive growth fueled advances in toolmaking, strategy, and social life.</p>
+                    </div>
+
+                    <div class="card p-6 text-center flex flex-col justify-center">
+                        <div class="stat-icon">🔥</div>
+                        <h3 class="text-xl font-bold mt-4">Expensive Tissue</h3>
+                        <p class="mt-2 text-gray-300">To fuel our energy-hungry brains, our digestive tracts shrank. This was made possible by cooking and eating more energy-dense foods, a change that also encouraged social cooperation.</p>
+                    </div>
+
+                </div>
+            </section>
+            
+            <div class="card p-6 md:p-8 w-full">
+                <h3 class="text-2xl font-serif-display text-center mb-6">The Obstetric Dilemma: An Evolutionary Trade-Off</h3>
+                <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 text-center">
+                    <div class="flex flex-col items-center">
+                        <p class="text-lg font-bold">Efficient Bipedalism</p>
+                        <p class="text-gray-300 italic">(For walking)</p>
+                        <div class="flow-arrow mt-2">↓</div>
+                        <p class="p-3 rounded-md mt-2 font-bold text-white" style="background-color: #5c8bab; border: 1px solid #4c7b9b; box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);">Narrower Pelvis</p>
+                    </div>
+                    <div class="text-5xl font-bold mx-8" style="color: #af5d5d;">vs</div>
+                    <div class="flex flex-col items-center">
+                        <p class="text-lg font-bold">Large Brain</p>
+                        <p class="text-gray-300 italic">(For intelligence)</p>
+                        <div class="flow-arrow mt-2">↓</div>
+                        <p class="p-3 rounded-md mt-2 font-bold text-white" style="background-color: #af5d5d; border: 1px solid #9f4d4d; box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);">Larger Skull</p>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-6">
+                    <div class="flow-arrow">↘</div>
+                    <div class="flow-arrow ml-12">↙</div>
+                </div>
+                <div class="text-center mt-2 card p-4 border-amber-600 border-2 max-w-md mx-auto">
+                    <h4 class="text-xl font-serif-display" style="color: #D4AF37;">Result: Social Birth</h4>
+                    <p class="text-gray-200 mt-1">Human birth became uniquely challenging, making us dependent on our social groups for survival from the very beginning.</p>
+                </div>
+            </div>
+
+            <section id="pre-agricultural">
+                <h2 class="text-3xl font-serif-display text-center my-12 border-b-2 border-amber-600 pb-2">II. The Original Human Society (~300,000 - 10,000 BCE)</h2>
+                <p class="text-center text-lg text-gray-300 max-w-4xl mx-auto mb-10">For over 95% of our history, *Homo sapiens* lived as nomadic hunter-gatherers. Our greatest strength was not technology, but our connection to each other in small, intensely social groups.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-center mb-4">Humanity's Superpower: The Social Group</h3>
+                        <p class="text-center text-gray-300 mb-4">Anthropologist Robin Dunbar found a link between brain size and group size. Humans evolved to manage communities far larger than our primate relatives, a capacity maintained through ritual, language, and gossip.</p>
+                        <div class="chart-container">
+                           <img src="https://quickchart.io/chart?c={type:'horizontalBar',data:{labels:['Chimpanzees','Bonobos','Early Humans'],datasets:[{label:'Typical Social Group Size',data:[50,100,150],backgroundColor:['%234F81BD','%239BBB59','%23D4AF37']}]},options:{legend:{display:false},scales:{xAxes:[{ticks:{fontColor:'white',fontFamily:'Georgia'},gridLines:{color:'rgba(255,255,255,0.15)'}}],yAxes:[{ticks:{fontColor:'white',fontFamily:'Georgia',fontStyle:'bold'},gridLines:{display:false}}]}}}" alt="Chart showing social group sizes of primates vs humans">
+                        </div>
+                    </div>
+
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-center mb-4">The "Original Affluent Society"</h3>
+                        <p class="text-center text-gray-300 mb-4">Hunter-gatherer life was an affluence of time, not things. With needs met in 15-20 hours a week, the vast majority of life was spent on social bonding, storytelling, and ritual.</p>
+                        <div class="chart-container flex items-center justify-center">
+                            <img src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Work (18h)','Leisure (150h)'],datasets:[{data:[18,150],backgroundColor:['%23C0504D','%234F81BD'],borderColor:'%232c2c2c',borderWidth:4}]},options:{legend:{labels:{fontColor:'white',fontFamily:'Georgia',fontStyle:'bold'}},plugins:{datalabels:{display:false}}}}" alt="Doughnut chart showing work vs leisure time">
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 card p-6">
+                        <h3 class="text-xl font-bold text-center mb-4">Worldview: The Age of Animism</h3>
+                        <p class="text-center text-gray-300 max-w-3xl mx-auto">The predominant worldview was animism: the belief that everything in nature—animals, plants, rivers, rocks—possesses a spirit and agency. This required a symbolic culture, famously expressed in the ritualistic cave paintings at sites like Chauvet, France, to communicate with a world that was alive and meaningful.</p>
+                    </div>
+
+                </div>
+            </section>
+            
+            <section id="agricultural-revolution">
+                <h2 class="text-3xl font-serif-display text-center my-12 border-b-2 border-amber-600 pb-2">III. The Agricultural Revolution (~10,000 BCE)</h2>
+                <p class="text-center text-lg text-gray-300 max-w-4xl mx-auto mb-10">The shift to farming was a profound rupture in human history. It led to a population boom but fundamentally altered our societies, our work, and our relationship with the world.</p>
+                <div class="card p-6 md:p-8 w-full">
+                    <h3 class="text-2xl font-serif-display text-center mb-6">How Farming Changed Everything</h3>
+                    <div class="relative pl-8">
+                        <div class="absolute left-4 top-0 bottom-0 w-0.5 timeline-line"></div>
+                        <div class="mb-8 relative">
+                            <div class="absolute -left-10 w-8 h-8 timeline-dot border-4 border-gray-800 flex items-center justify-center text-gray-900 font-bold">1</div>
+                            <h4 class="text-xl font-bold" style="color: #D4AF37;">Sedentism & Surplus</h4>
+                            <p class="text-gray-300 mt-1">Farming tied people to land. For the first time, societies could generate a food surplus.</p>
+                        </div>
+                        <div class="mb-8 relative">
+                             <div class="absolute -left-10 w-8 h-8 timeline-dot border-4 border-gray-800 flex items-center justify-center text-gray-900 font-bold">2</div>
+                            <h4 class="text-xl font-bold" style="color: #D4AF3T7;">Private Property & Patriarchy</h4>
+                            <p class="text-gray-300 mt-1">Surplus led to concepts of ownership and inheritance. Controlling land became paramount, driving a shift toward rigid patriarchal structures to manage lineage.</p>
+                        </div>
+                        <div class="mb-8 relative">
+                             <div class="absolute -left-10 w-8 h-8 timeline-dot border-4 border-gray-800 flex items-center justify-center text-gray-900 font-bold">3</div>
+                            <h4 class="text-xl font-bold" style="color: #D4AF37;">War, Money & Theism</h4>
+                            <p class="text-gray-300 mt-1">Concentrated wealth created an incentive for organized warfare. Systems of accounting were born to manage grain, a precursor to money. Moralizing "Big Gods" emerged to enforce cooperation in now-anonymous, large-scale societies.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="modern-era">
+                 <h2 class="text-3xl font-serif-display text-center my-12 border-b-2 border-amber-600 pb-2">IV. The Industrial & Modern Era (~1760 CE - Present)</h2>
+                 <p class="text-center text-lg text-gray-300 max-w-4xl mx-auto mb-10">The last few centuries have been a period of unprecedented acceleration, generating immense wealth and technology but also profound disconnection and anxiety.</p>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-center mb-4">The Redefinition of Work</h3>
+                        <p class="text-center text-gray-300 mb-4">The factory replaced the field, and life became regimented by the clock. The average work week exploded, a stark contrast to our ancestors' "affluent" leisure time. The 40-hour week was a hard-won victory of labor movements.</p>
+                        <div class="chart-container">
+                           <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Hunter-Gatherer','Industrial Era','Modern Standard'],datasets:[{label:'Avg. Weekly Work Hours',data:[18,65,40],backgroundColor:['%239BBB59','%23C0504D','%234F81BD']}]},options:{legend:{display:false},scales:{yAxes:[{ticks:{fontColor:'white',fontFamily:'Georgia'}}],xAxes:[{ticks:{fontColor:'white',fontFamily:'Georgia',fontStyle:'bold'}}]}}}" alt="Bar chart comparing work hours across different eras">
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-1 card p-6 text-center">
+                        <h3 class="text-xl font-bold mb-4">The Empathy Deficit</h3>
+                        <p class="text-gray-300 max-w-2xl mx-auto leading-relaxed">"We have journeyed from small, high-trust communities where empathy was a survival necessity to massive, anonymous societies where it can be a liability. Modern structures often reward self-interested behavior, creating an 'empathy deficit.' The pathologizing of neurodivergent traits—which often reflect older, more connected ways of perceiving the world—is a symptom of this deficit."</p>
+                        <p class="font-bold mt-6 text-lg" style="color: #D4AF37;">In a system that devalues connection, empathy is an act of rebellion.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
