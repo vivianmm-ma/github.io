@@ -3,289 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cindness Korner (CK)</title>
-    <!-- Importing Source Serif Pro from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Cindness Kult: a non-cult collaboration zone for growth and learning</title>
     <style>
-        /* --- Base Styles & Colors --- */
-        :root {
-            --purple: #9b59b6;
-            --blue: #3498db;
-            --green: #2ecc71;
-            --dark-bg: #0d0f1a;
-            --light-text: #ecf0f1;
-            --glow-color: rgba(52, 152, 219, 0.7);
-        }
-
-        /* --- Twinkling Cursor & Background --- */
-        html {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12,0L9.9,8.1L0,9.9l8.1,2.1l2.1,8.1l2.1-8.1l8.1-2.1L14.1,8.1L12,0z" transform="rotate(0 12 12)"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></animateTransform></path></svg>') 12 12, auto;
-        }
-
         body {
-            background-color: var(--dark-bg);
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib-rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            font-family: 'Source Serif Pro', serif;
-            color: var(--light-text);
+            background-color: #000;
+            color: #dcdcdc;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
             margin: 0;
-            padding: 40px 20px;
-            min-height: 100vh;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* --- Main Container & Layout --- */
-        .container {
-            max-width: 700px;
-            width: 100%;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* --- General Section Styling --- */
-        .section {
-            /* Increased opacity for better readability */
-            background-color: rgba(13, 15, 26, 0.92);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(52, 152, 219, 0.2);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            text-align: left;
-            transition: all 0.4s ease; /* Transition for hover effect */
-        }
-        
-        /* NEW: Hover effect for sections */
-        .section:hover {
-            border-color: rgba(52, 152, 219, 0.5);
-            box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
-        }
-        
-        /* --- Gradient Text for Titles --- */
-        .gradient-text {
-            background: linear-gradient(90deg, var(--purple), var(--blue), var(--green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: gradient-animation-text 5s linear infinite;
-        }
-        @keyframes gradient-animation-text {
-            to {
-                background-position: 200% center;
-            }
-        }
-
-        h2 {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 1.8rem;
-            color: #ffffff;
-            margin-top: 0;
-            margin-bottom: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(52, 152, 219, 0.3);
-            padding-bottom: 10px;
-        }
-        h3 {
-             font-family: 'Times New Roman', Times, serif;
-             font-size: 1.4rem;
-             color: #ffffff;
-             margin-top: 25px;
-             text-align: center;
-        }
-        p {
-            font-size: 1.1rem;
-        }
-
-        /* --- Header Section --- */
-        .main-header {
             padding: 20px;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><circle cx="8" cy="8" r="4" fill="%23dcdcdc"/></svg>'), auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
             margin-bottom: 40px;
         }
-        .title {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 3rem;
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 0 5px #ff69b4, 0 0 10px #ff69b4;
             margin-bottom: 10px;
         }
         .subtitle {
             font-size: 1.1rem;
-            color: #bdc3c7;
-            margin-bottom: 25px;
+            color: #aaa;
         }
-        .pillars {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px 25px;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 1.8rem;
-            color: #ffffff;
-        }
-
-        /* --- Simple Nav Links --- */
-        .simple-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-        }
-        .simple-nav a {
-            color: #bdc3c7;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.2s;
-        }
-        .simple-nav a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        .contact-button {
-            background: linear-gradient(135deg, var(--green), var(--blue));
-            border: none;
-            border-radius: 8px;
-            padding: 10px 25px;
-            color: #ffffff;
-            font-family: 'Source Serif Pro', serif;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .contact-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        /* --- Resource Hub Portal Buttons --- */
-        .link-pool {
+        .link-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
         }
-        .link-pool li a {
+        .link-list li a {
             display: block;
-            color: var(--light-text);
-            padding: 18px 20px;
-            border-radius: 10px;
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-align: center;
-            border: 2px solid transparent;
-            background: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) padding-box,
-                        linear-gradient(135deg, var(--purple), var(--blue), var(--green)) border-box;
-            background-size: 200% 200%;
-            animation: gradient-animation 10s ease infinite;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+            text-transform: uppercase;
         }
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .link-list li a:hover {
+            background-color: #ff69b4;
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.8);
         }
-        .link-pool li a:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* --- Footer --- */
         footer {
-            margin-top: 60px;
+            margin-top: 40px;
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: #888;
+            text-align: center;
+        }
+        .intro-text {
+            padding: 20px;
+            background-color: #1a1a1a;
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .intro-text h2 {
+            color: #fff;
+            margin-top: 0;
+        }
+        .intro-text p {
+            margin: 0;
+        }
+        .infographic {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+        }
+        .infographic h3 {
+            color: #ff69b4;
+            margin-top: 0;
+        }
+        .infographic svg {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #555;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        
-        <header class="main-header">
-            <h1 class="title gradient-text">Cindness Korner (CK)</h1>
-            <p class="subtitle">by Vivian Mitchell, MA, APCC, PhD Student</p>
+        <header class="header">
+            <h1>Cindness Kult</h1>
+            <p class="subtitle">a non-cult collaboration zone for growth and learning</p>
         </header>
 
-        <div class="section">
-            <h2 class="gradient-text">What is it about?</h2>
-            <div class="pillars">
-                <span>Self-Compassion</span>
-                <span>•</span>
-                <span>Congruence</span>
-                <span>•</span>
-                <span>Inclusivity</span>
-            </div>
+        <div class="intro-text">
+            <h2>Welcome</h2>
+            <p>
+                This space is a digital sanctuary for thinkers, creators, and collaborators.
+                We believe in the power of open dialogue and collective growth.
+                Explore the pathways below to dive into our shared resources and projects.
+            </p>
         </div>
 
-        <div class="section">
-            <h2 class="gradient-text">The Problem</h2>
-            <p><strong>Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
-            <p><strong>Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
-        </div>
+        <ul class="link-list">
+            <li>
+                <a href="writing.html">Writing, Poetry, & Essays</a>
+            </li>
+            <li>
+                <a href="toolkits.html">Toolkits & Resources</a>
+            </li>
+            <li>
+                <a href="professional.html">Professional Collaborations</a>
+            </li>
+            <li>
+                <a href="community.html">Community Hub</a>
+            </li>
+            <li>
+                <a href="about.html">About Me</a>
+            </li>
+        </ul>
 
-        <div class="section">
-            <h2 class="gradient-text">The Solution Path</h2>
-            <p>This space is my response. It's where I share tools for therapy, research, and understanding neurodivergence. The core of this work is finding the balance between <strong>Creativity & Structure</strong>. It's all grounded in my <strong>Interwoven Roots Theory</strong>, which seeks to prevent harm by building kinder systems.</p>
-            <p>Want to know when my book on this theory is ready? Sign up for exclusive updates.</p>
-            <div class="simple-nav" style="margin-top: 20px;">
-                <a href="mailto:your-email@example.com?subject=Book Updates" class="contact-button">Get Notified About the Book</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="gradient-text">About Me</h2>
-            <p>As a writer and psychotherapist-in-training, my work is dedicated to creating validating, person-centered tools that challenge systemic invalidation. My focus is on neurodiversity, trauma, and the LGBTQ+ community, blending evidence-based practices with the humanistic need for creativity and connection. This space is where I share my work to help build kinder, more effective systems for therapy and understanding.</p>
-        </div>
-        
-        <div class="section simple-nav">
-            <a href="https://www.tiktok.com/@vivi.yum?lang=en" target="_blank">TikTok</a>
-            <a href="https://www.linkedin.com/in/vivianmmitchell/" target="_blank">LinkedIn</a>
-            <a href="mailto:your-email@example.com" class="contact-button">Contact Me</a>
-        </div>
-
-        <div class="section">
-            <h2 class="gradient-text">Resource Hub</h2>
-            
-            <h3>For Understanding</h3>
-            <ul class="link-pool">
-                <li><a href="NDguide.resources.html">A Guide to Neurodivergence</a></li>
-                <li><a href="difflang.html">It's a Different Language, Not a Deficit</a></li>
-                <li><a href="duality.html">The Duality Framework</a></li>
-                <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
-                <li><a href="theory.html">Interwoven Roots Theory (The Basics)</a></li>
-            </ul>
-
-            <h3>The Solution in Practice (Free Tools)</h3>
-            <ul class="link-pool" style="margin-top: 20px;">
-                <li><a href="creativitystructure.html">Creativity & Structure</a></li>
-                <li><a href="printerfriendlyCS.html">Printer-Friendly Version</a></li>
-                <li><a href="sensorybasics.html">Sensory Basics</a></li>
-                <li><a href="sensorygame.html">The Sensory Game</a></li>
-                <li><a href="planner.html">ADHD-Friendly Planner</a></li>
-            </ul>
-
-            <h3>Creative Works & Socials</h3>
-             <ul class="link-pool" style="margin-top: 20px;">
-                <li><a href="writing.html">My Writing & Poetry</a></li>
-                <li><a href="#">Videos & Presentations</a></li>
-            </ul>
+        <div class="infographic">
+            <h3>A Quick Reminder on Self-Compassion</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1300" xml:space="preserve" style="background-color: #000; fill: #dcdcdc; font-family: 'Courier New', Courier, monospace; border: 1px solid #ff69b4; border-radius: 5px;">
+<style>
+    .st0 {
+        fill: #ff69b4;
+    }
+    .st1 {
+        font-size: 55px;
+    }
+    .st2 {
+        fill: #ffffff;
+    }
+    .st3 {
+        font-size: 40px;
+    }
+    .st4 {
+        fill: #808080;
+    }
+    .st5 {
+        font-size: 30px;
+    }
+    .st6 {
+        fill: #ff69b4;
+    }
+    .st7 {
+        font-size: 60px;
+    }
+    .st8 {
+        font-size: 45px;
+    }
+</style>
+<path class="st0" d="M0 0h1000v100H0z"/>
+<text transform="translate(500 70)" text-anchor="middle" class="st2 st1">What is Self-Compassion?</text>
+<path class="st0" d="M0 1300h1000v-100H0z"/>
+<text transform="translate(500 1250)" text-anchor="middle" class="st2 st1">embrace-autism.com</text>
+<g transform="translate(50 200)">
+    <text class="st2 st7">Self-Kindness</text>
+    <path class="st6" d="M0 80h900v10H0z"/>
+    <text transform="translate(0 140)" class="st2 st3">Being gentle and understanding with yourself, rather than</text>
+    <text transform="translate(0 190)" class="st2 st3">harshly self-critical or judgmental.</text>
+</g>
+<g transform="translate(50 450)">
+    <text class="st2 st7">Common Humanity</text>
+    <path class="st6" d="M0 80h900v10H0z"/>
+    <text transform="translate(0 140)" class="st2 st3">Recognizing that suffering and personal failure are part</text>
+    <text transform="translate(0 190)" class="st2 st3">of the shared human experience.</text>
+</g>
+<g transform="translate(50 700)">
+    <text class="st2 st7">Mindfulness</text>
+    <path class="st6" d="M0 80h900v10H0z"/>
+    <text transform="translate(0 140)" class="st2 st3">Observing your thoughts and feelings without judgment,</text>
+    <text transform="translate(0 190)" class="st2 st3">instead of over-identifying with them.</text>
+</g>
+<g transform="translate(50 950)">
+    <text class="st4 st8">© 2024 Embrace Autism</text>
+</g>
+</svg>
         </div>
 
         <footer>
-            <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
+            <p>&copy; 2025 Cindness Kult. All rights reserved.</p>
         </footer>
-
     </div>
 </body>
 </html>
