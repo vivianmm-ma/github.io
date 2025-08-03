@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Guide to Supporting Your Neurodivergent Self</title>
+    <style>
+        /* General Body and Font Styles */
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color: #1a202c; /* Deep Slate Blue */
+            color: #e5e7eb; /* Light Gray Text */
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* Gradient Text Style */
+        .gradient-text {
+            background: linear-gradient(45deg, #f9a8d4, #c084fc, #7dd3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #F9FAFB;
+        }
+        header .nav-links {
+            display: none; /* Hidden on mobile */
+        }
+        header .nav-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        header .nav-links a:hover {
+            color: #f9a8d4;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        
+        section {
+            margin-bottom: 6rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: #F9FAFB;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 56rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Strengths Section */
+        .strengths-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        .strength-card {
+            background-color: #2d3748;
+            padding: 1.75rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
+            border-top-width: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .strength-card:hover {
+             transform: translateY(-8px);
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+        .strength-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .strength-card p {
+            color: #adb5bd;
+            font-size: 1.1rem;
+        }
+        .border-violet { border-color: #c084fc; }
+        .text-violet { color: #c084fc; }
+        .border-sky { border-color: #7dd3fc; }
+        .text-sky { color: #7dd3fc; }
+        .border-teal { border-color: #5eead4; }
+        .text-teal { color: #5eead4; }
+        .border-lime { border-color: #bef264; }
+        .text-lime { color: #bef264; }
+        .border-rose { border-color: #f9a8d4; }
+        .text-rose { color: #f9a8d4; }
+        .border-orange { border-color: #fb923c; }
+        .text-orange { color: #fb923c; }
+
+        /* Support Section */
+        .support-section > div {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .support-category {
+            background-color: #2d3748;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
+        }
+        .support-category h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #E5E7EB;
+        }
+        .support-category ul {
+            padding-left: 1.5rem;
+            list-style-type: '✨';
+            color: #adb5bd;
+            font-size: 1.1rem;
+        }
+         .support-category li {
+            padding-left: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+
+        /* Strategies Section */
+        .strategies-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        .strategy-card {
+            background-color: #2d3748;
+            padding: 1.75rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+        }
+        .strategy-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #E5E7EB;
+        }
+        .strategy-card p {
+            color: #adb5bd;
+            font-size: 1.1rem;
+        }
+
+        /* Resources Section */
+        .resources-section > div {
+            background-color: #2d3748;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+        }
+        .resources-grid {
+            display: grid;
+            gap: 2.5rem;
+        }
+        .resources-grid h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #d8b4fe;
+        }
+        .resources-grid ul {
+            padding: 0;
+            list-style: none;
+        }
+        .resources-grid li {
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .resources-grid a {
+            color: #c084fc;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        .resources-grid a:hover {
+            color: #d8b4fe;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1F2937;
+            color: #9CA3AF;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        /* Responsive Media Queries */
+        @media (min-width: 768px) {
+            header .nav-links {
+                display: flex;
+            }
+            .hero-section h1 {
+                font-size: 4.5rem;
+            }
+            .strengths-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .strategies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .strengths-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <nav class="container">
+            <div class="logo">Neurodivergent Guide</div>
+            <div class="nav-links">
+                <a href="#strengths">Strengths</a>
+                <a href="#support">Support</a>
+                <a href="#strategies">Strategies</a>
+                <a href="#resources">Resources</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="gradient-text">A Guide to Supporting Your Neurodivergent Self</h1>
+            <p>A framework of recommendations to support an individual with an AuDHD (Autism + ADHD) profile in building a life that honors their neurotype, leverages their strengths, and provides scaffolding for areas of challenge.</p>
+        </section>
+
+        <!-- Strengths Section -->
+        <section id="strengths">
+            <h2 class="section-title">🧠 Acknowledging Your Strengths</h2>
+            <div class="strengths-grid">
+                <div class="strength-card border-violet">
+                    <h3 class="text-violet">Deep Focus & Passionate Interests</h3>
+                    <p>Your ability to immerse yourself in topics is a powerful asset that allows for the development of expert-level knowledge.</p>
+                </div>
+                <div class="strength-card border-sky">
+                    <h3 class="text-sky">Pattern Recognition & Systemizing</h3>
+                    <p>Many neurodivergent individuals excel at seeing connections and systems that others miss, making them natural problem-solvers.</p>
+                </div>
+                <div class="strength-card border-teal">
+                    <h3 class="text-teal">Honesty, Loyalty, & Strong Moral Compass</h3>
+                    <p>A preference for direct communication and a deep sense of justice are common traits that foster reliable and principled relationships.</p>
+                </div>
+                <div class="strength-card border-lime">
+                    <h3 class="text-lime">Creativity & Innovative Thinking</h3>
+                    <p>Your mind is likely a wellspring of ideas, capable of making rapid, novel connections that lead to exceptional creativity.</p>
+                </div>
+                <div class="strength-card border-rose">
+                    <h3 class="text-rose">Resilience & Adaptability</h3>
+                    <p>Navigating a world not built for your brain style fosters incredible resilience and perseverance.</p>
+                </div>
+                 <div class="strength-card border-orange">
+                    <h3 class="text-orange">Heightened Sensory Experience</h3>
+                    <p>While sensitivities can be a challenge, they can also lead to a richer, more detailed, and nuanced appreciation of the world.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support" class="support-section">
+            <h2 class="section-title">🤝 Building Your Support System</h2>
+            <div>
+                <div class="support-category">
+                    <h3>I. Therapeutic & Clinical Support</h3>
+                    <ul>
+                        <li><b>Individual Therapy:</b> Engage with a provider who is explicitly neurodiversity-affirming and trauma-informed. Look for person-centered, validating approaches. Resources like Zocdoc and Psychology Today can help.</li>
+                        <li><b>Specialized Treatment:</b> If co-occurring OCD is present, consider Exposure and Response Prevention (ERP) adapted for a neurodivergent profile.</li>
+                        <li><b>Medication Management:</b> Consult a knowledgeable psychiatrist to discuss options for ADHD that may improve executive functioning and emotional regulation.</li>
+                    </ul>
+                </div>
+                <div class="support-category">
+                    <h3>II. Systems, Advocacy, & Community Support</h3>
+                    <ul>
+                        <li><b>Apply for Public Services:</b> Investigate eligibility for Supplemental Security Income (SSI), Medicaid, and state-level Developmental Disability Services (like Regional Centers in CA).</li>
+                        <li><b>Know Your Rights:</b> Familiarize yourself with the Americans with Disabilities Act (ADA) and state-specific laws (like the Lanterman Act in CA).</li>
+                        <li><b>Connect with Peers:</b> Seek out online or in-person peer support groups for neurodivergent adults to reduce isolation and find validation.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Strategies Section -->
+        <section id="strategies">
+            <h2 class="section-title">💡 Self-Advocacy & Well-being Strategies</h2>
+            <div class="strategies-grid">
+                <div class="strategy-card">
+                    <h3>Honor Your Sensory System</h3>
+                    <p>Proactively create comfortable environments. Use tools like tinted lenses (e.g., FL-41), noise-canceling headphones, blackout curtains, and weighted blankets to manage sensory input.</p>
+                </div>
+                <div class="strategy-card">
+                    <h3>Authentic Communication</h3>
+                    <p>Consciously reduce masking in safe relationships. Practice explicitly stating your needs and boundaries. Connect with others on your own terms in ways that feel energizing.</p>
+                </div>
+                <div class="strategy-card">
+                    <h3>Physical Well-being</h3>
+                    <p>Engage in regular physical movement that feels good to your body. Explore sustainable nutritional shifts, like focusing on adequate protein intake.</p>
+                </div>
+                <div class="strategy-card">
+                    <h3>Vocational & Independent Living</h3>
+                    <p>Explore state vocational training services. Use external aids like visual timers, checklists, and apps to support executive functioning and financial planning.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="resources-section">
+            <h2 class="section-title">📚 Psychoeducation & Further Learning</h2>
+            <div>
+                <div class="resources-grid">
+                    <div>
+                        <h3>🔗 Recommended Websites</h3>
+                        <ul>
+                            <li><a href="https://neurodivergentinsights.com" target="_blank">Neurodivergent Insights</a></li>
+                            <li><a href="https://autisticadvocacy.org" target="_blank">Autistic Self Advocacy Network (ASAN)</a></li>
+                            <li><a href="https://chadd.org" target="_blank">CHADD</a></li>
+                            <li><a href="https://www.pdasociety.org.uk" target="_blank">PDA Society</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>📖 Selected Books</h3>
+                        <ul>
+                            <li><i>Unmasking Autism</i> by Devon Price, Ph.D.</li>
+                            <li><i>NeuroTribes</i> by Steve Silberman</li>
+                            <li><i>Divergent Mind</i> by Jenara Nerenberg</li>
+                            <li><i>Sincerely, Your Autistic Child</i> by AWN</li>
+                            <li><i>How to Keep House While Drowning</i> by KC Davis, LPC</li>
+                            <li><i>Taking Charge of ADHD</i> by Russell A. Barkley, Ph.D.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Neurodivergent Guide. A resource for understanding and affirmation.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
