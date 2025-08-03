@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Planner</title>
+    <style>
+        /* General Body & Font Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #F8F7FA;
+            color: #374151; /* gray-700 */
+            margin: 0;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Custom Font Class (using a common serif fallback) */
+        .font-playfair {
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        }
+
+        /* Main container to center content */
+        .container {
+            width: 100%;
+            max-width: 50rem; /* Adjusted for a single-column layout */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: left; /* Aligned to the left */
+            margin-bottom: 2rem;
+            padding-left: 0.5rem; /* Added some padding */
+        }
+        .header h1 {
+            font-size: 2.5rem; /* text-4xl */
+            font-weight: 700;
+            color: #1F2937;
+            margin: 0 0 0.75rem 0;
+        }
+        .header .info-line {
+            font-size: 1.125rem; /* text-lg */
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+        }
+        .header .blank-space {
+            display: inline-block;
+            border-bottom: 2px solid #D1D5DB;
+            min-width: 150px;
+            padding-left: 5px;
+            vertical-align: bottom;
+        }
+
+
+        /* Main Planner Container */
+        .planner-body {
+            background-color: #ffffff;
+            border: 4px solid #A7F3D0; /* New green border */
+            border-radius: 1rem; /* rounded-2xl */
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: relative;
+            /* Opaque star background */
+            background-image:
+                radial-gradient(circle, rgba(167, 139, 250, 0.15) 1px, transparent 1px),
+                radial-gradient(circle, rgba(147, 197, 253, 0.15) 1px, transparent 1px),
+                radial-gradient(circle, rgba(167, 243, 208, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px, 40px 40px, 40px 40px;
+            background-position: 0 0, 20px 20px, 0px 20px;
+        }
+        
+        /* Section styling (e.g., for different subjects) */
+        .subject-block {
+            margin-bottom: 1.5rem;
+        }
+        
+        .general-notes-section {
+             margin-top: 1.5rem;
+        }
+
+
+        /* Table Grid Styles */
+        .assignment-grid {
+            display: grid;
+            /* Adjusted column widths for new headers */
+            grid-template-columns: 1.5fr 2.5fr 1fr 2fr;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #E5E7EB;
+        }
+
+        /* Table Header */
+        .grid-header {
+            font-weight: normal; /* Unbolded the font */
+            padding: 0.75rem 1rem;
+            text-align: center;
+            color: #111827;
+            border-bottom: 1px solid #E5E7EB;
+            font-family: "Times New Roman", Times, serif; /* Changed font */
+            font-size: 1.1rem; /* Increased font size */
+        }
+        .grid-header:not(:last-child) {
+            border-right: 1px solid #E5E7EB;
+        }
+
+        /* Table Cell */
+        .grid-cell {
+            padding: 0.75rem 1rem;
+            min-height: 2.5rem; /* 40px */
+            border-bottom: 1px solid #E5E7EB;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent to see stars */
+        }
+        .assignment-grid .grid-cell:not(:last-child) {
+            border-right: 1px solid #E5E7EB;
+        }
+        /* Remove bottom border from last row */
+        .assignment-grid > .grid-cell:nth-last-child(-n+4) {
+             border-bottom: none;
+        }
+
+        /* Color Themes for Sections */
+        .theme-purple .grid-header { background-color: #E9D5FF; } /* purple-200 */
+        .theme-green .grid-header { background-color: #A7F3D0; } /* green-200 */
+        .theme-blue .grid-header { background-color: #BFDBFE; } /* blue-200 */
+
+        /* Notes Section & Keep in Mind Section */
+        .notes-section h4, .keep-in-mind-header, .general-notes-section h4 {
+            margin: 0 0 0.5rem 0.25rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        .notes-area {
+            width: 100%;
+            min-height: 100px;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            box-sizing: border-box;
+            background-color: rgba(249, 250, 251, 0.8); /* Slightly transparent */
+        }
+        .keep-in-mind-header {
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="font-playfair">✨ Daily Planner ✨</h1>
+            <div class="info-line">Date:<span contenteditable="true" class="blank-space"></span></div>
+            <div class="info-line">Day of week:<span contenteditable="true" class="blank-space"></span></div>
+        </header>
+
+        <!-- Planner Body -->
+        <div class="planner-body">
+            
+            <!-- Subject Block 1: Purple -->
+            <div class="subject-block theme-purple">
+                <div class="assignment-grid">
+                    <!-- Header Row -->
+                    <div class="grid-header">(•ᴗ•) To-do</div>
+                    <div class="grid-header">About</div>
+                    <div class="grid-header">Done by?</div>
+                    <div class="grid-header">Notes</div>
+
+                    <!-- Data Row 1 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+
+                    <!-- Data Row 2 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+
+                    <!-- Data Row 3 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+
+                    <!-- Data Row 4 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                </div>
+            </div>
+
+            <!-- Subject Block 2: Green -->
+            <div class="subject-block theme-green">
+                <div class="assignment-grid">
+                    <!-- Header Row -->
+                    <div class="grid-header">♥ Needs to be done soon</div>
+                    <div class="grid-header">About</div>
+                    <div class="grid-header">Done by?</div>
+                    <div class="grid-header">Notes</div>
+
+                    <!-- Data Row 1 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    
+                    <!-- Data Row 2 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+
+                    <!-- Data Row 3 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+
+                    <!-- Data Row 4 -->
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                    <div class="grid-cell" contenteditable="true"></div>
+                </div>
+            </div>
+
+            <!-- Subject Block 3: Blue -->
+            <div class="subject-block theme-blue">
+                <div class="keep-in-mind-header grid-header">(„• ֊ •„) Keep in mind</div>
+                <div class="notes-area" contenteditable="true"></div>
+            </div>
+
+            <!-- General Notes Section -->
+            <div class="general-notes-section">
+                <h4>✎ Notes:</h4>
+                <div class="notes-area" contenteditable="true"></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
