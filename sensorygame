@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printable Sensory Cards</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .instructions {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin: 0 auto 40px auto;
+            max-width: 800px;
+            page-break-after: always; /* Creates a page break after instructions when printing */
+        }
+
+        .instructions h2 {
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .instructions strong {
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            page-break-after: avoid;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px;
+        }
+
+        .card {
+            width: 150px;
+            height: 200px;
+            border: 2px dashed #aaa;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #ffffff;
+            page-break-inside: avoid;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .card .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .card .text {
+            font-size: 1em;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        
+        .card .footer {
+            font-size: 0.7em;
+            font-style: italic;
+            color: #888;
+            position: absolute;
+            bottom: 5px;
+        }
+
+        .card .category-icon {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-size: 1.5em;
+            opacity: 0.6;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                background-color: #fff;
+            }
+            .instructions {
+                border: none;
+                box-shadow: none;
+                max-width: 100%;
+            }
+            h1, h2 {
+                border-top: none;
+            }
+            .card {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="instructions">
+        <h2>How to Play: "Sensory Profile" (The Card Sort)</h2>
+        <p><strong>Goal:</strong> To discover and create a visual map of your personal sensory needs. Remember, each player needs their own set of cards to sort!</p>
+        <ol>
+            <li><strong>Get Your Cards:</strong> Print and cut out all the cards from the three decks (❤️ Likes, ⚡ Triggers, and 🌿 Soothers/Helpers). Mix them all into one big pile.</li>
+            <li><strong>Set Up Your Sorting Area:</strong> On a large, flat surface, make labels for your sorting categories. Good ones to start with are: <strong>Like</strong>, <strong>Dislike / Trigger</strong>, <strong>Soother / Helper</strong>, <strong>Neutral</strong>, and <strong>Unsure / Want to Explore</strong>.</li>
+            <li><strong>Sort the Cards (One by One):</strong> Draw a card from your big pile. Read it and think about how that specific thing makes <em>you</em> feel. Place the card under the category label that fits best for you. There are no wrong answers!</li>
+            <li><strong>Review Your Profile:</strong> Once all the cards are sorted, take a look at your piles. This is your personal sensory profile! Notice any patterns. This is the foundation for your sensory safety plan and for playing the "Sensory Solutions" game next.</li>
+        </ol>
+    </div>
+
+    <h1>Printable Sensory Profile Cards</h1>
+
+    <!-- SENSORY LIKES DECK -->
+    <h2>❤️ Sensory Likes Deck</h2>
+    <div class="card-container">
+        <!-- Visual/Lighting -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Natural lighting</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Dim lighting</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Bright lighting</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Artificial light</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Colorful lighting (LED)</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Moderate lighting</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Yellow hues (warm)</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">White hues (cool)</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Visually sparse & organized</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Neutral colors</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Vibrant colors</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Patterns & bright decor</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Solid colors</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Minimalism</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Everything spread out/visible</div><div class="category-icon">👁️</div><div class="footer">Like</div></div>
+        <!-- Sound -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Quiet</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">White noise</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Brown noise</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Binaural beats</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Loud and lively</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Music/background noise</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Television on in background</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Stim song (song on repeat)</div><div class="category-icon">🔊</div><div class="footer">Like</div></div>
+        <!-- Smell -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Mild or subtle scents</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Fresh or clean smells</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Citrus or fruity scents</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Bakery or food-related scents</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Herbal or earthy scents</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Aromatherapy scents</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Natural scents (flowers, trees)</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Scents of joyful memories</div><div class="category-icon">👃</div><div class="footer">Like</div></div>
+        <!-- Tactile -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Light touch</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Deep pressure touch</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">No touch</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Twirling hair</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Fidget toy</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Soft textures</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Petting a dog or cat</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Rub or pick at clothes</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Warm bath or shower</div><div class="category-icon">✋</div><div class="footer">Like</div></div>
+        <!-- Gustatory -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Chewing gum</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Crunchy snack</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Suck or bite lips or cheeks</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Chewing ice</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Spicy food</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Drinking a warm beverage</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Hard candy</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Drinking a carbonated drink</div><div class="category-icon">👅</div><div class="footer">Like</div></div>
+        <!-- Clothing -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Constriction clothing (tight)</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Loose-fitting clothing</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Cotton fabric</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Tagless clothing</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Seamless garments</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Breathable materials</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Stretchy and flexible clothing</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Non-restrictive waistbands</div><div class="category-icon">👕</div><div class="footer">Like</div></div>
+        <!-- Movement -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Gentle rocking or swaying</div><div class="category-icon">🤸</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Swinging</div><div class="category-icon">🤸</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Jumping or bouncing</div><div class="category-icon">🤸</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Stimming</div><div class="category-icon">🤸</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Spinning or twirling</div><div class="category-icon">🤸</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Pacing</div><div class="category-icon">🤸</div><div class="footer">Like</div></div>
+        <!-- Environment -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Outdoors</div><div class="category-icon">🌳</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Indoors</div><div class="category-icon">🌳</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Open space</div><div class="category-icon">🌳</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Nooks and crannies</div><div class="category-icon">🌳</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Urban environments</div><div class="category-icon">🌳</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Rural settings</div><div class="category-icon">🌳</div><div class="footer">Like</div></div>
+        <!-- Temperature -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Cool</div><div class="category-icon">🌡️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Warm</div><div class="category-icon">🌡️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Breeze/airflow</div><div class="category-icon">🌡️</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Neutral temperature</div><div class="category-icon">🌡️</div><div class="footer">Like</div></div>
+        <!-- People -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Lots of people</div><div class="category-icon">👥</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Only a few people</div><div class="category-icon">👥</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">A small group of people</div><div class="category-icon">👥</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Alone</div><div class="category-icon">👥</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">People you don't know</div><div class="category-icon">👥</div><div class="footer">Like</div></div>
+        <!-- Proprioception -->
+        <div class="card"><div class="icon">❤️</div><div class="text">Lifting weights</div><div class="category-icon">💪</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Pressure</div><div class="category-icon">💪</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Weight</div><div class="category-icon">💪</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">No pressure (avoidance)</div><div class="category-icon">💪</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Pillow/weighted blanket</div><div class="category-icon">💪</div><div class="footer">Like</div></div>
+        <div class="card"><div class="icon">❤️</div><div class="text">Weight on lap</div><div class="category-icon">💪</div><div class="footer">Like</div></div>
+    </div>
+
+    <!-- SENSORY TRIGGERS DECK -->
+    <h2>⚡ Sensory Triggers Deck</h2>
+    <div class="card-container">
+        <!-- Visual/Lighting -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Bright or harsh lighting</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Flickering or flashing lights</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Fluorescent lighting</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Intense or direct sunlight</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Rapid changes in lighting</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Dim or low lighting</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Glare or reflections</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Colored or neon lights</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Strobe lights</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Busy visual environments</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Cluttered environments</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Rapidly moving visuals</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Specific colors or contrasts</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Overwhelming patterns</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Fast-paced movies or games</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Strained or intense eye contact</div><div class="category-icon">👁️</div><div class="footer">Trigger</div></div>
+        <!-- Sound -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Loud noises</div><div class="category-icon">🔊</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Sudden bursts of sound</div><div class="category-icon">🔊</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Background noise or chatter</div><div class="category-icon">🔊</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Echoes or reverberations</div><div class="category-icon">🔊</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">People chewing</div><div class="category-icon">🔊</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">High-pitched sounds</div><div class="category-icon">🔊</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Repetitive noise (pen clicking)</div><div class="category-icon">🔊</div><div class="footer">Trigger</div></div>
+        <!-- Smell -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Strong odors</div><div class="category-icon">👃</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Chemical smells</div><div class="category-icon">👃</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Perfumes or colognes</div><div class="category-icon">👃</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Cooking smells</div><div class="category-icon">👃</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Smoke or pollution</div><div class="category-icon">👃</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Cleaning products</div><div class="category-icon">👃</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Floral or fragrant scents</div><div class="category-icon">👃</div><div class="footer">Trigger</div></div>
+        <!-- Tactile -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Rough or abrasive textures</div><div class="category-icon">✋</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Itchy or scratchy materials</div><div class="category-icon">✋</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Light or gentle touch</div><div class="category-icon">✋</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Heavy or deep pressure</div><div class="category-icon">✋</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Wet or sticky sensations</div><div class="category-icon">✋</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Moisture</div><div class="category-icon">✋</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Hot or cold objects</div><div class="category-icon">✋</div><div class="footer">Trigger</div></div>
+        <!-- Gustatory -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Overpowering flavors</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Spicy or hot foods</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Bitter tastes</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Sour tastes</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Sweet tastes</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Food touching sensitivities</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Food temperature issues</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Unfamiliar or new foods</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Mushy textures (yogurt, etc.)</div><div class="category-icon">👅</div><div class="footer">Trigger</div></div>
+        <!-- Clothing -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Tags or labels on clothing</div><div class="category-icon">👕</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Tight or constricting clothing</div><div class="category-icon">👕</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Uncomfortable footwear</div><div class="category-icon">👕</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Sensitivity to certain fabrics</div><div class="category-icon">👕</div><div class="footer">Trigger</div></div>
+        <!-- Movement -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Fast or erratic movements</div><div class="category-icon">🤸</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Being in crowds</div><div class="category-icon">🤸</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Rapid changes in motion</div><div class="category-icon">🤸</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Intense physical activity</div><div class="category-icon">🤸</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Certain transportation (elevators)</div><div class="category-icon">🤸</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Spinning or rotating</div><div class="category-icon">🤸</div><div class="footer">Trigger</div></div>
+        <!-- Environment -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Crowded or busy spaces</div><div class="category-icon">🌳</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Confined environments</div><div class="category-icon">🌳</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Lack of personal space</div><div class="category-icon">🌳</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Unfamiliar environments</div><div class="category-icon">🌳</div><div class="footer">Trigger</div></div>
+        <!-- Temperature -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Extreme heat or cold</div><div class="category-icon">🌡️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Stuffy or stagnant air</div><div class="category-icon">🌡️</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Humidity or dryness</div><div class="category-icon">🌡️</div><div class="footer">Trigger</div></div>
+        <!-- People -->
+        <div class="card"><div class="icon">⚡</div><div class="text">Loud or intrusive voices</div><div class="category-icon">👥</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Personal space invasion</div><div class="category-icon">👥</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Social demands / small talk</div><div class="category-icon">👥</div><div class="footer">Trigger</div></div>
+        <div class="card"><div class="icon">⚡</div><div class="text">Physical touch from others</div><div class="category-icon">👥</div><div class="footer">Trigger</div></div>
+    </div>
+
+    <!-- SENSORY SOOTHERS & HELPERS DECK -->
+    <h2>🌿 Soothers & Helpers Deck</h2>
+    <div class="card-container">
+        <!-- Visual/Lighting -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Darkness</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Himalayan salt lamp</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Candlelight</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Twinkle or fairy lights</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Light-filtering glasses</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Nature scenery</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Calming artwork</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Closing eyes/visual detox</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Lava lamp or bubble lamp</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Tinted glasses or sunglasses</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Eye masks or sleep masks</div><div class="category-icon">👁️</div><div class="footer">Soother/Helper</div></div>
+        <!-- Sound -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Calming music</div><div class="category-icon">🔊</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Instrumental tunes</div><div class="category-icon">🔊</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">ASMR videos</div><div class="category-icon">🔊</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Guided meditation</div><div class="category-icon">🔊</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Noise-canceling headphones</div><div class="category-icon">🔊</div><div class="footer">Soother/Helper</div></div>
+        <!-- Smell -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Essential oils or sachets</div><div class="category-icon">👃</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Freshly brewed coffee or tea</div><div class="category-icon">👃</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Baking or food aromas</div><div class="category-icon">👃</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Scented lotions or body oils</div><div class="category-icon">👃</div><div class="footer">Soother/Helper</div></div>
+        <!-- Tactile -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Engaging in tactile crafts</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Exploring sensory bins</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Kinetic sand or play-dough</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Gardening or working with soil</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Seeking touch (massage, etc)</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Weighted blanket or lap pad</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Squishy stress balls</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">TENS unit</div><div class="category-icon">✋</div><div class="footer">Soother/Helper</div></div>
+        <!-- Gustatory -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Savoring a favorite food</div><div class="category-icon">👅</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Enjoying a warm cup of tea</div><div class="category-icon">👅</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Trying soothing foods</div><div class="category-icon">👅</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Chewable jewelry</div><div class="category-icon">👅</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Oral sensory tools (chewy tubes)</div><div class="category-icon">👅</div><div class="footer">Soother/Helper</div></div>
+        <!-- Clothing -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Compression clothing</div><div class="category-icon">👕</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Tagless clothes/seamless socks</div><div class="category-icon">👕</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Adaptive clothing</div><div class="category-icon">👕</div><div class="footer">Soother/Helper</div></div>
+        <!-- Movement -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Gentle stretching or yoga</div><div class="category-icon">🤸</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Walking or hiking in nature</div><div class="category-icon">🤸</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Dancing</div><div class="category-icon">🤸</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Fidget cubes or tools</div><div class="category-icon">🤸</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Exercise balls</div><div class="category-icon">🤸</div><div class="footer">Soother/Helper</div></div>
+        <!-- Environment -->
+        <div class="card"><div class="icon">🌿</div><div class="text">De-cluttered space</div><div class="category-icon">🌳</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Cozy & comfortable seating</div><div class="category-icon">🌳</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Access to a quiet area</div><div class="category-icon">🌳</div><div class="footer">Soother/Helper</div></div>
+        <!-- Temperature -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Warm or cozy blankets</div><div class="category-icon">🌡️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Cooling gel packs / ice packs</div><div class="category-icon">🌡️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Heating pad</div><div class="category-icon">🌡️</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Air conditioner or fan</div><div class="category-icon">🌡️</div><div class="footer">Soother/Helper</div></div>
+        <!-- People -->
+        <div class="card"><div class="icon">🌿</div><div class="text">Time alone</div><div class="category-icon">👥</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">A designated advocate</div><div class="category-icon">👥</div><div class="footer">Soother/Helper</div></div>
+        <div class="card"><div class="icon">🌿</div><div class="text">Supportive friend</div><div class="category-icon">👥</div><div class="footer">Soother/Helper</div></div>
+    </div>
+
+</body>
+</html>
