@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cindness Kult - Writing</title>
+    <title>Cindness Korner (CK)</title>
     <!-- Importing Source Serif Pro from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- This is the same styling from your homepage for consistency! --- */
+        /* --- Base Styles & Colors --- */
         :root {
             --purple: #9b59b6;
             --blue: #3498db;
@@ -18,12 +18,15 @@
             --light-text: #ecf0f1;
             --glow-color: rgba(52, 152, 219, 0.7);
         }
+
+        /* --- Twinkling Cursor & Background --- */
         html {
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12,0L9.9,8.1L0,9.9l8.1,2.1l2.1,8.1l2.1-8.1l8.1-2.1L14.1,8.1L12,0z" transform="rotate(0 12 12)"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></animateTransform></path></svg>') 12 12, auto;
         }
+
         body {
             background-color: var(--dark-bg);
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib-rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -35,80 +38,253 @@
             line-height: 1.7;
             overflow-x: hidden;
         }
+
+        /* --- Main Container & Layout --- */
         .container {
             max-width: 700px;
             width: 100%;
             margin: 0 auto;
-            text-align: left; /* Changed to left-align for reading */
+            text-align: center;
             position: relative;
             z-index: 1;
         }
+
+        /* --- General Section Styling --- */
         .section {
-            background-color: rgba(13, 15, 26, 0.85); /* Slightly more opaque for reading */
+            /* Increased opacity for better readability */
+            background-color: rgba(13, 15, 26, 0.92);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(52, 152, 219, 0.2);
             border-radius: 12px;
-            padding: 30px 40px; /* More padding for text */
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+            transition: all 0.4s ease; /* Transition for hover effect */
+        }
+        
+        /* NEW: Hover effect for sections */
+        .section:hover {
+            border-color: rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* --- Gradient Text for Titles --- */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-animation-text 5s linear infinite;
+        }
+        @keyframes gradient-animation-text {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+            padding-bottom: 10px;
+        }
+        h3 {
+             font-family: 'Times New Roman', Times, serif;
+             font-size: 1.4rem;
+             color: #ffffff;
+             margin-top: 25px;
+             text-align: center;
+        }
+        p {
+            font-size: 1.1rem;
+        }
+
+        /* --- Header Section --- */
+        .main-header {
+            padding: 20px;
             margin-bottom: 40px;
         }
-        h1, h2, h3 {
+        .title {
             font-family: 'Times New Roman', Times, serif;
-            color: #ffffff;
-            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
         }
-        h1 { font-size: 2.8rem; text-shadow: 0 0 15px var(--glow-color); margin-bottom: 30px; }
-        h2 { font-size: 2rem; margin-top: 40px; }
-        p { margin-bottom: 1.2em; }
-        a { color: var(--green); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .home-link {
-            display: block;
-            text-align: center;
-            margin-top: 40px;
-            font-weight: 600;
+        .subtitle {
             font-size: 1.1rem;
+            color: #bdc3c7;
+            margin-bottom: 25px;
+        }
+        .pillars {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px 25px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+        }
+
+        /* --- Simple Nav Links --- */
+        .simple-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .simple-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .simple-nav a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .contact-button {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+            border: none;
+            border-radius: 8px;
+            padding: 10px 25px;
+            color: #ffffff;
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- Resource Hub Portal Buttons --- */
+        .link-pool {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .link-pool li a {
+            display: block;
+            color: var(--light-text);
+            padding: 18px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) padding-box,
+                        linear-gradient(135deg, var(--purple), var(--blue), var(--green)) border-box;
+            background-size: 200% 200%;
+            animation: gradient-animation 10s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .link-pool li a:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* --- Footer --- */
+        footer {
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
         }
     </style>
 </head>
 <body>
     <div class="container">
         
+        <header class="main-header">
+            <h1 class="title gradient-text">Cindness Korner (CK)</h1>
+            <p class="subtitle">by Vivian Mitchell, MA, APCC, PhD Student</p>
+        </header>
+
         <div class="section">
-            <h1>Writing & Creative Works</h1>
-
-            <!-- =============================================================== -->
-            <!-- START PASTING YOUR CONTENT HERE                                 -->
-            <!-- =============================================================== -->
-            
-            <h2>Poetry</h2>
-            <h3>Title of Your Poem</h3>
-            <p>
-                Paste your poem here. Line one.<br>
-                Line two.<br>
-                Line three.
-            </p>
-
-            <h2>Research & Articles</h2>
-            <h3>Title of Your First Article (e.g., "Autism: A Different Communication")</h3>
-            <p>
-                Start pasting your article text here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <p>
-                You can add more paragraphs as needed.
-            </p>
-
-            <h3>Title of Your Next Article (e.g., "Neurodiversity: A Different Language")</h3>
-            <p>
-                Paste your next article here. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            
-            <!-- =============================================================== -->
-            <!-- END OF CONTENT AREA                                             -->
-            <!-- =============================================================== -->
-
-            <a href="index.html" class="home-link">← Back to Main Hub</a>
+            <h2 class="gradient-text">What is it about?</h2>
+            <div class="pillars">
+                <span>Self-Compassion</span>
+                <span>•</span>
+                <span>Congruence</span>
+                <span>•</span>
+                <span>Inclusivity</span>
+            </div>
         </div>
+
+        <div class="section">
+            <h2 class="gradient-text">The Problem</h2>
+            <p><strong>Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
+            <p><strong>Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">The Solution Path</h2>
+            <p>This space is my response. It's where I share tools for therapy, research, and understanding neurodivergence. The core of this work is finding the balance between <strong>Creativity & Structure</strong>. It's all grounded in my <strong>Interwoven Roots Theory</strong>, which seeks to prevent harm by building kinder systems.</p>
+            <p>Want to know when my book on this theory is ready? Sign up for exclusive updates.</p>
+            <div class="simple-nav" style="margin-top: 20px;">
+                <a href="mailto:your-email@example.com?subject=Book Updates" class="contact-button">Get Notified About the Book</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">About Me</h2>
+            <p>As a writer and psychotherapist-in-training, my work is dedicated to creating validating, person-centered tools that challenge systemic invalidation. My focus is on neurodiversity, trauma, and the LGBTQ+ community, blending evidence-based practices with the humanistic need for creativity and connection. This space is where I share my work to help build kinder, more effective systems for therapy and understanding.</p>
+        </div>
+        
+        <div class="section simple-nav">
+            <a href="https://www.tiktok.com/@vivi.yum?lang=en" target="_blank">TikTok</a>
+            <a href="https://www.linkedin.com/in/vivianmmitchell/" target="_blank">LinkedIn</a>
+            <a href="mailto:your-email@example.com" class="contact-button">Contact Me</a>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">Resource Hub</h2>
+            
+            <h3>For Understanding</h3>
+            <ul class="link-pool">
+                <li><a href="NDguide.resources.html">A Guide to Neurodivergence</a></li>
+                <li><a href="difflang.html">It's a Different Language, Not a Deficit</a></li>
+                <li><a href="duality.html">The Duality Framework</a></li>
+                <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
+                <li><a href="theory.html">Interwoven Roots Theory (The Basics)</a></li>
+            </ul>
+
+            <h3>The Solution in Practice (Free Tools)</h3>
+            <ul class="link-pool" style="margin-top: 20px;">
+                <li><a href="creativitystructure.html">Creativity & Structure</a></li>
+                <li><a href="printerfriendlyCS.html">Printer-Friendly Version</a></li>
+                <li><a href="sensorybasics.html">Sensory Basics</a></li>
+                <li><a href="sensorygame.html">The Sensory Game</a></li>
+                <li><a href="planner.html">ADHD-Friendly Planner</a></li>
+            </ul>
+
+            <h3>Creative Works & Socials</h3>
+             <ul class="link-pool" style="margin-top: 20px;">
+                <li><a href="writing.html">My Writing & Poetry</a></li>
+                <li><a href="#">Videos & Presentations</a></li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
+        </footer>
 
     </div>
 </body>
