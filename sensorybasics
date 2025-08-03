@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Practical Guide to Your Sensory Strengths</title>
+    <style>
+        /* --- Basic Setup & Fonts --- */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f8f7f4;
+            color: #333;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* --- Main Container --- */
+        .guide-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 2rem 3rem;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        /* --- Header --- */
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: #2c2c2c;
+        }
+
+        /* --- Grid Layout for Cards --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        /* --- Individual Cards --- */
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eee;
+            text-align: left; /* Ensures all content inside aligns left */
+        }
+
+        /* --- Card Content --- */
+        .card-category {
+            font-size: 0.85rem; /* Reduced font size */
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            white-space: nowrap; /* Ensures this header stays on one line */
+        }
+
+        .card-category .icon {
+            color: #e79ab5;
+            margin-right: 0.5rem;
+            font-size: 0.9rem; /* Adjusted icon size */
+        }
+
+        .card-title {
+            font-size: 1.4rem; /* Reduced font size */
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+            white-space: nowrap; /* Ensures this header stays on one line */
+        }
+
+        .card-description {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 0;
+        }
+        
+        /* --- Printer-Friendly Styles --- */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+                margin: 1in; /* Standard print margin */
+            }
+            .guide-container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid; /* Prevents cards from splitting across pages */
+            }
+            header h1 {
+                font-size: 24pt;
+            }
+            .card-title {
+                font-size: 14pt; /* Adjusted for print */
+            }
+            .card-description {
+                font-size: 13pt;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main class="guide-container">
+        <header>
+            <h1>A Practical Guide to Your Sensory Strengths</h1>
+        </header>
+
+        <div class="grid" id="card-grid">
+            <!-- Card 1: Fix Your Space -->
+            <article class="card">
+                <h2 class="card-category"><span class="icon">♥</span>Manage Your Sensory Needs</h2>
+                <h3 class="card-title">🏠 Fix Your Space</h3>
+                <p class="card-description">
+                    Use calming scents or adjust lighting to make your environment feel safe and comfortable.
+                </p>
+            </article>
+
+            <!-- Card 2: Sensory Diet -->
+            <article class="card">
+                <h2 class="card-category"><span class="icon">♥</span>Manage Your Sensory Needs</h2>
+                <h3 class="card-title">🎧 Plan a "Sensory Diet"</h3>
+                <p class="card-description">
+                    Use a weighted blanket, exercise, or listen to curated playlists with noise-canceling headphones to keep your nervous system calm.
+                </p>
+            </article>
+
+            <!-- Card 3: Ease Transitions -->
+            <article class="card">
+                <h2 class="card-category"><span class="icon">♥</span>Manage Your Sensory Needs</h2>
+                <h3 class="card-title">☁️ Ease Transitions</h3>
+                <p class="card-description">
+                    Make hard sensory shifts easier with soft towels, comfy clothes, and a specific calming routine afterward.
+                </p>
+            </article>
+
+            <!-- Card 4: Set Firm Boundaries -->
+            <article class="card">
+                <h2 class="card-category"><span class="icon">♥</span>Protect Your Emotional Energy</h2>
+                <h3 class="card-title">🚧 Set Firm Boundaries</h3>
+                <p class="card-description">
+                    Practice saying "I need a break" or "I don't have energy for this." Plan your exit from social events ahead of time.
+                </p>
+            </article>
+
+            <!-- Card 5: Schedule Recharge Time -->
+            <article class="card">
+                <h2 class="card-category"><span class="icon">♥</span>Protect Your Emotional Energy</h2>
+                <h3 class="card-title">🔋 Schedule Recharge Time</h3>
+                <p class="card-description">
+                    After being social, plan for intentional alone time with your interests. Honor your natural sleep patterns whenever possible.
+                </p>
+            </article>
+
+            <!-- Card 6: Use the "Spoon Theory" -->
+            <article class="card">
+                <h2 class="card-category"><span class="icon">♥</span>Protect Your Emotional Energy</h2>
+                <h3 class="card-title">🥄 Use the "Spoon Theory"</h3>
+                <p class="card-description">
+                    Think of your energy as "spoons." Each task costs a spoon. This helps you manage your energy without self-judgment.
+                </p>
+            </article>
+        </div>
+    </main>
+
+</body>
+</html>
