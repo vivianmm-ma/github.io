@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Interwoven Roots Theory: A Developmental Model of Psychopathology</title>
+    <style>
+        /* --- Basic Setup & Typography --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .info-box {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* --- Header & Intro with Gradient --- */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 40px 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0077b6, #00b4d8);
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        header p {
+            color: #e0f2f1;
+            font-size: 1.1em;
+            margin: 0;
+        }
+        header .author-info {
+            font-size: 1em;
+            color: #b2e6e6;
+            margin-top: 10px;
+        }
+
+        /* --- Main Sections --- */
+        h2, h3 {
+            text-align: center;
+            color: #212529;
+            font-weight: 600;
+        }
+        h2 {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        p {
+            text-align: center;
+            margin: 0 0 15px 0;
+        }
+        
+        strong {
+            color: #03045e;
+            font-weight: 600;
+        }
+
+        /* --- Tree Diagram Styling --- */
+        .pathway-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .level {
+            width: 95%;
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .level::after {
+            content: '⬇️';
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: #6c757d;
+        }
+        .level:last-of-type::after {
+            content: none;
+        }
+        .level:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        /* Color Scheme for Levels */
+        .level-0-roots { background-color: #e0f2f1; border: 2px solid #4db6ac; }
+        .level-1-manifestations { background-color: #c1e6e2; border: 2px solid #26a69a; }
+        .level-2-conditions { background-color: #a2dad4; border: 2px solid #00897b; }
+        .level-3-complex { background-color: #83cec5; border: 2px solid #00695c; }
+        
+        /* Inner container styling */
+        .level-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .item {
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #b2dfdb;
+            flex: 1 1 200px;
+            min-width: 150px;
+        }
+        
+        .epigenetics-bridge {
+            margin: 15px auto;
+            padding: 8px;
+            border: 2px dashed #00796b;
+            background-color: #ffffff;
+            border-radius: 8px;
+            font-style: italic;
+            width: 80%;
+            max-width: 400px;
+            font-weight: 500;
+            color: #00796b;
+        }
+
+        /* --- Protective Factors Section --- */
+        .protective-factors-container {
+            background-color: #eaf4f4;
+            border: 2px solid #66b3cc;
+            border-left: 5px solid #66b3cc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .protective-factors-container ul {
+            padding-left: 20px;
+            text-align: left;
+        }
+        .protective-factors-container li {
+            margin-bottom: 5px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        /* --- Links --- */
+        .home-link {
+            text-decoration: none;
+            color: #0077b6;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 2px solid #0077b6;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .home-link:hover {
+            background-color: #0077b6;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <a href="https://kindnesskult.com" class="home-link">← back home</a>
+
+        <header>
+            <h1>The Interwoven Roots Theory of Psychopathology</h1>
+            <p>A Developmental Model of Psychopathology</p>
+            <p class="author-info"><strong>Vivian Mitchell, MA, APCC 16067</strong> | Ph.D. Student of Clinical Psychology</p>
+        </header>
+
+        <!-- The "Why" - A simple introduction -->
+        <div class="info-box">
+            <h2>Why This Framework Exists</h2>
+            <p>For decades, psychology has focused on what's wrong, using checklists of symptoms. But this approach misses a fundamental question: <strong><em>why</em></strong> do these symptoms appear together?</p>
+            <p>The Interwoven Roots Theory reframes mental health not as a series of isolated problems, but as a dynamic process. It suggests that many symptoms are the result of a few core "roots" that interact over time. By understanding these roots, we can move from simply treating symptoms to promoting deeper, lasting well-being.</p>
+        </div>
+
+        <!-- The "What" - The visual pathway -->
+        <div class="info-box">
+            <h2>What The Model Shows: From Roots to Conditions</h2>
+            <p>This model illustrates the developmental journey from our foundational vulnerabilities to the complex conditions we see in everyday life.</p>
+
+            <div class="pathway-diagram">
+                
+                <!-- Level 0: Foundational Roots -->
+                <div class="level level-0-roots">
+                    <h3>Level 0: Foundational Roots</h3>
+                    <p>Our primary, unchanging sources of vulnerability that create a unique developmental blueprint.</p>
+                    <div class="epigenetics-bridge"><strong>Epigenetics:</strong> The "bridge" where life experiences influence how our genes are expressed.</div>
+                    <div class="level-container">
+                        <div class="item"><strong>Adverse Events (AEs):</strong> Trauma, neglect, stress, poverty, nutritional deficiencies.</div>
+                        <div class="item"><strong>ADHD Neurotype:</strong> An inherent neurobiological profile.</div>
+                        <div class="item"><strong>ASD Neurotype:</strong> An inherent neurobiological profile.</div>
+                        <div class="item"><strong>Genetic/Bio (Other):</strong> Predispositions for conditions like schizophrenia or bipolar disorder.</div>
+                    </div>
+                </div>
+
+                <!-- Level 0.5: Initial Reactions -->
+                <div class="level level-1-manifestations">
+                    <h3>Level 0.5: Initial Reactions & Sub-Clinical Manifestations</h3>
+                    <p>Early, often subtle, responses to the foundational roots.</p>
+                    <div class="level-container">
+                        <div class="item">From AEs: Acute stress, emotional dysregulation.</div>
+                        <div class="item">From ADHD: Restlessness, mild executive dysfunction.</div>
+                        <div class="item">From ASD: Social awkwardness, sensory sensitivities.</div>
+                        <div class="item">From Genes: Sub-threshold mood fluctuations.</div>
+                    </div>
+                </div>
+                
+                <!-- Level 1: Early Diagnosable Conditions -->
+                <div class="level level-2-conditions">
+                    <h3>Level 1: Early Diagnosable Conditions</h3>
+                    <p>Recognizable patterns of symptoms that coalesce from the roots.</p>
+                    <div class="level-container">
+                        <div class="item"><strong>From AEs:</strong> PTSD, Adjustment Disorders.</div>
+                        <div class="item"><strong>From ADHD:</strong> ADHD itself, co-occurring anxiety.</div>
+                        <div class="item"><strong>From ASD:</strong> ASD itself, co-occurring depression.</div>
+                        <div class="item"><strong>From Genes (Other):</strong> Intellectual Disability, Cyclothymic Disorder.</div>
+                    </div>
+                </div>
+                
+                <!-- Level 2: Complex & Progressive Disorders -->
+                <div class="level level-3-complex">
+                    <h3>Level 2: Complex, Progressive, or Interactional Disorders</h3>
+                    <p>Conditions that arise from the cumulative impact of multiple roots interacting over time.</p>
+                    <div class="level-container">
+                         <div class="item"><strong>AE-Driven:</strong> Dissociative Identity Disorder (DID), Borderline Personality Disorder (BPD), Complex PTSD.</div>
+                         <div class="item"><strong>Neurodev/Genetic:</strong> Schizophrenia, Severe Bipolar Disorder.</div>
+                         <div class="item"><strong>Interactional:</strong> Severe GAD, MDD, Personality Disorders.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- The "How" - Treatment and Protective Factors -->
+        <div class="info-box">
+            <h2>How It Works: The Path to Wellbeing</h2>
+            <p>Our goal isn't to "cure" a foundational root—we can't change our genes or our past. Instead, the focus is on addressing the roots and building resilience to achieve a state of lasting remission.</p>
+            
+            <div class="protective-factors-container">
+                <h3>The Power of Protective Factors</h3>
+                <p>These are the "counterweights" that help to balance out our vulnerabilities.</p>
+                <ul>
+                    <li><strong>Attachment & Community:</strong> Having a safe, supportive network.</li>
+                    <li><strong>Innate Temperament:</strong> Our natural ability to self-regulate.</li>
+                    <li><strong>Holistic Practices:</strong> The role of good nutrition, sleep, and exercise.</li>
+                    <li><strong>Developed Skills:</strong> The capacity for self-compassion, insight, and healthy coping.</li>
+                </ul>
+            </div>
+            
+            <div class="info-box" style="margin-top: 20px;">
+                <h3>A Phased Approach to Treatment</h3>
+                <p>Healing begins by identifying the roots and building a foundation of safety, not by rushing to treat the most visible symptom. Only after this foundation is secure can we effectively work on deeper issues and build a resilient future.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <a href="https://kindnesskult.com" class="home-link">← back home</a>
+            <p>This is a preprint of the "Interwoven Roots Theory." All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
