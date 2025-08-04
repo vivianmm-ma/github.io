@@ -97,7 +97,7 @@
             signOutButton.addEventListener('click', async () => {
                 try {
                     await signOut(auth);
-                    messagesContainer.innerHTML = '';
+                    messagesContainer.innerHTML = ''; 
                 } catch (e) {
                     console.error("Error during sign out:", e);
                     showMessage("Failed to sign out. Please try again.");
