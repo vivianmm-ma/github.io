@@ -6,6 +6,7 @@
     <title>Cindness KULT</title>
     <!-- Importing a pixel-like font for the title -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- Base Styles & Colors --- */
         :root {
@@ -84,17 +85,34 @@
         
         /* Specific styling for the Welcome section header from the screenshot */
         .welcome-header {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Press Start 2P', cursive;
             font-size: 1.8rem;
             color: var(--purple); /* Using the purple variable for the header color */
             margin-top: 0;
             margin-bottom: 20px;
             text-align: left;
             padding-bottom: 10px;
+            display: flex; /* Added flexbox to align icon and text */
+            align-items: center;
+            gap: 10px; /* Spacing between icon and text */
+        }
+
+        /* Styling for the new Connect Corner header */
+        .connect-header {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: left;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         h2 {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Press Start 2P', cursive;
             font-size: 1.8rem;
             color: #ffffff;
             margin-top: 0;
@@ -103,6 +121,7 @@
             border-bottom: 1px solid rgba(52, 152, 219, 0.3);
             padding-bottom: 10px;
         }
+
         h3 {
              font-family: 'Times New Roman', Times, serif;
              font-size: 1.4rem;
@@ -112,6 +131,10 @@
         }
         p {
             font-size: 1.1rem;
+        }
+
+        .problem-bold {
+            font-family: 'Press Start 2P', cursive;
         }
 
         /* --- Header Section --- */
@@ -177,23 +200,25 @@
             box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
         }
 
-        /* --- Resource Hub Portal Buttons --- */
+        /* --- Resource Hub Portal Buttons (new circular design) --- */
         .link-pool {
             list-style-type: none;
             padding: 0;
             margin: 0;
-            /* New grid layout for card format */
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
         .link-pool li a {
-            display: flex; /* Changed to flexbox for better alignment */
+            display: flex;
             justify-content: center;
             align-items: center;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             color: var(--light-text);
-            padding: 18px 20px;
-            border-radius: 10px;
+            padding: 10px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -212,6 +237,16 @@
         .link-pool li a:hover {
             transform: translateY(-4px) scale(1.03);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            animation: gradient-animation-hover 0.5s linear infinite alternate;
+        }
+
+        @keyframes gradient-animation-hover {
+            from {
+                border-color: rgba(52, 152, 219, 0.5);
+            }
+            to {
+                border-color: rgba(52, 152, 219, 1);
+            }
         }
         
         /* --- Footer --- */
@@ -264,6 +299,14 @@
         .flyer-container img:hover {
             transform: scale(1.02);
         }
+
+        @media (max-width: 480px) {
+            .link-pool li a {
+                width: 120px;
+                height: 120px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -275,8 +318,34 @@
         </header>
         
         <div class="section">
-            <h2 class="welcome-header">Welcome</h2>
+            <!-- Updated: Added an SVG star icon next to the "Welcome" header -->
+            <h2 class="welcome-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.0001 2.25L9.57013 9.48912L2.25008 10.1472L7.69741 15.1764L6.15584 22.25L12.0001 18.5772L17.8444 22.25L16.3028 15.1764L21.7501 10.1472L14.4301 9.48912L12.0001 2.25Z" stroke="#9B59B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Welcome
+            </h2>
             <p>This space is a digital sanctuary for thinkers, creators, and collaborators. We believe in the power of open dialogue and collective growth. Explore the pathways below to dive into our shared resources and projects.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="connect-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.0001 2.25L9.57013 9.48912L2.25008 10.1472L7.69741 15.1764L6.15584 22.25L12.0001 18.5772L17.8444 22.25L16.3028 15.1764L21.7501 10.1472L14.4301 9.48912L12.0001 2.25Z" stroke="#9B59B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Connect Corner
+            </h2>
+            <p>A place for thinkers to connect, collaborate, and share ideas. </p>
+            <ul class="link-pool">
+                <li><a href="#">Clinician Corner</a></li>
+                <li><a href="#">Friendship Forum</a></li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2 class="gradient-text">The Problem</h2>
+            <p><strong class="problem-bold">Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
+            <p><strong class="problem-bold">Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
         </div>
         
         <!-- New section for the Self-Compassion Flyer -->
@@ -326,6 +395,11 @@
                 <li><a href="duality.html">The Duality Framework</a></li>
                 <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
                 <li><a href="theory.html">Interwoven Roots Theory (The Basics)</a></li>
+                <li><a href="diff2">diff2</a></li>
+                <li><a href="evolution">evolution</a></li>
+                <li><a href="index.html">index.html</a></li>
+                <li><a href="dynamic">dynamic</a></li>
+                <li><a href="README.MD">README.MD</a></li>
             </ul>
 
             <h3>The Solution in Practice (Free Tools)</h3>
