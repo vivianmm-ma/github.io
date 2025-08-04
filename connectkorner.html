@@ -1,178 +1,316 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Korner Forum</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithPopup, signOut, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { useState, useEffect } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, query, orderBy, doc } from 'firebase/firestore';
 
-        // Global variables provided by the Canvas environment.
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+// Initialize Firebase with global variables provided by the Canvas environment.
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-        // Initialize Firebase services
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
+// Thread component to display a post and its replies
+function Thread({ post, user, postId, onReply }) {
+  const [replies, setReplies] = useState([]);
+  const [replyText, setReplyText] = useState('');
+  const [showReplyForm, setShowReplyForm] = useState(false);
+  const [loadingReplies, setLoadingReplies] = useState(true);
 
-        let user = null;
+  // Fetch replies for this specific post
+  useEffect(() => {
+    const repliesCollection = collection(db, `artifacts/${appId}/public/data/forum-posts/${postId}/replies`);
+    const repliesQuery = query(repliesCollection, orderBy('createdAt'));
+    
+    const unsubscribe = onSnapshot(repliesQuery, (snapshot) => {
+      const fetchedReplies = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setReplies(fetchedReplies);
+      setLoadingReplies(false);
+    }, (e) => {
+      console.error("Error fetching replies:", e);
+      setLoadingReplies(false);
+    });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const messagesContainer = document.getElementById('messages-container');
-            const postForm = document.getElementById('post-form');
-            const messageInput = document.getElementById('message-input');
-            const authContainer = document.getElementById('auth-container');
-            const signInButton = document.getElementById('sign-in-button');
-            const signOutButton = document.getElementById('sign-out-button');
-            const userInfo = document.getElementById('user-info');
-            const errorBox = document.getElementById('error-box');
+    return () => unsubscribe();
+  }, [postId]);
 
-            function showMessage(message, type = 'error') {
-                errorBox.textContent = message;
-                errorBox.className = `p-4 rounded-lg text-white text-center mb-4 ${type === 'error' ? 'bg-red-500' : 'bg-green-500'}`;
-                errorBox.style.display = 'block';
-                setTimeout(() => errorBox.style.display = 'none', 5000);
-            }
+  const handleReply = (e) => {
+    e.preventDefault();
+    if (replyText.trim() === '') return;
+    onReply(postId, replyText);
+    setReplyText('');
+  };
 
-            onAuthStateChanged(auth, (currentUser) => {
-                user = currentUser;
-                if (user) {
-                    authContainer.classList.remove('hidden');
-                    signInButton.classList.add('hidden');
-                    userInfo.textContent = `Signed in as: ${user.displayName || user.email}`;
-                    postForm.classList.remove('hidden');
-                    
-                    // Setup real-time listener for posts
-                    const postsCollection = collection(db, `artifacts/${appId}/public/data/forum-posts`);
-                    const postsQuery = query(postsCollection, orderBy('createdAt', 'desc'));
+  return (
+    <div className="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+      <div className="flex justify-between items-center mb-2">
+        <span className="font-semibold text-purple-400">{post.user}</span>
+        {post.createdAt && (
+          <span className="text-sm text-gray-500">
+            {new Date(post.createdAt.seconds * 1000).toLocaleTimeString()}
+          </span>
+        )}
+      </div>
+      <p className="text-gray-300 mb-4">{post.text}</p>
 
-                    onSnapshot(postsQuery, (snapshot) => {
-                        messagesContainer.innerHTML = '';
-                        if (snapshot.empty) {
-                            messagesContainer.innerHTML = '<div class="text-center text-gray-400 p-8">No posts yet. Be the first to start a conversation!</div>';
-                        } else {
-                            snapshot.forEach(doc => {
-                                const data = doc.data();
-                                const messageElement = document.createElement('div');
-                                messageElement.className = "bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700 mb-4";
-                                messageElement.innerHTML = `
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="font-semibold text-purple-400">${data.user}</span>
-                                        ${data.createdAt ? `<span class="text-sm text-gray-500">${new Date(data.createdAt.seconds * 1000).toLocaleTimeString()}</span>` : ''}
-                                    </div>
-                                    <p class="text-gray-300">${data.text}</p>
-                                `;
-                                messagesContainer.appendChild(messageElement);
-                            });
-                        }
-                    }, (e) => {
-                        console.error("Error fetching data:", e);
-                        showMessage("Failed to load posts. Please check your network connection.");
-                    });
-                } else {
-                    authContainer.classList.add('hidden');
-                    signInButton.classList.remove('hidden');
-                    userInfo.textContent = '';
-                    postForm.classList.add('hidden');
-                    messagesContainer.innerHTML = '<div class="text-center text-gray-400 p-8">Please sign in to view and post messages.</div>';
-                }
-            });
-
-            signInButton.addEventListener('click', async () => {
-                try {
-                    await signInWithPopup(auth, provider);
-                } catch (e) {
-                    console.error("Error during Google Sign-in:", e);
-                    showMessage("Failed to sign in. Please try again.");
-                }
-            });
-
-            signOutButton.addEventListener('click', async () => {
-                try {
-                    await signOut(auth);
-                    messagesContainer.innerHTML = ''; 
-                } catch (e) {
-                    console.error("Error during sign out:", e);
-                    showMessage("Failed to sign out. Please try again.");
-                }
-            });
-
-            postForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const text = messageInput.value.trim();
-                if (text === '') {
-                    showMessage("Message cannot be empty.");
-                    return;
-                }
-                
-                if (!user) {
-                    showMessage("You must be signed in to post.");
-                    return;
-                }
-
-                try {
-                    await addDoc(collection(db, `artifacts/${appId}/public/data/forum-posts`), {
-                        text: text,
-                        user: user.displayName || user.email,
-                        userId: user.uid,
-                        createdAt: serverTimestamp(),
-                    });
-                    messageInput.value = '';
-                } catch (e) {
-                    console.error("Error adding document: ", e);
-                    showMessage("Failed to post message. Please try again.");
-                }
-            });
-        });
-    </script>
-    <style>
-        body {
-            background-color: #0d0f1a;
-            color: #ecf0f1;
-            font-family: 'Source Serif Pro', serif;
-        }
-        .message-box {
-          position: fixed;
-          top: 1rem;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 50;
-        }
-    </style>
-</head>
-<body class="bg-gray-900 text-gray-100 p-4 sm:p-8">
-    <div class="max-w-4xl mx-auto flex flex-col min-h-screen">
-        <div id="error-box" class="message-box hidden"></div>
-        <a href="index.html" class="mb-4 text-sm text-gray-400 hover:underline">← Back to Home</a>
-        <h1 class="text-3xl font-bold text-white mb-6 text-center">Connect Korner Forum</h1>
-
-        <div id="auth-container" class="mb-4 flex items-center justify-between hidden">
-            <span id="user-info" class="text-sm font-medium text-gray-400"></span>
-            <button id="sign-out-button" class="text-sm text-red-400 hover:underline">
-                (Sign Out)
-            </button>
-        </div>
-        <button id="sign-in-button" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4">
-            Sign In with Google
-        </button>
-
-        <div id="messages-container" class="flex-grow overflow-auto p-4 bg-gray-800 rounded-lg shadow-inner border border-gray-700 space-y-4">
-            <div class="text-center text-gray-400 p-8">Loading posts...</div>
-        </div>
-
-        <form id="post-form" class="flex space-x-2 mt-4 hidden">
-            <input id="message-input" type="text" placeholder="Start a new discussion topic..." class="flex-grow p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
-            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-400">
-                Post
-            </button>
+      {/* Replies section */}
+      <div className="mt-4 pl-4 border-l border-gray-600 space-y-2">
+        <h4 className="text-sm font-semibold text-gray-400 mb-2">Replies</h4>
+        {loadingReplies ? (
+          <p className="text-sm text-gray-500">Loading replies...</p>
+        ) : replies.length === 0 ? (
+          <p className="text-sm text-gray-500">No replies yet.</p>
+        ) : (
+          replies.map((reply) => (
+            <div key={reply.id} className="bg-gray-700 p-3 rounded-lg">
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-sm font-semibold text-blue-400">{reply.user}</span>
+                {reply.createdAt && (
+                  <span className="text-xs text-gray-500">
+                    {new Date(reply.createdAt.seconds * 1000).toLocaleTimeString()}
+                  </span>
+                )}
+              </div>
+              <p className="text-gray-300 text-sm">{reply.text}</p>
+            </div>
+          ))
+        )}
+      </div>
+      
+      {/* Reply Form */}
+      {user && (
+        <form onSubmit={handleReply} className="flex space-x-2 mt-4">
+          <input
+            type="text"
+            value={replyText}
+            onChange={(e) => setReplyText(e.target.value)}
+            placeholder="Reply to this thread..."
+            className="flex-grow p-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm"
+          />
+          <button
+            type="submit"
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 text-sm"
+          >
+            Reply
+          </button>
         </form>
+      )}
     </div>
-</body>
-</html>
+  );
+}
+
+// Main App component
+function App() {
+  const [posts, setPosts] = useState([]);
+  const [newPostTitle, setNewPostTitle] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  // Handle Google Sign-in.
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (e) {
+      console.error("Error during Google Sign-in:", e);
+      setError("Failed to sign in. Please try again.");
+    }
+  };
+
+  // Handle Sign-out.
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setPosts([]);
+    } catch (e) {
+      console.error("Error during sign out:", e);
+      setError("Failed to sign out. Please try again.");
+    }
+  };
+
+  // Auth and data fetching setup
+  useEffect(() => {
+    const authenticate = async () => {
+      try {
+        const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        if (token) {
+          await signInWithCustomToken(auth, token);
+        } else {
+          // If no token, sign in anonymously for a public view.
+          await signInAnonymously(auth);
+        }
+      } catch (e) {
+        console.error("Error during authentication:", e);
+        setError("Authentication failed. Please try reloading the page.");
+        setLoading(false);
+      }
+    };
+
+    authenticate();
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+
+    return () => unsubscribeAuth();
+  }, []);
+
+  // Fetch main posts
+  useEffect(() => {
+    if (user) {
+      const postsCollection = collection(db, `artifacts/${appId}/public/data/forum-posts`);
+      const postsQuery = query(postsCollection, orderBy('createdAt', 'desc'));
+
+      const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
+        const fetchedPosts = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPosts(fetchedPosts);
+      }, (e) => {
+        console.error("Error fetching data:", e);
+        setError("Failed to load posts. Please check your network connection.");
+      });
+
+      return () => unsubscribe();
+    }
+  }, [user]);
+
+  // Function to add a new post (top-level topic)
+  const handleNewPost = async (e) => {
+    e.preventDefault();
+    if (newPostTitle.trim() === '') {
+      setError("Post title cannot be empty.");
+      return;
+    }
+    if (!user) {
+      setError("You must be signed in to post.");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, `artifacts/${appId}/public/data/forum-posts`), {
+        text: newPostTitle,
+        user: user.displayName || user.email,
+        userId: user.uid,
+        createdAt: serverTimestamp(),
+      });
+      setNewPostTitle('');
+      setError('');
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      setError("Failed to post message. Please try again.");
+    }
+  };
+
+  // Function to add a reply to a specific post
+  const handleReply = async (postId, replyText) => {
+    if (replyText.trim() === '') return;
+    if (!user) {
+      setError("You must be signed in to post.");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, `artifacts/${appId}/public/data/forum-posts/${postId}/replies`), {
+        text: replyText,
+        user: user.displayName || user.email,
+        userId: user.uid,
+        createdAt: serverTimestamp(),
+      });
+    } catch (e) {
+      console.error("Error adding reply: ", e);
+      setError("Failed to post reply. Please try again.");
+    }
+  };
+
+  // Helper component for message box instead of alert()
+  const MessageBox = ({ message, type, onClose }) => (
+    <div className={`fixed top-4 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-lg z-50 text-white
+                    ${type === 'error' ? 'bg-red-500' : 'bg-green-500'}`}>
+      <span>{message}</span>
+      <button onClick={onClose} className="ml-4 font-bold">X</button>
+    </div>
+  );
+
+  if (loading) {
+    return <div className="p-8 text-center text-gray-400">Loading forum...</div>;
+  }
+
+  return (
+    <div className="bg-gray-900 text-gray-100 min-h-screen flex flex-col p-4 sm:p-8 rounded-lg">
+      {error && <MessageBox message={error} type="error" onClose={() => setError('')} />}
+      
+      <div className="flex justify-between items-center mb-4">
+        <a href="index.html" className="text-sm text-gray-400 hover:underline">Back to Home</a>
+        {user ? (
+          <div className="flex items-center space-x-2">
+            <span className="text-sm font-medium text-gray-400">Signed in as:</span>
+            <span className="font-semibold text-purple-400">{user.displayName || user.email}</span>
+            <button onClick={handleSignOut} className="text-sm text-red-400 hover:underline">
+              (Sign Out)
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={signInWithGoogle}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            Sign In with Google
+          </button>
+        )}
+      </div>
+
+      <div className="flex-grow overflow-auto mb-4 p-4 bg-gray-800 rounded-lg">
+        <h2 className="text-2xl font-bold mb-4 text-white">Connect Korner Discussions</h2>
+        
+        {/* Form to create a new post */}
+        {user ? (
+          <form onSubmit={handleNewPost} className="flex flex-col space-y-2 mb-6">
+            <input
+              type="text"
+              value={newPostTitle}
+              onChange={(e) => setNewPostTitle(e.target.value)}
+              placeholder="Start a new discussion topic..."
+              className="p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            />
+            <button
+              type="submit"
+              className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
+            >
+              Start New Topic
+            </button>
+          </form>
+        ) : (
+          <div className="text-center p-4 text-gray-400 border border-dashed border-gray-700 rounded-lg mb-6">
+            Please sign in to start a new discussion.
+          </div>
+        )}
+
+        {/* Display posts and replies */}
+        {posts.length === 0 ? (
+          <div className="text-center text-gray-400 p-8">No posts yet. Be the first to start a conversation!</div>
+        ) : (
+          <div className="space-y-6">
+            {posts.map((post) => (
+              <Thread
+                key={post.id}
+                post={post}
+                postId={post.id}
+                user={user}
+                onReply={handleReply}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
