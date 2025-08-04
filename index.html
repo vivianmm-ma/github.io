@@ -7,6 +7,8 @@
     <!-- Importing fonts for the title and body -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* --- Base Styles & Colors --- */
         :root {
@@ -204,36 +206,15 @@
             text-align: center;
             transition: all 0.3s ease;
             border-radius: 12px;
-            border: 2px solid transparent;
             background-clip: padding-box;
-            background-origin: padding-box;
+            border: 2px solid transparent;
             box-shadow: inset 0 0 0 1px rgba(52, 152, 219, 0.2);
         }
 
         .link-pool li a:hover {
             transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 30px rgba(52, 152, 219, 0.6);
-        }
-        
-        .link-pool li a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: -1;
-            margin: -2px; /* Expand the pseudo-element to create the border */
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--purple), var(--blue), var(--green));
-            background-size: 200% 200%;
-            animation: gradient-animation 10s ease infinite;
-        }
-
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-image: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) 1;
         }
         
         /* --- Footer --- */
@@ -293,6 +274,90 @@
                 font-size: 0.9rem;
             }
         }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .authenticity-diagram {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .core-self {
+            width: 120px;
+            height: 120px;
+            background-color: #27AE60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            z-index: 10;
+            border: 4px solid #2ECC71;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+        }
+        .action-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #2980B9;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.2;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+        .action-node-1 { transform: translate(-110px, -80px); }
+        .action-node-2 { transform: translate(110px, -80px); }
+        .action-node-3 { transform: translate(0, 130px); }
+
+        /* Custom styling for the new content sections to match the theme */
+        .content-card {
+            background-color: var(--dark-bg);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.1);
+        }
+        .content-card h3 {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--light-text);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .content-card p {
+            color: var(--light-text);
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+        }
+        .content-card strong {
+            color: var(--purple);
+        }
+        .content-card .text-gray-500, .content-card .text-gray-400 {
+            color: var(--light-text);
+            opacity: 0.7;
+        }
+        
     </style>
 </head>
 <body>
@@ -334,13 +399,25 @@
             <h2 class="gradient-text">The Problem</h2>
             <p><strong class="problem-bold">Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
             <p><strong class="problem-bold">Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
-        </div>
-        
-        <!-- New section for the Self-Compassion Flyer -->
-        <div class="section">
-            <h2 class="gradient-text">Self-Compassion</h2>
-            <div class="flyer-container">
-                <img src="https://embrace-autism.com/wp-content/uploads/flyer-SelfCompassion.svg" alt="Self-Compassion flyer from Embrace Autism">
+            <div class="text-center mb-10">
+                <h3 class="font-bold text-lg text-left text-light-text opacity-70 mt-2">When the Scale Tips: Understanding Imbalance</h3>
+                <p class="text-light-text">Psychological distress often arises from a deep imbalance between these two forces.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-6">
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-center mb-4">The Pull of Imbalance</h3>
+                    <p class="text-center mb-4">An over-reliance on one force creates a strong pull towards certain states of being.</p>
+                    <div class="chart-container">
+                        <canvas id="imbalanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-center mb-4">Oscillation Between Extremes</h3>
+                     <p class="text-center mb-4">Some conditions, like Bipolar Disorder, can be seen as a violent swing between the two poles.</p>
+                    <div class="chart-container">
+                        <canvas id="oscillationChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -349,7 +426,55 @@
             <p>This space is my response. It's where I share tools for therapy, research, and understanding neurodivergence. The core of this work is finding the balance between <strong>Creativity & Structure</strong>. It's all grounded in my <strong>Interwoven Roots Theory</strong>, which seeks to prevent harm by building kinder systems.</p>
             <p>Want to know when my book on this theory is ready? Sign up for exclusive updates.</p>
             <div class="simple-nav" style="margin-top: 20px;">
-                <a href="mailto:your-email@example.com?subject=Book Updates" class="contact-button">Get Notified About the Book</a>
+                <a href="mailto:cindnesskult@gmail.com?subject=Book Updates" class="contact-button">Get Notified About the Book</a>
+            </div>
+            <div class="text-center mb-10 mt-10">
+                <h3 class="font-bold text-lg text-left text-light-text opacity-70 mt-2">Finding Your Authentic Self</h3>
+                <p class="text-light-text">Balance leads to Congruence, where your actions align with your true self.</p>
+            </div>
+            <div class="content-card flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="flex-shrink-0">
+                    <div class="authenticity-diagram mx-auto">
+                        <div class="core-self">Core Self & Values</div>
+                        <div class="action-node action-node-1">Spontaneous Actions</div>
+                        <div class="action-node action-node-2">Creative Thoughts</div>
+                        <div class="action-node action-node-3">Lived Experience</div>
+                    </div>
+                </div>
+                <div class="flex-grow max-w-xl">
+                    <h3 class="text-2xl font-bold mb-4">Congruence: A Harmony of Being</h3>
+                    <p class="text-lg">Psychologist Carl Rogers spoke of <span class="font-semibold text-light-text opacity-70">Congruence</span> as a state where our actions and experiences (Creation) are in harmony with our core self and values (Structure). It’s when the garden we cultivate reflects the home we've built. It feels genuine and true.</p>
+                    <p class="text-lg mt-4">When out of balance, we feel <span class="font-semibold text-light-text opacity-70">Incongruence</span>. This is the dissonance between who we are and what we do.</p>
+                </div>
+            </div>
+            <div class="text-center mb-10 mt-10">
+                <h3 class="font-bold text-lg text-left text-light-text opacity-70 mt-2">A Path Forward: Building a More Balanced World</h3>
+                <p class="text-light-text">Creating a healthier world requires conscious work on both individual and societal levels.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+                <div class="content-card text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold mb-2">Learn Each Other's Language</h3>
+                    <p>Create a culture of belonging by appreciating different ways of thinking and communicating, lifting the burden on neurodivergent individuals to always "fit in."</p>
+                </div>
+                <div class="content-card text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">❤️</div>
+                    <h3 class="text-xl font-bold mb-2">Change What We Celebrate</h3>
+                    <p>Shift our values from celebrating the hoarding of wealth and power to celebrating cooperation, community, and compassion as the highest forms of success.</p>
+                </div>
+                <div class="content-card text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-2">Raise a Wiser Generation</h3>
+                    <p>Make clarity, kindness, and critical thinking the cornerstones of education to build a "mental immune system" against manipulation and division.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New section for the Self-Compassion Flyer -->
+        <div class="section">
+            <h2 class="gradient-text">Self-Compassion</h2>
+            <div class="flyer-container">
+                <img src="https://embrace-autism.com/wp-content/uploads/flyer-SelfCompassion.svg" alt="Self-Compassion flyer from Embrace Autism">
             </div>
         </div>
 
@@ -370,7 +495,7 @@
         <div class="section simple-nav">
             <a href="https://www.tiktok.com/@vivi.yum?lang=en" target="_blank">TikTok</a>
             <a href="https://www.linkedin.com/in/vivianmmitchell/" target="_blank">LinkedIn</a>
-            <a href="mailto:your-email@example.com" class="contact-button">Contact Me</a>
+            <p>Email: <a href="mailto:cindnesskult@gmail.com" class="contact-button">cindnesskult@gmail.com</a></p>
         </div>
 
         <div class="section">
@@ -379,10 +504,10 @@
             <h3>For Understanding</h3>
             <ul class="link-pool">
                 <li><a href="NDguide.resources.html">A Guide to Neurodivergence</a></li>
-                <li><a href="difflang.html">It's a Different Language, Not a Deficit</a></li>
-                <li><a href="duality.html">The Duality Framework</a></li>
-                <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
-                <li><a href="theory.html">Interwoven Roots Theory (The Basics)</a></li>
+                <li><a href="difflang">It's a Different Language, Not a Deficit</a></li>
+                <li><a href="duality">The Duality Framework</a></li>
+                <li><a href="ocd.risk">Understanding OCD & Risk</a></li>
+                <li><a href="theory">Interwoven Roots Theory (The Basics)</a></li>
                 <li><a href="diff2">diff2</a></li>
                 <li><a href="evolution">evolution</a></li>
                 <li><a href="index.html">index.html</a></li>
@@ -392,11 +517,11 @@
 
             <h3>The Solution in Practice (Free Tools)</h3>
             <ul class="link-pool" style="margin-top: 20px;">
-                <li><a href="creativitystructure.html">Creativity & Structure</a></li>
-                <li><a href="printerfriendlyCS.html">Printer-Friendly Version</a></li>
-                <li><a href="sensorybasics.html">Sensory Basics</a></li>
-                <li><a href="sensorygame.html">The Sensory Game</a></li>
-                <li><a href="planner.html">ADHD-Friendly Planner</a></li>
+                <li><a href="creativityvstructure">Creativity & Structure</a></li>
+                <li><a href="printerfriendlyCS">Printer-Friendly Version</a></li>
+                <li><a href="sensorybasics">Sensory Basics</a></li>
+                <li><a href="sensorygame">The Sensory Game</a></li>
+                <li><a href="planner">ADHD-Friendly Planner</a></li>
             </ul>
 
             <h3>Creative Works & Socials</h3>
@@ -411,5 +536,117 @@
         </footer>
 
     </div>
+
+    <script>
+        const oceanForest = {
+            primary: '#2ECC71', // Green
+            secondary: '#3498DB', // Blue
+            tertiary: '#1A5276', // Darker Blue
+            text: '#ecf0f1', // light text
+            grid: 'rgba(236, 240, 241, 0.1)', // light grid lines
+            primaryTransparent: 'rgba(46, 204, 113, 0.4)',
+            secondaryTransparent: 'rgba(52, 152, 219, 0.4)'
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: oceanForest.text,
+                        font: {
+                            family: "'Source Serif Pro', serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: oceanForest.text },
+                    grid: { color: oceanForest.grid }
+                },
+                x: {
+                    ticks: { color: oceanForest.text },
+                    grid: { color: oceanForest.grid }
+                }
+            }
+        };
+
+        const imbalanceCtx = document.getElementById('imbalanceChart').getContext('2d');
+        new Chart(imbalanceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pull towards Structure (Rigidity, Anxiety)', 'Pull towards Creation (Chaos, Impulsivity)'],
+                datasets: [{
+                    label: 'Pull of Imbalance',
+                    data: [55, 45],
+                    backgroundColor: [
+                        oceanForest.secondary,
+                        oceanForest.primary
+                    ],
+                    borderColor: '#0d0f1a', // dark background
+                    borderWidth: 4,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                           color: oceanForest.text,
+                           font: { family: "'Source Serif Pro', serif" }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const oscillationCtx = document.getElementById('oscillationChart').getContext('2d');
+        new Chart(oscillationCtx, {
+            type: 'line',
+            data: {
+                labels: ['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'Phase 5', 'Phase 6'],
+                datasets: [{
+                    label: 'Creative Energy',
+                    data: [10, 90, 85, 20, 15, 70],
+                    borderColor: oceanForest.primary,
+                    backgroundColor: oceanForest.primaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Rigid Structure',
+                    data: [90, 10, 15, 80, 85, 30],
+                    borderColor: oceanForest.secondary,
+                    backgroundColor: oceanForest.secondaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: defaultChartOptions
+        });
+    </script>
 </body>
 </html>
