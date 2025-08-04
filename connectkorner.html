@@ -1,24 +1,138 @@
 import { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, query, orderBy, doc } from 'firebase/firestore';
 
 // Initialize Firebase with global variables provided by the Canvas environment.
 const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-// Define the main App component for the forum.
+// Thread component to display a post and its replies
+function Thread({ post, user, postId, onReply }) {
+  const [replies, setReplies] = useState([]);
+  const [replyText, setReplyText] = useState('');
+  const [showReplyForm, setShowReplyForm] = useState(false);
+  const [loadingReplies, setLoadingReplies] = useState(true);
+
+  // Fetch replies for this specific post
+  useEffect(() => {
+    const repliesCollection = collection(db, `artifacts/${appId}/public/data/forum-posts/${postId}/replies`);
+    const repliesQuery = query(repliesCollection, orderBy('createdAt'));
+    
+    const unsubscribe = onSnapshot(repliesQuery, (snapshot) => {
+      const fetchedReplies = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setReplies(fetchedReplies);
+      setLoadingReplies(false);
+    }, (e) => {
+      console.error("Error fetching replies:", e);
+      setLoadingReplies(false);
+    });
+
+    return () => unsubscribe();
+  }, [postId]);
+
+  const handleReply = (e) => {
+    e.preventDefault();
+    if (replyText.trim() === '') return;
+    onReply(postId, replyText);
+    setReplyText('');
+  };
+
+  return (
+    <div className="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+      <div className="flex justify-between items-center mb-2">
+        <span className="font-semibold text-purple-400">{post.user}</span>
+        {post.createdAt && (
+          <span className="text-sm text-gray-500">
+            {new Date(post.createdAt.seconds * 1000).toLocaleTimeString()}
+          </span>
+        )}
+      </div>
+      <p className="text-gray-300 mb-4">{post.text}</p>
+
+      {/* Replies section */}
+      <div className="mt-4 pl-4 border-l border-gray-600 space-y-2">
+        <h4 className="text-sm font-semibold text-gray-400 mb-2">Replies</h4>
+        {loadingReplies ? (
+          <p className="text-sm text-gray-500">Loading replies...</p>
+        ) : replies.length === 0 ? (
+          <p className="text-sm text-gray-500">No replies yet.</p>
+        ) : (
+          replies.map((reply) => (
+            <div key={reply.id} className="bg-gray-700 p-3 rounded-lg">
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-sm font-semibold text-blue-400">{reply.user}</span>
+                {reply.createdAt && (
+                  <span className="text-xs text-gray-500">
+                    {new Date(reply.createdAt.seconds * 1000).toLocaleTimeString()}
+                  </span>
+                )}
+              </div>
+              <p className="text-gray-300 text-sm">{reply.text}</p>
+            </div>
+          ))
+        )}
+      </div>
+      
+      {/* Reply Form */}
+      {user && (
+        <form onSubmit={handleReply} className="flex space-x-2 mt-4">
+          <input
+            type="text"
+            value={replyText}
+            onChange={(e) => setReplyText(e.target.value)}
+            placeholder="Reply to this thread..."
+            className="flex-grow p-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm"
+          />
+          <button
+            type="submit"
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 text-sm"
+          >
+            Reply
+          </button>
+        </form>
+      )}
+    </div>
+  );
+}
+
+// Main App component
 function App() {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [newPostTitle, setNewPostTitle] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  // useEffect hook to handle authentication state and Firestore data fetching.
+  // Handle Google Sign-in.
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (e) {
+      console.error("Error during Google Sign-in:", e);
+      setError("Failed to sign in. Please try again.");
+    }
+  };
+
+  // Handle Sign-out.
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setPosts([]);
+    } catch (e) {
+      console.error("Error during sign out:", e);
+      setError("Failed to sign out. Please try again.");
+    }
+  };
+
+  // Auth and data fetching setup
   useEffect(() => {
     const authenticate = async () => {
       try {
@@ -26,7 +140,7 @@ function App() {
         if (token) {
           await signInWithCustomToken(auth, token);
         } else {
-          // If no token, sign in anonymously.
+          // If no token, sign in anonymously for a public view.
           await signInAnonymously(auth);
         }
       } catch (e) {
@@ -38,60 +152,55 @@ function App() {
 
     authenticate();
 
-    // Set up an auth state observer.
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
 
-    // Clean up the auth subscription on component unmount.
     return () => unsubscribeAuth();
   }, []);
 
-  // useEffect hook for real-time Firestore updates.
+  // Fetch main posts
   useEffect(() => {
-    // Only fetch data if the user is authenticated.
     if (user) {
-      // Define the collection path based on the app ID and user ID.
-      // This creates a public collection shared by all users of this app.
       const postsCollection = collection(db, `artifacts/${appId}/public/data/forum-posts`);
-      // Create a query to get all documents, ordered by creation time.
       const postsQuery = query(postsCollection, orderBy('createdAt', 'desc'));
 
-      // Set up a real-time listener for the posts.
       const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
-        const posts = snapshot.docs.map(doc => ({
+        const fetchedPosts = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setMessages(posts);
+        setPosts(fetchedPosts);
       }, (e) => {
         console.error("Error fetching data:", e);
         setError("Failed to load posts. Please check your network connection.");
       });
 
-      // Clean up the subscription on component unmount.
       return () => unsubscribe();
     }
-  }, [user]); // Re-run effect when the user changes.
+  }, [user]);
 
-  // Function to add a new post to the forum.
-  const handlePost = async (e) => {
+  // Function to add a new post (top-level topic)
+  const handleNewPost = async (e) => {
     e.preventDefault();
-    if (newMessage.trim() === '') {
-      setError("Message cannot be empty.");
+    if (newPostTitle.trim() === '') {
+      setError("Post title cannot be empty.");
+      return;
+    }
+    if (!user) {
+      setError("You must be signed in to post.");
       return;
     }
 
     try {
-      // Add a new document to the 'forum-posts' collection.
-      const docRef = await addDoc(collection(db, `artifacts/${appId}/public/data/forum-posts`), {
-        text: newMessage,
-        user: auth.currentUser.email || 'Anonymous', // Use email if available, otherwise 'Anonymous'.
-        userId: auth.currentUser.uid,
+      await addDoc(collection(db, `artifacts/${appId}/public/data/forum-posts`), {
+        text: newPostTitle,
+        user: user.displayName || user.email,
+        userId: user.uid,
         createdAt: serverTimestamp(),
       });
-      setNewMessage('');
+      setNewPostTitle('');
       setError('');
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -99,55 +208,107 @@ function App() {
     }
   };
 
+  // Function to add a reply to a specific post
+  const handleReply = async (postId, replyText) => {
+    if (replyText.trim() === '') return;
+    if (!user) {
+      setError("You must be signed in to post.");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, `artifacts/${appId}/public/data/forum-posts/${postId}/replies`), {
+        text: replyText,
+        user: user.displayName || user.email,
+        userId: user.uid,
+        createdAt: serverTimestamp(),
+      });
+    } catch (e) {
+      console.error("Error adding reply: ", e);
+      setError("Failed to post reply. Please try again.");
+    }
+  };
+
+  // Helper component for message box instead of alert()
+  const MessageBox = ({ message, type, onClose }) => (
+    <div className={`fixed top-4 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-lg z-50 text-white
+                    ${type === 'error' ? 'bg-red-500' : 'bg-green-500'}`}>
+      <span>{message}</span>
+      <button onClick={onClose} className="ml-4 font-bold">X</button>
+    </div>
+  );
+
   if (loading) {
     return <div className="p-8 text-center text-gray-400">Loading forum...</div>;
   }
 
   return (
     <div className="bg-gray-900 text-gray-100 min-h-screen flex flex-col p-4 sm:p-8 rounded-lg">
-      <div className="flex-grow overflow-auto mb-4">
-        {messages.length === 0 ? (
+      {error && <MessageBox message={error} type="error" onClose={() => setError('')} />}
+      
+      <div className="flex justify-between items-center mb-4">
+        <a href="index.html" className="text-sm text-gray-400 hover:underline">Back to Home</a>
+        {user ? (
+          <div className="flex items-center space-x-2">
+            <span className="text-sm font-medium text-gray-400">Signed in as:</span>
+            <span className="font-semibold text-purple-400">{user.displayName || user.email}</span>
+            <button onClick={handleSignOut} className="text-sm text-red-400 hover:underline">
+              (Sign Out)
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={signInWithGoogle}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            Sign In with Google
+          </button>
+        )}
+      </div>
+
+      <div className="flex-grow overflow-auto mb-4 p-4 bg-gray-800 rounded-lg">
+        <h2 className="text-2xl font-bold mb-4 text-white">Connect Korner Discussions</h2>
+        
+        {/* Form to create a new post */}
+        {user ? (
+          <form onSubmit={handleNewPost} className="flex flex-col space-y-2 mb-6">
+            <input
+              type="text"
+              value={newPostTitle}
+              onChange={(e) => setNewPostTitle(e.target.value)}
+              placeholder="Start a new discussion topic..."
+              className="p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            />
+            <button
+              type="submit"
+              className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
+            >
+              Start New Topic
+            </button>
+          </form>
+        ) : (
+          <div className="text-center p-4 text-gray-400 border border-dashed border-gray-700 rounded-lg mb-6">
+            Please sign in to start a new discussion.
+          </div>
+        )}
+
+        {/* Display posts and replies */}
+        {posts.length === 0 ? (
           <div className="text-center text-gray-400 p-8">No posts yet. Be the first to start a conversation!</div>
         ) : (
-          <div className="space-y-4">
-            {messages.map((message) => (
-              <div key={message.id} className="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="font-semibold text-purple-400">{message.user}</span>
-                  {message.createdAt && (
-                    <span className="text-sm text-gray-500">
-                      {new Date(message.createdAt.seconds * 1000).toLocaleTimeString()}
-                    </span>
-                  )}
-                </div>
-                <p className="text-gray-300">{message.text}</p>
-              </div>
+          <div className="space-y-6">
+            {posts.map((post) => (
+              <Thread
+                key={post.id}
+                post={post}
+                postId={post.id}
+                user={user}
+                onReply={handleReply}
+              />
             ))}
           </div>
         )}
       </div>
-      
-      {error && (
-        <div className="bg-red-500 text-white p-3 rounded-lg mb-4 text-center">
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={handlePost} className="flex space-x-2">
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Write a message..."
-          className="flex-grow p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-        />
-        <button
-          type="submit"
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-400"
-        >
-          Post
-        </button>
-      </form>
     </div>
   );
 }
