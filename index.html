@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cindness KULT</title>
-    <!-- Importing a pixel-like font for the title -->
+    <!-- Importing fonts for the title and body -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -83,22 +83,8 @@
             }
         }
         
-        /* Specific styling for the Welcome section header from the screenshot */
-        .welcome-header {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.8rem;
-            color: var(--purple); /* Using the purple variable for the header color */
-            margin-top: 0;
-            margin-bottom: 20px;
-            text-align: left;
-            padding-bottom: 10px;
-            display: flex; /* Added flexbox to align icon and text */
-            align-items: center;
-            gap: 10px; /* Spacing between icon and text */
-        }
-
-        /* Styling for the new Connect Corner header */
-        .connect-header {
+        /* Specific styling for section headers */
+        h2 {
             font-family: 'Press Start 2P', cursive;
             font-size: 1.8rem;
             color: var(--purple);
@@ -109,27 +95,18 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.8rem;
-            color: #ffffff;
-            margin-top: 0;
-            margin-bottom: 20px;
-            text-align: center;
             border-bottom: 1px solid rgba(52, 152, 219, 0.3);
-            padding-bottom: 10px;
         }
 
         h3 {
-             font-family: 'Times New Roman', Times, serif;
+             font-family: 'Press Start 2P', cursive;
              font-size: 1.4rem;
              color: #ffffff;
              margin-top: 25px;
              text-align: center;
         }
         p {
+            font-family: 'Source Serif Pro', serif;
             font-size: 1.1rem;
         }
 
@@ -149,6 +126,7 @@
             margin-bottom: 10px;
         }
         .subtitle {
+            font-family: 'Source Serif Pro', serif;
             font-size: 1.1rem;
             color: #bdc3c7;
             margin-bottom: 25px;
@@ -200,7 +178,7 @@
             box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
         }
 
-        /* --- Resource Hub Portal Buttons (new circular design) --- */
+        /* --- Resource Hub Portal Buttons (new oval design) --- */
         .link-pool {
             list-style-type: none;
             padding: 0;
@@ -210,42 +188,62 @@
             justify-content: center;
             gap: 20px;
         }
+
         .link-pool li a {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            color: var(--light-text);
+            width: 250px;
+            height: 80px;
             padding: 10px;
+            position: relative;
+            background-color: var(--dark-bg);
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            color: var(--light-text);
             text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 12px; /* Rounded corners */
             border: 2px solid transparent;
-            background: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) padding-box,
-                        linear-gradient(135deg, var(--purple), var(--blue), var(--green)) border-box;
+            background-clip: padding-box;
+        }
+        
+        .link-pool li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            margin: -2px; /* Expand the pseudo-element to create the border */
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--purple), var(--blue), var(--green));
             background-size: 200% 200%;
             animation: gradient-animation 10s ease infinite;
         }
+
         @keyframes gradient-animation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
         .link-pool li a:hover {
             transform: translateY(-4px) scale(1.03);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .link-pool li a:hover::before {
             animation: gradient-animation-hover 0.5s linear infinite alternate;
         }
 
         @keyframes gradient-animation-hover {
             from {
-                border-color: rgba(52, 152, 219, 0.5);
+                background-position: 0% 50%;
             }
             to {
-                border-color: rgba(52, 152, 219, 1);
+                background-position: 100% 50%;
             }
         }
         
@@ -274,7 +272,7 @@
             box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
         }
         .profile-card .name-title {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Source Serif Pro', serif;
             font-size: 1.2rem;
             color: var(--light-text);
             line-height: 1.4;
@@ -302,8 +300,7 @@
 
         @media (max-width: 480px) {
             .link-pool li a {
-                width: 120px;
-                height: 120px;
+                width: 100%;
                 font-size: 0.9rem;
             }
         }
@@ -318,7 +315,6 @@
         </header>
         
         <div class="section">
-            <!-- Updated: Added an SVG star icon next to the "Welcome" header -->
             <h2 class="welcome-header">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.0001 2.25L9.57013 9.48912L2.25008 10.1472L7.69741 15.1764L6.15584 22.25L12.0001 18.5772L17.8444 22.25L16.3028 15.1764L21.7501 10.1472L14.4301 9.48912L12.0001 2.25Z" stroke="#9B59B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -330,8 +326,11 @@
 
         <div class="section">
             <h2 class="connect-header">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.0001 2.25L9.57013 9.48912L2.25008 10.1472L7.69741 15.1764L6.15584 22.25L12.0001 18.5772L17.8444 22.25L16.3028 15.1764L21.7501 10.1472L14.4301 9.48912L12.0001 2.25Z" stroke="#9B59B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)">
+                    <path d="M11 2h2v11h-2z"/>
+                    <path d="M16 13h-2v11h2z"/>
+                    <path d="M7 13h-2v11h2z"/>
+                    <path d="M12 2l-12 22h24z"/>
                 </svg>
                 Connect Corner
             </h2>
@@ -344,8 +343,8 @@
         
         <div class="section">
             <h2 class="gradient-text">The Problem</h2>
-            <p><strong class="problem-bold">Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
-            <p><strong class="problem-bold">Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
+            <p><strong>Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
+            <p><strong>Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
         </div>
         
         <!-- New section for the Self-Compassion Flyer -->
