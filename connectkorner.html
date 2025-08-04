@@ -1,0 +1,155 @@
+import { useState, useEffect } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
+
+// Initialize Firebase with global variables provided by the Canvas environment.
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+// Define the main App component for the forum.
+function App() {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  // useEffect hook to handle authentication state and Firestore data fetching.
+  useEffect(() => {
+    const authenticate = async () => {
+      try {
+        const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        if (token) {
+          await signInWithCustomToken(auth, token);
+        } else {
+          // If no token, sign in anonymously.
+          await signInAnonymously(auth);
+        }
+      } catch (e) {
+        console.error("Error during authentication:", e);
+        setError("Authentication failed. Please try reloading the page.");
+        setLoading(false);
+      }
+    };
+
+    authenticate();
+
+    // Set up an auth state observer.
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+
+    // Clean up the auth subscription on component unmount.
+    return () => unsubscribeAuth();
+  }, []);
+
+  // useEffect hook for real-time Firestore updates.
+  useEffect(() => {
+    // Only fetch data if the user is authenticated.
+    if (user) {
+      // Define the collection path based on the app ID and user ID.
+      // This creates a public collection shared by all users of this app.
+      const postsCollection = collection(db, `artifacts/${appId}/public/data/forum-posts`);
+      // Create a query to get all documents, ordered by creation time.
+      const postsQuery = query(postsCollection, orderBy('createdAt', 'desc'));
+
+      // Set up a real-time listener for the posts.
+      const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
+        const posts = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setMessages(posts);
+      }, (e) => {
+        console.error("Error fetching data:", e);
+        setError("Failed to load posts. Please check your network connection.");
+      });
+
+      // Clean up the subscription on component unmount.
+      return () => unsubscribe();
+    }
+  }, [user]); // Re-run effect when the user changes.
+
+  // Function to add a new post to the forum.
+  const handlePost = async (e) => {
+    e.preventDefault();
+    if (newMessage.trim() === '') {
+      setError("Message cannot be empty.");
+      return;
+    }
+
+    try {
+      // Add a new document to the 'forum-posts' collection.
+      const docRef = await addDoc(collection(db, `artifacts/${appId}/public/data/forum-posts`), {
+        text: newMessage,
+        user: auth.currentUser.email || 'Anonymous', // Use email if available, otherwise 'Anonymous'.
+        userId: auth.currentUser.uid,
+        createdAt: serverTimestamp(),
+      });
+      setNewMessage('');
+      setError('');
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      setError("Failed to post message. Please try again.");
+    }
+  };
+
+  if (loading) {
+    return <div className="p-8 text-center text-gray-400">Loading forum...</div>;
+  }
+
+  return (
+    <div className="bg-gray-900 text-gray-100 min-h-screen flex flex-col p-4 sm:p-8 rounded-lg">
+      <div className="flex-grow overflow-auto mb-4">
+        {messages.length === 0 ? (
+          <div className="text-center text-gray-400 p-8">No posts yet. Be the first to start a conversation!</div>
+        ) : (
+          <div className="space-y-4">
+            {messages.map((message) => (
+              <div key={message.id} className="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-semibold text-purple-400">{message.user}</span>
+                  {message.createdAt && (
+                    <span className="text-sm text-gray-500">
+                      {new Date(message.createdAt.seconds * 1000).toLocaleTimeString()}
+                    </span>
+                  )}
+                </div>
+                <p className="text-gray-300">{message.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      
+      {error && (
+        <div className="bg-red-500 text-white p-3 rounded-lg mb-4 text-center">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handlePost} className="flex space-x-2">
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Write a message..."
+          className="flex-grow p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+        />
+        <button
+          type="submit"
+          className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          Post
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
