@@ -3,388 +3,650 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trauma, Dissociation & Decompensation Pathways</title>
+    <title>Cindness KULT</title>
+    <!-- Importing fonts for the title and body -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* --- Custom Styles for the Infographic --- */
-        body {
-            font-family: 'Source Serif Pro', serif;
-            background-color: #f0f4f8;
-            color: #1a202c; /* Ensure text is readable */
+        /* --- Base Styles & Colors --- */
+        :root {
+            --purple: #9b59b6;
+            --blue: #3498db;
+            --green: #2ecc71;
+            --dark-bg: #0d0f1a;
+            --light-text: #ecf0f1;
+            --glow-color: rgba(52, 152, 219, 0.7);
         }
-        .brand-gray { color: #4A5568; }
-        .brand-purple { color: #4C1D95; }
-        .brand-red { color: #CC333F; }
-        .brand-orange { color: #EB6841; }
-        .brand-yellow { color: #EDC951; }
-        .bg-brand-gray { background-color: #4A5568; }
-        .bg-brand-purple { background-color: #4C1D95; }
-        .bg-brand-red { background-color: #CC333F; }
-        .bg-brand-orange { background-color: #EB6841; }
-        .bg-brand-yellow { background-color: #EDC951; }
-        .border-brand-gray { border-color: #4A5568; }
-        .border-brand-red { border-color: #CC333F; }
 
-        /* Chart container and styling for responsiveness */
+        /* --- Twinkling Cursor & Background --- */
+        html {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12,0L9.9,8.1L0,9.9l8.1,2.1l2.1,8.1l2.1-8.1l8.1-2.1L14.1,8.1L12,0z" transform="rotate(0 12 12)"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></animateTransform></path></svg>') 12 12, auto;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib-rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Source Serif Pro', serif;
+            color: var(--light-text);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- Main Container & Layout --- */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- General Section Styling --- */
+        .section {
+            /* Increased opacity for better readability */
+            background-color: rgba(13, 15, 26, 0.92);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+            transition: all 0.4s ease; /* Transition for hover effect */
+        }
+        
+        /* NEW: Hover effect for sections */
+        .section:hover {
+            border-color: rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* --- Gradient Text for Titles --- */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-animation-text 5s linear infinite;
+        }
+        @keyframes gradient-animation-text {
+            to {
+                background-position: 200% center;
+            }
+        }
+        
+        /* Specific styling for section headers */
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: left;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        h3 {
+             font-family: 'Press Start 2P', cursive;
+             font-size: 1.4rem;
+             color: #ffffff;
+             margin-top: 25px;
+             text-align: center;
+        }
+        p {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+        }
+
+        .problem-bold {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* --- Header Section --- */
+        .main-header {
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+        .title {
+            /* Updated font for the main title */
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+            margin-bottom: 25px;
+        }
+        .pillars {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px 25px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+        }
+
+        /* --- Simple Nav Links --- */
+        .simple-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .simple-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .simple-nav a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .contact-button {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+            border: none;
+            border-radius: 8px;
+            padding: 10px 25px;
+            color: #ffffff;
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- Resource Hub Portal Buttons (new card design with glowing border) --- */
+        .link-pool {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .link-pool li a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
+            height: 80px;
+            padding: 10px;
+            position: relative;
+            background-color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--light-text);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+            box-shadow: inset 0 0 0 1px rgba(52, 152, 219, 0.2);
+        }
+
+        .link-pool li a:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-image: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) 1;
+        }
+        
+        /* --- Footer --- */
+        footer {
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* --- New Styling for Profile Card --- */
+        .profile-card {
+            display: flex;
+            flex-direction: row; /* Changed to row for side-by-side layout */
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px; /* Added a gap for spacing between the photo and text */
+            justify-content: center; /* Center the entire profile card horizontally */
+        }
+        .profile-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--blue);
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+        }
+        .profile-card .name-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.2rem;
+            color: var(--light-text);
+            line-height: 1.4;
+            text-align: left; /* Align the text to the left */
+        }
+
+        /* New Styling for the Self-Compassion Flyer */
+        .flyer-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .flyer-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .flyer-container img:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 480px) {
+            .link-pool li a {
+                width: 100%;
+                font-size: 0.9rem;
+            }
+        }
         .chart-container {
             position: relative;
             width: 100%;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
+            height: 350px;
             max-height: 400px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 350px;
+                height: 400px;
             }
         }
-
-        /* Card and flowchart styling */
-        .stat-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            text-align: center;
-        }
-        .flowchart-node {
-            background-color: white;
-            border: 2px solid #4A5568;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
-            color: #4C1D95;
-            font-weight: 600;
-        }
-        .flowchart-arrow {
-            font-size: 2rem;
-            color: #4A5568;
-            margin: 0 0.5rem;
-            align-self: center;
-        }
-        .dialectic-box {
-            border: 3px solid;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.125rem;
-            line-height: 1.75rem;
-        }
-        .alert-box {
-            background-color: #fffbeb;
-            border-left: 5px solid #facc15;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-        }
-        /* New styling for the decompensation flowchart */
-        .decompensation-flow {
+        .authenticity-diagram {
+            position: relative;
+            width: 300px;
+            height: 300px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            justify-content: center;
         }
-        .decompensation-node {
-            background-color: white;
-            border: 2px solid #a0aec0;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        .core-self {
+            width: 120px;
+            height: 120px;
+            background-color: #27AE60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            width: 100%;
-        }
-        .decompensation-node h3 {
-            font-size: 1.25rem;
+            color: white;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            z-index: 10;
+            border: 4px solid #2ECC71;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
         }
-        .decompensation-arrow {
-            font-size: 2rem;
-            color: #4A5568;
-            align-self: center;
-            animation: bounce 2s infinite;
+        .action-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #2980B9;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.2;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
         }
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(-25%);
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-            50% {
-                transform: none;
-                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            }
+        .action-node-1 { transform: translate(-110px, -80px); }
+        .action-node-2 { transform: translate(110px, -80px); }
+        .action-node-3 { transform: translate(0, 130px); }
+
+        /* Custom styling for the new content sections to match the theme */
+        .content-card {
+            background-color: var(--dark-bg);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.1);
         }
+        .content-card h3 {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--light-text);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .content-card p {
+            color: var(--light-text);
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+        }
+        .content-card strong {
+            color: var(--purple);
+        }
+        .content-card .text-gray-500, .content-card .text-gray-400 {
+            color: var(--light-text);
+            opacity: 0.7;
+        }
+        
     </style>
 </head>
-<body class="text-gray-800">
-
-    <div class="container mx-auto p-4 md:p-8">
-
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-black brand-purple mb-2 leading-tight" style="font-weight: 900;">The Decompensation Trajectory: <br><span class="text-3xl md:text-4xl text-gray-600 font-semibold">From Trauma to Complex Conditions</span></h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mt-4">Understanding the pathways from foundational vulnerabilities to severe mental health challenges.</p>
+<body>
+    <div class="container">
+        
+        <header class="main-header">
+            <h1 class="title gradient-text">Cindness KULT</h1>
+            <p class="subtitle">a non-cult collaboration zone for growth and learning</p>
         </header>
+        
+        <div class="section">
+            <h2 class="welcome-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.0001 2.25L9.57013 9.48912L2.25008 10.1472L7.69741 15.1764L6.15584 22.25L12.0001 18.5772L17.8444 22.25L16.3028 15.1764L21.7501 10.1472L14.4301 9.48912L12.0001 2.25Z" stroke="#9B59B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Welcome
+            </h2>
+            <p>This space is a digital sanctuary for thinkers, creators, and collaborators. We believe in the power of open dialogue and collective growth. Explore the pathways below to dive into our shared resources and projects.</p>
+        </div>
 
-        <main class="space-y-16">
+        <div class="section">
+            <h2 class="connect-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)">
+                    <path d="M11 2h2v11h-2z"/>
+                    <path d="M16 13h-2v11h2z"/>
+                    <path d="M7 13h-2v11h2z"/>
+                    <path d="M12 2l-12 22h24z"/>
+                </svg>
+                Connect Corner
+            </h2>
+            <p>A place for thinkers to connect, collaborate, and share ideas. </p>
+            <ul class="link-pool">
+                <li><a href="#">Clinician Corner</a></li>
+                <li><a href="#">Friendship Forum</a></li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2 class="gradient-text">The Problem</h2>
+            <p><strong class="problem-bold">Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
+            <p><strong class="problem-bold">Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
+            <div class="text-center mb-10">
+                <h3 class="font-bold text-lg text-left text-light-text opacity-70 mt-2">When the Scale Tips: Understanding Imbalance</h3>
+                <p class="text-light-text">Psychological distress often arises from a deep imbalance between these two forces.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-6">
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-center mb-4">The Pull of Imbalance</h3>
+                    <p class="text-center mb-4">An over-reliance on one force creates a strong pull towards certain states of being.</p>
+                    <div class="chart-container">
+                        <canvas id="imbalanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-center mb-4">Oscillation Between Extremes</h3>
+                     <p class="text-center mb-4">Some conditions, like Bipolar Disorder, can be seen as a violent swing between the two poles.</p>
+                    <div class="chart-container">
+                        <canvas id="oscillationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">The Solution Path</h2>
+            <p>This space is my response. It's where I share tools for therapy, research, and understanding neurodivergence. The core of this work is finding the balance between <strong>Creativity & Structure</strong>. It's all grounded in my <strong>Interwoven Roots Theory</strong>, which seeks to prevent harm by building kinder systems.</p>
+            <p>Want to know when my book on this theory is ready? Sign up for exclusive updates.</p>
+            <div class="simple-nav" style="margin-top: 20px;">
+                <a href="mailto:cindnesskult@gmail.com?subject=Book Updates" class="contact-button">Get Notified About the Book</a>
+            </div>
+            <div class="text-center mb-10 mt-10">
+                <h3 class="font-bold text-lg text-left text-light-text opacity-70 mt-2">Finding Your Authentic Self</h3>
+                <p class="text-light-text">Balance leads to Congruence, where your actions align with your true self.</p>
+            </div>
+            <div class="content-card flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="flex-shrink-0">
+                    <div class="authenticity-diagram mx-auto">
+                        <div class="core-self">Core Self & Values</div>
+                        <div class="action-node action-node-1">Spontaneous Actions</div>
+                        <div class="action-node action-node-2">Creative Thoughts</div>
+                        <div class="action-node action-node-3">Lived Experience</div>
+                    </div>
+                </div>
+                <div class="flex-grow max-w-xl">
+                    <h3 class="text-2xl font-bold mb-4">Congruence: A Harmony of Being</h3>
+                    <p class="text-lg">Psychologist Carl Rogers spoke of <span class="font-semibold text-light-text opacity-70">Congruence</span> as a state where our actions and experiences (Creation) are in harmony with our core self and values (Structure). It’s when the garden we cultivate reflects the home we've built. It feels genuine and true.</p>
+                    <p class="text-lg mt-4">When out of balance, we feel <span class="font-semibold text-light-text opacity-70">Incongruence</span>. This is the dissonance between who we are and what we do.</p>
+                </div>
+            </div>
+            <div class="text-center mb-10 mt-10">
+                <h3 class="font-bold text-lg text-left text-light-text opacity-70 mt-2">A Path Forward: Building a More Balanced World</h3>
+                <p class="text-light-text">Creating a healthier world requires conscious work on both individual and societal levels.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+                <div class="content-card text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold mb-2">Learn Each Other's Language</h3>
+                    <p>Create a culture of belonging by appreciating different ways of thinking and communicating, lifting the burden on neurodivergent individuals to always "fit in."</p>
+                </div>
+                <div class="content-card text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">❤️</div>
+                    <h3 class="text-xl font-bold mb-2">Change What We Celebrate</h3>
+                    <p>Shift our values from celebrating the hoarding of wealth and power to celebrating cooperation, community, and compassion as the highest forms of success.</p>
+                </div>
+                <div class="content-card text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-2">Raise a Wiser Generation</h3>
+                    <p>Make clarity, kindness, and critical thinking the cornerstones of education to build a "mental immune system" against manipulation and division.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New section for the Self-Compassion Flyer -->
+        <div class="section">
+            <h2 class="gradient-text">Self-Compassion</h2>
+            <div class="flyer-container">
+                <img src="https://embrace-autism.com/wp-content/uploads/flyer-SelfCompassion.svg" alt="Self-Compassion flyer from Embrace Autism">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">About Me</h2>
+            <!-- New profile card added here -->
+            <div class="profile-card">
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocKbt7sfDcLSlGp7EYryYvUXZKl0RnqnsVi9sIRFwWTIphxA_zg0=s576-c-no" alt="Vivian Mitchell professional photo">
+                <div class="name-title">
+                    <p>Vivian Mitchell</p>
+                    <p>MA, APCC, Ph.D. student</p>
+                </div>
+            </div>
+            <!-- Original paragraph follows -->
+            <p>Greetings! My name is Vivian (they/them) and I'm a pscyhology-enjoyer, poetry enthusiast, and practicing psychotherapist. I'm also in training to become a psychologist, and I currently work as an APCC in private practice, focusing on differential diagnosis, clinical assessment and evaluation, person-centered approaches, and neurodiversity. My work is dedicated to creating validating, person-centered tools that challenge systemic invalidation. My focus is on neurodiversity, trauma, and the LGBTQ+ community, blending evidence-based practices with the humanistic need for creativity and connection. This space is where I share my work to help build kinder, more effective systems for therapy and understanding.</p>
+        </div>
+        
+        <div class="section simple-nav">
+            <a href="https://www.tiktok.com/@vivi.yum?lang=en" target="_blank">TikTok</a>
+            <a href="https://www.linkedin.com/in/vivianmmitchell/" target="_blank">LinkedIn</a>
+            <p>Email: <a href="mailto:cindnesskult@gmail.com" class="contact-button">cindnesskult@gmail.com</a></p>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">Resource Hub</h2>
             
-            <!-- The Trauma Pathway Section -->
-            <section id="trauma">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 1: The Trauma Pathway</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold brand-purple mb-4">PTSD as the Origin Point</h3>
-                        <p class="text-gray-700 mb-4">For many, the "intolerable internal state" that fuels OCD is forged by trauma. Intrusive memories from PTSD function like obsessions, and dissociation is the mind's primary defense.</p>
-                        <div class="chart-container">
-                            <canvas id="traumaPathwaysChart"></canvas>
-                        </div>
-                         <p class="text-sm text-center text-gray-500 mt-2">Comorbidity rates highlight the deep connection between trauma and OCD.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md space-y-6">
-                        <h3 class="text-2xl font-bold brand-purple">The Dissociative Fork: A Creative Defense</h3>
-                        <p class="text-gray-700">When the external world fails to provide safety, the mind uses a profound creative act to survive. Dissociation can take multiple forms, representing a failure of personality integration due to overwhelming trauma.</p>
-                        <div class="space-y-4">
-                            <div class="p-4 border-l-4 border-brand-red rounded-r-lg bg-red-50">
-                                <h4 class="font-bold text-lg brand-red">Structural Dissociation</h4>
-                                <p class="text-gray-700">A failure to integrate a single personality, leading to compartmentalized memory and identity (OSDD/DID).</p>
-                            </div>
-                            <div class="p-4 border-l-4 border-brand-orange rounded-r-lg bg-orange-50">
-                                <h4 class="font-bold text-lg brand-orange">Ritualized Dissociation</h4>
-                                <p class="text-gray-700">The development of active, compulsive rituals (OCD) to control and contain internal chaos.</p>
-                            </div>
-                            <div class="p-4 border-l-4 border-brand-yellow rounded-r-lg bg-yellow-50">
-                                <h4 class="font-bold text-lg brand-yellow">Chronic Dissociative States</h4>
-                                <p class="text-gray-700">The primary symptom becomes a persistent feeling of being unreal or disconnected from the self or the world (DPDR).</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <h3>For Understanding</h3>
+            <ul class="link-pool">
+                <li><a href="NDguide.resources.html">A Guide to Neurodivergence</a></li>
+                <li><a href="difflang">It's a Different Language, Not a Deficit</a></li>
+                <li><a href="duality">The Duality Framework</a></li>
+                <li><a href="ocd.risk">Understanding OCD & Risk</a></li>
+                <li><a href="theory">Interwoven Roots Theory (The Basics)</a></li>
+                <li><a href="diff2">diff2</a></li>
+                <li><a href="evolution">evolution</a></li>
+                <li><a href="index.html">index.html</a></li>
+                <li><a href="dynamic">dynamic</a></li>
+                <li><a href="README.MD">README.MD</a></li>
+            </ul>
 
-            <!-- Decompensation Trajectory Section - Expanded with Personality Disorders -->
-            <section id="decompensation">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 2: The Trajectory of Decompensation</h2>
-                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">Unresolved foundational vulnerabilities can lead to a trajectory of worsening symptoms as the system's attempts to cope become more and more maladaptive.</p>
-                
-                <!-- The new decompensation flowchart -->
-                <div class="decompensation-flow max-w-4xl mx-auto">
-                    <div class="decompensation-node">
-                        <h3 class="text-brand-purple">Foundational Vulnerabilities</h3>
-                        <p class="text-sm text-gray-600">Neurodivergence & Childhood Trauma</p>
-                    </div>
-                    <div class="decompensation-arrow">↓</div>
-                    <div class="decompensation-node">
-                        <h3 class="text-brand-orange">Dysregulated Coping</h3>
-                        <p class="text-gray-700">The mind's attempt to manage internal chaos. This can manifest as ritualized behaviors (OCD) or emotional dysregulation.</p>
-                    </div>
-                    <div class="decompensation-arrow">↓</div>
-                    <div class="decompensation-node">
-                        <h3 class="text-brand-red">Progression to More Complex Disorders</h3>
-                        <p class="text-gray-700">This pathway can lead to a variety of complex conditions as the coping mechanisms fail and the system breaks down.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                            <div class="bg-red-50 p-3 rounded-lg text-sm text-red-800 font-semibold">
-                                <span class="block text-xl">⛓️</span> Borderline Personality Disorder (BPD)
-                            </div>
-                            <div class="bg-orange-50 p-3 rounded-lg text-sm text-orange-800 font-semibold">
-                                <span class="block text-xl">🎭</span> Dissociative Disorders (OSDD/DID)
-                            </div>
-                            <div class="bg-yellow-50 p-3 rounded-lg text-sm text-yellow-800 font-semibold">
-                                <span class="block text-xl">🌀</span> Schizo-OCD
-                            </div>
-                        </div>
-                    </div>
-                    <div class="decompensation-arrow">↓</div>
-                    <div class="decompensation-node">
-                        <h3 class="text-brand-gray">The "Schizo-obsessive" Subtype</h3>
-                        <p class="text-gray-700">When the firewall of **insight** collapses, OCD obsessions can become indistinguishable from delusional beliefs, leading to a more severe psychotic illness.</p>
-                    </div>
-                </div>
+            <h3>The Solution in Practice (Free Tools)</h3>
+            <ul class="link-pool" style="margin-top: 20px;">
+                <li><a href="creativityvstructure">Creativity & Structure</a></li>
+                <li><a href="printerfriendlyCS">Printer-Friendly Version</a></li>
+                <li><a href="sensorybasics">Sensory Basics</a></li>
+                <li><a href="sensorygame">The Sensory Game</a></li>
+                <li><a href="planner">ADHD-Friendly Planner</a></li>
+            </ul>
 
-                <!-- The original schizo-ocd chart -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
-                    <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold brand-purple mb-4">From OCD to Psychosis: The Role of Insight</h3>
-                        <p class="text-gray-700 mb-6">The firewall between severe OCD and psychosis is <span class="font-bold">insight</span>. When an individual loses the awareness that their obsessions are irrational, they begin a slide towards delusional beliefs. The presence of Bipolar Disorder can act as a powerful accelerator on this path.</p>
-                        <div class="chart-container h-80">
-                            <canvas id="schizoOcdChart"></canvas>
-                        </div>
-                        <p class="text-sm text-center text-gray-500 mt-2">The prevalence of OCD is significantly higher in individuals with schizophrenia.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold brand-purple mb-4">Differentiating Psychosis</h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li><strong class="brand-red">In OCD:</strong> Psychosis is limited to the content of the obsessions. <em class="block text-sm text-gray-500">(Onset: Adolescence/Early Adulthood)</em></li>
-                            <li><strong class="brand-orange">In Bipolar Disorder:</strong> Psychosis occurs only during mood episodes. <em class="block text-sm text-gray-500">(Onset: Late Adolescence/Early Adulthood)</em></li>
-                            <li><strong class="brand-yellow">In Schizophrenia:</strong> Psychosis is persistent and the primary feature; negative symptoms are prominent. <em class="block text-sm text-gray-500">(Onset: Late Teens to Early 30s)</em></li>
-                            <li><strong class="brand-gray">In Schizoaffective Disorder:</strong> A mix of psychosis and mood episodes, with at least 2 weeks of psychosis without mood symptoms. <em class="block text-sm text-gray-500">(Onset: Early Adulthood)</em></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </main>
+            <h3>Creative Works & Socials</h3>
+             <ul class="link-pool" style="margin-top: 20px;">
+                <li><a href="writing.html">My Writing & Poetry</a></li>
+                <li><a href="#">Videos & Presentations</a></li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
+        </footer>
+
     </div>
 
-<script>
-    // Helper function to wrap long labels for charts
-    function wrapText(text, maxLen) {
-        if (text.length <= maxLen) {
-            return text;
-        }
-        const words = text.split(' ');
-        let lines = [];
-        let currentLine = '';
-        for (const word of words) {
-            if ((currentLine + ' ' + word).length > maxLen) {
-                lines.push(currentLine);
-                currentLine = word;
-            } else {
-                currentLine += (currentLine === '' ? '' : ' ') + word;
-            }
-        }
-        lines.push(currentLine);
-        return lines;
-    }
+    <script>
+        const oceanForest = {
+            primary: '#2ECC71', // Green
+            secondary: '#3498DB', // Blue
+            tertiary: '#1A5276', // Darker Blue
+            text: '#ecf0f1', // light text
+            grid: 'rgba(236, 240, 241, 0.1)', // light grid lines
+            primaryTransparent: 'rgba(46, 204, 113, 0.4)',
+            secondaryTransparent: 'rgba(52, 152, 219, 0.4)'
+        };
 
-    // Callback for chart tooltips to handle wrapped text
-    const tooltipTitleCallback = function(tooltipItems) {
-        const item = tooltipItems[0];
-        let label = item.chart.data.labels[item.dataIndex];
-        if (Array.isArray(label)) {
-          return label.join(' ');
-        } else {
-          return label;
-        }
-    };
-
-    // Default options for Chart.js
-    const defaultChartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels: {
-                    font: {
-                        size: 14,
-                        family: 'Source Serif Pro'
-                    }
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    title: tooltipTitleCallback
-                }
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
             }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    font: {
-                        size: 12,
-                        family: 'Source Serif Pro'
-                    }
-                }
-            },
-            x: {
-                ticks: {
-                    font: {
-                        size: 12,
-                        family: 'Source Serif Pro'
-                    }
-                }
-            }
-        }
-    };
-
-    // Chart for OCD & Dissociative Disorder Comorbidity
-    const traumaPathwaysCtx = document.getElementById('traumaPathwaysChart').getContext('2d');
-    new Chart(traumaPathwaysCtx, {
-        type: 'doughnut',
-        data: {
-            // Updated label based on a 14% comorbidity rate mentioned in your notes
-            labels: ['OCD Patients with Dissociative Symptoms', 'OCD Patients without Dissociative Symptoms'],
-            datasets: [{
-                label: 'Comorbidity Rate',
-                data: [14, 86],
-                backgroundColor: ['#CC333F', '#e2e8f0'],
-                borderColor: ['#CC333F', '#e2e8f0'],
-                borderWidth: 2,
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            responsive: true,
+            return label;
+        };
+        
+        const defaultChartOptions = {
             maintainAspectRatio: false,
+            responsive: true,
             plugins: {
                 legend: {
-                    position: 'bottom',
-                     labels: {
+                    labels: {
+                        color: oceanForest.text,
                         font: {
-                            family: 'Source Serif Pro'
-                        },
-                        boxWidth: 20,
-                        padding: 20
+                            family: "'Source Serif Pro', serif"
+                        }
                     }
                 },
                 tooltip: {
                     callbacks: {
                         title: tooltipTitleCallback
                     }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: oceanForest.text },
+                    grid: { color: oceanForest.grid }
                 },
-                title: {
-                    display: true,
-                    text: 'OCD & Dissociative Symptoms Comorbidity',
-                    font: { size: 16, weight: 'bold', family: 'Source Serif Pro' },
-                    padding: { top: 10, bottom: 20 }
+                x: {
+                    ticks: { color: oceanForest.text },
+                    grid: { color: oceanForest.grid }
                 }
             }
-        }
-    });
+        };
 
-    // Chart for Schizo-OCD prevalence
-    const schizoOcdCtx = document.getElementById('schizoOcdChart').getContext('2d');
-    new Chart(schizoOcdCtx, {
-        type: 'bar',
-        data: {
-            labels: ['General Population', wrapText('Schizophrenia Patient Population', 16)],
-            datasets: [{
-                label: 'Prevalence of OCD (%)',
-                data: [2, 25],
-                backgroundColor: ['#EDC951', '#CC333F'],
-                borderColor: ['#EDC951', '#CC333F'],
-                borderWidth: 1,
-                borderRadius: 5
-            }]
-        },
-        options: {
-            ...defaultChartOptions,
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    max: 30,
-                    ticks: {
-                        callback: function(value) {
-                            return value + '%'
-                        },
-                        font: { family: 'Source Serif Pro' }
-                    }
-                },
-                y: { ticks: { font: { family: 'Source Serif Pro' } } }
+        const imbalanceCtx = document.getElementById('imbalanceChart').getContext('2d');
+        new Chart(imbalanceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pull towards Structure (Rigidity, Anxiety)', 'Pull towards Creation (Chaos, Impulsivity)'],
+                datasets: [{
+                    label: 'Pull of Imbalance',
+                    data: [55, 45],
+                    backgroundColor: [
+                        oceanForest.secondary,
+                        oceanForest.primary
+                    ],
+                    borderColor: '#0d0f1a', // dark background
+                    borderWidth: 4,
+                }]
             },
-            plugins: {
-                 legend: { display: false },
-                 tooltip: { callbacks: { title: tooltipTitleCallback } }
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                           color: oceanForest.text,
+                           font: { family: "'Source Serif Pro', serif" }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
             }
-        }
-    });
-</script>
+        });
+
+        const oscillationCtx = document.getElementById('oscillationChart').getContext('2d');
+        new Chart(oscillationCtx, {
+            type: 'line',
+            data: {
+                labels: ['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'Phase 5', 'Phase 6'],
+                datasets: [{
+                    label: 'Creative Energy',
+                    data: [10, 90, 85, 20, 15, 70],
+                    borderColor: oceanForest.primary,
+                    backgroundColor: oceanForest.primaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Rigid Structure',
+                    data: [90, 10, 15, 80, 85, 30],
+                    borderColor: oceanForest.secondary,
+                    backgroundColor: oceanForest.secondaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: defaultChartOptions
+        });
+    </script>
 </body>
 </html>
