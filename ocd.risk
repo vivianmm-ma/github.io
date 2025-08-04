@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Unseen Progression: From Anxiety & OCD to Dissociation & Psychosis</title>
+    <title>Trauma, Dissociation & Decompensation Pathways</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
+        /* --- Custom Styles for the Infographic --- */
         body {
             font-family: 'Source Serif Pro', serif;
             background-color: #f0f4f8;
+            color: #1a202c; /* Ensure text is readable */
         }
         .brand-gray { color: #4A5568; }
         .brand-purple { color: #4C1D95; }
@@ -26,6 +28,8 @@
         .bg-brand-yellow { background-color: #EDC951; }
         .border-brand-gray { border-color: #4A5568; }
         .border-brand-red { border-color: #CC333F; }
+
+        /* Chart container and styling for responsiveness */
         .chart-container {
             position: relative;
             width: 100%;
@@ -40,6 +44,8 @@
                 height: 350px;
             }
         }
+
+        /* Card and flowchart styling */
         .stat-card {
             background-color: white;
             border-radius: 0.75rem;
@@ -78,6 +84,43 @@
             padding: 1.5rem;
             border-radius: 0.5rem;
         }
+        /* New styling for the decompensation flowchart */
+        .decompensation-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        .decompensation-node {
+            background-color: white;
+            border: 2px solid #a0aec0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            text-align: center;
+            width: 100%;
+        }
+        .decompensation-node h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .decompensation-arrow {
+            font-size: 2rem;
+            color: #4A5568;
+            align-self: center;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            50% {
+                transform: none;
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -85,132 +128,88 @@
     <div class="container mx-auto p-4 md:p-8">
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-black brand-purple mb-2 leading-tight" style="font-weight: 900;">The Unseen Progression: <br><span class="text-3xl md:text-4xl text-gray-600 font-semibold">From Anxiety & OCD to Dissociation & Psychosis</span></h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mt-4">Visualizing the critical importance of early diagnosis and the risks of untreated, complex conditions.</p>
+            <h1 class="text-4xl md:text-5xl font-black brand-purple mb-2 leading-tight" style="font-weight: 900;">The Decompensation Trajectory: <br><span class="text-3xl md:text-4xl text-gray-600 font-semibold">From Trauma to Complex Conditions</span></h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mt-4">Understanding the pathways from foundational vulnerabilities to severe mental health challenges.</p>
         </header>
 
         <main class="space-y-16">
-
-            <section id="differential-diagnosis">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-red">The Diagnostic Imperative: Is It Anxiety or OCD?</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="alert-box">
-                        <h3 class="text-2xl font-bold brand-purple mb-3">A Critical Oversight</h3>
-                        <p class="text-gray-700 mb-4">When a client presents with anxiety, it is a clinical imperative to differentiate between Generalized Anxiety Disorder (GAD) and OCD. Treating OCD as GAD can worsen symptoms and cause iatrogenic harm. A differential can be completed in minutes.</p>
-                        <div class="mt-4">
-                            <h4 class="font-bold text-lg text-gray-800">Quick Screening Tools:</h4>
-                            <ul class="list-disc list-inside text-gray-700">
-                                <li><span class="font-semibold">For Worry (GAD):</span> Penn State Worry Questionnaire (PSWQ)</li>
-                                <li><span class="font-semibold">For OCD:</span> Obsessive-Compulsive Inventory-Revised (OCI-R)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold brand-purple mb-4">Always Screen for OCD If Risk Factors Are Present</h3>
-                        <p class="text-gray-700">Early and accurate diagnosis dramatically improves outcomes. Screening is essential for individuals with:</p>
-                        <div class="mt-4 space-y-3">
-                            <div class="flex items-center bg-orange-50 p-3 rounded-lg">
-                                <span class="text-2xl mr-4">🤯</span>
-                                <p class="font-semibold text-orange-800">Neurodivergence (ADHD / Autism)</p>
-                            </div>
-                            <div class="flex items-center bg-red-50 p-3 rounded-lg">
-                                <span class="text-2xl mr-4">🤯</span>
-                                <p class="font-semibold text-red-800">History of PTSD or Childhood Trauma</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="foundations">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 1: Foundational Vulnerabilities</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                    <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
-                        <h3 class="text-2xl font-bold brand-purple">The Neurodivergent Mind</h3>
-                        <p class="text-gray-700">Neurodevelopmental profiles like Autism and ADHD are significant precursors for OCD. The cognitive styles inherent to these neurotypes can lead to obsessive-compulsive patterns as a way to cope with a world that feels chaotic or overwhelming.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                            <div class="stat-card border-l-4 border-brand-orange">
-                                <h4 class="text-xl font-bold brand-orange">Autism & OCD</h4>
-                                <p class="text-4xl font-black brand-purple my-2" style="font-weight: 900;">17-37%</p>
-                                <p class="text-sm text-gray-600">of autistic youth exhibit OCD symptoms, driven by a need to systematize a confusing world.</p>
-                            </div>
-                            <div class="stat-card border-l-4 border-brand-red">
-                                <h4 class="text-xl font-bold brand-red">ADHD & OCD</h4>
-                                <p class="text-4xl font-black brand-purple my-2" style="font-weight: 900;">8-25%</p>
-                                <p class="text-sm text-gray-600">of individuals with OCD also have ADHD, often using rituals to manage executive dysfunction.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
-                        <h3 class="text-2xl font-bold brand-purple">The Central Dialectic</h3>
-                         <p class="text-gray-700">Mental health can be seen as a dynamic balance between two forces. An over-reliance on Structure, often as a defense against internal or external chaos, leads to the rigidity characteristic of OCD.</p>
-                        <div class="flex flex-col space-y-4 mt-4">
-                           <div class="dialectic-box border-brand-gray">
-                               <p>STRUCTURE</p>
-                               <p class="text-sm font-normal text-gray-600">(Safety, Predictability, Rules) → Rigidity</p>
-                           </div>
-                           <div class="text-center text-2xl font-bold brand-purple">⚡️ vs ⚡️</div>
-                           <div class="dialectic-box border-brand-orange">
-                               <p>CREATIVITY</p>
-                               <p class="text-sm font-normal text-gray-600">(Adaptation, Spontaneity, Flexibility) → Chaos</p>
-                           </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="cycle">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 2: The OCD Cycle</h2>
-                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">The OCD cycle is a self-reinforcing loop where pathological structure (the compulsion) is used to neutralize the anxiety caused by internal chaos (the obsession).</p>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0">
-                        <div class="flowchart-node">1. Obsession<br><span class="text-sm font-normal">(Intrusive Thought)</span></div>
-                        <div class="flowchart-arrow">→</div>
-                        <div class="flowchart-node">2. Anxiety/Distress<br><span class="text-sm font-normal">(Emotional Chaos)</span></div>
-                        <div class="flowchart-arrow">→</div>
-                        <div class="flowchart-node">3. Compulsion<br><span class="text-sm font-normal">(Ritualized Behavior)</span></div>
-                        <div class="flowchart-arrow">→</div>
-                        <div class="flowchart-node">4. Temporary Relief<br><span class="text-sm font-normal">(Reinforcement)</span></div>
-                    </div>
-                </div>
-            </section>
-
+            
+            <!-- The Trauma Pathway Section -->
             <section id="trauma">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 3: The Trauma Pathway</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 1: The Trauma Pathway</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="text-2xl font-bold brand-purple mb-4">PTSD as the Origin Point</h3>
-                        <p class="text-gray-700 mb-4">For many, the "intolerable internal state" that fuels OCD is forged by trauma. Intrusive memories from PTSD function like obsessions, and dissociation is the mind's primary defense. This can evolve into more structured disorders.</p>
+                        <p class="text-gray-700 mb-4">For many, the "intolerable internal state" that fuels OCD is forged by trauma. Intrusive memories from PTSD function like obsessions, and dissociation is the mind's primary defense.</p>
                         <div class="chart-container">
                             <canvas id="traumaPathwaysChart"></canvas>
                         </div>
                          <p class="text-sm text-center text-gray-500 mt-2">Comorbidity rates highlight the deep connection between trauma and OCD.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md space-y-6">
-                        <h3 class="text-2xl font-bold brand-purple">The Developmental Fork</h3>
+                        <h3 class="text-2xl font-bold brand-purple">The Dissociative Fork: A Creative Defense</h3>
+                        <p class="text-gray-700">When the external world fails to provide safety, the mind uses a profound creative act to survive. Dissociation can take multiple forms, representing a failure of personality integration due to overwhelming trauma.</p>
                         <div class="space-y-4">
                             <div class="p-4 border-l-4 border-brand-red rounded-r-lg bg-red-50">
-                                <h4 class="font-bold text-lg brand-red">Pathway 1: Structural Dissociation</h4>
-                                <p class="text-gray-700">Compartmentalization of memory and identity leads to OSDD/DID.</p>
+                                <h4 class="font-bold text-lg brand-red">Structural Dissociation</h4>
+                                <p class="text-gray-700">A failure to integrate a single personality, leading to compartmentalized memory and identity (OSDD/DID).</p>
                             </div>
                             <div class="p-4 border-l-4 border-brand-orange rounded-r-lg bg-orange-50">
-                                <h4 class="font-bold text-lg brand-orange">Pathway 2: Ritualized Dissociation</h4>
-                                <p class="text-gray-700">Active, compulsive rituals are developed to control internal chaos, leading to OCD.</p>
+                                <h4 class="font-bold text-lg brand-orange">Ritualized Dissociation</h4>
+                                <p class="text-gray-700">The development of active, compulsive rituals (OCD) to control and contain internal chaos.</p>
                             </div>
                             <div class="p-4 border-l-4 border-brand-yellow rounded-r-lg bg-yellow-50">
-                                <h4 class="font-bold text-lg brand-yellow">Pathway 3: Chronic Dissociative States</h4>
-                                <p class="text-gray-700">Depersonalization/Derealization become the primary, persistent symptoms (DPDR).</p>
+                                <h4 class="font-bold text-lg brand-yellow">Chronic Dissociative States</h4>
+                                <p class="text-gray-700">The primary symptom becomes a persistent feeling of being unreal or disconnected from the self or the world (DPDR).</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <!-- Decompensation Trajectory Section - Expanded with Personality Disorders -->
             <section id="decompensation">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 4: The Trajectory of Decompensation</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Part 2: The Trajectory of Decompensation</h2>
+                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">Unresolved foundational vulnerabilities can lead to a trajectory of worsening symptoms as the system's attempts to cope become more and more maladaptive.</p>
+                
+                <!-- The new decompensation flowchart -->
+                <div class="decompensation-flow max-w-4xl mx-auto">
+                    <div class="decompensation-node">
+                        <h3 class="text-brand-purple">Foundational Vulnerabilities</h3>
+                        <p class="text-sm text-gray-600">Neurodivergence & Childhood Trauma</p>
+                    </div>
+                    <div class="decompensation-arrow">↓</div>
+                    <div class="decompensation-node">
+                        <h3 class="text-brand-orange">Dysregulated Coping</h3>
+                        <p class="text-gray-700">The mind's attempt to manage internal chaos. This can manifest as ritualized behaviors (OCD) or emotional dysregulation.</p>
+                    </div>
+                    <div class="decompensation-arrow">↓</div>
+                    <div class="decompensation-node">
+                        <h3 class="text-brand-red">Progression to More Complex Disorders</h3>
+                        <p class="text-gray-700">This pathway can lead to a variety of complex conditions as the coping mechanisms fail and the system breaks down.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                            <div class="bg-red-50 p-3 rounded-lg text-sm text-red-800 font-semibold">
+                                <span class="block text-xl">⛓️</span> Borderline Personality Disorder (BPD)
+                            </div>
+                            <div class="bg-orange-50 p-3 rounded-lg text-sm text-orange-800 font-semibold">
+                                <span class="block text-xl">🎭</span> Dissociative Disorders (OSDD/DID)
+                            </div>
+                            <div class="bg-yellow-50 p-3 rounded-lg text-sm text-yellow-800 font-semibold">
+                                <span class="block text-xl">🌀</span> Schizo-OCD
+                            </div>
+                        </div>
+                    </div>
+                    <div class="decompensation-arrow">↓</div>
+                    <div class="decompensation-node">
+                        <h3 class="text-brand-gray">The "Schizo-obsessive" Subtype</h3>
+                        <p class="text-gray-700">When the firewall of **insight** collapses, OCD obsessions can become indistinguishable from delusional beliefs, leading to a more severe psychotic illness.</p>
+                    </div>
+                </div>
+
+                <!-- The original schizo-ocd chart -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
                     <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold brand-purple mb-4">From OCD to Psychosis</h3>
+                        <h3 class="text-2xl font-bold brand-purple mb-4">From OCD to Psychosis: The Role of Insight</h3>
                         <p class="text-gray-700 mb-6">The firewall between severe OCD and psychosis is <span class="font-bold">insight</span>. When an individual loses the awareness that their obsessions are irrational, they begin a slide towards delusional beliefs. The presence of Bipolar Disorder can act as a powerful accelerator on this path.</p>
                         <div class="chart-container h-80">
                             <canvas id="schizoOcdChart"></canvas>
@@ -228,37 +227,11 @@
                     </div>
                 </div>
             </section>
-
-            <section id="implications">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-gray">Clinical Implications & The Danger of Misdiagnosis</h2>
-                 <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">A core tenet of this model is that symptoms are often maladaptive coping skills. Treating the symptom without understanding its root cause can be ineffective and harmful.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                     <div class="bg-red-100 border-l-4 border-brand-red p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold brand-red mb-4">Treating OCD as Generalized Anxiety</h3>
-                        <p class="text-gray-800">A common clinical error is to treat OCD with standard talk therapy that provides reassurance or engages in logical debate about the obsession. This is iatrogenic (harmful) because:</p>
-                        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700">
-                            <li><span class="font-semibold">Reassurance becomes a compulsion,</span> strengthening the OCD cycle.</li>
-                            <li><span class="font-semibold">Debating the obsession</span> gives it legitimacy and power.</li>
-                        </ul>
-                        <p class="mt-4 font-bold text-red-800">The correct treatment is Exposure and Response Prevention (ERP), which must be applied carefully.</p>
-                    </div>
-                    <div class="bg-gray-100 border-l-4 border-brand-gray p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold brand-gray mb-4">A Phased Mandate for Safety</h3>
-                        <p class="text-gray-800">A safe, effective approach must be phased to avoid removing a coping mechanism before the underlying root is addressed.</p>
-                         <ol class="list-decimal list-inside mt-4 space-y-2 text-gray-700 font-semibold">
-                            <li>Safety, Stabilization, & Root Identification</li>
-                            <li>Symptom Tracing & Skill Building</li>
-                            <li>Addressing Specific Symptomatic Clusters</li>
-                            <li>Deeper Trauma Integration</li>
-                        </ol>
-                    </div>
-                </div>
-            </section>
-
         </main>
     </div>
 
 <script>
+    // Helper function to wrap long labels for charts
     function wrapText(text, maxLen) {
         if (text.length <= maxLen) {
             return text;
@@ -278,6 +251,7 @@
         return lines;
     }
 
+    // Callback for chart tooltips to handle wrapped text
     const tooltipTitleCallback = function(tooltipItems) {
         const item = tooltipItems[0];
         let label = item.chart.data.labels[item.dataIndex];
@@ -288,6 +262,7 @@
         }
     };
 
+    // Default options for Chart.js
     const defaultChartOptions = {
         responsive: true,
         maintainAspectRatio: false,
@@ -328,15 +303,17 @@
         }
     };
 
+    // Chart for OCD & Dissociative Disorder Comorbidity
     const traumaPathwaysCtx = document.getElementById('traumaPathwaysChart').getContext('2d');
     new Chart(traumaPathwaysCtx, {
         type: 'doughnut',
         data: {
-            labels: ['OCD Patients with a Dissociative Disorder', 'OCD Patients without a Dissociative Disorder'],
+            // Updated label based on a 14% comorbidity rate mentioned in your notes
+            labels: ['OCD Patients with Dissociative Symptoms', 'OCD Patients without Dissociative Symptoms'],
             datasets: [{
                 label: 'Comorbidity Rate',
                 data: [14, 86],
-                backgroundColor: ['#CC333F', '#f0f4f8'],
+                backgroundColor: ['#CC333F', '#e2e8f0'],
                 borderColor: ['#CC333F', '#e2e8f0'],
                 borderWidth: 2,
                 hoverOffset: 4
@@ -363,7 +340,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'OCD & Dissociative Disorder Comorbidity',
+                    text: 'OCD & Dissociative Symptoms Comorbidity',
                     font: { size: 16, weight: 'bold', family: 'Source Serif Pro' },
                     padding: { top: 10, bottom: 20 }
                 }
@@ -371,6 +348,7 @@
         }
     });
 
+    // Chart for Schizo-OCD prevalence
     const schizoOcdCtx = document.getElementById('schizoOcdChart').getContext('2d');
     new Chart(schizoOcdCtx, {
         type: 'bar',
@@ -385,9 +363,10 @@
                 borderRadius: 5
             }]
         },
-        options: { ...defaultChartOptions,
+        options: {
+            ...defaultChartOptions,
             indexAxis: 'y',
-             scales: {
+            scales: {
                 x: {
                     beginAtZero: true,
                     max: 30,
@@ -406,7 +385,6 @@
             }
         }
     });
-
 </script>
 </body>
 </html>
