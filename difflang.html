@@ -8,12 +8,21 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --dark-bg: #0d0f1a;
+            --light-text: #ecf0f1;
+            --blue: #3498db;
+            --green: #2ecc71;
+            --purple: #9b59b6;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #053B50;
-            color: #EEEEEE;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
         }
         .chart-container {
             position: relative;
@@ -30,50 +39,66 @@
             }
         }
         .stat-card {
-            background-color: #176B87;
-            border-left: 5px solid #64CCC5;
+            background-color: rgba(13, 15, 26, 0.92);
+            border-left: 5px solid var(--blue);
         }
         .flow-box {
-            border: 2px solid #64CCC5;
-            background-color: #176B87;
+            border: 2px solid var(--green);
+            background-color: rgba(13, 15, 26, 0.92);
         }
         .flow-line {
             width: 2px;
-            background-color: #64CCC5;
+            background-color: var(--green);
             margin: 0 auto;
         }
         .flow-line-h {
             height: 2px;
-            background-color: #64CCC5;
+            background-color: var(--green);
+        }
+        /* New button styles */
+        .back-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--blue);
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .back-button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body class="antialiased">
 
     <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <a href="index.html" class="back-button">← Back to Home</a>
 
         <header class="text-center my-12">
-            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight">It's Not a Deficit.</h1>
-            <h2 class="text-2xl md:text-4xl font-bold text-[#64CCC5]">It's a Different Language.</h2>
+            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight font-['Press Start 2P']">It's Not a Deficit.</h1>
+            <h2 class="text-2xl md:text-4xl font-bold text-green-400">It's a Different Language.</h2>
             <p class="max-w-3xl mx-auto mt-4 text-lg text-gray-300">An infographic exploring the system that harms us all and the neurodiverse future that can save us.</p>
         </header>
 
         <main>
             <section id="system" class="my-16">
-                <h3 class="text-3xl font-bold text-center mb-2 text-[#64CCC5]">The System of Social Performance</h3>
+                <h3 class="text-3xl font-bold text-center mb-2 text-blue-400 font-['Press Start 2P']">The System of Social Performance</h3>
                 <p class="text-center max-w-3xl mx-auto mb-12 text-gray-300">We are taught to follow a rigid, unspoken script. This system prioritizes conformity over authentic connection, creating invisible rules that govern our lives.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-[#EEEEEE] text-[#053B50] p-6 rounded-lg shadow-2xl text-center">
+                    <div class="bg-gray-800 text-light-text p-6 rounded-lg shadow-2xl text-center">
                         <div class="text-5xl mb-4">👁️</div>
                         <h4 class="text-xl font-bold mb-2">Eye Contact as a Loyalty Test</h4>
                         <p>The system demands direct eye contact to signal trust. Looking away is punished as disrespect, turning a simple gaze into a high-stakes performance.</p>
                     </div>
-                    <div class="bg-[#EEEEEE] text-[#053B50] p-6 rounded-lg shadow-2xl text-center">
+                    <div class="bg-gray-800 text-light-text p-6 rounded-lg shadow-2xl text-center">
                         <div class="text-5xl mb-4">👤</div>
                         <h4 class="text-xl font-bold mb-2">Body Language as a Uniform</h4>
                         <p>A performance of engagement is required: a still body, nodding, and "appropriate" expressions. It's a social uniform we are all expected to wear.</p>
                     </div>
-                    <div class="bg-[#EEEEEE] text-[#053B50] p-6 rounded-lg shadow-2xl text-center">
+                    <div class="bg-gray-800 text-light-text p-6 rounded-lg shadow-2xl text-center">
                         <div class="text-5xl mb-4">🤫</div>
                         <h4 class="text-xl font-bold mb-2">Subtext as a Secret Handshake</h4>
                         <p>Indirectness is prioritized. Meaning is hidden between the lines, and direct, literal communication is punished as blunt or rude.</p>
@@ -82,87 +107,87 @@
             </section>
 
             <section id="impact" class="my-24">
-                 <h3 class="text-3xl font-bold text-center mb-12 text-[#64CCC5]">A System That Harms Everyone</h3>
+                 <h3 class="text-3xl font-bold text-center mb-12 text-green-400 font-['Press Start 2P']">A System That Harms Everyone</h3>
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                     <div class="bg-[#176B87] p-8 rounded-lg shadow-xl">
+                     <div class="bg-gray-800 p-8 rounded-lg shadow-xl border-l-4 border-red-500">
                          <h4 class="text-2xl font-bold text-white mb-4">The Neurotypical Burden</h4>
-                         <p class="text-lg font-semibold text-[#64CCC5] mb-2">The Pain of Cognitive Dissonance</p>
+                         <p class="text-lg font-semibold text-green-400 mb-2">The Pain of Cognitive Dissonance</p>
                          <p class="text-gray-300">This system forces a constant, low-level distress by creating a conflict between personal values and the pressure to conform. To cope, the mind creates rationalizations, slowly trading pieces of integrity for social safety.</p>
-                         <div class="mt-4 p-4 bg-[#053B50] rounded-md text-gray-400 italic">
-                            "It was just a joke." <br>
-                            "It's important to be a team player."<br>
-                            "That's just how the game is played."
+                         <div class="mt-4 p-4 bg-gray-900 rounded-md text-gray-400 italic">
+                             "It was just a joke." <br>
+                             "It's important to be a team player."<br>
+                             "That's just how the game is played."
                          </div>
                      </div>
-                     <div class="bg-[#176B87] p-8 rounded-lg shadow-xl">
+                     <div class="bg-gray-800 p-8 rounded-lg shadow-xl border-l-4 border-green-400">
                          <h4 class="text-2xl font-bold text-white mb-4">The Autistic Trauma</h4>
-                         <p class="text-lg font-semibold text-[#64CCC5] mb-2">The Hostility of Erasure</p>
+                         <p class="text-lg font-semibold text-green-400 mb-2">The Hostility of Erasure</p>
                          <p class="text-gray-300">For a mind wired for logic and consistency, conforming to an illogical system isn't a compromise—it's a violation. This forced self-betrayal leads to burnout, anxiety, and the trauma of having one's true self erased.</p>
-                         <div class="mt-4 p-4 bg-[#053B50] rounded-md text-gray-400 font-bold">
-                            ERROR: Action contradicts internal logic. <br>
-                            Self-betrayal initiated. <br>
-                            System integrity compromised.
+                         <div class="mt-4 p-4 bg-gray-900 rounded-md text-gray-400 font-bold">
+                             ERROR: Action contradicts internal logic. <br>
+                             Self-betrayal initiated. <br>
+                             System integrity compromised.
                          </div>
                      </div>
                  </div>
             </section>
             
             <section id="data" class="my-24">
-                <h3 class="text-3xl font-bold text-center mb-2 text-[#64CCC5]">The Buried Truth: A Health Crisis in Plain Sight</h3>
+                <h3 class="text-3xl font-bold text-center mb-2 text-green-400 font-['Press Start 2P']">The Buried Truth: A Health Crisis in Plain Sight</h3>
                 <p class="text-center max-w-3xl mx-auto mb-12 text-gray-300">The system's ignorance has real, physical consequences. By pathologizing neurodivergence, we have failed to see critical connections between the mind and body, leaving many to suffer in silence.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="bg-[#EEEEEE] text-[#053B50] p-8 rounded-lg shadow-2xl">
+                    <div class="bg-gray-800 text-light-text p-8 rounded-lg shadow-2xl">
                         <h4 class="text-2xl font-bold mb-4 text-center">Autism Prevalence in the U.S.</h4>
                         <div class="text-center">
-                            <div class="text-8xl font-black text-[#053B50]">1 in 36</div>
-                            <div class="text-xl font-bold text-[#176B87]">Children diagnosed as autistic (CDC, 2023)</div>
+                            <div class="text-8xl font-black text-light-text">1 in 36</div>
+                            <div class="text-xl font-bold text-blue-400">Children diagnosed as autistic (CDC, 2023)</div>
                             <p class="mt-4">This isn't a tiny minority. It's a significant part of our population whose health and culture have been systematically ignored.</p>
                         </div>
                         <div class="chart-container h-64 mt-6">
                             <canvas id="prevalenceChart"></canvas>
                         </div>
                     </div>
-                    <div class="bg-[#EEEEEE] text-[#053B50] p-8 rounded-lg shadow-2xl">
-                         <h4 class="text-2xl font-bold mb-4 text-center">Increased Health Risks for Autistic People</h4>
-                         <p class="text-center mb-6">Studies reveal significantly higher rates of co-occurring physical and mental health conditions.</p>
-                         <div class="chart-container h-80">
+                    <div class="bg-gray-800 text-light-text p-8 rounded-lg shadow-2xl">
+                        <h4 class="text-2xl font-bold mb-4 text-center">Increased Health Risks for Autistic People</h4>
+                        <p class="text-center mb-6">Studies reveal significantly higher rates of co-occurring physical and mental health conditions.</p>
+                        <div class="chart-container h-80">
                             <canvas id="healthRiskChart"></canvas>
                         </div>
                     </div>
                 </div>
             </section>
-
+            
             <section id="reframe" class="my-24">
-                 <h3 class="text-3xl font-bold text-center mb-12 text-[#64CCC5]">What is a "Deficit," Anyway?</h3>
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                     <div class="bg-[#176B87] p-8 rounded-lg shadow-xl border-l-4 border-red-500">
-                         <h4 class="text-2xl font-bold text-white mb-4">❌ The Deficit Lens</h4>
-                         <ul class="list-disc list-inside space-y-2 text-gray-300">
+                <h3 class="text-3xl font-bold text-center mb-12 text-green-400 font-['Press Start 2P']">What is a "Deficit," Anyway?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-800 p-8 rounded-lg shadow-xl border-l-4 border-red-500">
+                        <h4 class="text-2xl font-bold text-white mb-4">❌ The Deficit Lens</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
                             <li>Repetitive behaviors (stimming)</li>
                             <li>Restricted, "obsessive" interests</li>
                             <li>Lack of neurotypical eye contact</li>
                             <li>Blunt or "rude" communication</li>
                             <li>Inability to understand subtext</li>
-                         </ul>
-                     </div>
-                     <div class="bg-[#176B87] p-8 rounded-lg shadow-xl border-l-4 border-green-400">
-                         <h4 class="text-2xl font-bold text-white mb-4">✅ The Strengths Lens</h4>
-                         <ul class="list-disc list-inside space-y-2 text-gray-300">
-                             <li>Sensory self-regulation</li>
-                             <li>Deep, world-class expertise</li>
-                             <li>Honest and authentic presence</li>
-                             <li>Direct, clear communication</li>
-                             <li>A mind that resists manipulation</li>
-                         </ul>
-                     </div>
-                 </div>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 p-8 rounded-lg shadow-xl border-l-4 border-green-400">
+                        <h4 class="text-2xl font-bold text-white mb-4">✅ The Strengths Lens</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li>Sensory self-regulation</li>
+                            <li>Deep, world-class expertise</li>
+                            <li>Honest and authentic presence</li>
+                            <li>Direct, clear communication</li>
+                            <li>A mind that resists manipulation</li>
+                        </ul>
+                    </div>
+                </div>
             </section>
-
+            
             <section id="tribe" class="my-24">
-                <h3 class="text-3xl font-bold text-center mb-2 text-[#64CCC5]">A Strengths-Based Model: The Neurodiverse Tribe</h3>
+                <h3 class="text-3xl font-bold text-center mb-2 text-green-400 font-['Press Start 2P']">A Strengths-Based Model: The Neurodiverse Tribe</h3>
                 <p class="text-center max-w-3xl mx-auto mb-12 text-gray-300">A healthy community is a neurodiverse one. It needs different minds working together, each with a vital role. One is not better; they are two halves of a resilient whole.</p>
                 <div class="flex flex-col items-center">
-                    <div class="flow-box p-4 rounded-lg text-center font-bold text-xl">A Resilient Community</div>
+                    <div class="flow-box p-4 rounded-lg text-center font-bold text-xl text-light-text">A Resilient Community</div>
                     <div class="flow-line h-8"></div>
                     <div class="w-full max-w-4xl flex justify-center items-start">
                         <div class="w-1/2 h-16 flex justify-end">
@@ -179,8 +204,8 @@
                     <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
                         <div class="flex flex-col items-center">
                             <div class="flow-box p-6 rounded-lg w-full">
-                                <h4 class="text-2xl font-bold text-center text-[#64CCC5]">The Neurodivergent Role</h4>
-                                <p class="text-center font-semibold mb-4">(The Hunter, Watcher, & Innovator)</p>
+                                <h4 class="text-2xl font-bold text-center text-blue-400">The Neurodivergent Role</h4>
+                                <p class="text-center font-semibold mb-4 text-gray-300">(The Hunter, Watcher, & Innovator)</p>
                                 <ul class="list-none space-y-2 text-left">
                                     <li>🏹 <span class="font-bold">Hunter's Focus:</span> Deep, singular focus to solve complex problems.</li>
                                     <li>🌙 <span class="font-bold">The Night Watch:</span> Natural guardians, alert when others rest.</li>
@@ -190,8 +215,8 @@
                         </div>
                         <div class="flex flex-col items-center">
                             <div class="flow-box p-6 rounded-lg w-full">
-                                <h4 class="text-2xl font-bold text-center text-[#64CCC5]">The Neurotypical Role</h4>
-                                <p class="text-center font-semibold mb-4">(The Farmer, Diplomat, & Builder)</p>
+                                <h4 class="text-2xl font-bold text-center text-blue-400">The Neurotypical Role</h4>
+                                <p class="text-center font-semibold mb-4 text-gray-300">(The Farmer, Diplomat, & Builder)</p>
                                 <ul class="list-none space-y-2 text-left">
                                     <li>🌱 <span class="font-bold">Farmer's Consistency:</span> Reliability to maintain stable institutions.</li>
                                     <li>🤝 <span class="font-bold">Diplomat's Skill:</span> Innate ability to build consensus and social harmony.</li>
@@ -204,7 +229,7 @@
             </section>
 
             <footer class="text-center my-16 py-12 border-t-2 border-[#176B87]">
-                <h3 class="text-4xl font-black text-white">The Path Forward is Together.</h3>
+                <h3 class="text-4xl font-black text-white font-['Press Start 2P']">The Path Forward is Together.</h3>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-4">This is not a battle between people. It is a battle against a system of conformity. It's time to stop blaming each other and start reclaiming the true value of every mind in our community.</p>
                 <a href="#system" class="mt-8 inline-block bg-[#64CCC5] text-[#053B50] font-bold py-3 px-8 rounded-lg text-lg hover:bg-white transition-colors">Choose Freedom. Start Reclaiming.</a>
             </footer>
@@ -254,7 +279,7 @@
                         '#176B87',
                         '#64CCC5'
                     ],
-                    borderColor: '#EEEEEE',
+                    borderColor: '#053B50',
                     borderWidth: 2
                 }]
             },
@@ -265,7 +290,7 @@
                     legend: {
                         position: 'bottom',
                         labels: {
-                            color: '#053B50'
+                            color: '#EEEEEE'
                         }
                     },
                     tooltip: {
@@ -282,7 +307,7 @@
             type: 'bar',
             data: {
                 labels: [
-                    wrapLabel('Obsessive-Compulsive Disorder (OCD)'), 
+                    wrapLabel('Obsessive-Compulsive Disorder (OCD)'),
                     wrapLabel('Type 1 & 2 Diabetes'),
                     wrapLabel('Joint Hypermobility (e.g., EDS)')
                 ],
@@ -296,7 +321,7 @@
                 },
                 {
                     label: 'General Population (Est.)',
-                    data: [2.3, 8, 10], 
+                    data: [2.3, 8, 10],
                     backgroundColor: '#176B87',
                     borderColor: '#EEEEEE',
                     borderWidth: 1
@@ -310,18 +335,18 @@
                     x: {
                         beginAtZero: true,
                         ticks: {
-                            color: '#053B50',
+                            color: '#EEEEEE',
                             callback: function(value) {
                                 return value + '%'
                             }
                         },
                         grid: {
-                            color: 'rgba(5, 59, 80, 0.1)'
+                            color: 'rgba(238, 238, 238, 0.1)'
                         }
                     },
                     y: {
                         ticks: {
-                            color: '#053B50'
+                            color: '#EEEEEE'
                         },
                         grid: {
                             display: false
@@ -332,7 +357,7 @@
                     legend: {
                         position: 'bottom',
                         labels: {
-                            color: '#053B50'
+                            color: '#EEEEEE'
                         }
                     },
                     tooltip: {
@@ -348,14 +373,6 @@
                                 }
                                 return label;
                             }
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Prevalence of Co-occurring Conditions (%)',
-                        color: '#053B50',
-                        font: {
-                            size: 16
                         }
                     }
                 }
