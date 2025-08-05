@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: A Guide to Neuroregulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F8FF; /* AliceBlue - a soft, light blue */
+        }
+        .chart-container {
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+            width: 100%;
+            max-width: 500px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#004AAD] mb-2">The Brain's Balancing Act</h1>
+            <p class="text-lg md:text-xl text-[#0079C2] max-w-3xl mx-auto">A guide to Glutamate, GABA, and holistic strategies for the neurodivergent mind.</p>
+        </header>
+
+        <main class="space-y-12">
+
+            <!-- Section 1: Key Players -->
+            <section id="key-players" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] text-center mb-6">The Brain's "Go" & "Stop" Signals</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">For stable mood and focus, the brain must balance its primary excitatory (go) and inhibitory (stop) signals.</p>
+                <div class="flex flex-col md:flex-row justify-center items-stretch gap-8">
+                    <div class="text-center p-6 border-4 border-[#00AEEF] rounded-xl w-full md:w-1/3 flex flex-col justify-center bg-sky-50">
+                        <span class="text-7xl mb-2 text-[#00AEEF]">⬆️</span>
+                        <h3 class="text-2xl font-bold text-[#0079C2]">Glutamate</h3>
+                        <p class="font-semibold text-lg text-[#00AEEF]">The "Go" Signal</p>
+                        <p class="text-gray-600 mt-2">The main "excitatory" signal, crucial for learning, memory, and alertness.</p>
+                    </div>
+                    <div class="text-center p-6 border-4 border-[#89D6F7] rounded-xl w-full md:w-1/3 flex flex-col justify-center bg-sky-50">
+                        <span class="text-7xl mb-2 text-[#89D6F7]">⬇️</span>
+                        <h3 class="text-2xl font-bold text-[#0079C2]">GABA</h3>
+                        <p class="font-semibold text-lg text-[#89D6F7]">The "Stop" Signal</p>
+                        <p class="text-gray-600 mt-2">The main "inhibitory" signal, responsible for calming the nervous system.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Imbalance (with Bar Chart) -->
+            <section id="imbalance" class="bg-blue-50 rounded-2xl shadow-lg p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-[#004AAD] mb-4">The Neurodivergent Brain: A Tilted Scale</h2>
+                        <p class="text-gray-600 mb-4">Research suggests conditions like ADHD and Autism are linked to an Excitatory/Inhibitory (E/I) imbalance, where the "go" signal is overactive relative to the "stop" signal.</p>
+                        <p class="text-gray-600 font-semibold">This can create a "noisy" neural environment, leading to:</p>
+                        <ul class="list-none space-y-2 mt-4 text-gray-700">
+                            <li class="flex items-center"><span class="text-2xl mr-3">⚡</span> Sensory Overload & Hypersensitivity</li>
+                            <li class="flex items-center"><span class="text-2xl mr-3">🤯</span> Heightened Anxiety & Racing Thoughts</li>
+                            <li class="flex items-center"><span class="text-2xl mr-3">🏃</span> Hyperactivity & Impulsivity</li>
+                            <li class="flex items-center"><span class="text-2xl mr-3">😵</span> Difficulty Filtering Distractions</li>
+                        </ul>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="imbalanceChart"></canvas>
+                        <p class="text-center text-sm text-gray-500 mt-2">Hypothetical E/I Imbalance</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Fueling -->
+            <section id="fueling" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] text-center mb-6">Fueling the Conversion: From "Go" to "Stop"</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
+                    <div class="md:col-span-1">
+                        <p class="text-8xl font-black text-[#00AEEF]">20%</p>
+                        <p class="text-lg text-gray-600 font-semibold">of the body's energy is consumed by the brain, mostly as glucose.</p>
+                    </div>
+                    <div class="md:col-span-2">
+                         <p class="text-gray-600 mb-4">This energy is vital for converting stimulating Glutamate into calming GABA. This energy-intensive process requires a steady fuel supply.</p>
+                        <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="bg-[#00AEEF] text-white p-4 rounded-lg shadow-md">
+                                <p class="font-bold text-lg">Glutamate</p>
+                            </div>
+                            <div class="font-bold text-4xl text-[#0079C2] transform md:-translate-y-2">→</div>
+                            <div class="text-center">
+                                <div class="bg-[#CDEFFC] text-[#004AAD] p-2 rounded-md border-2 border-dashed border-[#00AEEF]">
+                                    <p class="font-semibold">Stable Energy</p>
+                                    <p class="text-sm">(from Complex Carbs)</p>
+                                </div>
+                            </div>
+                            <div class="font-bold text-4xl text-[#0079C2] transform md:-translate-y-2">→</div>
+                            <div class="bg-[#89D6F7] text-white p-4 rounded-lg shadow-md">
+                                <p class="font-bold text-lg">GABA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Carbs -->
+            <section id="carbs" class="bg-blue-50 rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] text-center mb-2">Not All Carbs Are Created Equal</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">The type of carbohydrate consumed directly impacts the stability of the brain's fuel supply.</p>
+                <div class="chart-container h-[400px] md:h-[450px] max-h-[500px]">
+                    <canvas id="carbChart"></canvas>
+                </div>
+                 <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div>
+                        <h3 class="font-bold text-[#0079C2] mb-2">Simple Carbs (The Spike & Crash)</h3>
+                        <p class="text-gray-600">Refined sugars and white flour cause a rapid blood glucose spike, followed by a crash. This volatility can worsen anxiety, irritability, and brain fog.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-[#004AAD] mb-2">Complex Carbs (Slow & Steady Fuel)</h3>
+                        <p class="text-gray-600">Found in oats, beans, and vegetables, their fiber content ensures a slow, sustained glucose release, providing stable energy for hours.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Plate Building -->
+            <section id="plate-building" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] text-center mb-2">Building a Brain-Friendly Plate</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">To support regulation, focus on meals that provide slow-release energy. Here’s a model for a balanced meal.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="bg-sky-50 p-4 rounded-lg border-2 border-[#00AEEF]">
+                        <span class="text-4xl">🌾</span>
+                        <h3 class="font-bold text-lg text-[#0079C2] mt-2 mb-1">Complex Carbs</h3>
+                        <p class="text-sm text-gray-600 font-semibold mb-2">(~1/4 of plate)</p>
+                        <p class="text-sm text-gray-500">Oats, quinoa, brown rice, sweet potatoes, beans, lentils.</p>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border-2 border-[#0079C2]">
+                        <span class="text-4xl">🍗</span>
+                        <h3 class="font-bold text-lg text-[#0079C2] mt-2 mb-1">Lean Protein</h3>
+                        <p class="text-sm text-gray-600 font-semibold mb-2">(~1/4 of plate)</p>
+                        <p class="text-sm text-gray-500">Chicken, fish, tofu, eggs, greek yogurt.</p>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border-2 border-[#89D6F7]">
+                        <span class="text-4xl">🥑</span>
+                        <h3 class="font-bold text-lg text-[#0079C2] mt-2 mb-1">Healthy Fats</h3>
+                        <p class="text-sm text-gray-600 font-semibold mb-2">(Small portion)</p>
+                        <p class="text-sm text-gray-500">Avocado, nuts, seeds, olive oil.</p>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border-2 border-[#004AAD]">
+                        <span class="text-4xl">🥦</span>
+                        <h3 class="font-bold text-lg text-[#0079C2] mt-2 mb-1">Fiber & Veggies</h3>
+                        <p class="text-sm text-gray-600 font-semibold mb-2">(~1/2 of plate)</p>
+                        <p class="text-sm text-gray-500">Broccoli, spinach, bell peppers, carrots, leafy greens.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 6: Supplements -->
+            <section id="supplements" class="bg-blue-50 rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] text-center mb-2">Evidence-Based Nutrients for Regulation</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Certain supplements may help support the glutamate-GABA balance. Always consult a doctor before starting new supplements.</p>
+                <div class="space-y-4">
+                    <div class="p-4 bg-white rounded-lg border-l-4 border-[#00AEEF]">
+                        <h3 class="font-bold text-lg text-[#004AAD]">Magnesium</h3>
+                        <p class="text-gray-600">Helps reduce excess excitatory (glutamate) signaling by acting as a natural blocker for its receptors.</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-lg border-l-4 border-[#0079C2]">
+                        <h3 class="font-bold text-lg text-[#004AAD]">Vitamin B6 (P5P)</h3>
+                        <p class="text-gray-600">A critical "helper molecule" required for the enzyme that converts glutamate into calming GABA.</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-lg border-l-4 border-[#89D6F7]">
+                        <h3 class="font-bold text-lg text-[#004AAD]">Zinc</h3>
+                        <p class="text-gray-600">Helps inhibit excitatory signals and also plays a role in the synthesis and release of GABA.</p>
+                    </div>
+                     <div class="p-4 bg-white rounded-lg border-l-4 border-[#004AAD]">
+                        <h3 class="font-bold text-lg text-[#004AAD]">N-Acetylcysteine (NAC)</h3>
+                        <p class="text-gray-600">An antioxidant that helps regulate and restore the overall balance of glutamate in the brain.</p>
+                    </div>
+                     <div class="p-4 bg-white rounded-lg border-l-4 border-[#00AEEF]">
+                        <h3 class="font-bold text-lg text-[#004AAD]">L-Theanine</h3>
+                        <p class="text-gray-600">An amino acid (from green tea) that can block glutamate receptors and may increase GABA levels.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Holistic Strategies -->
+            <section id="holistic-strategies" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#004AAD] text-center mb-2">Beyond the Plate: Holistic Strategies</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Lifestyle factors play a huge role in supporting your nervous system.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-sky-50 p-4 rounded-lg border-2 border-[#00AEEF] flex flex-col items-center text-center">
+                        <span class="text-4xl">🧘</span>
+                        <h3 class="font-bold text-lg text-[#0079C2] mt-2 mb-1">Mindful Movement</h3>
+                        <p class="text-sm text-gray-500">Regular exercise, stretching, and mindfulness can help regulate the nervous system.</p>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border-2 border-[#0079C2] flex flex-col items-center text-center">
+                        <span class="text-4xl">😴</span>
+                        <h3 class="font-bold text-lg text-[#0079C2] mt-2 mb-1">Prioritize Sleep</h3>
+                        <p class="text-sm text-gray-500">Consistent sleep routines are crucial. Consider blackout curtains and weighted blankets.</p>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border-2 border-[#89D6F7] flex flex-col items-center text-center">
+                        <span class="text-4xl">🎧</span>
+                        <h3 class="font-bold text-lg text-[#0079C2] mt-2 mb-1">Sensory Care</h3>
+                        <p class="text-sm text-gray-500">Use tools like noise-canceling headphones or tinted glasses to prevent sensory overload.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 py-6 border-t border-[#89D6F7]">
+            <p class="text-sm text-gray-500">This infographic is for educational purposes and is not a substitute for professional medical advice. Content based on peer-reviewed research regarding the Glutamate-GABA system.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- Bar Chart for E/I Imbalance ---
+        const imbalanceCtx = document.getElementById('imbalanceChart').getContext('2d');
+        new Chart(imbalanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Glutamate "Go"', 'GABA "Stop"'],
+                datasets: [{
+                    label: 'Relative Activity',
+                    data: [75, 25],
+                    backgroundColor: ['#00AEEF', '#89D6F7'],
+                    borderColor: ['#0079C2', '#004AAD'],
+                    borderWidth: 2,
+                    borderRadius: 5,
+                    barThickness: 50,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Relative Neural Activity',
+                            color: '#374151',
+                            font: { size: 14 }
+                        },
+                        grid: { color: '#e5e7eb' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            }
+        });
+
+        // --- Line Chart for Carb Impact ---
+        const carbCtx = document.getElementById('carbChart').getContext('2d');
+        new Chart(carbCtx, {
+            type: 'line',
+            data: {
+                labels: ['0 min', '30 min', '1 hr', '1.5 hr', '2 hr', '3 hr', '4 hr'],
+                datasets: [{
+                    label: 'Simple Carbs (e.g., sugary drink)',
+                    data: [85, 150, 120, 70, 80, 85, 80],
+                    borderColor: '#00AEEF',
+                    backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3
+                }, {
+                    label: 'Complex Carbs (e.g., oats)',
+                    data: [85, 90, 100, 110, 105, 95, 90],
+                    borderColor: '#004AAD',
+                    backgroundColor: 'rgba(0, 74, 173, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Blood Glucose Level',
+                            color: '#374151'
+                        },
+                        grid: { color: '#e5e7eb' }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time After Eating',
+                            color: '#374151'
+                        },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                         labels: {
+                            color: '#374151',
+                            font: { size: 14 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
