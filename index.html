@@ -27,7 +27,7 @@
 
         body {
             background-color: var(--dark-bg);
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib-rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=2071&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -101,11 +101,11 @@
         }
 
         h3 {
-             font-family: 'Press Start 2P', cursive;
-             font-size: 1.4rem;
-             color: #ffffff;
-             margin-top: 25px;
-             text-align: center;
+              font-family: 'Press Start 2P', cursive;
+              font-size: 1.4rem;
+              color: #ffffff;
+              margin-top: 25px;
+              text-align: center;
         }
         p {
             font-family: 'Source Serif Pro', serif;
@@ -403,16 +403,14 @@
             <h2 class="gradient-text">The Problem</h2>
             <p><strong class="problem-bold">Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
             <p><strong class="problem-bold">Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
-            <div class="text-center mb-10">
-                <h3 class="font-bold text-lg text-left text-light-text opacity-70 mt-2">When the Scale Tips: Understanding Imbalance</h3>
-                <p class="text-light-text">Psychological distress often arises from a deep imbalance between these two forces.</p>
-            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-6">
                 <div class="content-card">
-                    <h3 class="text-xl font-semibold text-center mb-4">The Pull of Imbalance</h3>
-                    <p class="text-center mb-4">An over-reliance on one force creates a strong pull towards certain states of being.</p>
+                    <!-- UPDATED CHART SECTION -->
+                    <h3 class="text-xl font-semibold text-center mb-4" style="font-size: 1.1rem;">The Central Dialectic: A Bell Curve of Mental Health</h3>
+                    <p class="text-center mb-4 text-base">Healthy functioning exists in a state of flexible equilibrium. Pathology emerges at the extremes of too much structure (rigidity) or too much creativity (chaos).</p>
                     <div class="chart-container">
-                        <canvas id="imbalanceChart"></canvas>
+                        <canvas id="bellCurveChart"></canvas>
                     </div>
                 </div>
                 <div class="content-card">
@@ -542,17 +540,18 @@
             
             <h3>For Understanding</h3>
             <ul class="link-pool">
-                <li><a href="NDguide.resources.html">Support/Accommodations for NDs</a></li>
-                <li><a href="difflang.html">It's a Different Language, Not a Deficit</a></li>
-                <li><a href="diff2.html">It's a Different Language, Not a Deficit (Version 2)</a></li>
+                <li><a href="diff2.html">It's a Different Operating System, Not a Deficit</a></li>
                 <li><a href="duality.html">The Duality Framework</a></li>
                 <li><a href="evolution.html">Evolution of Harm (The Roots)</a></li>
                 <li><a href="maintheory.html">Interwoven Roots Theory (The Main Theory)</a></li>
                 <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
+                <li><a href="dynamic.html">Dynamic Systems Theory</a></li>
+                <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
             </ul>
 
             <h3>Free Resources/Tools</h3>
             <ul class="link-pool" style="margin-top: 20px;">
+                <li><a href="NDguide.resources.html">Support/Accommodations for NDs</a></li>
                 <li><a href="creativityvstructure.html">Creativity & Structure</a></li>
                 <li><a href="printerfriendlyCS.html">Creativity & Structure (Printer Friendly Version)</a></li>
                 <li><a href="sensorygame.html">Free Sensory Game (Printable)</a></li>
@@ -564,7 +563,7 @@
              <ul class="link-pool" style="margin-top: 20px;">
                 <li><a href="https://plasma-pet.tumblr.com/tagged/ocpoetry">Some Poems</a></li>
                 <li><a href="https://www.instagram.com/viviyum/" target="_blank">Instagram (@viviyum)</a></li>
-            </ul>
+             </ul>
         </div>
 
         <footer>
@@ -598,12 +597,7 @@
             responsive: true,
             plugins: {
                 legend: {
-                    labels: {
-                        color: oceanForest.text,
-                        font: {
-                            family: "'Source Serif Pro', serif"
-                        }
-                    }
+                    display: false // Hide legend by default on most charts
                 },
                 tooltip: {
                     callbacks: {
@@ -614,46 +608,49 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: { color: oceanForest.text },
+                    ticks: { color: oceanForest.text, font: { family: "'Source Serif Pro', serif" } },
                     grid: { color: oceanForest.grid }
                 },
                 x: {
-                    ticks: { color: oceanForest.text },
+                    ticks: { color: oceanForest.text, font: { family: "'Source Serif Pro', serif" } },
                     grid: { color: oceanForest.grid }
                 }
             }
         };
 
-        const imbalanceCtx = document.getElementById('imbalanceChart').getContext('2d');
-        new Chart(imbalanceCtx, {
-            type: 'doughnut',
+        // NEW BELL CURVE CHART
+        const bellCurveCtx = document.getElementById('bellCurveChart').getContext('2d');
+        new Chart(bellCurveCtx, {
+            type: 'line',
             data: {
-                labels: ['Pull towards Structure (Rigidity, Anxiety)', 'Pull towards Creation (Chaos, Impulsivity)'],
+                labels: ['STRUCTURE\n(Rigidity)', 'EQUILIBRIUM\n(Flexibility)', 'CREATIVITY\n(Chaos)'],
                 datasets: [{
-                    label: 'Pull of Imbalance',
-                    data: [55, 45],
-                    backgroundColor: [
-                        oceanForest.secondary,
-                        oceanForest.primary
-                    ],
-                    borderColor: '#0d0f1a', // dark background
-                    borderWidth: 4,
+                    label: 'Mental Health',
+                    data: [20, 100, 20],
+                    borderColor: oceanForest.primary,
+                    backgroundColor: oceanForest.primaryTransparent,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
                 }]
             },
             options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                           color: oceanForest.text,
-                           font: { family: "'Source Serif Pro', serif" }
-                        }
+                ...defaultChartOptions,
+                scales: {
+                    y: {
+                       display: false // Hide Y axis
                     },
-                    tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback
+                    x: {
+                        ...defaultChartOptions.scales.x,
+                        grid: {
+                            display: false // Hide X axis grid lines
+                        },
+                        ticks: {
+                           ...defaultChartOptions.scales.x.ticks,
+                           font: {
+                               size: 14,
+                               family: "'Source Serif Pro', serif"
+                           }
                         }
                     }
                 }
@@ -681,7 +678,10 @@
                     tension: 0.4
                 }]
             },
-            options: defaultChartOptions
+            options: {
+                ...defaultChartOptions,
+                plugins: { ...defaultChartOptions.plugins, legend: { display: true, labels: { color: oceanForest.text, font: { family: "'Source Serif Pro', serif" } } } }
+            }
         });
     </script>
 </body>
