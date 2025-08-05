@@ -417,6 +417,52 @@
         #mc_embed_signup .refferal_badge {
             display: none !important; /* Hide Mailchimp branding */
         }
+
+        /* --- NEW: TASK MANAGER STYLES --- */
+        .task-manager-body {
+            font-family: 'Source Serif Pro', serif;
+            color: var(--light-text);
+        }
+        .task-card {
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: rgba(13, 15, 26, 0.8);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        .task-card.completed {
+            background-color: rgba(13, 15, 26, 0.5);
+            transform: scale(0.98);
+        }
+        .task-card.completed h3,
+        .task-card.completed p,
+        .task-card.completed .pinch-motivator {
+            text-decoration: line-through;
+            color: #6b7280;
+        }
+        .task-manager-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            height: 250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .sub-steps-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+        }
+         .sub-steps-list li.completed {
+            text-decoration: line-through;
+            color: #6b7280;
+        }
         
     </style>
 </head>
@@ -445,6 +491,38 @@
             </h2>
             <p>HI. This space is a digital sanctuary for thinkers, creators, and collaborators. We believe in the power of open dialogue and collective growth. Explore the pathways below to dive into our shared resources and projects.</p>
         </div>
+        
+        <!-- NEW TASK MANAGER SECTION -->
+        <div class="section task-manager-body">
+            <div id="app">
+                <header class="text-center mb-8">
+                    <h2 class="gradient-text">Daily Game Plan</h2>
+                    <p class="text-sm" style="color: var(--light-text); opacity: 0.7;">A Dynamic Task Manager</p>
+                </header>
+
+                <section id="controls" class="mb-8 p-4 bg-black/20 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button id="show-modal-btn" class="w-full sm:w-auto contact-button">
+                        ✨ Add New Task
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-semibold">Sort By:</span>
+                        <button id="sort-importance-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Importance</button>
+                        <button id="sort-time-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Time</button>
+                    </div>
+                </section>
+
+                <section id="progress-section" class="mb-12">
+                     <h3 class="text-xl font-bold text-center mb-4" style="color: var(--light-text);">Your Progress</h3>
+                     <div class="task-manager-chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </section>
+
+                <main id="tasks-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </main>
+            </div>
+        </div>
+
 
         <div class="section">
             <h2 class="connect-header">
@@ -619,6 +697,41 @@
 
     </div>
 
+    <!-- Add Task Modal -->
+    <div id="task-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="rounded-lg shadow-xl p-6 w-full max-w-md" style="background-color: var(--dark-bg); border: 1px solid rgba(52, 152, 219, 0.3);">
+            <h2 class="text-2xl font-bold mb-4" style="font-family: 'Press Start 2P', cursive; color: var(--light-text);">Add a New Task</h2>
+            <form id="task-form">
+                <div class="space-y-4">
+                    <input type="text" id="task-title" placeholder="Task Title" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="number" id="task-time" placeholder="Time (mins)" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                        <select id="task-pinch" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                            <option>Passion</option>
+                            <option>Interest</option>
+                            <option>Hurry</option>
+                            <option>Urgency</option>
+                            <option>Competition</option>
+                            <option>Coordination</option>
+                            <option>Novelty</option>
+                        </select>
+                    </div>
+                    <select id="task-importance" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                        <option value="1">🔥 Do It Now</option>
+                        <option value="2">🎯 Focus Next</option>
+                        <option value="3">⏳ Schedule It</option>
+                        <option value="4">✨ Someday/Maybe</option>
+                    </select>
+                </div>
+                <div class="mt-6 flex justify-end gap-4">
+                    <button type="button" id="close-modal-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">Cancel</button>
+                    <button type="submit" class="contact-button">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <script>
         const oceanForest = {
             primary: '#2ECC71', // Green
@@ -730,6 +843,253 @@
                 plugins: { ...defaultChartOptions.plugins, legend: { display: true, labels: { color: oceanForest.text, font: { family: "'Source Serif Pro', serif" } } } }
             }
         });
+
+        // --- NEW TASK MANAGER SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if the task manager elements exist before running the script
+            if (!document.getElementById('app')) return;
+
+            let tasks = [];
+            let currentSort = 'importance';
+
+            const tasksContainer = document.getElementById('tasks-container');
+            const modal = document.getElementById('task-modal');
+            const showModalBtn = document.getElementById('show-modal-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const taskForm = document.getElementById('task-form');
+            const sortImportanceBtn = document.getElementById('sort-importance-btn');
+            const sortTimeBtn = document.getElementById('sort-time-btn');
+            
+            const importanceMeta = {
+                '1': { title: '🔥 Do It Now' },
+                '2': { title: '🎯 Focus Next' },
+                '3': { title: '⏳ Schedule It' },
+                '4': { title: '✨ Someday/Maybe' }
+            };
+            
+            const pinchColors = {
+                'Hurry': 'bg-red-900/70 text-red-200',
+                'Urgency': 'bg-yellow-900/70 text-yellow-200',
+                'Passion': 'bg-pink-900/70 text-pink-200',
+                'Interest': 'bg-sky-900/70 text-sky-200',
+                'Competition': 'bg-indigo-900/70 text-indigo-200',
+                'Coordination': 'bg-teal-900/70 text-teal-200',
+                'Novelty': 'bg-purple-900/70 text-purple-200',
+            };
+
+            function saveTasks() {
+                localStorage.setItem('gamePlanTasks', JSON.stringify(tasks));
+            }
+
+            function loadTasks() {
+                const savedTasks = localStorage.getItem('gamePlanTasks');
+                tasks = savedTasks ? JSON.parse(savedTasks) : [];
+            }
+
+            function renderTasks() {
+                saveTasks();
+                tasksContainer.innerHTML = '';
+                
+                let sortedTasks = [...tasks];
+                if (currentSort === 'time') {
+                    sortedTasks.sort((a, b) => a.time - b.time);
+                } else { 
+                    sortedTasks.sort((a, b) => a.importance - b.importance);
+                }
+
+                if (tasks.length === 0) {
+                    tasksContainer.innerHTML = `<div class="col-span-full text-center p-8 rounded-lg" style="background-color: rgba(13, 15, 26, 0.5);">
+                        <p style="color: var(--light-text); opacity: 0.7;">Your task list is empty.</p>
+                        <p style="color: var(--light-text); opacity: 0.5;">Click '✨ Add New Task' to get started!</p>
+                    </div>`;
+                    updateChart();
+                    return;
+                }
+
+                const groupedTasks = sortedTasks.reduce((acc, task) => {
+                    const key = currentSort === 'importance' ? task.importance : 'allTasks';
+                    if (!acc[key]) acc[key] = [];
+                    acc[key].push(task);
+                    return acc;
+                }, {});
+                
+                tasksContainer.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6';
+
+                Object.keys(groupedTasks).sort().forEach(groupKey => {
+                    const groupTasks = groupedTasks[groupKey];
+                    
+                    if (currentSort === 'importance') {
+                        const groupWrapper = document.createElement('div');
+                        const meta = importanceMeta[groupKey];
+                        const titleEl = document.createElement('h3');
+                        titleEl.className = "font-bold text-lg mb-4";
+                        titleEl.style.color = "var(--light-text)";
+                        titleEl.textContent = meta.title;
+                        groupWrapper.appendChild(titleEl);
+                        
+                        const tasksDiv = document.createElement('div');
+                        tasksDiv.className = "space-y-4";
+                        groupTasks.forEach(task => tasksDiv.appendChild(createTaskElement(task)));
+                        groupWrapper.appendChild(tasksDiv);
+                        tasksContainer.appendChild(groupWrapper);
+                    } else {
+                        groupTasks.forEach(task => tasksContainer.appendChild(createTaskElement(task)));
+                    }
+                });
+                
+                if (currentSort === 'time') {
+                     tasksContainer.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4';
+                }
+                updateChart();
+            }
+
+            function createTaskElement(task) {
+                const timeText = task.time > 0 ? `<p class="text-xs" style="color: var(--light-text); opacity: 0.6;">🕰️ ${task.time} min</p>` : '';
+                const pinchColor = pinchColors[task.pinch] || 'bg-gray-700 text-gray-200';
+                const completedClass = task.completed ? 'completed' : '';
+                const subStepsHtml = (task.subSteps || []).map((step, index) => 
+                    `<li data-index="${index}" class="${step.completed ? 'completed' : ''}">
+                        <input type="checkbox" ${step.completed ? 'checked' : ''} class="sub-step-checkbox accent-purple-400">
+                        <span>${step.text}</span>
+                    </li>`
+                ).join('');
+
+                const card = document.createElement('div');
+                card.id = task.id;
+                card.className = `task-card rounded-lg p-4 shadow-sm ${completedClass}`;
+                card.innerHTML = `
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start cursor-pointer" data-action="toggle-main">
+                            <h3 class="font-bold pr-2" style="color: var(--light-text);">${task.title}</h3>
+                            ${timeText}
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm font-semibold mb-2" style="color: var(--light-text); opacity: 0.8;">Smallest Next Steps:</p>
+                            <ul class="sub-steps-list text-sm space-y-2">${subStepsHtml}</ul>
+                            <input type="text" class="sub-step-input w-full p-1.5 rounded-md mt-2 border text-sm" placeholder="Add a small step..." style="background-color: var(--dark-bg); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3);">
+                        </div>
+                    </div>
+                    <div class="flex justify-end items-center mt-4 pt-4 border-t" style="border-color: rgba(52, 152, 219, 0.2);">
+                        <span class="pinch-motivator text-xs font-semibold px-2 py-1 rounded-full ${pinchColor}">${task.pinch}</span>
+                    </div>
+                `;
+                return card;
+            }
+
+            function updateChart() {
+                const totalTasks = tasks.length;
+                const completedTasks = tasks.filter(t => t.completed).length;
+                if (window.progressChart) {
+                    window.progressChart.data.datasets[0].data = [completedTasks, totalTasks - completedTasks];
+                    window.progressChart.update();
+                }
+            }
+            
+            function handleContainerClick(e) {
+                const card = e.target.closest('.task-card');
+                if (!card) return;
+
+                const taskId = card.id;
+                const task = tasks.find(t => t.id === taskId);
+                if (!task) return;
+
+                if (e.target.closest('[data-action="toggle-main"]')) {
+                    task.completed = !task.completed;
+                    renderTasks();
+                }
+
+                if (e.target.classList.contains('sub-step-checkbox')) {
+                    const subStepIndex = parseInt(e.target.closest('li').dataset.index, 10);
+                    task.subSteps[subStepIndex].completed = e.target.checked;
+                    renderTasks();
+                }
+            }
+
+            function handleInputKeydown(e) {
+                if (e.key === 'Enter' && e.target.classList.contains('sub-step-input')) {
+                    const card = e.target.closest('.task-card');
+                    if (!card) return;
+
+                    const taskId = card.id;
+                    const task = tasks.find(t => t.id === taskId);
+                    if (!task) return;
+                    
+                    const text = e.target.value.trim();
+                    if (text) {
+                        if (!task.subSteps) task.subSteps = [];
+                        task.subSteps.push({ text: text, completed: false });
+                        e.target.value = '';
+                        renderTasks();
+                    }
+                }
+            }
+
+            function toggleModal() {
+                modal.classList.toggle('hidden');
+            }
+
+            showModalBtn.addEventListener('click', toggleModal);
+            closeModalBtn.addEventListener('click', toggleModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target.closest('.modal-backdrop') && !e.target.closest('.modal-backdrop > div')) {
+                    toggleModal();
+                }
+            });
+
+            taskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newTask = {
+                    id: `task_${Date.now()}`,
+                    title: document.getElementById('task-title').value,
+                    time: parseInt(document.getElementById('task-time').value, 10),
+                    pinch: document.getElementById('task-pinch').value,
+                    importance: document.getElementById('task-importance').value,
+                    subSteps: [],
+                    completed: false
+                };
+                tasks.push(newTask);
+                taskForm.reset();
+                toggleModal();
+                renderTasks();
+            });
+            
+            sortImportanceBtn.addEventListener('click', () => {
+                currentSort = 'importance';
+                renderTasks();
+            });
+            sortTimeBtn.addEventListener('click', () => {
+                currentSort = 'time';
+                renderTasks();
+            });
+
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            window.progressChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'To Do'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: ['var(--green)', 'rgba(236, 240, 241, 0.1)'],
+                        borderColor: ['var(--green)', 'rgba(236, 240, 241, 0.1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
+                    }
+                }
+            });
+
+            loadTasks();
+            renderTasks();
+            tasksContainer.addEventListener('click', handleContainerClick);
+            tasksContainer.addEventListener('keydown', handleInputKeydown);
+        });
     </script>
 </body>
-</html>
+</ht
