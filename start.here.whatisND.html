@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurodiversity: A Different Operating System: Like Mac or PC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Dark Purple, Black, with Teal Accents -->
+    <!-- Application Structure Plan: The SPA is designed as a single-column, scrollable narrative. It starts with a core concept, then uses an interactive two-panel component to compare Neurotypical and Neurodivergent processing styles trait-by-trait. This prevents overwhelming the user with a large table. The narrative continues with the 'Hunter/Farmer' strengths analogy, explains the 'Mismatch' causing challenges, and concludes with a 'Solution'. This structure guides the user from understanding the differences to recognizing their value and the current societal problems, promoting a more engaging learning path than a static document. -->
+    <!-- Visualization & Content Choices: Report Info: Comparison of NT/ND traits. Goal: Compare. Method: Interactive two-panel display. Interaction: User clicks a trait button to reveal comparative text. Justification: More engaging and digestible than a static table. Library: Vanilla JS. Report Info: Strengths archetypes. Goal: Inform/Organize. Method: Styled HTML cards with icons. Justification: Visually separates and reinforces the core analogy. Library: Tailwind/HTML. Report Info: Societal challenges. Goal: Inform. Method: Styled HTML cards. Justification: Clearly presents the key problems. Library: Tailwind/HTML. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background-color: #1a0033; /* Dark Purple */
+            color: #e0e0e0; /* Light text for dark background */
+        }
+        .active-trait {
+            background-color: #0d9488 !important; /* Teal */
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .trait-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .content-panel {
+            transition: background-color 0.3s ease-in-out;
+            min-height: 300px;
+        }
+        .icon-bg {
+            background-color: #3a0066; /* Slightly lighter purple for icons */
+        }
+        .icon-color {
+            color: #818cf8; /* Lighter purple/blue for icon color */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">What is Neurodivergence?</h1>
+            <p class="text-xl md:text-2xl text-purple-300">It's a Different Operating System: Like Mac or PC.</p>
+            <p class="max-w-3xl mx-auto mt-4 text-purple-200">Neurodiversity is the understanding that human brains naturally vary. These variations are valuable differences, not defects. This guide explores two of these powerful "operating systems."</p>
+        </header>
+
+        <main>
+            <section id="comparison" class="mb-20">
+                <h2 class="text-3xl font-bold text-center text-white mb-2">Two Ways of Processing the World</h2>
+                <p class="text-center text-purple-200 mb-8 max-w-2xl mx-auto">Select a trait below to compare how different "operating systems" approach it. This is not a binary; it's a spectrum of processing styles.</p>
+
+                <nav id="trait-nav" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                </nav>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-purple-900/50 p-6 rounded-xl shadow-lg border border-purple-800">
+                        <h3 class="text-2xl font-bold text-white mb-4">Neurotypical Processing</h3>
+                        <div id="nt-content" class="content-panel text-purple-100 space-y-4">
+                        </div>
+                    </div>
+                    <div class="bg-black/50 text-white p-6 rounded-xl shadow-lg border border-gray-700">
+                        <h3 class="text-2xl font-bold text-white mb-4">Neurodivergent Processing</h3>
+                        <div id="nd-content" class="content-panel text-gray-200 space-y-4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="strengths" class="mb-20">
+                <h2 class="text-3xl font-bold text-center text-white mb-12">A Cohesive Social Group Needs Both</h2>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-purple-900/50 p-8 rounded-xl shadow-lg border border-purple-800 text-center">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full icon-bg flex items-center justify-center">
+                                <span class="text-3xl icon-color">👥</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">The Farmer, Diplomat & Builder</h3>
+                        <p class="text-purple-300 mb-4">(Neurotypical Strengths)</p>
+                        <p class="text-purple-100">Excels at social cohesion, stability, and maintaining community. These generalists build and manage the village, ensuring predictable routines, smooth social interactions, and widespread social networks.</p>
+                    </div>
+                    <div class="bg-black/50 p-8 rounded-xl shadow-lg border border-gray-700 text-center">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full icon-bg flex items-center justify-center">
+                                <span class="text-3xl icon-color">🎯</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">The Hunter, Watcher & Innovator</h3>
+                        <p class="text-gray-300 mb-4">(Neurodivergent Strengths)</p>
+                        <p class="text-gray-200">Excels at deep focus, pattern recognition, and moral integrity. These specialists protect the village and drive it forward with novel solutions, unique perspectives, and a resistance to groupthink.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="challenge" class="mb-20 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">The Current Challenge: A Mismatch</h2>
+                <p class="max-w-3xl mx-auto mt-4 text-purple-200">Both processing styles are essential. However, modern society often imposes neurotypical rules and demands on everyone, which can be profoundly disabling for neurodivergent individuals.</p>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12">
+                     <div class="bg-pink-900/50 border border-pink-700 p-6 rounded-lg text-left">
+                        <h4 class="font-bold text-pink-300 text-lg mb-2">Unspoken Social Rules</h4>
+                        <p class="text-pink-200">The expectation of neurotypical communication (e.g., constant eye contact, indirect language, performing emotions) can lead to burnout, anxiety, and self-betrayal for neurodivergent individuals.</p>
+                    </div>
+                    <div class="bg-yellow-900/50 border border-yellow-700 p-6 rounded-lg text-left">
+                        <h4 class="font-bold text-yellow-300 text-lg mb-2">Rigid Societal Demands</h4>
+                        <p class="text-yellow-200">The rigid 9-to-5 work schedule and environments saturated with overstimulating sensory information are not built for neurodivergent processing, leading to exhaustion and distress.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="solution" class="text-center bg-teal-600 text-white py-16 rounded-xl">
+                 <h2 class="text-3xl font-bold mb-4">The Solution is Cultural Competence</h2>
+                 <p class="max-w-3xl mx-auto mt-4 text-teal-100">We must move beyond a "deficit" model. The path forward requires building a shared language, dropping assumptions, and creating environments that accommodate and value all operating systems.</p>
+            </section>
+
+        </main>
+
+        <footer class="mt-20 pt-10 border-t border-purple-800">
+            <h3 class="text-center text-xl font-bold text-white mb-6">Understanding Common Neurotypes</h3>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto text-purple-200">
+                <div class="p-4">
+                    <h4 class="font-bold text-lg text-white">Autism Spectrum Disorder (ASD)</h4>
+                    <p>A neurodevelopmental difference characterized by distinct social communication styles, unique sensory processing, and often intense, focused interests. It is not an intellectual disability or a language disorder, though co-occurring differences can exist. Many autistic individuals have average or above-average intelligence.</p>
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold text-lg text-white">Attention-Deficit/Hyperactivity Disorder (ADHD)</h4>
+                    <p>A neurodevelopmental difference impacting attention regulation, impulsivity, and hyperactivity. It is not a deficit in attention itself, but a difference in how it is regulated. Individuals with ADHD often exhibit creativity, hyperfocus on engaging tasks, and rapid ideation. It is not an intellectual disability.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = {
+                'Information Processing': {
+                    nt: `<strong>Top-Down Thinking:</strong> Starts with the "big picture" or existing social rules, then fills in the details. When entering a room, they might first get a general "vibe" or understand the social expectations before noticing specific items.`,
+                    nd: `<strong>Bottom-Up Thinking:</strong> Starts with specific sensory details and builds up to the "big picture." When entering a room, they might first notice the hum of the lights, the texture of the carpet, or specific patterns, then piece together the overall environment.`
+                },
+                'Communication': {
+                    nt: `<strong>Indirect & Relational:</strong> Communication often relies on unspoken social rules, subtext, and inferred meaning. Direct eye contact is used to signal trust and honesty. The goal is often to maintain group harmony.`,
+                    nd: `<strong>Direct & Literal:</strong> Communication often prioritizes clarity, directness, and logical consistency. Direct eye contact can be physically overwhelming or distracting; looking away can signify deep listening.`
+                },
+                'Attention & Focus': {
+                    nt: `<strong>Multitasking:</strong> Often skilled at quickly shifting attention between various social and logistical tasks. They excel at managing a wide array of responsibilities and maintaining a predictable schedule.`,
+                    nd: `<strong>Hyperfocus:</strong> Often exhibit intense focus on specific interests or tasks, leading to deep expertise and innovative solutions. They may struggle with quickly switching between tasks, but their intense focus drives progress.`
+                },
+                'Sensory Experience': {
+                    nt: `<strong>Filtered Awareness:</strong> Generally able to filter out background sensory information (e.g., hum of appliances, texture of clothes) to focus on what is deemed socially relevant or immediately important.`,
+                    nd: `<strong>Heightened Awareness:</strong> Often have a high-fidelity awareness of sensory input, leading to sensitivities to sounds, lights, textures, or smells. This can be overwhelming in environments not designed for their sensory needs.`
+                }
+            };
+
+            const traitNav = document.getElementById('trait-nav');
+            const ntContent = document.getElementById('nt-content');
+            const ndContent = document.getElementById('nd-content');
+            
+            let activeTraitButton = null;
+
+            function updateContent(trait) {
+                if (data[trait]) {
+                    ntContent.innerHTML = `<p>${data[trait].nt}</p>`;
+                    ndContent.innerHTML = `<p>${data[trait].nd}</p>`;
+                }
+            }
+
+            Object.keys(data).forEach(trait => {
+                const button = document.createElement('button');
+                button.textContent = trait;
+                button.className = 'trait-button text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-slate-800 text-purple-200 shadow-sm hover:bg-purple-700 border border-purple-600';
+                button.addEventListener('click', () => {
+                    if (activeTraitButton) {
+                        activeTraitButton.classList.remove('active-trait');
+                    }
+                    button.classList.add('active-trait');
+                    activeTraitButton = button;
+                    updateContent(trait);
+                });
+                traitNav.appendChild(button);
+            });
+            
+            const firstButton = traitNav.querySelector('button');
+            if(firstButton) {
+                firstButton.click();
+            }
+        });
+    </script>
+
+</body>
+</html>
