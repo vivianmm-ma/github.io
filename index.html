@@ -491,38 +491,47 @@
             </h2>
             <p>HI. This space is a digital sanctuary for thinkers, creators, and collaborators. We believe in the power of open dialogue and collective growth. Explore the pathways below to dive into our shared resources and projects.</p>
         </div>
-        
-        <!-- NEW TASK MANAGER SECTION -->
-        <div class="section task-manager-body">
-            <div id="app">
-                <header class="text-center mb-8">
-                    <h2 class="gradient-text">Daily Game Plan</h2>
-                    <p class="text-sm" style="color: var(--light-text); opacity: 0.7;">A Dynamic Task Manager</p>
-                </header>
 
-                <section id="controls" class="mb-8 p-4 bg-black/20 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button id="show-modal-btn" class="w-full sm:w-auto contact-button">
-                        ✨ Add New Task
-                    </button>
-                    <div class="flex items-center gap-2">
-                        <span class="text-sm font-semibold">Sort By:</span>
-                        <button id="sort-importance-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Importance</button>
-                        <button id="sort-time-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Time</button>
-                    </div>
-                </section>
-
-                <section id="progress-section" class="mb-12">
-                     <h3 class="text-xl font-bold text-center mb-4" style="color: var(--light-text);">Your Progress</h3>
-                     <div class="task-manager-chart-container">
-                        <canvas id="progressChart"></canvas>
-                    </div>
-                </section>
-
-                <main id="tasks-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                </main>
+        <!-- NEW NEURODIVERGENCE SECTION -->
+        <div class="section">
+            <h2 class="gradient-text">What is Neurodivergence?</h2>
+            <p class="mb-4"><strong>It's a Different Operating System:</strong> Like Mac or PC. Brains naturally vary. These differences are valuable, not defects.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="content-card">
+                    <h3 class="text-lg">Neurotypical Processing</h3>
+                    <ul class="list-disc list-inside space-y-2 mt-4">
+                        <li><strong>Top-Down Processing:</strong> Sees the big picture first, then details.</li>
+                        <li><strong>Social Rules & Harmony:</strong> Prioritizes group cohesion, indirect communication.</li>
+                        <li><strong>Multitasking:</strong> Good at juggling many tasks.</li>
+                        <li><strong>Filtered Senses:</strong> Tunes out background noise.</li>
+                        <li><strong>Strengths:</strong> The Farmer, Diplomat, Builder (social, stable, community-focused).</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3 class="text-lg">Neurodivergent Processing</h3>
+                     <ul class="list-disc list-inside space-y-2 mt-4">
+                        <li><strong>Bottom-Up Processing:</strong> Sees details first, then the big picture.</li>
+                        <li><strong>Direct & Logical:</strong> Prefers clear, literal communication; eye contact can be overwhelming.</li>
+                        <li><strong>Hyperfocus:</strong> Deep dives into specific interests.</li>
+                        <li><strong>Heightened Senses:</strong> Aware of all sensory input.</li>
+                        <li><strong>Strengths:</strong> The Hunter, Watcher, Innovator (focused, innovative, morally consistent).</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 class="mt-8">The Problem: A Mismatch</h3>
+            <p>Modern society's neurotypical demands can disable neurodivergent individuals.</p>
+            <ul class="list-disc list-inside space-y-2 mt-4">
+                <li><strong>Unspoken Social Rules:</strong> Expectations of neurotypical communication lead to burnout and self-betrayal.</li>
+                <li><strong>Rigid Societal Demands:</strong> 9-to-5 schedules and overstimulating environments are not built for neurodivergent processing.</li>
+            </ul>
+            <h3 class="mt-8">The Solution: Cultural Competence</h3>
+            <p>Build a shared language, drop assumptions, and create environments that value all operating systems.</p>
+             <div class="mt-6 p-4 rounded-lg" style="background-color: rgba(13, 15, 26, 0.5); border-left: 4px solid var(--blue);">
+                <p><strong>Key Fact:</strong> Neurodivergence is not an intellectual or language disability.</p>
+                <p class="mt-2"><strong>Autism Spectrum Disorder (ASD):</strong> Unique social/sensory processing, focused interests.</p>
+                <p class="mt-2"><strong>Attention-Deficit/Hyperactivity Disorder (ADHD):</strong> Differences in attention regulation, impulsivity, hyperactivity. Often creative and hyperfocused.</p>
             </div>
         </div>
-
 
         <div class="section">
             <h2 class="connect-header">
@@ -689,6 +698,37 @@
                 <li><a href="https://plasma-pet.tumblr.com/tagged/ocpoetry">Some Poems</a></li>
                 <li><a href="https://www.instagram.com/viviyum/" target="_blank">Instagram (@viviyum)</a></li>
              </ul>
+        </div>
+
+        <!-- TASK MANAGER MOVED HERE -->
+        <div class="section task-manager-body">
+            <div id="app">
+                <header class="text-center mb-8">
+                    <h2 class="gradient-text">Daily Game Plan</h2>
+                    <p class="text-sm" style="color: var(--light-text); opacity: 0.7;">A Dynamic Task Manager</p>
+                </header>
+
+                <section id="controls" class="mb-8 p-4 bg-black/20 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button id="show-modal-btn" class="w-full sm:w-auto contact-button">
+                        ✨ Add New Task
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-semibold">Sort By:</span>
+                        <button id="sort-importance-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Importance</button>
+                        <button id="sort-time-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Time</button>
+                    </div>
+                </section>
+
+                <section id="progress-section" class="mb-12">
+                     <h3 class="text-xl font-bold text-center mb-4" style="color: var(--light-text);">Your Progress</h3>
+                     <div class="task-manager-chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </section>
+
+                <main id="tasks-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </main>
+            </div>
         </div>
 
         <footer>
@@ -1092,4 +1132,4 @@
         });
     </script>
 </body>
-</ht
+</html>
