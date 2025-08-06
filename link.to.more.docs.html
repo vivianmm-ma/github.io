@@ -157,6 +157,204 @@
 
     </style>
 </head>
+    <iframe src="printables.html" width="100%" height="600" style="border:none;"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printables & Resources - Cindness KULT</title>
+    <!-- Importing fonts for the title and body -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* --- Base Styles & Colors (Copied from main page) --- */
+        :root {
+            --purple: #9b59b6;
+            --blue: #3498db;
+            --green: #2ecc71;
+            --dark-bg: #0d0f1a;
+            --light-text: #ecf0f1;
+            --glow-color: rgba(52, 152, 219, 0.7);
+        }
+
+        html {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12,0L9.9,8.1L0,9.9l8.1,2.1l2.1,8.1l2.1-8.1l8.1-2.1L14.1,8.1L12,0z" transform="rotate(0 12 12)"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></animateTransform></path></svg>') 12 12, auto;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Source Serif Pro', serif;
+            color: var(--light-text);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            background-color: rgba(13, 15, 26, 0.92);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+            transition: all 0.4s ease;
+        }
+        
+        .section:hover {
+            border-color: rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-animation-text 5s linear infinite;
+        }
+        @keyframes gradient-animation-text {
+            to {
+                background-position: 200% center;
+            }
+        }
+        
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: left;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+            margin-bottom: 25px;
+        }
+        
+        .contact-button {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+            border: none;
+            border-radius: 8px;
+            padding: 10px 25px;
+            color: #ffffff;
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block; /* Important for buttons */
+        }
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- NEW: Resource Item Styles --- */
+        .resource-item {
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+        .resource-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--light-text);
+        }
+        .resource-description {
+            font-family: 'Source Serif Pro', serif;
+            color: #bdc3c7;
+            margin-bottom: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header class="text-center py-5">
+            <h1 class="title gradient-text">Printables & Resources</h1>
+            <p class="subtitle">A collection of tools, documents, and info sheets.</p>
+        </header>
+        
+        <div class="section">
+            
+            <!-- Example Resource Item 1 -->
+            <div class="resource-item">
+                <div>
+                    <h3 class="resource-title">Printable Planner Pages</h3>
+                    <p class="resource-description">A set of planner pages designed to help organize tasks and thoughts, tailored for neurodivergent minds.</p>
+                </div>
+                <a href="planner.html" class="contact-button" style="align-self: flex-start;">View/Download</a>
+            </div>
+
+            <!-- Example Resource Item 2 -->
+            <div class="resource-item">
+                <div>
+                    <h3 class="resource-title">Free Sensory Game (Printable)</h3>
+                    <p class="resource-description">An interactive and printable game designed to help explore and understand sensory experiences in a fun way.</p>
+                </div>
+                <a href="sensorygame.html" class="contact-button" style="align-self: flex-start;">View/Download</a>
+            </div>
+
+            <!-- Example Resource Item 3 -->
+            <div class="resource-item">
+                <div>
+                    <h3 class="resource-title">Creativity & Structure (Printer Friendly)</h3>
+                    <p class="resource-description">A text-based, printer-friendly version of the Creativity vs. Structure framework for easy reading and reference.</p>
+                </div>
+                <a href="printerfriendlyCS.html" class="contact-button" style="align-self: flex-start;">View/Download</a>
+            </div>
+
+            <!-- Add more .resource-item divs here as you add more documents -->
+
+        </div>
+
+        <div class="text-center">
+             <a href="index.html" class="contact-button" style="background: var(--purple);">← Back to Main Page</a>
+        </div>
+
+    </div>
+</body>
+</html>
+</iframe>
 <body>
 
     <!-- Link to go back to the main website -->
