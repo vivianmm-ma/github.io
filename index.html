@@ -101,11 +101,11 @@
         }
 
         h3 {
-              font-family: 'Press Start 2P', cursive;
-              font-size: 1.4rem;
-              color: #ffffff;
-              margin-top: 25px;
-              text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-top: 25px;
+            text-align: center;
         }
         p {
             font-family: 'Source Serif Pro', serif;
@@ -116,31 +116,68 @@
             font-family: 'Press Start 2P', cursive;
         }
 
-        /* --- Header Section --- */
+        /* --- Header Section (Now part of the dashboard) --- */
         .main-header {
             padding: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 0; /* Removed margin as it's now in the dashboard */
         }
         .title {
-            /* Updated font for the main title */
             font-family: 'Press Start 2P', cursive;
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
             margin-bottom: 10px;
         }
         .subtitle {
             font-family: 'Source Serif Pro', serif;
             font-size: 1.1rem;
             color: #bdc3c7;
-            margin-bottom: 25px;
+            margin-bottom: 0;
         }
-        .pillars {
+
+        /* --- UPDATED: Dashboard Banner (was stats-bar) --- */
+        .dashboard-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            gap: 20px;
+            background-color: rgba(13, 15, 26, 0.92);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-banner .header-content {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .dashboard-banner .stats-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        #circular-clock {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--green);
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px 25px;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 1.8rem;
-            color: #ffffff;
+            align-items: center;
+            font-size: 1.1rem; 
+            color: var(--green);
+            background-color: rgba(13, 15, 26, 0.5);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3), inset 0 0 15px rgba(46, 204, 113, 0.2);
+        }
+
+        #visitor-counter {
+            font-size: 1rem;
+            color: var(--blue);
+            font-family: 'Press Start 2P', cursive;
         }
 
         /* --- Simple Nav Links --- */
@@ -216,6 +253,32 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             border-image: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) 1;
         }
+
+        /* --- UPDATED: Attention-grabbing button styles --- */
+        .attention-button {
+            width: 100%; /* Make it full-width within the flex container */
+            height: 90px;
+            font-size: 1.2rem;
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(135deg, var(--blue), var(--green));
+            border: none;
+            border-radius: 9999px; /* Creates an oval shape */
+            color: white;
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        .attention-button:hover {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+        }
+
+        @keyframes pulse-glow {
+            from {
+                box-shadow: 0 0 10px rgba(52, 152, 219, 0.4), 0 0 20px rgba(46, 204, 113, 0.4);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(52, 152, 219, 0.8), 0 0 35px rgba(46, 204, 113, 0.8);
+            }
+        }
         
         /* --- Footer --- */
         footer {
@@ -266,6 +329,16 @@
         
         .flyer-container img:hover {
             transform: scale(1.02);
+        }
+
+        @media (max-width: 680px) {
+            .dashboard-banner {
+                flex-direction: column;
+                align-items: center;
+            }
+            .dashboard-banner .header-content {
+                text-align: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -469,10 +542,17 @@
 <body>
     <div class="container">
         
-        <header class="main-header">
-            <h1 class="title gradient-text">Cindness KULT</h1>
-            <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
-        </header>
+        <!-- UPDATED: Dashboard Banner -->
+        <div class="dashboard-banner">
+            <div class="header-content">
+                <h1 class="title gradient-text">Cindness KULT</h1>
+                <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
+            </div>
+            <div class="stats-content">
+                <div id="circular-clock"></div>
+                <div id="visitor-counter"></div>
+            </div>
+        </div>
         
         <div class="section">
             <h3 class="text-xl font-bold text-left text-light-text mb-4">Give me any problem and I'll give you the solution--and it'll always be kindness.</h3>
@@ -691,6 +771,8 @@
                 <li><a href="sensorygame.html">Free Sensory Game (Printable)</a></li>
                 <li><a href="planner.html">Free Printable Planner Pages</a></li>
                 <li><a href="adhdmeds.html">Info on ADHD Medication Options (For Education Only)</a></li>
+                <!-- NEW BUTTON FOR PRINTABLES PAGE -->
+                <li><a href="link.to.more.docs.html" class="attention-button">Printables & Downloads</a></li>
             </ul>
 
             <h3>Creative Works & Socials</h3>
@@ -1129,6 +1211,31 @@
             renderTasks();
             tasksContainer.addEventListener('click', handleContainerClick);
             tasksContainer.addEventListener('keydown', handleInputKeydown);
+
+            // --- NEW: Clock and Visitor Counter Initialization ---
+            function updateClock() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const timeString = `${hours}:${minutes}:${seconds}`;
+                document.getElementById('circular-clock').textContent = timeString;
+            }
+
+            function updateVisitorCount() {
+                let count = localStorage.getItem('visitorCount');
+                if (count === null) {
+                    count = 1;
+                } else {
+                    count = parseInt(count) + 1;
+                }
+                localStorage.setItem('visitorCount', count);
+                document.getElementById('visitor-counter').textContent = `Visitor #${count}`;
+            }
+
+            updateClock();
+            setInterval(updateClock, 1000);
+            updateVisitorCount();
         });
     </script>
 </body>
