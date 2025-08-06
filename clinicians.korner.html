@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Guidelines & Insights - Cindnesskult.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using 'Press Start 2P' for a blocky, retro feel for titles -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Using 'Source Serif Pro' for body text and other elements -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* General page styling */
+        body {
+            background-color: #bbb4fe; /* Light purple-blue background */
+            font-family: 'Source Serif Pro', serif; /* Default font for body text */
+            color: #322277; /* Dark blue text for general content */
+            margin: 0;
+            padding: 2rem 1rem; /* Add some padding to the body */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Back Link Styling */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-family: 'Source Serif Pro', serif;
+            font-style: italic;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #322277;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Box (Cindness KULT branding) */
+        .header-box {
+            background-color: #e8e6ff; /* Lighter purple background for header */
+            padding: 1.3rem 2.0rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            border: 2px solid #98c379; /* Green border */
+            margin: 0 auto; /* Center the header box */
+        }
+
+        /* Styling for the main heading "Cindness KULT" */
+        .title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            margin-top: 0;
+            margin-bottom: 0.0rem;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+            text-shadow: -1px -1px 0 #98c379, 1px -1px 0 #98c379, -1px 1px 0 #98c379, 1px 1px 0 #98c379; /* Pixel-art shadow */
+        }
+
+        .title-cyan {
+            color: #304694; /* Dark blue for "Cindness" */
+        }
+
+        .title-purple {
+            color: #556fc8; /* Medium blue for "KULT" */
+        }
+
+        /* Styling for the subtitle text. */
+        .subtitle {
+            color: #154734; /* Dark green text */
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 500;
+            font-style: italic;
+            font-size: clamp(1.3rem, 3vw, 1.1rem);
+            line-height: 1.6;
+            margin: 0;
+            text-shadow: -1.5px -1px 0 #98c379, 1px -1px 0 #98c379, -1px 1px 0 #98c379, 1px 1px 0 #98c379;
+        }
+        
+        /* Styling for the green heart symbol */
+        .green-heart {
+            color: #98c379; /* Green heart */
+            text-shadow: none;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* Styling for the decorative divider line */
+        .divider-line {
+            color: #322277; /* Dark blue */
+            margin-top: 0.0rem;
+            font-size: 1rem;
+            word-wrap: break-word;
+            line-height: 1.0;
+            text-shadow: none;
+        }
+        
+        /* Class to apply the specific font to the URL */
+        .url-text {
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 800;
+            font-style: italic;
+            text-shadow: none;
+            color: #322277;
+        }
+
+        /* Main content container for the entire document */
+        .main-content-container {
+            background-color: #e8e6ff; /* Lighter purple background */
+            padding: 2rem;
+            border-radius: 0.5rem;
+            border: 2px solid #98c379; /* Green border */
+            max-width: 90%;
+            margin: 2rem auto 0 auto; /* Space it out from the header */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Align text to left for readability */
+        }
+
+        /* Section headings within the main content */
+        .main-content-container h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            text-align: center;
+            color: #304694; /* Dark blue */
+            text-shadow: -1px -1px 0 #98c379, 1px -1px 0 #98c379, -1px 1px 0 #98c379, 1px 1px 0 #98c379;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #556fc8; /* Medium blue border */
+            padding-bottom: 0.5rem;
+        }
+
+        /* Sub-headings for sections like "Why This Resource?" */
+        .main-content-container h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #556fc8; /* Medium blue */
+            border-left: 4px solid #304694; /* Dark blue left border */
+            padding-left: 10px;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            text-shadow: -0.5px -0.5px 0 #98c379, 0.5px -0.5px 0 #98c379, -0.5px 0.5px 0 #98c379, 0.5px 0.5px 0 #98c379;
+        }
+
+        /* Smaller headings like "Clinical Vignette" */
+        .main-content-container h4 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #304694; /* Dark blue */
+            margin-top: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Smallest headings like "Neurodevelopmental Disorders" in "If This, Then That" */
+        .main-content-container h5 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            color: #556fc8; /* Medium blue */
+            margin-bottom: 0.5rem;
+        }
+
+        /* General paragraph styling */
+        .main-content-container p {
+            font-family: 'Source Serif Pro', serif;
+            color: #322277; /* Dark blue text */
+            margin-bottom: 1em;
+        }
+
+        /* Strong text within paragraphs */
+        .main-content-container strong {
+            color: #154734; /* Dark green for strong text */
+            font-weight: 700;
+        }
+
+        /* Unordered lists */
+        .main-content-container ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 0;
+            margin-bottom: 1em;
+            color: #322277;
+        }
+        .main-content-container ul ul, .main-content-container ol ul {
+            list-style-type: circle;
+            color: #322277;
+        }
+        .main-content-container li {
+            margin-bottom: 8px;
+        }
+
+        /* Ordered lists */
+        .main-content-container ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+            margin-top: 0;
+            margin-bottom: 1em;
+            color: #322277;
+        }
+
+        /* Specific styles for the "If This, Then That" section's disorder categories */
+        .disorder-category {
+            background-color: #f0f0ff; /* Lighter background for categories */
+            border: 1px solid #a0a0d0; /* Soft border */
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .disorder-category p {
+            margin-bottom: 0.5em;
+        }
+        .disorder-category p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Clinical caveat box */
+        .clinical-caveat {
+            background-color: #fff3e6; /* Light orange background */
+            border-left: 4px solid #ff8c00; /* Orange left border */
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #8b4513; /* Brownish text */
+            font-family: 'Source Serif Pro', serif;
+        }
+        .clinical-caveat strong {
+            color: #8b4513;
+        }
+
+        /* Theory section specific boxes */
+        .theory-info-box {
+            background-color: #f0f0ff;
+            border: 1px solid #a0a0d0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Tree Diagram Styling */
+        .tree-diagram {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .level {
+            width: 95%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            font-family: 'Source Serif Pro', serif; /* Ensure content here is serif */
+            color: #322277;
+        }
+        .level:not(.level-1)::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 20px;
+            background-color: #6c757d;
+        }
+        .level-title {
+            font-family: 'Press Start 2P', cursive; /* Title within level is pixel font */
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #304694;
+        }
+        /* Level colors */
+        .level-1 { background-color: #e0f2f1; border-color: #4db6ac; } /* Greenish */
+        .level-1_5 { background-color: #c1e6e2; border-color: #26a69a; }
+        .level-2 { background-color: #a2dad4; border-color: #00897b; }
+        .level-3 { background-color: #83cec5; border-color: #00695c; }
+        .level-4 { background-color: #64b9b0; border-color: #004d40; }
+
+        .roots-container, .branches-container, .canopy-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .root-item, .branch, .canopy-item {
+            flex: 1;
+            min-width: 150px;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #b2dfdb;
+            color: #322277;
+        }
+        .epigenetics-bridge {
+            margin-top: 15px;
+            padding: 8px;
+            border: 2px dashed #00796b;
+            background-color: #ffffff;
+            border-radius: 6px;
+            font-style: italic;
+            color: #322277;
+        }
+
+        /* Clinical Vignette */
+        .vignette {
+            background-color: #fffbeb; /* Light yellow */
+            border: 1px solid #fceec4; /* Yellow border */
+            border-left: 5px solid #fbc02d; /* Darker yellow left border */
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-family: 'Source Serif Pro', serif;
+            color: #8b4513; /* Brownish text */
+        }
+        .vignette p {
+            margin: 0;
+            color: #8b4513;
+        }
+        .vignette h4 {
+            color: #8b4513;
+        }
+
+        /* Protective Factors "Pillars" */
+        .pillar {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #eaf4f4; /* Light blue-green */
+            border-left: 5px solid #66b3cc; /* Medium blue */
+            border-radius: 0 4px 4px 0;
+            font-family: 'Source Serif Pro', serif;
+            color: #322277;
+        }
+        .pillar strong {
+            color: #154734;
+        }
+
+        /* Screening Table */
+        .screening-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            font-family: 'Source Serif Pro', serif;
+            color: #322277;
+        }
+        .screening-table th, .screening-table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #a0a0d0; /* Soft blue-gray border */
+        }
+        .screening-table th {
+            background-color: #f0f0ff; /* Lighter background for table headers */
+            font-weight: 600;
+            color: #304694;
+        }
+        .screening-table td:nth-child(3) { /* Est. Time column */
+            white-space: nowrap;
+        }
+
+        /* Rule-out and Approval boxes */
+        .rule-out-box, .approval-box {
+            border: 1px solid #a0a0d0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+            background-color: #f0f0ff;
+            font-family: 'Source Serif Pro', serif;
+            color: #322277;
+        }
+        .rule-out-box p, .approval-box p {
+            margin: 0 0 10px 0;
+        }
+        .rule-out-box p:last-child, .approval-box p:last-child {
+            margin-bottom: 0;
+        }
+        .approval-box {
+            background-color: #fff8e1; /* Light yellow */
+            border-color: #ffecb3; /* Yellow border */
+            color: #8b4513;
+        }
+        .approval-box h4 {
+            color: #8b4513;
+        }
+        .approval-box strong {
+            color: #8b4513;
+        }
+
+        /* Intake Comparison Container (First Session Guide) */
+        .intake-comparison-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for responsiveness */
+            gap: 2em;
+            width: 100%;
+            margin-bottom: 30px;
+            justify-content: center; /* Center the columns when they wrap */
+        }
+
+        .intake-infographic-wrapper {
+            flex: 1;
+            min-width: 300px; /* Minimum width for each column */
+            max-width: 48%; /* Max width to allow two columns on larger screens */
+            box-sizing: border-box; /* Include padding/border in width */
+        }
+        @media (max-width: 992px) {
+            .intake-infographic-wrapper {
+                max-width: 100%; /* Full width on smaller screens */
+            }
+        }
+
+        .intake-infographic-container {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(75, 0, 130, 0.05);
+            overflow: hidden;
+            border: 1px solid #e0e5eb;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            color: #322277; /* Text color for intake section */
+        }
+
+        .intake-header {
+            background: linear-gradient(135deg, #4B0082, #3a0066); /* Indigo Gradient */
+            color: white;
+            padding: 1.5em;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .intake-header h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0 0 0.2em 0;
+            letter-spacing: 0.5px;
+            color: white; /* Override default h2 color */
+            border-bottom: none;
+            text-shadow: -1px -1px 0 #98c379, 1px -1px 0 #98c379, -1px 1px 0 #98c379, 1px 1px 0 #98c379;
+        }
+
+        .intake-header h3 {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1em;
+            font-weight: 700;
+            margin: 0;
+            padding: 0.5em 1em;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            display: inline-block;
+            border-left: none;
+            color: white;
+            text-shadow: none;
+        }
+
+        .intake-main {
+            padding: 1em 0;
+            flex-grow: 1;
+        }
+
+        .intake-section {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.2em 1.5em;
+            border-bottom: 1px solid #e0e5eb;
+            transition: background-color 0.3s ease;
+        }
+
+        .intake-section:last-child {
+            border-bottom: none;
+        }
+
+        .intake-section:hover {
+            background-color: #f8faff;
+        }
+
+        .intake-icon {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            margin-right: 1em;
+            margin-top: 5px;
+        }
+
+        .intake-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #4B0082; /* Indigo color for icons */
+        }
+
+        .intake-content {
+            flex-grow: 1;
+        }
+
+        .intake-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 0.5em;
+        }
+
+        .intake-section-header h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.1em;
+            color: #3a0066;
+            margin: 0;
+            border-left: none;
+            padding-left: 0;
+            text-shadow: -0.5px -0.5px 0 #98c379, 0.5px -0.5px 0 #98c379, -0.5px 0.5px 0 #98c379, 0.5px 0.5px 0 #98c379;
+        }
+
+        .time-estimate {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: rgba(34, 139, 34, 0.85); /* Forest green */
+            padding: 0.3em 0.8em;
+            border-radius: 15px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .intake-section ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .intake-section ul li {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 0.5em;
+            padding-left: 1.2em;
+            position: relative;
+        }
+        
+        .intake-section ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .intake-section ul li::before {
+            content: '»';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #4B0082;
+            font-weight: bold;
+        }
+
+        .intake-section ul li blockquote {
+            font-style: italic;
+            margin: 0.2em 0 0 0;
+            padding: 0;
+            color: #555;
+        }
+
+        .risk-assessment .intake-section-header h3 {
+            color: #d62828; /* Red for Risk Assessment */
+        }
+        .risk-assessment .time-estimate {
+            background-color: #d62828;
+        }
+        .risk-assessment ul li::before {
+            color: #d62828;
+        }
+        .risk-assessment .intake-icon svg {
+            fill: #d62828;
+        }
+
+        /* Intake Checklist Cards */
+        .checklist-card {
+            border: 1px solid #dee2e6;
+            border-left-width: 6px;
+            transition: all 0.3s ease-in-out;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px; /* Spacing from previous section */
+            margin-bottom: 30px;
+            background-color: #f0f0ff; /* Lighter background for checklist cards */
+            color: #322277;
+        }
+        .checklist-card-part1 {
+            border-left-color: #0c7a6e; /* Teal */
+        }
+        .checklist-card-part2 {
+            border-left-color: #6d28d9; /* Purple */
+        }
+        .checklist-card:hover {
+            border-color: #adb5bd;
+            border-left-color: #212529;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .checklist-card-header {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            text-shadow: -0.5px -0.5px 0 #98c379, 0.5px -0.5px 0 #98c379, -0.5px 0.5px 0 #98c379, 0.5px 0.5px 0 #98c379;
+        }
+        .checklist-card-header span {
+            font-family: 'Source Serif Pro', serif;
+            font-weight: normal;
+            font-size: 0.8em;
+            text-shadow: none;
+        }
+        .checklist-item-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .checklist-item-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 10px;
+            font-family: 'Source Serif Pro', serif;
+        }
+        .checklist-item-list li svg {
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            fill: #28a745; /* Green checkmark */
+        }
+        .checklist-sub-box {
+            border: 1px solid #e9ecef;
+            border-left-width: 4px;
+            border-left-color: #adb5bd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #fdfdff;
+            font-family: 'Source Serif Pro', serif;
+            color: #322277;
+        }
+        .checklist-sub-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        .checklist-note-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-family: 'Source Serif Pro', serif;
+        }
+        .checklist-note-box p {
+            margin-bottom: 0.5em;
+        }
+        .checklist-note-box p:last-child {
+            margin-bottom: 0;
+        }
+        .checklist-note-box strong {
+            color: #856404;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #98c379; /* Green border */
+            color: #322277;
+            font-size: 0.9em;
+            font-family: 'Source Serif Pro', serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Link to go back to the main website -->
+    <a href="http://cindnesskult.com" class="back-link">← back to cindnesskult.com</a>
+
+    <!-- This is the main container for the header content -->
+    <header class="header-box">
+        <!-- The main title, with spans to color the words differently -->
+        <h1 class="title">
+            <span class="title-cyan">Cindness</span>
+            <span class="title-purple">KULT</span>
+        </h1>
+        <!-- The smaller text below the title, with your custom text -->
+        <p class="subtitle">
+            ⋆˙⟡♡The answer is always kindness. (not a cult btw)♡⟡˙⋆<span class="green-heart">♡</span>
+        </p>
+        <!-- The new decorative divider line with your custom text -->
+        <div class="divider-line">
+            ♡⟡˙⋆♡⟡˙⋆<span class="url-text">cindnesskult.com</span>⟡♡˙⋆⟡˙⋆♡
+        </div>
+    </header>
+
+    <!-- This is the main container for the entire clinical guidelines document -->
+    <main class="main-content-container">
+        
+        <!-- Section: Introduction -->
+        <section>
+            <h2>Welcome, Clinicians!</h2>
+            <p>At Cindnesskult.com, our mission is to foster a deeper understanding of mental health through an integrative, developmental lens. This resource page is designed to support you in providing comprehensive, nuanced, and effective care by offering practical guidelines and theoretical insights.</p>
+            
+            <h3>Why This Resource?</h3>
+            <p>In the complex landscape of mental health, accurate assessment and tailored intervention are paramount. This guide consolidates essential protocols for initial client sessions, introduces "The Interwoven Roots Theory of Psychopathology" as a framework for understanding symptom manifestation, and provides practical tools for differential diagnosis. Our aim is to streamline your process, enhance diagnostic precision, and ultimately contribute to better client outcomes.</p>
+            
+            <h3>Helpful Tips for Using This Guide</h3>
+            <ul>
+                <li><strong>Dynamic Application:</strong> This guide is a framework, not a rigid script. Adapt its principles to each client's unique presentation and needs.</li>
+                <li><strong>Integrative Approach:</strong> Combine the structured protocols with your clinical intuition and ongoing client rapport.</li>
+                <li><strong>Continuous Learning:</strong> Mental health is an evolving field. Stay curious, consult with peers, and engage in ongoing professional development.</li>
+                <li><strong>Client-Centered Care:</strong> Always prioritize the client's experience, safety, and goals throughout the assessment and treatment process.</li>
+            </ul>
+        </section>
+
+        <!-- Section: The Interwoven Roots Theory -->
+        <section>
+            <header style="text-align: center; margin-bottom: 30px;">
+                <div class="theory-title" style="font-family: 'Press Start 2P', cursive; font-size: 1.3em; font-weight: bold; color: #304694; margin-bottom: 5px; text-shadow: -0.5px -0.5px 0 #98c379, 0.5px -0.5px 0 #98c379, -0.5px 0.5px 0 #98c379, 0.5px 0.5px 0 #98c379;">From the Interwoven Roots Theory: The Developmental Model of Psychopathology</div>
+                <div class="author-info" style="font-family: 'Source Serif Pro', serif; font-size: 1.1em; color: #322277;">Vivian Mitchell, MA, APCC 16067, Ph.D. Student of Clinical Psychology</div>
+                <div class="preprint-status" style="font-family: 'Source Serif Pro', serif; font-size: 1em; color: #6c757d; font-style: italic; margin-top: 5px;">(Preprint Finalization)</div>
+            </header>
+
+            <h2>Developmental Pathways & Symptom Manifestation</h2>
+            <p style="text-align: center; margin-bottom: 30px;">This model outlines the developmental progression from foundational roots to symptomatic clusters. The pathways are not rigid but represent common patterns of how vulnerabilities manifest.</p>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 30px;">
+                <!-- Left Column: The Visual Pathway -->
+                <div style="flex: 3; min-width: 500px; flex-grow: 1;">
+                    <div class="theory-info-box">
+                        <div class="tree-diagram">
+                            
+                            <!-- Level 3: Canopy -->
+                            <div class="level level-4">
+                                <div class="level-title">Level 3: Full Symptom Development in Poor Circumstances/Complex Presentations</div>
+                                 <div class="canopy-container">
+                                     <div class="canopy-item"><strong>Primarily AE-Driven:</strong><br>Dissociative Identity Disorder (DID), Borderline Personality Disorder (BPD), Complex PTSD</div>
+                                     <div class="canopy-item"><strong>Primarily Neurodev/Genetic:</strong><br>Schizophrenia Spectrum, Bipolar I & II (severe)</div>
+                                     <div class="canopy-item"><strong>Primarily Interactional:</strong><br>Severe Generalized Anxiety Disorder (GAD), Major Depressive Disorder (MDD), Obsessive-Compulsive Disorder (OCD); Personality Disorders</div>
+                                </div>
+                            </div>
+
+                            <!-- Level 2: More Specified Disorders -->
+                            <div class="level level-3">
+                                <div class="level-title">Level 2: More Specified, Complex, or Progressive Disorders</div>
+                                <div class="canopy-container">
+                                     <div class="canopy-item"><strong>Primarily AE-Driven:</strong><br>Treatment-resistant MDD/Anxiety, severe/enduring Eating Disorders, DID/OSDD, deeply entrenched Personality Disorders</div>
+                                     <div class="canopy-item"><strong>Primarily Neurodev/Genetic:</strong><br>Schizophrenia, Bipolar I (severe)</div>
+                                     <div class="canopy-item"><strong>Primarily Interactional:</strong><br>Severe GAD, MDD, OCD; Personality Disorders (often with multiple interacting roots, cumulative AEs)</div>
+                                </div>
+                            </div>
+
+                            <!-- Level 1: Branches -->
+                            <div class="level level-2">
+                                <div class="level-title">Level 1: Early Diagnosable Conditions / Core Symptom Clusters</div>
+                                <div class="branches-container">
+                                    <div class="branch"><strong>From AE:</strong><br>Adjustment Disorders, PTSD, Trauma-Related OCD, Dissociative Disorders, Borderline Personality Disorder traits, Reactive Anxiety/Depression.</div>
+                                    <div class="branch"><strong>From ADHD:</strong><br>ADHD, co-occurring Anxiety, Depressive symptoms, early Substance Use Disorders (SUDs) (coping), some Impulse Control issues. AEs can exacerbate.</div>
+                                    <div class="branch"><strong>From ASD:</strong><br>Avoidant/Restrictive Food Intake Disorder (ARFID), Pica, Social Anxiety, Depression (often due to environmental mismatch/trauma pipeline). Potential overlap with Avoidant Personality Disorder (AVPD), Dependent Personality Disorder (DPD) traits.</div>
+                                    <div class="branch"><strong>From Genes (Other):</strong><br>Intellectual Disability (ID), Learning Disorders, Primary Sleep-Wake Disorders, Cyclothymic Disorder, Primary OCD, early signs of Bipolar spectrum, Attenuated Psychosis Syndrome (if strong genetic loading).</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Level 0.5: Trunk -->
+                            <div class="level level-1_5">
+                                <div class="level-title">Level 0.5: Prodromal / Sub-Clinical Manifestations / Early Signs</div>
+                                <ul>
+                                    <li><strong>From AE:</strong> Early, less differentiated signs of distress or characteristic difficulties emerging from Level 0 Roots. Acute stress, emotional dysregulation, somatic complaints, mood changes, social withdrawal, sleep/appetit disturbances.</li>
+                                    <li><strong>From ADHD:</strong> Mild executive dysfunction, restlessness, emotional over-reactivity, mild cognitive/executive issues.</li>
+                                    <li><strong>From ASD:</strong> Mild sensory sensitivities, social awkwardness, anxiety, heightened sensitivities, early repetitive behaviors.</li>
+                                    <li><strong>From Genes (Other):</strong> Mild temperamental expressions, sub-threshold mood fluctuations.</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Level 0: Roots -->
+                            <div class="level level-1">
+                                <div class="epigenetics-bridge"><strong>Epigenetics (The Bridge):</strong> The mechanism by which Adverse Events influence gene expression.</div>
+                                <div class="level-title" style="margin-top: 20px;">Level 0: Foundational Roots / Primary Etiological Domains</div>
+                                <div class="roots-container">
+                                    <div class="root-item"><strong>Adverse Events (AE):</strong><br>Trauma, neglect, chronic stress, discrimination, poverty, nutritional deficiencies.</div>
+                                    <div class="root-item"><strong>ADHD Neurotype:</strong><br>Highly heritable neurodevelopmental profile (Inattention, impulsivity, hyperactivity differences).</div>
+                                    <div class="root-item"><strong>ASD Neurotype:</strong><br>Highly heritable profile (Social communication, sensory processing, RRBI differences). Higher risk for AEs (Hoover & Kaufman, 2018).</div>
+                                    <div class="root-item"><strong>Genetic/Bio (Other):</strong><br>Polygenic risks (psychosis, bipolar), MTHFR, neurochemical variations, predispositions for schizophrenia, bipolar, etc.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="theory-info-box">
+                        <h3>Treatment Implications & Future Directions</h3>
+                         <div class="vignette">
+                            <h4>Clinical Vignette: The Case of "Alex"</h4>
+                            <p>"Alex" (13) with family history (Genetic predispositions), suspected neurodivergence (ASD/ADHD neurotype), and a history of home abuse (Adverse Events), first presented with bipolar-like symptoms (which were a form of coping). After medication stabilized mood, unaddressed trauma led to new OCD, BPD traits, and finally dissociation (Other Specified Dissociative Disorder - OSDD-1), which became a "safer" coping mechanism than mania. This case illustrates that without addressing the foundational root of safety, the system may generate new, complex symptoms to survive.</p>
+                        </div>
+                        <h4>Phased & Individualized Treatment Approach</h4>
+                        <p><strong>Critique:</strong> Modalities like EMDR or CBT can be ineffective or even harmful if applied without a full understanding of the underlying roots and the client's current state.</p>
+                        <ol>
+                            <li><strong>Safety, Stabilization, & Root Identification:</strong> Establish safety, provide psychoeducation, and assess the four foundational roots.</li>
+                            <li><strong>Symptom Tracing & Prevention:</strong> Map developmental pathways to understand symptom emergence. This allows for proactive work to prevent further progression by identifying prodromal symptoms (Level 0.5) of other potential clusters and building targeted protective factors.</li>
+                            <li><strong>Addressing Specific Symptomatic Clusters:</strong> Once stabilized, use evidence-based interventions to treat the most pressing Level 1, 2 or 3 symptom clusters.</li>
+                            <li><strong>Deeper Trauma Integration:</strong> Specialized, trauma-focused work should be initiated after a foundation of safety and stability is established.</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Supporting Information -->
+                <div style="flex: 2; min-width: 400px; flex-grow: 1;">
+                    <div class="theory-info-box">
+                        <h3>Protective Factors & Resilience</h3>
+                        <p>These factors can buffer against risk and promote positive adaptation.</p>
+                        <div class="pillar"><strong>Pillar 1:</strong> Innate Temperament & Early Regulatory Capacities</div>
+                        <div class="pillar"><strong>Pillar 2:</strong> Sense of Community (Ecological Model)</div>
+                        <div class="pillar"><strong>Pillar 3:</strong> Attachment Security (and Earned Security)</div>
+                        <div class="pillar"><strong>Pillar 4:</strong> Nature of Dissociative Response & Trauma Integration</div>
+                        <div class="pillar"><strong>Pillar 5:</strong> Holistic Well-being Practices (Nutrition, sleep, etc.)</div>
+                        <div class="pillar"><strong>Pillar 6:</strong> Positive Childhood Experiences (PCEs)</div>
+                        <div class="pillar"><strong>Pillar 7:</strong> Developed Psychological Capacities & Skills</div>
+                        <div class="pillar"><strong>Pillar 8:</strong> Active Coping & External Engagement (Purpose)</div>
+                    </div>
+                    
+                    <div class="theory-info-box">
+                        <h3>Clinical Application: Proposed Methodological Approach</h3>
+                        <h4>A. Initial Etiological Exploration</h4>
+                        <p>Before assessing specific symptom clusters, it is crucial to explore foundational etiological factors. This involves a multi-faceted approach to understand the client's history and biological context.</p>
+                        <ol>
+                            <li><strong>Gather Comprehensive History:</strong> Systematically collect detailed family history (e.g., using structured interview forms) and medical history to identify genetic predispositions and existing conditions.</li>
+                            <li><strong>Establish Timeline of Onset:</strong> Create a clear timeline of when symptoms appeared to rule out causes related to medication changes (iatrogenic), injury, illness, or substance use.</li>
+                            <li><strong>Collaborate with Medical Providers:</strong> To rule out biological contributors, request lab testing for vitamin/mineral deficiencies (e.g., Vitamin D, B12) and hormonal imbalances. If possible, consider pharmacogenomic testing (e.g., GeneSight).</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: "If This, Then That" - Symptom Clusters & Root Exploration -->
+        <section>
+            <h2>"If This, Then That" - Symptom Clusters & Root Exploration</h2>
+            <p style="text-align: center; margin-bottom: 30px;">This section explores common symptom clusters and their potential underlying roots, guiding a more targeted and effective clinical approach.</p>
+            <p class="clinical-caveat"><strong>Clinical Caveat on "Forced Coping":</strong> A core tenet is addressing foundational roots, particularly active Adverse Events (AEs), before or concurrently with interventions for specific symptomatic clusters. Without addressing the underlying roots, the system may generate new, complex symptoms as a means of survival.</p>
+
+            <div class="disorder-category">
+                <h5>Neurodevelopmental Disorders</h5>
+                <p><em>Level 0 Roots:</em> ASD Neurotype, ADHD Neurotype, Genes (Other), AEs (prenatal exposure, birth trauma, early neglect).</p>
+                <p><em>Level 1 Diagnoses:</em> Autism Spectrum Disorder, ADHD, Intellectual Disability, Specific Learning Disorder, Communication Disorders, Motor Disorders.</p>
+                <p><em>Clinical Progression & Considerations:</em> The severity and presentation of these Level 1 conditions are heavily influenced by the presence and severity of AEs. For example, an individual with an ASD neurotype who experiences significant early trauma and attachment disruption is more likely to meet criteria for ASD Level 2 or 3, requiring more substantial support, compared to an individual with the same neurotype but with strong protective factors.</p>
+                <p><strong>If a Neurodevelopmental Disorder is present/suspected:</strong> Screen for AEs (high risk), Anxiety, Depression, OCD, Eating Disorders (ARFID), and features of Cluster A/C personality disorders as potential maladaptive coping strategies.</p>
+            </div>
+
+            <div class="disorder-category">
+                <h5>Schizophrenia Spectrum and Other Psychotic Disorders</h5>
+                <p><em>Level 0 Roots:</em> Primarily Genes (Other), with AEs (especially trauma) and nutritional deficiencies acting as significant triggers or accelerators.</p>
+                <p><em>Level 1 Diagnoses:</em> Brief Psychotic Disorder, Attenuated Psychosis Syndrome.</p>
+                <p><em>Level 2/3 Progression:</em> Untreated Level 1 conditions, especially in the context of ongoing AEs or lack of protective factors, can progress to Schizophreniform Disorder, and then to Schizophrenia or Schizoaffective Disorder (if mood episodes are prominent).</p>
+                <p><strong>If Psychosis is present:</strong> Investigate family history of psychosis/bipolar. Screen thoroughly for trauma (AEs). Rule out Substance-Induced Psychosis. Carefully assess for underlying ASD, as sensory experiences or communication differences can be misdiagnosed as psychosis.</p>
+            </div>
+
+            <div class="disorder-category">
+                <h5>Bipolar and Related Disorders</h5>
+                <p><em>Level 0 Roots:</em> Primarily Genes (Other). AEs are a major trigger, often influencing an earlier age of onset and more severe course.</p>
+                <p><em>Level 1 Diagnoses:</em> Cyclothymic Disorder.</p>
+                <p><em>Level 2/3 Progression:</em> Cyclothymia, particularly when compounded by AEs, can progress to Bipolar II, and subsequently to Bipolar I. The presence of significant trauma can lead to presentations with rapid cycling, mixed features, and psychotic features, sometimes evolving into a Schizoaffective Disorder presentation.</p>
+                <p><strong>If Bipolar symptoms are present:</strong> Screen for AEs/trauma. Assess for co-occurring ADHD, Anxiety Disorders, and SUDs.</p>
+            </div>
+            
+            <div class="disorder-category">
+                <h5>Depressive Disorders</h5>
+                <p><em>Level 0 Roots:</em> Can stem from any of the four roots (AEs, Neurodivergence, Genes).</p>
+                <p><em>Level 1 Diagnoses:</em> Persistent Depressive Disorder (Dysthymia), Unspecified Depressive Disorder.</p>
+                <p><em>Level 2/3 Progression:</em> Chronic, untreated depression, especially when rooted in trauma or neurodivergence, can become Major Depressive Disorder, single or recurrent episode, with increasing severity specifiers.</p>
+                <p><strong>If Depression is present:</strong> Screen for AEs, ADHD, ASD (burnout/social isolation), and rule out medical/nutritional causes. Crucially, screen for a history of mania/hypomania to rule out Bipolar Disorder.</p>
+            </div>
+            
+            <div class="disorder-category">
+                <h5>Anxiety Disorders</h5>
+                <p><em>Level 0 Roots:</em> Can stem from any of the four roots.</p>
+                <p><em>Level 1 Diagnoses:</em> Unspecified Anxiety Disorder, Generalized Anxiety Disorder.</p>
+                <p><em>Level 2/3 Progression:</em> Can progress to more specific and impairing forms like Panic Disorder, Agoraphobia, and Social Anxiety Disorder. Social Anxiety in the context of ASD may be a reasonable response to a lifetime of social difficulties, not a disordered perception.</p>
+                <p><strong>If Anxiety is present:</strong> Screen for AEs, ADHD, ASD. Differentiate GAD from the worry/anxiety inherent to OCD.</p>
+            </div>
+            
+            <div class="disorder-category">
+                <h5>Obsessive-Compulsive and Related Disorders</h5>
+                <p><em>Level 0 Roots:</em> Genes (Other), AEs (trauma-related OCD), ADHD/ASD (as a coping mechanism).</p>
+                <p><em>Level 1 Diagnoses:</em> OCD.</p>
+                <p><em>Level 2/3 Progression:</em> Untreated OCD, especially when co-occurring with ADHD or significant trauma, can increase in severity, leading to specifiers like "with poor insight" or "with absent insight/delusional beliefs."</p>
+                <p><strong>If OCD is present:</strong> Assess for underlying ADHD/ASD. Explore trauma history. Differentiate from OCPD traits.</p>
+            </div>
+            
+            <div class="disorder-category">
+                <h5>Trauma- and Stressor-Related Disorders</h5>
+                <p><em>Level 0 Roots:</em> Primarily AEs. Neurodivergence can increase vulnerability to trauma.</p>
+                <p><em>Level 1 Diagnoses:</em> Adjustment Disorder, Acute Stress Disorder, PTSD.</p>
+                <p><em>Level 2/3 Progression:</em> Chronic or complex PTSD is a Level 2/3 condition. If PTSD is present, it is critical to screen for the development of Dissociative Disorders (OSDD/DID) and Personality Disorders, particularly BPD.</p>
+                <p><strong>If PTSD is present:</strong> Screen for Dissociative Disorders, BPD, SUDs, and underlying neurodivergence.</p>
+            </div>
+            
+            <div class="disorder-category">
+                <h5>Dissociative Disorders</h5>
+                <p><em>Level 0 Roots:</em> Primarily severe, chronic childhood AEs (trauma).</p>
+                <p><em>Level 1/2 Diagnoses:</em> Depersonalization/Derealization Disorder, Other Specified Dissociative Disorder.</p>
+                <p><em>Level 3 Progression:</em> These are often Level 3 diagnoses by nature, particularly Dissociative Identity Disorder, representing a profound adaptation to overwhelming trauma.</p>
+                <p><strong>If Dissociation is present:</strong> A thorough trauma history is essential. Assess for co-occurring PTSD, BPD, Depression, and Anxiety.</p>
+            </div>
+            
+            <div class="disorder-category">
+                <h5>Personality Disorders</h5>
+                <p><em>Level 0 Roots:</em> Primarily AEs interacting with Genes (Other)/Neurotype.</p>
+                <p><em>If PD traits are present:</em> Conduct a thorough trauma history. Assess for underlying ASD/ADHD. The presence of BPD strongly suggests a history of trauma and attachment disruption. Traits of AVPD and DPD often overlap significantly with the presentation of an unaccommodated autistic individual. Low empathy temperamental traits interacting with AEs are a key pathway to NPD and ASPD.</p>
+            </div>
+        </section>
+
+        <!-- Section: Key Diagnostic Considerations & Screening Tools -->
+        <section>
+            <h2>Key Diagnostic Considerations & Screening Tools</h2>
+            <p style="text-align: center; margin-bottom: 30px;">This section provides guidance on essential screening tools and crucial differential diagnostic considerations for various clinical presentations.</p>
+
+            <div class="theory-info-box">
+                <h4>Suggested Screening Tools for Symptom Clusters</h4>
+                <p>The following tools can be used to screen for specific symptom clusters. Most can be self-administered, but some require clinical training for interpretation.</p>
+                <table class="screening-table">
+                    <thead>
+                        <tr>
+                            <th>Domain</th>
+                            <th>Tool(s)</th>
+                            <th>Est. Time</th>
+                            <th>Notes</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>General Distress</td>
+                            <td>DASS-10, PHQ-9, GAD-7</td>
+                            <td>~5 mins</td>
+                            <td>DASS for initial screen. PHQ-9/GAD-7 for ongoing tracking/confirmation.</td>
+                            <td>Client Portal, EHR</td>
+                        </tr>
+                        <tr>
+                            <td>Trauma / PTSD</td>
+                            <td>ACE-Q, ITQ, PCL-5</td>
+                            <td>5-15 mins</td>
+                            <td>ACEs for history. ITQ for C-PTSD. PCL-5 for PTSD.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                        <tr>
+                            <td>Autism</td>
+                            <td>AQ-10</td>
+                            <td>~5 mins</td>
+                            <td>Pre-screen. Requires clinical training for interpretation.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                        <tr>
+                            <td>ADHD</td>
+                            <td>ESQ-R, Vanderbilt, Conners</td>
+                            <td>5-30 mins</td>
+                            <td>Vanderbilt/Conners for children (short form ~5 min, full ~20-30 min). ESQ-R for adolescents/adults.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                         <tr>
+                            <td>Bipolar Disorder</td>
+                            <td>MDQ</td>
+                            <td>~5 mins</td>
+                            <td>Rule out within 5 sessions. Requires clinician interpretation.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                        <tr>
+                            <td>Psychosis</td>
+                            <td>PQ-B, PANSS</td>
+                            <td>5-10 mins</td>
+                            <td>PQ-B for screening. PANSS for full assessment (requires specialized training).</td>
+                            <td>Internal Resources</td>
+                        </tr>
+                        <tr>
+                            <td>OCD</td>
+                            <td>OCI-R, ChOCI-R (Child)</td>
+                            <td>~10 mins</td>
+                            <td>Rule out within 5 sessions. High "ordering" may suggest neurodivergence.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                        <tr>
+                            <td>Dissociation</td>
+                            <td>MID</td>
+                            <td>~20 mins</td>
+                            <td>Multidimensional Inventory of Dissociation.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                        <tr>
+                            <td>Personality</td>
+                            <td>PID-5-SF</td>
+                            <td>~15 mins</td>
+                            <td>Personality Inventory for DSM-5, Short Form.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                         <tr>
+                            <td>Anxiety (Child)</td>
+                            <td>RCADS, SCARED</td>
+                            <td>10-15 mins</td>
+                            <td>Screens for various anxiety and depressive disorders in youth.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                        <tr>
+                            <td>Substance Use</td>
+                            <td>IRIS, AUDIT, DAST</td>
+                            <td>5-10 mins</td>
+                            <td>Initial screen for alcohol and drug use risk.</td>
+                            <td>Client Portal</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <hr style="margin: 25px 0; border: 1px solid #a0a0d0;">
+
+                <h4>Key Diagnostic Rule-Outs & Exclusions (DSM-5-TR Informed)</h4>
+                <div class="rule-out-box">
+                    <p><strong>Bipolar vs. Depressive Disorders:</strong> A history of a manic, hypomanic, or mixed episode excludes a diagnosis of Major Depressive Disorder, Persistent Depressive Disorder (Dysthymia), or other primary depressive disorders. The presence of mania or hypomania indicates a fundamental difference in mood regulation that is distinct from unipolar depression.</p>
+                    <p><strong>Schizophrenia Spectrum vs. Mood Disorders:</strong> These primary psychotic disorders generally exclude a diagnosis of a Depressive Disorder or Bipolar II Disorder/Cyclothymic Disorder if the mood episodes are brief relative to the total duration of the psychotic or delusional periods. Schizoaffective Disorder is the exception, as it requires a mood episode concurrent with psychotic symptoms, along with a period of psychosis without a major mood episode.</p>
+                    <p><strong>Substance/Medication-Induced vs. Primary Disorder:</strong> If the symptoms of a mental disorder are judged to be entirely and directly caused by a substance, medication, or medical condition, a primary mental disorder diagnosis cannot be given. Instead, the appropriate Substance/Medication-Induced or Due to Another Medical Condition diagnosis is used. Symptoms occurring exclusively during intoxication or withdrawal are classified as Substance/Medication-Induced and would exclude a primary diagnosis if the substance use is the sole cause.</p>
+                    <p><strong>Autism Spectrum Disorder (ASD) vs. Personality Disorders:</strong> If criteria for ASD are met, a diagnosis of Schizotypal Personality Disorder or Schizoid Personality Disorder should not be made unless there is a marked disparity between social communication deficits and other behaviors not typical of ASD. With Narcissistic (NPD) and Antisocial (ASPD) Personality Disorders, clinicians must carefully differentiate if the traits stem from core ASD social cognition differences or a disregard for others. A dual diagnosis requires that criteria for both are distinctly met and not better explained by the other condition.</p>
+                    <p><strong>ADHD vs. Other Mental Disorders:</strong> The criteria for ADHD state that symptoms should not occur exclusively during the course of Schizophrenia or another Psychotic Disorder and are not better explained by another mental disorder. However, ADHD can be diagnosed concurrently with conditions like Bipolar Disorder or ASD if criteria for both are fully met and the ADHD symptoms are not solely a manifestation of the other disorder.</p>
+                    <p><strong>OCD vs. Psychotic Disorders:</strong> While OCD can have "poor insight" or "delusional intensity" regarding obsessions, the delusions are typically limited to the content of the obsessions. If psychotic symptoms are prominent, persistent, and not exclusively related to the OCD themes, a separate Psychotic Disorder might be considered.</p>
+                </div>
+
+                <div class="approval-box">
+                    <h4>Diagnoses for Careful Consideration/Consultation</h4>
+                    <p>The following diagnoses often benefit from consultation with a supervisor or specialist before being finalized:</p>
+                    <ul>
+                        <li>Bipolar I & II Disorders</li>
+                        <li>ADHD (all presentations)</li>
+                        <li>Obsessive-Compulsive Disorder (OCD)</li>
+                        <li>Borderline Personality Disorder (BPD)</li>
+                        <li>Schizoaffective Disorder</li>
+                        <li>Schizophrenia</li>
+                        <li>Autism Spectrum Disorder (ASD)</li>
+                    </ul>
+                    <p><strong>Note:</strong> It is generally recommended to refer out for all Eating Disorders (e.g., Anorexia, Bulimia) to specialized care.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: First Session Guide (Moved to bottom) -->
+        <section>
+            <h2>First Session Guide for Clinicians</h2>
+            <p style="text-align: center; margin-bottom: 30px;">This guide outlines two models for conducting initial sessions, adapting to whether pre-screening tools are completed prior to the session or need to be administered during the session.</p>
+             <div class="intake-comparison-container">
+                <!-- Left Column: Ideal Model -->
+                <div class="intake-infographic-wrapper">
+                    <div class="intake-infographic-container">
+                        <header class="intake-header">
+                            <h2>Ideal Intake</h2>
+                            <h3>(Screeners Pre-Completed)</h3>
+                            <h3>Total Estimated Time: 50-60 minutes</h3>
+                        </header>
+                        <main class="intake-main">
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H8c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM8 18H4v-6h4v6zm12-4H10v-2h2v2zm0-4H10v-2h2v2zm0-4H10V6h10V10z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Welcome & Logistics</h3><span class="time-estimate">5 min</span></div>
+                                    <ul>
+                                        <li>Go over: <strong>Confidentiality, policies, supervisor info.</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13 7h-2v6l5 3 1-1.59-1-3.71V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Presenting Concern & History</h3><span class="time-estimate">15-20 min</span></div>
+                                    <ul>
+                                        <li><blockquote>"What brings you in today?"</blockquote></li>
+                                        <li><blockquote>"How are these symptoms affecting your life? When did they start?"</blockquote></li>
+                                        <li><blockquote>"Have you received treatment before?"</blockquote></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h12v2zm0-4H7V7h12v2z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Review Screeners & Risk</h3><span class="time-estimate">10-15 min</span></div>
+                                    <ul>
+                                        <li>Review pre-completed forms (e.g., ACE-Q, PHQ-9).</li>
+                                        <li>Ask clarifying questions about any flagged items.</li>
+                                        <li>Complete live risk assessment.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                             <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21 9.5 8.82 12 13.18 14.48 10.7 12 7.27z"/><path d="M12 17.27l6.18 3.73L16.54 13.97 22 9.24H14.81L12 2 9.19 9.24H2v4.73l5.46 3.07L5.82 21z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Goals & Strengths</h3><span class="time-estimate">10-15 min</span></div>
+                                    <ul>
+                                        <li><blockquote>"What are you hoping to get out of therapy?"</blockquote></li>
+                                        <li><blockquote>"Who do you have for support? What are you proud of?"</blockquote></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 2h-8C6 2 4 4 4 6v14c0 2 2 4 4 4h8c2 0 4-2 4-4V6c0-2-2-4-4-4zm-6 16H8v-2h4v2zm6-4H10v-2h8v2zm0-4H10v-2h8v2zm-2-6h-6V3h8v5z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Wrap-Up & Next Steps</h3><span class="time-estimate">5 min</span></div>
+                                    <ul><li>Summarize, answer questions, and schedule.</li></ul>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+
+                <!-- Right Column: Contingency Model -->
+                <div class="intake-infographic-wrapper">
+                    <div class="intake-infographic-container">
+                        <header class="intake-header">
+                            <h2>Contingency Model</h2>
+                            <h3>(In-Session Screeners)</h3>
+                            <h3>Total Estimated Time: 50-60 minutes</h3>
+                        </header>
+                        <main class="intake-main">
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H8c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM8 18H4v-6h4v6zm12-4H10v-2h2v2zm0-4H10v-2h2v2zm0-4H10V6h10V10z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Welcome & Presenting Concern</h3><span class="time-estimate">10 min</span></div>
+                                    <ul>
+                                        <li>Go over: <strong>Confidentiality, policies, supervisor info.</strong></li>
+                                        <li><blockquote>"What brings you in today?" / “How are these symptoms affecting your daily life?”</blockquote></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h12v2zm0-4H7V7h12v2z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Required Screenings Checklist</h3><span class="time-estimate">15 min</span></div>
+                                    <ul>
+                                        <li><strong>ACE-Q:</strong> Trauma history.</li>
+                                        <li><strong>PHQ-9:</strong> Depression symptoms.</li>
+                                        <li><strong>IRIS/CAGE/AUDIT:</strong> Substance use risk.</li>
+                                        <li><strong>DASS-10/GAD-7:</strong> Anxiety and stress.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13 7h-2v6l5 3 1-1.59-1-3.71V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.81 0-8.75-3.94-8.75-8.75S7.19 3.25 12 3.25S20.75 7.19 20.75 12S16.81 20.75 12 20.75z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>History & Medical/Substance Use</h3><span class="time-estimate">10 min</span></div>
+                                    <ul>
+                                        <li><blockquote>"Have you ever felt this way before? Or received treatment?"</blockquote></li>
+                                        <li><blockquote>"Any family history of mental health or substance use concerns?"</blockquote></li>
+                                        <li><blockquote>"Any psychiatric medications or significant medical conditions?"</blockquote></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21 9.5 8.82 12 13.18 14.48 10.7 12 7.27z"/><path d="M12 17.27l6.18 3.73L16.54 13.97 22 9.24H14.81L12 2 9.19 9.24H2v4.73l5.46 3.07L5.82 21z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Goals & Strengths</h3><span class="time-estimate">10 min</span></div>
+                                    <ul>
+                                        <li><blockquote>"What are you hoping to get out of therapy?"</blockquote></li>
+                                        <li><blockquote>"If the problem was gone tomorrow, what would be different?"</blockquote></li>
+                                        <li><blockquote>"Who do you have for support? What are you good at or proud of?"</blockquote></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section risk-assessment">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d62828"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-6h2v6z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Risk Assessment</h3><span class="time-estimate">5 min</span></div>
+                                    <ul>
+                                        <li><blockquote>"Sometimes when people feel overwhelmed, they have thoughts of hurting themselves. Has that ever been the case for you?"</blockquote></li>
+                                        <li><blockquote>"Have you ever had thoughts of hurting someone else?"</blockquote></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="intake-section">
+                                <div class="intake-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 2h-8C6 2 4 4 4 6v14c0 2 2 4 4 4h8c2 0 4-2 4-4V6c0-2-2-4-4-4zm-6 16H8v-2h4v2zm6-4H10v-2h8v2zm0-4H10v-2h8v2zm-2-6h-6V3h8v5z"/></svg></div>
+                                <div class="intake-content">
+                                    <div class="intake-section-header"><h3>Wrap-Up & Next Steps</h3><span class="time-estimate">5 min</span></div>
+                                    <ul>
+                                        <li>Briefly summarize, answer client questions, and schedule next session.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+            <div class="checklist-card checklist-card-part1">
+                <h2 class="checklist-card-header" style="color: #0c7a6e;">Part 1: Initial Session Protocol</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    
+                    <!-- Administrative Tasks -->
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="display: flex; align-items: center; font-size: 1.2em; color: #343a40; border-left: none; padding-left: 0; text-shadow: none;">
+                            <svg style="width: 24px; height: 24px; margin-right: 12px; fill: #0c7a6e;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            Administrative Tasks
+                        </h3>
+                        <ul class="checklist-item-list" style="list-style-type: none; padding-left: 0;">
+                            <li>
+                                <svg style="width: 20px; height: 20px; fill: #28a745;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Confirm <strong>Intake Packet</strong> is fully completed and signed.</span>
+                            </li>
+                            <li>
+                                <svg style="width: 20px; height: 20px; fill: #28a745;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verbally confirm <strong>Address</strong> and <strong>DOB</strong> are accurate in the client's file.</span>
+                            </li>
+                            <li>
+                                <svg style="width: 20px; height: 20px; fill: #28a745;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Check Electronic Health Record (EHR) for <strong>Insurance Card</strong>; photograph if needed.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Cancellation Policy -->
+                    <div style="margin-bottom: 20px;">
+                         <h3 style="display: flex; align-items: center; font-size: 1.2em; color: #343a40; border-left: none; padding-left: 0; text-shadow: none;">
+                            <svg style="width: 24px; height: 24px; margin-right: 12px; fill: #0c7a6e;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            Reviewing Cancellation Policy
+                        </h3>
+                        <ul class="checklist-item-list" style="list-style-type: none; padding-left: 0;">
+                            <li>
+                                <svg style="width: 20px; height: 20px; fill: #007bff;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                <span><strong>First late cancellation/no-show</strong> is a one-time courtesy.</span>
+                            </li>
+                            <li>
+                                <svg style="width: 20px; height: 20px; fill: #007bff;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                <span>Cancellations with <strong>>24 hours' notice</strong> are not charged.</span>
+                            </li>
+                            <li>
+                                <svg style="width: 20px; height: 20px; fill: #007bff;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                <span>Subsequent late cancellations are billed the <strong>full session fee</strong>.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Diagnosis -->
+                <div style="margin-top: 30px; padding-top: 25px; border-top: 2px solid #e9ecef;">
+                    <h3 style="display: flex; align-items: center; font-size: 1.2em; color: #343a40; border-left: none; padding-left: 0; text-shadow: none;">
+                        <svg style="width: 24px; height: 24px; margin-right: 12px; fill: #0c7a6e;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.657 7.343A8 8 0 0117.657 18.657z"/><path d="M9.879 16.121A3 3 0 1014.12 11.88l-4.242 4.242z"/></svg>
+                        Diagnosis
+                    </h3>
+                    <ul class="checklist-item-list" style="list-style-type: none; padding-left: 0; margin-top: 15px;">
+                        <li>
+                            <svg style="width: 20px; height: 20px; fill: #28a745;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span>Establish a <strong>provisional diagnosis</strong>. Refer to the full intake protocol for guidance on diagnostic restrictions (e.g., for single-incident trauma).</span>
+                        </li>
+                        <li>
+                            <svg style="width: 20px; height: 20px; fill: #28a745;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span>Also include the ICD-10-CM code <strong>Z13.89</strong> (Encounter for screening for other disorder) as part of the initial diagnostic call.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Standard Clinical Screenings -->
+                <div style="margin-top: 30px; padding-top: 25px; border-top: 2px solid #e9ecef;">
+                    <h3 style="display: flex; align-items: center; font-size: 1.2em; color: #343a40; margin-bottom: 20px; border-left: none; padding-left: 0; text-shadow: none;">
+                        <svg style="width: 24px; height: 24px; margin-right: 12px; fill: #0c7a6e;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                        Standard Clinical Screenings
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                        <div class="checklist-sub-box">
+                            <p style="font-weight: 600; color: #343a40;">For ALL Clients</p>
+                            <ul style="margin-top: 10px; color: #495057; list-style-type: disc; padding-left: 20px;">
+                                <li><strong>ACE-Q:</strong> Adverse Childhood Experiences <span class="time-estimate">(Approx. 5 mins)</span></li>
+                                <li><strong>DASS:</strong> Depression, Anxiety, Stress Scales <span class="time-estimate">(Approx. 5 mins)</span>
+                                    <ul style="list-style-type: circle; list-style-position: inside; padding-left: 15px; margin-top: 5px;">
+                                        <li><strong>DASS-10</strong> for ages 12+</li>
+                                        <li><strong>DASS-Y</strong> for ages under 12</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="checklist-sub-box">
+                            <p style="font-weight: 600; color: #343a40;">IN ADDITION For Clients Aged 12+</p>
+                            <ul style="margin-top: 10px; color: #495057; list-style-type: disc; padding-left: 20px;">
+                                <li><strong>PHQ-9:</strong> Depressive Symptoms <span class="time-estimate">(Approx. 5 mins)</span></li>
+                                <li><strong>IRIS:</strong> Substance & Alcohol Use <span class="time-estimate">(Approx. 5 mins)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-card checklist-card-part2">
+                 <h2 class="checklist-card-header" style="color: #6d28d9;">Part 2: Follow-Up Assessments <span style="font-weight: normal; font-size: 0.8em;">(Within 5 Sessions)</span></h2>
+                 <p style="color: #495057; margin-bottom: 25px;">Based on clinical presentation, administer the following as needed to refine diagnosis and treatment.</p>
+                 
+                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                     <!-- If Anxiety -->
+                     <div style="background-color: #f5f3ff; padding: 20px; border-radius: 8px; border: 1px solid #ddd6fe; display: flex; align-items: flex-start;">
+                         <div style="flex-shrink: 0; margin-right: 16px;">
+                             <div style="width: 48px; height: 48px; background-color: #e9d5ff; border-radius: 9999px; display: flex; align-items: center; justify-content: center; border: 2px solid #d8b4fe;">
+                                 <svg style="width: 28px; height: 28px; fill: #9333ea;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                             </div>
+                         </div>
+                         <div>
+                             <h4 style="font-weight: 600; font-size: 1.1em; color: #581c87; margin-top: 0;">If Anxiety is a primary concern...</h4>
+                             <p style="color: #6d28d9; margin-top: 5px;">Administer the <strong>OCI-R</strong> (Obsessive-Compulsive Inventory-Revised) to assess for or rule out OCD. <span class="time-estimate">(Approx. 5-10 mins)</span></p>
+                         </div>
+                     </div>
+                      
+                     <!-- If Depression -->
+                     <div style="background-color: #f5f3ff; padding: 20px; border-radius: 8px; border: 1px solid #ddd6fe; display: flex; align-items: flex-start;">
+                         <div style="flex-shrink: 0; margin-right: 16px;">
+                             <div style="width: 48px; height: 48px; background-color: #e9d5ff; border-radius: 9999px; display: flex; align-items: center; justify-content: center; border: 2px solid #d8b4fe;">
+                                 <svg style="width: 28px; height: 28px; fill: #9333ea;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                             </div>
+                         </div>
+                         <div>
+                             <h4 style="font-weight: 600; font-size: 1.1em; color: #581c87; margin-top: 0;">If Depression is a primary concern...</h4>
+                             <p style="color: #6d28d9; margin-top: 5px;">Administer the <strong>MDQ</strong> (Mood Disorder Questionnaire) to rule out bipolar disorder. <br><strong style="color: #dc3545;">Note: This is clinician-administered.</strong> Ensure you are up-to-date on protocol. <span class="time-estimate">(Approx. 5-10 mins in person)</span></p>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+            
+            <!-- Important Note -->
+            <div style="margin-top: 20px; padding-top: 25px; border-top: 2px solid #e9ecef;">
+                <h3 style="display: flex; align-items: center; font-size: 1.2em; color: #343a40; margin-bottom: 15px; border-left: none; padding-left: 0; text-shadow: none;">
+                    <svg style="width: 24px; height: 24px; margin-right: 12px; fill: #ffc107;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    Important Note on Specialized Assessments
+                </h3>
+                <div class="checklist-note-box">
+                    <p style="font-weight: 600;">Neurodevelopmental Assessments (ADHD/ASD)</p>
+                    <p>This is typically a lengthy process that <strong>begins with an initial assessment with a specialized clinician</strong>.</p>
+                    <p style="margin-top: 8px;">Insurance for clients aged <strong>21 and under</strong> will typically cover these developmental assessments. For <strong>adult clients</strong>, insurance typically does not cover this type of specialized assessment.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="footer">
+        &copy; 2025 Cindnesskult.com. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
