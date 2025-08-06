@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Data-Driven Mind - Cindness KULT</title>
+    <!-- Fonts and scripts from your site's template -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Base Styles & Colors (From your provided code) --- */
+        :root {
+            --purple: #9b59b6;
+            --blue: #3498db;
+            --green: #2ecc71;
+            --dark-bg: #0d0f1a;
+            --light-text: #ecf0f1;
+            --glow-color: rgba(52, 152, 219, 0.7);
+            --border-color: rgba(52, 152, 219, 0.2);
+        }
+
+        html {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12,0L9.9,8.1L0,9.9l8.1,2.1l2.1,8.1l2.1-8.1l8.1-2.1L14.1,8.1L12,0z" transform="rotate(0 12 12)"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></animateTransform></path></svg>') 12 12, auto;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Source Serif Pro', serif;
+            color: var(--light-text);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            background-color: rgba(13, 15, 26, 0.92);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px 40px;
+            margin-bottom: 40px;
+            text-align: left;
+            transition: all 0.4s ease;
+        }
+        
+        .section:hover {
+            border-color: rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-animation-text 5s linear infinite;
+        }
+        @keyframes gradient-animation-text {
+            to {
+                background-position: 200% center;
+            }
+        }
+        
+        .title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .home-button {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            border: none;
+            border-radius: 8px;
+            padding: 12px 28px;
+            color: #ffffff;
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .home-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        /* --- Infographic Item Styles --- */
+        .infographic-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding: 2.5rem 0;
+        }
+        @media (min-width: 768px) {
+            .infographic-item {
+                flex-direction: row;
+                align-items: center;
+            }
+            .infographic-item:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        }
+        .infographic-item:first-child {
+            padding-top: 1rem;
+        }
+        .infographic-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        .item-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        
+        .item-text-content {
+            flex-grow: 1;
+        }
+
+        .infographic-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.3rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+        .infographic-text {
+            font-family: 'Source Serif Pro', serif;
+            color: #bdc3c7;
+            margin-bottom: 1rem;
+        }
+        .infographic-text strong {
+            color: var(--light-text);
+        }
+        .infographic-text .bias {
+            color: #e74c3c;
+            font-style: italic;
+        }
+        .infographic-text .data-driven {
+            color: #2ecc71;
+            font-style: italic;
+        }
+        
+        /* --- References Section --- */
+        .references-section {
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2.5rem;
+        }
+        .references-section h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: var(--purple);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .references-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .references-section li {
+            font-family: 'Source Serif Pro', serif;
+            color: #bdc3c7;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            text-indent: -1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h1 class="title gradient-text">A Data-Driven Mind</h1>
+            <p class="subtitle">Exploring how the autistic brain builds conclusions from raw data, rather than fitting data to pre-existing narratives.</p>
+        </header>
+        
+        <div class="section">
+            
+            <div class="infographic-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1509718443690-d8e2fb3474b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="A person in dark clothing looking at a screen with green code, reminiscent of The Matrix.">
+                </div>
+                <div class="item-text-content">
+                    <h3 class="infographic-title">1. The 'Expertise' Module</h3>
+                    <p class="infographic-text">
+                        <strong>The Data:</strong> The Fusiform Face Area (FFA) activates weakly for faces in many autistic people (Schultz et al., 2000), but activates intensely for their specific, deep interests (Grelotti et al., 2002).<br>
+                        <span class="bias"><strong>Biased Conclusion:</strong> There is an inherent "face processing" deficit.</span><br>
+                        <span class="data-driven"><strong>Data-Driven Conclusion:</strong> The FFA is an "expertise" module driven by attention and interest. The brain prioritizes data from areas of passion.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="infographic-item">
+                <div class="item-image">
+                    <img src="https://www.dreams.co.uk/sleep-matters-club/wp-content/uploads/Synapses-1024x586-1.jpg" alt="An abstract network of glowing blue and purple lines representing neural pathways.">
+                </div>
+                <div class="item-text-content">
+                    <h3 class="infographic-title">2. Synaptic Pruning & Efficiency</h3>
+                    <p class="infographic-text">
+                        <strong>The Data:</strong> Young autistic children start with *more* synapses than neurotypical peers (Tang et al., 2014). After a different "synaptic pruning" process, autistic adults show lower overall synaptic density (Onofrey et al., 2023).<br>
+                        <span class="bias"><strong>Biased Conclusion:</strong> Lower synaptic density is a defect or form of damage.</span><br>
+                        <span class="data-driven"><strong>Data-Driven Question:</strong> Is this different developmental path a sign of a system becoming more specialized? Or does it reflect the "wear and tear" of chronic stress? The raw data challenges a simple "deficit" narrative.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="infographic-item">
+                <div class="item-image">
+                    <img src="data:image/jpeg;base64,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" alt="A close-up, intense shot of an eye, representing a threat detector.">
+                </div>
+                <div class="item-text-content">
+                    <h3 class="infographic-title">3. The Amygdala's Threat Response</h3>
+                    <p class="infographic-text">
+                        <strong>The Data:</strong> Forcing eye contact in autistic individuals correlates directly with hyperactivation in the amygdala, the brain's alarm center (Dalton et al., 2005).<br>
+                        <span class="bias"><strong>Biased Conclusion:</strong> Avoiding eye contact is a social failure or lack of interest.</span><br>
+                        <span class="data-driven"><strong>Data-Driven Conclusion:</strong> The brain is correctly identifying an experience as physiologically painful or overwhelming and is activating a rational, protective survival response.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="infographic-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="A close-up of a computer circuit board, showing complex patterns.">
+                </div>
+                <div class="item-text-content">
+                    <h3 class="infographic-title">4. Superior Pattern Recognition</h3>
+                    <p class="infographic-text">
+                        <strong>The Data:</strong> Autistic individuals show increased activity in perceptual brain areas during pattern-recognition tasks.<br>
+                        <span class="bias"><strong>Biased Conclusion:</strong> These are "splinter skills" or obsessive interests.</span><br>
+                        <span class="data-driven"><strong>Data-Driven Conclusion:</strong> This is a neurological strength; a brain fundamentally optimized to perceive, process, and understand patterns in raw data—be they visual, auditory, or systemic.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="infographic-item">
+                <div class="item-image">
+                    <img src="data:image/jpeg;base64,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" alt="Motion-blurred city lights at night, representing sensory overload and an intense world.">
+                </div>
+                <div class="item-text-content">
+                    <h3 class="infographic-title">5. Intense World vs. "Noisy Circuit"</h3>
+                    <p class="infographic-text">
+                        <strong>The Data:</strong> 69% to 96% of autistic individuals report life-impacting sensory sensitivities (Ben-Sasson et al., 2009; Leekam et al., 2007).<br>
+                        <span class="bias"><strong>Biased Conclusion:</strong> The individual is "too sensitive" or their brain is a "noisy," faulty circuit.</span><br>
+                        <span class="data-driven"><strong>Data-Driven Conclusion:</strong> The brain is not faulty but hyper-reactive, processing *more* information with greater intensity (Markram & Markram, 2010). The "disability" arises from the mismatch with a relentlessly overstimulating environment.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="infographic-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1594495894542-a46cc73e081a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="A shadowy, imposing old institutional building.">
+                </div>
+                <div class="item-text-content">
+                    <h3 class="infographic-title">6. The Harm of Biased Conclusions</h3>
+                    <p class="infographic-text">
+                        <strong>The History:</strong> For decades, the conclusion-driven diagnosis of "Childhood Schizophrenia" was applied to autistic children. This led to institutionalization in sensory nightmares—a "treatment" that was effectively torture for a hypersensitive nervous system. The resulting trauma was then used as evidence to confirm the initial misdiagnosis. This shows how starting with a biased conclusion, rather than observing raw data, creates cycles of iatrogenic harm.
+                    </p>
+                </div>
+            </div>
+
+            <div class="references-section">
+                <h3>References</h3>
+                <ul>
+                    <li>Ben-Sasson, A., Hen, L., Fluss, R., Cermak, S. A., Engel-Yeger, B., & Gal, E. (2009). A meta-analysis of sensory modulation symptoms in individuals with autism spectrum disorders. <em>Journal of Autism and Developmental Disorders, 39</em>(1), 1–11.</li>
+                    <li>Dalton, K. M., Nacewicz, B. M., Johnstone, T., Schaefer, H. S., Gernsbacher, M. A., Goldsmith, H. H., ... & Davidson, R. J. (2005). Gaze fixation and the neural circuitry of face processing in autism. <em>Nature Neuroscience, 8</em>(4), 519–526.</li>
+                    <li>Grelotti, D. J., Gauthier, I., & Schultz, R. T. (2002). Social interest and the development of cortical face specialization: what autism teaches us about face processing. <em>Developmental Psychobiology, 40</em>(3), 213–225.</li>
+                    <li>Leekam, S. R., Nieto, C., Libby, S. J., Wing, L., & Gould, J. (2007). Describing the sensory abnormalities of children and adults with autism. <em>Journal of Autism and Developmental Disorders, 37</em>(5), 894–910.</li>
+                    <li>Markram, K., & Markram, H. (2010). The intense world theory–a unifying theory of the neurobiology of autism. <em>Frontiers in Human Neuroscience, 4</em>, 224.</li>
+                    <li>Onofrey, J. A., D’Souza, P., Degnan, A. J., et al. (2023). In vivo imaging of synaptic density in autism spectrum disorder. <em>Molecular Psychiatry, 28</em>(11), 4708–4716.</li>
+                    <li>Schultz, R. T., Gauthier, I., Klin, A., Fulbright, R. K., Anderson, A. W., Volkmar, F., ... & Cohen, D. J. (2000). Abnormal ventral temporal cortical activity during face discrimination among individuals with autism and Asperger syndrome. <em>Archives of General Psychiatry, 57</em>(4), 331–340.</li>
+                    <li>Tang, G., Gudsnuk, K., Kuo, S. H., Cotrina, M. L., Rosoklija, G., Sosunov, A., ... & Sulzer, D. (2014). Loss of mTOR-dependent macroautophagy causes autistic-like synaptic pruning deficits. <em>Neuron, 83</em>(5), 1131-1143.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="text-center py-4">
+             <a href="https://cindnesskult.com" class="home-button">← Back to Home</a>
+        </div>
+
+    </div>
+</body>
+</html>
