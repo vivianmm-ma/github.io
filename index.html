@@ -127,7 +127,7 @@
             margin-bottom: 0;
         }
 
-        /* --- UPDATED: Dashboard Banner (was stats-bar) --- */
+        /* --- UPDATED: Dashboard Banner --- */
         .dashboard-banner {
             display: flex;
             justify-content: space-between;
@@ -162,13 +162,16 @@
             text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
         }
 
-        /* --- UPDATED: Navigation inside banner --- */
-        .banner-nav {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        /* --- UPDATED: Visitor Counter moved to top --- */
+        .visitor-counter-top {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            color: var(--blue);
         }
 
+        /* --- UPDATED: Navigation Dropdown --- */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -313,15 +316,7 @@
             margin-top: 60px;
             font-size: 0.9rem;
             color: #7f8c8d;
-        }
-
-        /* NEW: Footer Content Layout */
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            text-align: center; /* Center footer text */
         }
 
         /* --- New Styling for Profile Card --- */
@@ -577,36 +572,36 @@
     </style>
 </head>
 <body>
+    <div class="visitor-counter-top">
+        <div id="visitor-counter">Loading...</div>
+    </div>
+
     <div class="container">
         
         <!-- UPDATED: Dashboard Banner -->
         <div class="dashboard-banner">
-            <div class="banner-top">
-                <div class="header-content">
-                    <h1 class="title gradient-text">Cindness KULT</h1>
-                    <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
-                </div>
-                <div class="stats-content">
-                    <div id="digital-clock"></div>
-                    <div class="banner-nav">
-                        <div class="dropdown">
-                            <button class="dropdown-btn">♡</button>
-                            <div class="dropdown-content">
-                                <a href="#">♡ Back Home ♡</a>
-                                <a href="link.to.more.docs.html">♡ Printables & Downloads ♡</a>
-                                <a href="http://connectkorner.cindnesskult.com" target="_blank" rel="noopener noreferrer">♡ Connect Korner Forum ♡</a>
-                                <hr>
-                                <a href="#resource-hub">♡ More Links ♡</a>
-                                <a href="#app">♡ Daily Game Plan ♡</a>
-                                <hr>
-                                <a href="diff2.html">♡ It's a Different Operating System, Not a Deficit ♡</a>
-                                <a href="evolution.html">♡ Evolution of Harm (The Roots) ♡</a>
-                                <a href="maintheory.html">♡ Interwoven Roots Theory (The Main Theory) ♡</a>
-                                <a href="ocd.risk.html">♡ Understanding OCD & Risk ♡</a>
-                                <a href="glutamate.gaba.html">♡ Glutamate & GABA Balance ♡</a>
-                                <a href="social.diff.html">♡ Social Differences & Communication ♡</a>
-                            </div>
-                        </div>
+            <div class="header-content">
+                <h1 class="title gradient-text">Cindness KULT</h1>
+                <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
+            </div>
+            <div class="stats-content">
+                <div id="digital-clock"></div>
+                <div class="dropdown">
+                    <button class="dropdown-btn">♡</button>
+                    <div class="dropdown-content">
+                        <a href="#">♡ Back Home ♡</a>
+                        <a href="link.to.more.docs.html">♡ Printables & Downloads ♡</a>
+                        <a href="http://connectkorner.cindnesskult.com" target="_blank" rel="noopener noreferrer">♡ Connect Korner Forum ♡</a>
+                        <hr>
+                        <a href="#resource-hub">♡ More Links ♡</a>
+                        <a href="#app">♡ Daily Game Plan ♡</a>
+                        <hr>
+                        <a href="diff2.html">♡ It's a Different Operating System, Not a Deficit ♡</a>
+                        <a href="evolution.html">♡ Evolution of Harm (The Roots) ♡</a>
+                        <a href="maintheory.html">♡ Interwoven Roots Theory (The Main Theory) ♡</a>
+                        <a href="ocd.risk.html">♡ Understanding OCD & Risk ♡</a>
+                        <a href="glutamate.gaba.html">♡ Glutamate & GABA Balance ♡</a>
+                        <a href="social.diff.html">♡ Social Differences & Communication ♡</a>
                     </div>
                 </div>
             </div>
@@ -864,10 +859,7 @@
         </div>
 
         <footer>
-            <div class="footer-content">
-                <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
-                <div id="visitor-counter">Loading...</div>
-            </div>
+            <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
         </footer>
 
     </div>
