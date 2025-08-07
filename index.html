@@ -615,7 +615,7 @@
 <body>
     <!-- NEW VISITOR COUNTER LOCATION -->
     <div class="visitor-counter-top">
-        <p>✨ <span id="visits">Loading...</span> spoonfuls of sugar ✨</p>
+        <p>✨ <span id="visits">counting...</span> spoonfuls of sugar ✨</p>
     </div>
 
     <div class="container">
@@ -900,6 +900,10 @@
                     <button id="show-modal-btn" class="w-full sm:w-auto contact-button">
                         ✨ Add New Task
                     </button>
+                    <!-- NEW DOWNLOAD BUTTON -->
+                    <button id="download-tasks-btn" class="w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">
+                        Download Tasks
+                    </button>
                     <div class="flex items-center gap-2">
                         <span class="text-sm font-semibold">Sort By:</span>
                         <button id="sort-importance-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Importance</button>
@@ -1087,6 +1091,7 @@
             const taskForm = document.getElementById('task-form');
             const sortImportanceBtn = document.getElementById('sort-importance-btn');
             const sortTimeBtn = document.getElementById('sort-time-btn');
+            const downloadTasksBtn = document.getElementById('download-tasks-btn');
             
             const importanceMeta = {
                 '1': { title: '🔥 Do It Now' },
@@ -1255,9 +1260,53 @@
             function toggleModal() {
                 modal.classList.toggle('hidden');
             }
+            
+            // NEW: Function to download tasks as a .txt file
+            function downloadTasksAsTxt() {
+                if (tasks.length === 0) {
+                    // Maybe show a message to the user that there are no tasks
+                    return;
+                }
+
+                let content = "Cindness KULT - Daily Game Plan\n";
+                content += "===================================\n\n";
+
+                const importanceMap = {
+                    '1': '🔥 Do It Now',
+                    '2': '🎯 Focus Next',
+                    '3': '⏳ Schedule It',
+                    '4': '✨ Someday/Maybe'
+                };
+
+                tasks.sort((a, b) => a.importance - b.importance).forEach(task => {
+                    content += `[${task.completed ? 'X' : ' '}] ${task.title}\n`;
+                    content += `    Importance: ${importanceMap[task.importance]}\n`;
+                    content += `    Time: ${task.time} mins\n`;
+                    content += `    Motivator: ${task.pinch}\n`;
+                    if (task.subSteps && task.subSteps.length > 0) {
+                        content += `    Sub-steps:\n`;
+                        task.subSteps.forEach(step => {
+                            content += `      - [${step.completed ? 'X' : ' '}] ${step.text}\n`;
+                        });
+                    }
+                    content += "\n-----------------------------------\n\n";
+                });
+
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'daily-game-plan.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
 
             showModalBtn.addEventListener('click', toggleModal);
             closeModalBtn.addEventListener('click', toggleModal);
+            downloadTasksBtn.addEventListener('click', downloadTasksAsTxt);
+
             modal.addEventListener('click', (e) => {
                 if (e.target.closest('.modal-backdrop') && !e.target.closest('.modal-backdrop > div')) {
                     toggleModal();
@@ -1336,7 +1385,7 @@
         });
     </script>
     
-    <!-- NEW VISITOR COUNTER SCRIPT -->
+    <!-- VISITOR COUNTER SCRIPT -->
     <script>
         const visitsSpan = document.getElementById('visits');
         const apiUrl = 'https://api.countapi.xyz/hit/cindnesskult.com/main';
@@ -1348,7 +1397,7 @@
             })
             .catch(error => {
                 console.error("Error fetching visitor count:", error);
-                visitsSpan.innerText = 'N/A';
+                visitsSpan.innerText = 'counter offline';
             });
     </script>
 </body>
