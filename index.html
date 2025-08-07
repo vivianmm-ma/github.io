@@ -52,6 +52,7 @@
 
         /* --- General Section Styling --- */
         .section {
+            /* Increased opacity for better readability */
             background-color: rgba(13, 15, 26, 0.92);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
@@ -60,9 +61,10 @@
             padding: 30px;
             margin-bottom: 40px;
             text-align: left;
-            transition: all 0.4s ease;
+            transition: all 0.4s ease; /* Transition for hover effect */
         }
         
+        /* NEW: Hover effect for sections */
         .section:hover {
             border-color: rgba(52, 152, 219, 0.5);
             box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
@@ -115,6 +117,10 @@
         }
 
         /* --- Header Section (Now part of the dashboard) --- */
+        .main-header {
+            padding: 20px;
+            margin-bottom: 0; /* Removed margin as it's now in the dashboard */
+        }
         .title {
             font-family: 'Press Start 2P', cursive;
             font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
@@ -127,12 +133,12 @@
             margin-bottom: 0;
         }
 
-        /* --- UPDATED: Dashboard Banner --- */
+        /* --- UPDATED: Dashboard Banner (was stats-bar) --- */
         .dashboard-banner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
             gap: 20px;
             background-color: rgba(13, 15, 26, 0.92);
             backdrop-filter: blur(5px);
@@ -154,87 +160,24 @@
             flex-shrink: 0;
         }
 
-        /* NEW Digital Clock Style */
-        #digital-clock {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.5rem; 
+        #circular-clock {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--green);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem; 
             color: var(--green);
-            text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+            background-color: rgba(13, 15, 26, 0.5);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3), inset 0 0 15px rgba(46, 204, 113, 0.2);
         }
 
-        /* --- UPDATED: Visitor Counter moved to top --- */
-        .visitor-counter-top {
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: 'Press Start 2P', cursive;
+        #visitor-counter {
             font-size: 1rem;
             color: var(--blue);
-        }
-
-        /* --- UPDATED: Navigation Dropdown --- */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-btn {
-            background-color: transparent;
-            color: var(--light-text);
-            padding: 10px;
-            font-size: 1.5rem;
             font-family: 'Press Start 2P', cursive;
-            border: 1px solid var(--blue);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .dropdown-btn:hover {
-            background-color: var(--blue);
-            color: var(--dark-bg);
-            transform: scale(1.1);
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--dark-bg);
-            min-width: 280px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1001;
-            border-radius: 8px;
-            border: 1px solid rgba(52, 152, 219, 0.2);
-            margin-top: 10px;
-        }
-
-        .dropdown-content a {
-            color: var(--light-text);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-            font-family: 'Source Serif Pro', serif;
-            font-size: 1rem;
-            transition: background-color 0.2s;
-        }
-        
-        .dropdown-content hr {
-            border-color: rgba(52, 152, 219, 0.2);
-            margin: 5px 0;
-        }
-
-        .dropdown-content a:hover {
-            background-color: rgba(52, 152, 219, 0.2);
-        }
-
-        .dropdown-content.show {
-            display: block;
         }
 
         /* --- Simple Nav Links --- */
@@ -310,13 +253,42 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             border-image: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) 1;
         }
+
+        /* --- UPDATED: Attention-grabbing button styles --- */
+        .attention-button {
+            width: 100%; /* Make it full-width within the flex container */
+            height: 90px;
+            font-size: 1.2rem;
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(135deg, var(--blue), var(--green));
+            border: none;
+            border-radius: 9999px; /* Creates an oval shape */
+            color: white;
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        .attention-button-li {
+            width: 100%;
+        }
+
+        .attention-button:hover {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+        }
+
+        @keyframes pulse-glow {
+            from {
+                box-shadow: 0 0 10px rgba(52, 152, 219, 0.4), 0 0 20px rgba(46, 204, 113, 0.4);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(52, 152, 219, 0.8), 0 0 35px rgba(46, 204, 113, 0.8);
+            }
+        }
         
         /* --- Footer --- */
         footer {
             margin-top: 60px;
             font-size: 0.9rem;
             color: #7f8c8d;
-            text-align: center; /* Center footer text */
         }
 
         /* --- New Styling for Profile Card --- */
@@ -572,10 +544,6 @@
     </style>
 </head>
 <body>
-    <div class="visitor-counter-top">
-        <div id="visitor-counter">Loading...</div>
-    </div>
-
     <div class="container">
         
         <!-- UPDATED: Dashboard Banner -->
@@ -585,25 +553,8 @@
                 <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
             </div>
             <div class="stats-content">
-                <div id="digital-clock"></div>
-                <div class="dropdown">
-                    <button class="dropdown-btn">♡</button>
-                    <div class="dropdown-content">
-                        <a href="#">♡ Back Home ♡</a>
-                        <a href="link.to.more.docs.html">♡ Printables & Downloads ♡</a>
-                        <a href="http://connectkorner.cindnesskult.com" target="_blank" rel="noopener noreferrer">♡ Connect Korner Forum ♡</a>
-                        <hr>
-                        <a href="#resource-hub">♡ More Links ♡</a>
-                        <a href="#app">♡ Daily Game Plan ♡</a>
-                        <hr>
-                        <a href="diff2.html">♡ It's a Different Operating System, Not a Deficit ♡</a>
-                        <a href="evolution.html">♡ Evolution of Harm (The Roots) ♡</a>
-                        <a href="maintheory.html">♡ Interwoven Roots Theory (The Main Theory) ♡</a>
-                        <a href="ocd.risk.html">♡ Understanding OCD & Risk ♡</a>
-                        <a href="glutamate.gaba.html">♡ Glutamate & GABA Balance ♡</a>
-                        <a href="social.diff.html">♡ Social Differences & Communication ♡</a>
-                    </div>
-                </div>
+                <div id="circular-clock"></div>
+                <div id="visitor-counter"></div>
             </div>
         </div>
         
@@ -802,9 +753,22 @@
             <p>Email: <a href="mailto:cindnesskult@gmail.com" class="contact-button">cindnesskult@gmail.com</a></p>
         </div>
 
-        <div class="section" id="resource-hub">
+        <div class="section">
             <h2 class="gradient-text">Resource Hub 👾</h2>
             
+            <h3>For Understanding</h3>
+            <ul class="link-pool">
+                <li><a href="diff2.html">It's a Different Operating System, Not a Deficit</a></li>
+                <li><a href="duality.html">The Duality Framework</a></li>
+                <li><a href="erp.info.html">ERP (OCD) therapy: an intro </a></li>
+                <li><a href="evolution.html">Evolution of Harm (The Roots)</a></li>
+                <li><a href="maintheory.html">Interwoven Roots Theory (The Main Theory)</a></li>
+                <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
+                <li><a href="dynamic.html">Dynamic Systems Theory</a></li>
+                <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
+                <li><a href="social.diff.html">Social Differences & Communication</a></li>
+            </ul>
+
             <h3>Free Resources/Tools</h3>
             <ul class="link-pool" style="margin-top: 20px;">
                 <li><a href="NDguide.resources.html">Support/Accommodations for NDs</a></li>
@@ -813,6 +777,7 @@
                 <li><a href="sensorygame.html">Free Sensory Game (Printable)</a></li>
                 <li><a href="planner.html">Free Printable Planner Pages</a></li>
                 <li><a href="adhdmeds.html">Info on ADHD Medication Options (For Education Only)</a></li>
+                <li class="attention-button-li"><a href="link.to.more.docs.html" class="attention-button">Printables & Downloads</a></li>
             </ul>
 
             <h3>For Clinicians</h3>
@@ -898,70 +863,8 @@
         </div>
     </div>
 
-    <!-- Firebase Libraries -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, doc, getDoc, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        async function initFirebase() {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                updateVisitorCount();
-            } catch (error) {
-                console.error("Firebase Auth Error:", error);
-                document.getElementById('visitor-counter').textContent = 'sugar counter broken :(';
-            }
-        }
-
-        async function updateVisitorCount() {
-            const counterRef = doc(db, `artifacts/${appId}/public/data/siteStats`, "visits");
-            const visitorCounterEl = document.getElementById('visitor-counter');
-
-            try {
-                // Check session storage to see if we've already counted this session
-                if (!sessionStorage.getItem('counted')) {
-                    // Use a transaction to safely increment the count
-                    const newCount = await runTransaction(db, async (transaction) => {
-                        const counterDoc = await transaction.get(counterRef);
-                        if (!counterDoc.exists()) {
-                            transaction.set(counterRef, { count: 1, lastUpdated: serverTimestamp() });
-                            return 1;
-                        }
-                        const newCount = counterDoc.data().count + 1;
-                        transaction.update(counterRef, { count: newCount, lastUpdated: serverTimestamp() });
-                        return newCount;
-                    });
-                    visitorCounterEl.textContent = `${newCount} spoonfuls of sugar`;
-                    sessionStorage.setItem('counted', 'true'); // Mark this session as counted
-                } else {
-                    // If already counted, just get the current value without incrementing
-                    const counterDoc = await getDoc(counterRef);
-                    if (counterDoc.exists()) {
-                        visitorCounterEl.textContent = `${counterDoc.data().count} spoonfuls of sugar`;
-                    } else {
-                        visitorCounterEl.textContent = `1 spoonful of sugar`;
-                    }
-                }
-            } catch (e) {
-                console.error("Error updating visitor count: ", e);
-                visitorCounterEl.textContent = "sugar counter n/a";
-            }
-        }
-        
-        initFirebase();
-
+    <script>
         const oceanForest = {
             primary: '#2ECC71', // Green
             secondary: '#3498DB', // Blue
@@ -1326,29 +1229,36 @@
                 const minutes = String(now.getMinutes()).padStart(2, '0');
                 const seconds = String(now.getSeconds()).padStart(2, '0');
                 const timeString = `${hours}:${minutes}:${seconds}`;
-                document.getElementById('digital-clock').textContent = timeString;
+                document.getElementById('circular-clock').textContent = timeString;
             }
 
-            
-            setInterval(updateClock, 1000);
-            updateClock(); // Initial call
-
-            // --- NEW: Dropdown Logic ---
-            const dropdownBtn = document.querySelector('.dropdown-btn');
-            const dropdownContent = document.querySelector('.dropdown-content');
-
-            dropdownBtn.addEventListener('click', () => {
-                dropdownContent.classList.toggle('show');
-            });
-
-            window.addEventListener('click', (event) => {
-                if (!event.target.matches('.dropdown-btn')) {
-                    if (dropdownContent.classList.contains('show')) {
-                        dropdownContent.classList.remove('show');
-                    }
+            function updateVisitorCount() {
+                let count = localStorage.getItem('visitorCount');
+                if (count === null) {
+                    count = 1;
+                } else {
+                    count = parseInt(count) + 1;
                 }
-            });
+                localStorage.setItem('visitorCount', count);
+                document.getElementById('visitor-counter').textContent = `Visitor #${count}`;
+            }
+
+            updateClock();
+            setInterval(updateClock, 1000);
+            updateVisitorCount();
         });
     </script>
 </body>
 </html>
+" code between  and  in the most up-to-date Canvas "Kindness KULT Homepage (Updated)" document above and am asking a query about/based on this code below.
+Instructions to follow:
+  * Don't output/edit the document if the query is Direct/Simple. For example, if the query asks for a simple explanation, output a direct answer.
+  * Make sure to **edit** the document if the query shows the intent of editing the document, in which case output the entire edited document, **not just that section or the edits**.
+    * Don't output the same document/empty document and say that you have edited it.
+    * Don't change unrelated code in the document.
+  * Don't output  and  in your final response.
+  * Any references like "this" or "selected code" refers to the code between  and  tags.
+  * Just acknowledge my request in the introduction.
+  * Make sure to refer to the document as "Canvas" in your response.
+
+ok i need my cindness korner one to link directly to a forum im hosting thru something else connectkorner.cindnesskult.
