@@ -52,7 +52,6 @@
 
         /* --- General Section Styling --- */
         .section {
-            /* Increased opacity for better readability */
             background-color: rgba(13, 15, 26, 0.92);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
@@ -61,10 +60,9 @@
             padding: 30px;
             margin-bottom: 40px;
             text-align: left;
-            transition: all 0.4s ease; /* Transition for hover effect */
+            transition: all 0.4s ease;
         }
         
-        /* NEW: Hover effect for sections */
         .section:hover {
             border-color: rgba(52, 152, 219, 0.5);
             box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
@@ -117,10 +115,6 @@
         }
 
         /* --- Header Section (Now part of the dashboard) --- */
-        .main-header {
-            padding: 20px;
-            margin-bottom: 0; /* Removed margin as it's now in the dashboard */
-        }
         .title {
             font-family: 'Press Start 2P', cursive;
             font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
@@ -133,12 +127,12 @@
             margin-bottom: 0;
         }
 
-        /* --- UPDATED: Dashboard Banner (was stats-bar) --- */
+        /* --- UPDATED: Dashboard Banner --- */
         .dashboard-banner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            flex-wrap: wrap;
             gap: 20px;
             background-color: rgba(13, 15, 26, 0.92);
             backdrop-filter: blur(5px);
@@ -160,26 +154,60 @@
             flex-shrink: 0;
         }
 
-        #circular-clock {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid var(--green);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem; 
+        /* NEW Digital Clock Style */
+        #digital-clock {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem; 
             color: var(--green);
-            background-color: rgba(13, 15, 26, 0.5);
-            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3), inset 0 0 15px rgba(46, 204, 113, 0.2);
+            text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
         }
 
-        #visitor-counter {
+        /* --- UPDATED: Visitor Counter moved to top --- */
+        .visitor-counter-top {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Press Start 2P', cursive;
             font-size: 1rem;
             color: var(--blue);
-            font-family: 'Press Start 2P', cursive;
         }
 
+        /* --- NEW: Select Dropdown Navigation --- */
+        .nav-select-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            color: var(--light-text);
+            padding: 10px 40px 10px 20px;
+            font-size: 1rem;
+            font-family: 'Source Serif Pro', serif; /* Changed to plain font */
+            border: 1px solid var(--blue);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .nav-select-wrapper::after {
+            content: '▼';
+            font-size: 1rem;
+            color: var(--blue);
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .nav-select option {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Source Serif Pro', serif;
+        }
+        
         /* --- Simple Nav Links --- */
         .simple-nav {
             display: flex;
@@ -289,6 +317,7 @@
             margin-top: 60px;
             font-size: 0.9rem;
             color: #7f8c8d;
+            text-align: center; /* Center footer text */
         }
 
         /* --- New Styling for Profile Card --- */
@@ -544,6 +573,10 @@
     </style>
 </head>
 <body>
+    <div class="visitor-counter-top">
+        <div id="visitor-counter">Loading...</div>
+    </div>
+
     <div class="container">
         
         <!-- UPDATED: Dashboard Banner -->
@@ -553,8 +586,16 @@
                 <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
             </div>
             <div class="stats-content">
-                <div id="circular-clock"></div>
-                <div id="visitor-counter"></div>
+                <div id="digital-clock"></div>
+                <div class="nav-select-wrapper">
+                    <select id="nav-dropdown" class="nav-select">
+                        <option value="">ready, set... go! <3</option>
+                        <option value="link.to.more.docs.html">Printables & Downloads</option>
+                        <option value="http://connectkorner.cindnesskult.com">Connect Korner Forum</option>
+                        <option value="#resource-hub">More Links</option>
+                        <option value="#app">Daily Game Plan</option>
+                    </select>
+                </div>
             </div>
         </div>
         
@@ -753,22 +794,9 @@
             <p>Email: <a href="mailto:cindnesskult@gmail.com" class="contact-button">cindnesskult@gmail.com</a></p>
         </div>
 
-        <div class="section">
+        <div class="section" id="resource-hub">
             <h2 class="gradient-text">Resource Hub 👾</h2>
             
-            <h3>For Understanding</h3>
-            <ul class="link-pool">
-                <li><a href="diff2.html">It's a Different Operating System, Not a Deficit</a></li>
-                <li><a href="duality.html">The Duality Framework</a></li>
-                <li><a href="erp.info.html">ERP (OCD) therapy: an intro </a></li>
-                <li><a href="evolution.html">Evolution of Harm (The Roots)</a></li>
-                <li><a href="maintheory.html">Interwoven Roots Theory (The Main Theory)</a></li>
-                <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
-                <li><a href="dynamic.html">Dynamic Systems Theory</a></li>
-                <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
-                <li><a href="social.diff.html">Social Differences & Communication</a></li>
-            </ul>
-
             <h3>Free Resources/Tools</h3>
             <ul class="link-pool" style="margin-top: 20px;">
                 <li><a href="NDguide.resources.html">Support/Accommodations for NDs</a></li>
@@ -803,6 +831,9 @@
                 <section id="controls" class="mb-8 p-4 bg-black/20 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-4">
                     <button id="show-modal-btn" class="w-full sm:w-auto contact-button">
                         ✨ Add New Task
+                    </button>
+                    <button id="start-over-btn" class="w-full sm:w-auto bg-red-800 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-semibold">
+                        Start Over
                     </button>
                     <div class="flex items-center gap-2">
                         <span class="text-sm font-semibold">Sort By:</span>
@@ -839,13 +870,12 @@
                     <div class="grid grid-cols-2 gap-4">
                         <input type="number" id="task-time" placeholder="Time (mins)" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
                         <select id="task-pinch" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
-                            <option>Passion</option>
+                            <option>Passion/Play</option>
                             <option>Interest</option>
-                            <option>Hurry</option>
-                            <option>Urgency</option>
-                            <option>Competition</option>
-                            <option>Coordination</option>
                             <option>Novelty</option>
+                            <option>Competition/Coordination</option>
+                            <option>Hurry!</option>
+                            <option>Sensory Supports</option>
                         </select>
                     </div>
                     <select id="task-importance" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
@@ -863,8 +893,70 @@
         </div>
     </div>
 
+    <!-- Firebase Libraries -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    <script>
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        async function initFirebase() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                updateVisitorCount();
+            } catch (error) {
+                console.error("Firebase Auth Error:", error);
+                document.getElementById('visitor-counter').textContent = 'sugar counter broken :(';
+            }
+        }
+
+        async function updateVisitorCount() {
+            const counterRef = doc(db, `artifacts/${appId}/public/data/siteStats`, "visits");
+            const visitorCounterEl = document.getElementById('visitor-counter');
+
+            try {
+                // Check session storage to see if we've already counted this session
+                if (!sessionStorage.getItem('counted')) {
+                    // Use a transaction to safely increment the count
+                    const newCount = await runTransaction(db, async (transaction) => {
+                        const counterDoc = await transaction.get(counterRef);
+                        if (!counterDoc.exists()) {
+                            transaction.set(counterRef, { count: 1, lastUpdated: serverTimestamp() });
+                            return 1;
+                        }
+                        const newCount = counterDoc.data().count + 1;
+                        transaction.update(counterRef, { count: newCount, lastUpdated: serverTimestamp() });
+                        return newCount;
+                    });
+                    visitorCounterEl.textContent = `${newCount} spoonfuls of sugar`;
+                    sessionStorage.setItem('counted', 'true'); // Mark this session as counted
+                } else {
+                    // If already counted, just get the current value without incrementing
+                    const counterDoc = await getDoc(counterRef);
+                    if (counterDoc.exists()) {
+                        visitorCounterEl.textContent = `${counterDoc.data().count} spoonfuls of sugar`;
+                    } else {
+                        visitorCounterEl.textContent = `1 spoonful of sugar`;
+                    }
+                }
+            } catch (e) {
+                console.error("Error updating visitor count: ", e);
+                visitorCounterEl.textContent = "sugar counter n/a";
+            }
+        }
+        
+        initFirebase();
+
         const oceanForest = {
             primary: '#2ECC71', // Green
             secondary: '#3498DB', // Blue
@@ -991,6 +1083,7 @@
             const taskForm = document.getElementById('task-form');
             const sortImportanceBtn = document.getElementById('sort-importance-btn');
             const sortTimeBtn = document.getElementById('sort-time-btn');
+            const startOverBtn = document.getElementById('start-over-btn');
             
             const importanceMeta = {
                 '1': { title: '🔥 Do It Now' },
@@ -1000,13 +1093,12 @@
             };
             
             const pinchColors = {
-                'Hurry': 'bg-red-900/70 text-red-200',
-                'Urgency': 'bg-yellow-900/70 text-yellow-200',
-                'Passion': 'bg-pink-900/70 text-pink-200',
+                'Passion/Play': 'bg-pink-900/70 text-pink-200',
                 'Interest': 'bg-sky-900/70 text-sky-200',
-                'Competition': 'bg-indigo-900/70 text-indigo-200',
-                'Coordination': 'bg-teal-900/70 text-teal-200',
                 'Novelty': 'bg-purple-900/70 text-purple-200',
+                'Competition/Coordination': 'bg-indigo-900/70 text-indigo-200',
+                'Hurry!': 'bg-red-900/70 text-red-200',
+                'Sensory Supports': 'bg-teal-900/70 text-teal-200',
             };
 
             function saveTasks() {
@@ -1079,27 +1171,17 @@
                 const timeText = task.time > 0 ? `<p class="text-xs" style="color: var(--light-text); opacity: 0.6;">🕰️ ${task.time} min</p>` : '';
                 const pinchColor = pinchColors[task.pinch] || 'bg-gray-700 text-gray-200';
                 const completedClass = task.completed ? 'completed' : '';
-                const subStepsHtml = (task.subSteps || []).map((step, index) => 
-                    `<li data-index="${index}" class="${step.completed ? 'completed' : ''}">
-                        <input type="checkbox" ${step.completed ? 'checked' : ''} class="sub-step-checkbox accent-purple-400">
-                        <span>${step.text}</span>
-                    </li>`
-                ).join('');
-
+                
                 const card = document.createElement('div');
                 card.id = task.id;
                 card.className = `task-card rounded-lg p-4 shadow-sm ${completedClass}`;
                 card.innerHTML = `
                     <div class="flex-grow">
-                        <div class="flex justify-between items-start cursor-pointer" data-action="toggle-main">
-                            <h3 class="font-bold pr-2" style="color: var(--light-text);">${task.title}</h3>
-                            ${timeText}
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold pr-2 cursor-pointer" style="color: var(--light-text);" data-action="toggle-main">${task.title}</h3>
+                            <button data-action="delete" class="text-red-400 hover:text-red-200 text-lg font-bold">&times;</button>
                         </div>
-                        <div class="mt-4">
-                            <p class="text-sm font-semibold mb-2" style="color: var(--light-text); opacity: 0.8;">Smallest Next Steps:</p>
-                            <ul class="sub-steps-list text-sm space-y-2">${subStepsHtml}</ul>
-                            <input type="text" class="sub-step-input w-full p-1.5 rounded-md mt-2 border text-sm" placeholder="Add a small step..." style="background-color: var(--dark-bg); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3);">
-                        </div>
+                         ${timeText}
                     </div>
                     <div class="flex justify-end items-center mt-4 pt-4 border-t" style="border-color: rgba(52, 152, 219, 0.2);">
                         <span class="pinch-motivator text-xs font-semibold px-2 py-1 rounded-full ${pinchColor}">${task.pinch}</span>
@@ -1122,17 +1204,16 @@
                 if (!card) return;
 
                 const taskId = card.id;
-                const task = tasks.find(t => t.id === taskId);
-                if (!task) return;
+                const taskIndex = tasks.findIndex(t => t.id === taskId);
+                if (taskIndex === -1) return;
 
-                if (e.target.closest('[data-action="toggle-main"]')) {
-                    task.completed = !task.completed;
+                if (e.target.dataset.action === 'toggle-main') {
+                    tasks[taskIndex].completed = !tasks[taskIndex].completed;
                     renderTasks();
                 }
 
-                if (e.target.classList.contains('sub-step-checkbox')) {
-                    const subStepIndex = parseInt(e.target.closest('li').dataset.index, 10);
-                    task.subSteps[subStepIndex].completed = e.target.checked;
+                if (e.target.dataset.action === 'delete') {
+                    tasks.splice(taskIndex, 1);
                     renderTasks();
                 }
             }
@@ -1193,6 +1274,11 @@
                 currentSort = 'time';
                 renderTasks();
             });
+            
+            startOverBtn.addEventListener('click', () => {
+                tasks = [];
+                renderTasks();
+            });
 
             const ctx = document.getElementById('progressChart').getContext('2d');
             window.progressChart = new Chart(ctx, {
@@ -1229,36 +1315,30 @@
                 const minutes = String(now.getMinutes()).padStart(2, '0');
                 const seconds = String(now.getSeconds()).padStart(2, '0');
                 const timeString = `${hours}:${minutes}:${seconds}`;
-                document.getElementById('circular-clock').textContent = timeString;
+                document.getElementById('digital-clock').textContent = timeString;
             }
 
-            function updateVisitorCount() {
-                let count = localStorage.getItem('visitorCount');
-                if (count === null) {
-                    count = 1;
-                } else {
-                    count = parseInt(count) + 1;
-                }
-                localStorage.setItem('visitorCount', count);
-                document.getElementById('visitor-counter').textContent = `Visitor #${count}`;
-            }
-
-            updateClock();
+            
             setInterval(updateClock, 1000);
-            updateVisitorCount();
+            updateClock(); // Initial call
+
+            // --- NEW: Dropdown Logic ---
+            const navDropdown = document.getElementById('nav-dropdown');
+            navDropdown.addEventListener('change', (event) => {
+                const value = event.target.value;
+                if (!value) return;
+
+                if (value.startsWith('#')) {
+                    document.querySelector(value).scrollIntoView({ behavior: 'smooth' });
+                } else if (value.startsWith('http')) {
+                     window.open(value, '_blank');
+                }
+                else {
+                    window.location.href = value;
+                }
+                event.target.selectedIndex = 0; // Reset dropdown
+            });
         });
     </script>
 </body>
 </html>
-" code between  and  in the most up-to-date Canvas "Kindness KULT Homepage (Updated)" document above and am asking a query about/based on this code below.
-Instructions to follow:
-  * Don't output/edit the document if the query is Direct/Simple. For example, if the query asks for a simple explanation, output a direct answer.
-  * Make sure to **edit** the document if the query shows the intent of editing the document, in which case output the entire edited document, **not just that section or the edits**.
-    * Don't output the same document/empty document and say that you have edited it.
-    * Don't change unrelated code in the document.
-  * Don't output  and  in your final response.
-  * Any references like "this" or "selected code" refers to the code between  and  tags.
-  * Just acknowledge my request in the introduction.
-  * Make sure to refer to the document as "Canvas" in your response.
-
-ok i need my cindness korner one to link directly to a forum im hosting thru something else connectkorner.cindnesskult.
