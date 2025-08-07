@@ -1,122 +1,1264 @@
-margin-bottom: 0;
-}
-
-        /* --- UPDATED: Dashboard Banner (was stats-bar) --- */
-        /* --- UPDATED: Dashboard Banner --- */
-.dashboard-banner {
-display: flex;
-justify-content: space-between;
-@@ -162,13 +162,16 @@
-text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
-}
-
-        /* --- UPDATED: Navigation inside banner --- */
-        .banner-nav {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        /* --- UPDATED: Visitor Counter moved to top --- */
-        .visitor-counter-top {
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1rem;
-            color: var(--blue);
-}
-
-        /* --- UPDATED: Navigation Dropdown --- */
-.dropdown {
-position: relative;
-display: inline-block;
-@@ -313,15 +316,7 @@
-margin-top: 60px;
-font-size: 0.9rem;
-color: #7f8c8d;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cindness KULT</title>
+    <!-- Importing fonts for the title and body -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Base Styles & Colors --- */
+        :root {
+            --purple: #9b59b6;
+            --blue: #3498db;
+            --green: #2ecc71;
+            --dark-bg: #0d0f1a;
+            --light-text: #ecf0f1;
+            --glow-color: rgba(52, 152, 219, 0.7);
         }
 
-        /* NEW: Footer Content Layout */
-        .footer-content {
+        /* --- Twinkling Cursor & Background --- */
+        html {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12,0L9.9,8.1L0,9.9l8.1,2.1l2.1,8.1l2.1-8.1l8.1-2.1L14.1,8.1L12,0z" transform="rotate(0 12 12)"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></animateTransform></path></svg>') 12 12, auto;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Source Serif Pro', serif;
+            color: var(--light-text);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- Main Container & Layout --- */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- General Section Styling --- */
+        .section {
+            /* Increased opacity for better readability */
+            background-color: rgba(13, 15, 26, 0.92);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+            transition: all 0.4s ease; /* Transition for hover effect */
+        }
+        
+        /* NEW: Hover effect for sections */
+        .section:hover {
+            border-color: rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* --- Gradient Text for Titles --- */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-animation-text 5s linear infinite;
+        }
+        @keyframes gradient-animation-text {
+            to {
+                background-position: 200% center;
+            }
+        }
+        
+        /* Specific styling for section headers */
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: left;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-top: 25px;
+            text-align: center;
+        }
+        p {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+        }
+
+        .problem-bold {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* --- Header Section (Now part of the dashboard) --- */
+        .main-header {
+            padding: 20px;
+            margin-bottom: 0; /* Removed margin as it's now in the dashboard */
+        }
+        .title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+            margin-bottom: 0;
+        }
+
+        /* --- UPDATED: Dashboard Banner (was stats-bar) --- */
+        .dashboard-banner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            text-align: center; /* Center footer text */
-}
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            gap: 20px;
+            background-color: rgba(13, 15, 26, 0.92);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
 
-/* --- New Styling for Profile Card --- */
-@@ -577,36 +572,36 @@
-</style>
+        .dashboard-banner .header-content {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .dashboard-banner .stats-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        #circular-clock {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--green);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem; 
+            color: var(--green);
+            background-color: rgba(13, 15, 26, 0.5);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3), inset 0 0 15px rgba(46, 204, 113, 0.2);
+        }
+
+        #visitor-counter {
+            font-size: 1rem;
+            color: var(--blue);
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* --- Simple Nav Links --- */
+        .simple-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .simple-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .simple-nav a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .contact-button {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+            border: none;
+            border-radius: 8px;
+            padding: 10px 25px;
+            color: #ffffff;
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- Resource Hub Portal Buttons (new card design with glowing border) --- */
+        .link-pool {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .link-pool li a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
+            height: 80px;
+            padding: 10px;
+            position: relative;
+            background-color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--light-text);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+            box-shadow: inset 0 0 0 1px rgba(52, 152, 219, 0.2);
+        }
+
+        .link-pool li a:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-image: linear-gradient(135deg, var(--purple), var(--blue), var(--green)) 1;
+        }
+
+        /* --- UPDATED: Attention-grabbing button styles --- */
+        .attention-button {
+            width: 100%; /* Make it full-width within the flex container */
+            height: 90px;
+            font-size: 1.2rem;
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(135deg, var(--blue), var(--green));
+            border: none;
+            border-radius: 9999px; /* Creates an oval shape */
+            color: white;
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        .attention-button-li {
+            width: 100%;
+        }
+
+        .attention-button:hover {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+        }
+
+        @keyframes pulse-glow {
+            from {
+                box-shadow: 0 0 10px rgba(52, 152, 219, 0.4), 0 0 20px rgba(46, 204, 113, 0.4);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(52, 152, 219, 0.8), 0 0 35px rgba(46, 204, 113, 0.8);
+            }
+        }
+        
+        /* --- Footer --- */
+        footer {
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* --- New Styling for Profile Card --- */
+        .profile-card {
+            display: flex;
+            flex-direction: row; /* Changed to row for side-by-side layout */
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px; /* Added a gap for spacing between the photo and text */
+            justify-content: center; /* Center the entire profile card horizontally */
+        }
+        .profile-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--blue);
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+        }
+        .profile-card .name-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.2rem;
+            color: var(--light-text);
+            line-height: 1.4;
+            text-align: left; /* Align the text to the left */
+        }
+
+        /* New Styling for the Self-Compassion Flyer */
+        .flyer-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .flyer-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .flyer-container img:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 680px) {
+            .dashboard-banner {
+                flex-direction: column;
+                align-items: center;
+            }
+            .dashboard-banner .header-content {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .link-pool li a {
+                width: 100%;
+                font-size: 0.9rem;
+            }
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .authenticity-diagram {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .core-self {
+            width: 120px;
+            height: 120px;
+            background-color: #27AE60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .action-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #2980B9;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.2;
+        }
+        .action-node-1 { transform: translate(-110px, -80px); }
+        .action-node-2 { transform: translate(110px, -80px); }
+        .action-node-3 { transform: translate(0, 130px); }
+
+        /* Custom styling for the new content sections to match the theme */
+        .content-card {
+            background-color: var(--dark-bg);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 25px rgba(52, 152, 219, 0.1);
+        }
+        .content-card h3 {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--light-text);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .content-card p {
+            color: var(--light-text);
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.1rem;
+        }
+        .content-card strong {
+            color: var(--purple);
+        }
+        .content-card .text-gray-500, .content-card .text-gray-400 {
+            color: var(--light-text);
+            opacity: 0.7;
+        }
+
+        /* --- NEW: Mailchimp Form Styles --- */
+        #mc_embed_signup {
+            background: transparent;
+            width: 100%;
+            font-family: 'Source Serif Pro', serif;
+            color: var(--light-text);
+        }
+        #mc_embed_signup h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--light-text);
+            border-bottom: none;
+            text-align: center;
+        }
+        #mc_embed_signup .mc-field-group {
+            width: 100%;
+            padding-bottom: 1.5rem;
+        }
+        #mc_embed_signup .mc-field-group label {
+            color: var(--light-text);
+            font-family: 'Source Serif Pro', serif;
+            margin-bottom: 0.5rem;
+        }
+        #mc_embed_signup .mc-field-group input {
+            background-color: rgba(13, 15, 26, 0.8);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 8px;
+            color: var(--light-text);
+            padding: 12px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        #mc_embed_signup .mc-field-group input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+        #mc_embed_signup .indicates-required {
+            color: rgba(236, 240, 241, 0.5);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        #mc_embed_signup .button {
+            background: linear-gradient(135deg, var(--green), var(--blue));
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            color: #ffffff;
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        #mc_embed_signup .button:hover {
+            transform: scale(1.03);
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+        }
+        #mc_embed_signup .refferal_badge {
+            display: none !important; /* Hide Mailchimp branding */
+        }
+
+        /* --- NEW: TASK MANAGER STYLES --- */
+        .task-manager-body {
+            font-family: 'Source Serif Pro', serif;
+            color: var(--light-text);
+        }
+        .task-card {
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: rgba(13, 15, 26, 0.8);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        .task-card.completed {
+            background-color: rgba(13, 15, 26, 0.5);
+            transform: scale(0.98);
+        }
+        .task-card.completed h3,
+        .task-card.completed p,
+        .task-card.completed .pinch-motivator {
+            text-decoration: line-through;
+            color: #6b7280;
+        }
+        .task-manager-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            height: 250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .sub-steps-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+        }
+         .sub-steps-list li.completed {
+            text-decoration: line-through;
+            color: #6b7280;
+        }
+        
+    </style>
 </head>
 <body>
-    <div class="visitor-counter-top">
-        <div id="visitor-counter">Loading...</div>
-    </div>
-
-<div class="container">
-
-<!-- UPDATED: Dashboard Banner -->
-<div class="dashboard-banner">
-            <div class="banner-top">
-                <div class="header-content">
-                    <h1 class="title gradient-text">Cindness KULT</h1>
-                    <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
-                </div>
-                <div class="stats-content">
-                    <div id="digital-clock"></div>
-                    <div class="banner-nav">
-                        <div class="dropdown">
-                            <button class="dropdown-btn">♡</button>
-                            <div class="dropdown-content">
-                                <a href="#">♡ Back Home ♡</a>
-                                <a href="link.to.more.docs.html">♡ Printables & Downloads ♡</a>
-                                <a href="http://connectkorner.cindnesskult.com" target="_blank" rel="noopener noreferrer">♡ Connect Korner Forum ♡</a>
-                                <hr>
-                                <a href="#resource-hub">♡ More Links ♡</a>
-                                <a href="#app">♡ Daily Game Plan ♡</a>
-                                <hr>
-                                <a href="diff2.html">♡ It's a Different Operating System, Not a Deficit ♡</a>
-                                <a href="evolution.html">♡ Evolution of Harm (The Roots) ♡</a>
-                                <a href="maintheory.html">♡ Interwoven Roots Theory (The Main Theory) ♡</a>
-                                <a href="ocd.risk.html">♡ Understanding OCD & Risk ♡</a>
-                                <a href="glutamate.gaba.html">♡ Glutamate & GABA Balance ♡</a>
-                                <a href="social.diff.html">♡ Social Differences & Communication ♡</a>
-                            </div>
-                        </div>
+    <div class="container">
+        
+        <!-- UPDATED: Dashboard Banner -->
+        <div class="dashboard-banner">
             <div class="header-content">
                 <h1 class="title gradient-text">Cindness KULT</h1>
                 <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
             </div>
             <div class="stats-content">
-                <div id="digital-clock"></div>
-                <div class="dropdown">
-                    <button class="dropdown-btn">♡</button>
-                    <div class="dropdown-content">
-                        <a href="#">♡ Back Home ♡</a>
-                        <a href="link.to.more.docs.html">♡ Printables & Downloads ♡</a>
-                        <a href="http://connectkorner.cindnesskult.com" target="_blank" rel="noopener noreferrer">♡ Connect Korner Forum ♡</a>
-                        <hr>
-                        <a href="#resource-hub">♡ More Links ♡</a>
-                        <a href="#app">♡ Daily Game Plan ♡</a>
-                        <hr>
-                        <a href="diff2.html">♡ It's a Different Operating System, Not a Deficit ♡</a>
-                        <a href="evolution.html">♡ Evolution of Harm (The Roots) ♡</a>
-                        <a href="maintheory.html">♡ Interwoven Roots Theory (The Main Theory) ♡</a>
-                        <a href="ocd.risk.html">♡ Understanding OCD & Risk ♡</a>
-                        <a href="glutamate.gaba.html">♡ Glutamate & GABA Balance ♡</a>
-                        <a href="social.diff.html">♡ Social Differences & Communication ♡</a>
-</div>
-</div>
-</div>
-@@ -864,10 +859,7 @@ <h3 class="text-xl font-bold text-center mb-4" style="color: var(--light-text);"
-</div>
-
-<footer>
-            <div class="footer-content">
-                <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
-                <div id="visitor-counter">Loading...</div>
+                <div id="circular-clock"></div>
+                <div id="visitor-counter"></div>
             </div>
-            <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
-</footer>
+        </div>
+        
+        <div class="section">
+            <h3 class="text-xl font-bold text-left text-light-text mb-4">Give me any problem and I'll give you the solution--and it'll always be kindness.</h3>
+            <p class="text-left text-light-text text-lg">Loneliness? Lack of kindness.</p>
+            <p class="text-left text-light-text text-lg">Mental health problems? Lack of kindness.</p>
+            <p class="text-left text-light-text text-lg">People are treating you poorly, or your boss isn't paying you enough? Lack of kindness.</p>
+            <p class="text-left text-xl font-bold gradient-text mt-4"><i>The answer is always kindness.</i></p>
+        </div>
 
-</div>
+        <div class="section">
+            <h2 class="welcome-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.0001 2.25L9.57013 9.48912L2.25008 10.1472L7.69741 15.1764L6.15584 22.25L12.0001 18.5772L17.8444 22.25L16.3028 15.1764L21.7501 10.1472L14.4301 9.48912L12.0001 2.25Z" stroke="#9B59B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Welcome
+            </h2>
+            <p>HI. This space is a digital sanctuary for thinkers, creators, and collaborators. We believe in the power of open dialogue and collective growth. Explore the pathways below to dive into our shared resources and projects.</p>
+        </div>
+
+        <!-- NEW NEURODIVERGENCE SECTION -->
+        <div class="section">
+            <h2 class="gradient-text">What is Neurodivergence?</h2>
+            <p class="mb-4"><strong>It's a Different Operating System:</strong> Like Mac or PC. Brains naturally vary. These differences are valuable, not defects.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="content-card">
+                    <h3 class="text-lg">Neurotypical Processing</h3>
+                    <ul class="list-disc list-inside space-y-2 mt-4">
+                        <li><strong>Top-Down Processing:</strong> Sees the big picture first, then details.</li>
+                        <li><strong>Social Rules & Harmony:</strong> Prioritizes group cohesion, indirect communication.</li>
+                        <li><strong>Multitasking:</strong> Good at juggling many tasks.</li>
+                        <li><strong>Filtered Senses:</strong> Tunes out background noise.</li>
+                        <li><strong>Strengths:</strong> The Farmer, Diplomat, Builder (social, stable, community-focused).</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3 class="text-lg">Neurodivergent Processing</h3>
+                     <ul class="list-disc list-inside space-y-2 mt-4">
+                        <li><strong>Bottom-Up Processing:</strong> Sees details first, then the big picture.</li>
+                        <li><strong>Direct & Logical:</strong> Prefers clear, literal communication; eye contact can be overwhelming.</li>
+                        <li><strong>Hyperfocus:</strong> Deep dives into specific interests.</li>
+                        <li><strong>Heightened Senses:</strong> Aware of all sensory input.</li>
+                        <li><strong>Strengths:</strong> The Hunter, Watcher, Innovator (focused, innovative, morally consistent).</li>
+                    </ul>
+                </div>
+            </div>
+            <h3 class="mt-8">The Problem: A Mismatch</h3>
+            <p>Modern society's neurotypical demands can disable neurodivergent individuals.</p>
+            <ul class="list-disc list-inside space-y-2 mt-4">
+                <li><strong>Unspoken Social Rules:</strong> Expectations of neurotypical communication lead to burnout and self-betrayal.</li>
+                <li><strong>Rigid Societal Demands:</strong> 9-to-5 schedules and overstimulating environments are not built for neurodivergent processing.</li>
+            </ul>
+            <h3 class="mt-8">The Solution: Cultural Competence</h3>
+            <p>Build a shared language, drop assumptions, and create environments that value all operating systems.</p>
+             <div class="mt-6 p-4 rounded-lg" style="background-color: rgba(13, 15, 26, 0.5); border-left: 4px solid var(--blue);">
+                <p><strong>Key Fact:</strong> Neurodivergence is not an intellectual or language disability.</p>
+                <p class="mt-2"><strong>Autism Spectrum Disorder (ASD):</strong> Unique social/sensory processing, focused interests.</p>
+                <p class="mt-2"><strong>Attention-Deficit/Hyperactivity Disorder (ADHD):</strong> Differences in attention regulation, impulsivity, hyperactivity. Often creative and hyperfocused.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="connect-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="var(--purple)">
+                    <path d="M11 2h2v11h-2z"/>
+                    <path d="M16 13h-2v11h2z"/>
+                    <path d="M7 13h-2v11h2z"/>
+                    <path d="M12 2l-12 22h24z"/>
+                </svg>
+                Connect Korner (a forum for the kind to connect)
+            </h2>
+            <p>A place for thinkers to connect, collaborate, and share ideas. </p>
+            <ul class="link-pool">
+                <li><a href="http://connectkorner.cindnesskult.com" target="_blank" rel="noopener noreferrer">Go to the Forum</a></li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2 class="gradient-text">The Problem</h2>
+            <p><strong class="problem-bold">Social Disconnection:</strong> Our "third places" are gone. We are more connected, and yet more isolated, than ever. Social media has become a fractured reality, and we need to bridge the gap and bring awareness to our shared experiences.</p>
+            <p><strong class="problem-bold">Systemic Invalidation:</strong> Clinical diagnostics often blame the individual rather than the system. We need better tools for understanding trauma, better tools for therapy, and better treatment that validates lived experience instead of dismissing it. This work is rooted in anti-racism and LGBTQ+ inclusivity.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-6">
+                <div class="content-card">
+                    <!-- UPDATED CHART SECTION -->
+                    <h3 class="text-xl font-semibold text-center mb-4" style="font-size: 1.1rem;">The Central Dialectic: A Bell Curve of Mental Health</h3>
+                    <p class="text-center mb-4 text-base">Healthy functioning exists in a state of flexible equilibrium. Pathology emerges at the extremes of too much structure (rigidity) or too much creativity (chaos).</p>
+                    <div class="chart-container">
+                        <canvas id="bellCurveChart"></canvas>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-center mb-4">Oscillation Between Extremes</h3>
+                     <p class="text-center mb-4">Some conditions, like Bipolar Disorder, can be seen as a violent swing between the two poles.</p>
+                    <div class="chart-container">
+                        <canvas id="oscillationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">The Path of Least Resistance—The Solution</h2>
+            <p>This space is my response. It's where I share tools for therapy, research, and understanding neurodivergence. The core of this work is finding the balance between <strong>Creativity & Structure</strong>. It's all grounded in my <strong>Interwoven Roots Theory</strong>, which seeks to prevent harm by building kinder systems.</p>
+            <p>Want to know when my book on this theory is ready? Sign up for exclusive updates.</p>
+            
+            <!-- NEW MAILCHIMP FORM EMBED -->
+            <div id="mc_embed_shell" class="mt-6">
+                <div id="mc_embed_signup">
+                    <form action="https://cindnesskult.us16.list-manage.com/subscribe/post?u=d60ef7df43ebff6df64112978&amp;id=02266560a9&amp;f_id=00b89ee0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                        <div id="mc_embed_signup_scroll">
+                            <h2>sign up for updates :)</h2>
+                            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+                            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+                            <div class="mc-field-group"><label for="mce-FNAME">First Name </label><input type="text" name="FNAME" class=" text" id="mce-FNAME" value=""></div>
+                            <div id="mce-responses" class="clear foot">
+                                <div class="response" id="mce-error-response" style="display: none;"></div>
+                                <div class="response" id="mce-success-response" style="display: none;"></div>
+                            </div>
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                <input type="text" name="b_d60ef7df43ebff6df64112978_02266560a9" tabindex="-1" value="">
+                            </div>
+                            <div class="optionalParent">
+                                <div class="clear foot">
+                                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                                    <p style="margin: 0px auto;"><a href="http://eepurl.com/jkHC2Q" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New section for the Self-Compassion Flyer -->
+        <div class="section">
+            <h2 class="gradient-text">Self-Compassion</h2>
+            <div class="flyer-container">
+                <img src="https://embrace-autism.com/wp-content/uploads/flyer-SelfCompassion.svg" alt="Self-Compassion flyer from Embrace Autism">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">Sensory Supports and Advice👾</h2>
+            <p class="text-lg text-light-text">The world is overwhelming, take some time and space to settle in.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div class="content-card">
+                    <h3 class="font-bold mb-4 text-left font-serif">🧠 Manage Your Sensory Needs</h3>
+                    <ul class="list-disc list-inside text-left space-y-4">
+                        <li>
+                            <p><strong>Fix Your Space:</strong> Use calming scents (like coffee or essential oils) or adjust lighting to make your environment feel safe and comfortable.</p>
+                        </li>
+                        <li>
+                            <p><strong>Plan a "Sensory Diet":</strong> Build a routine of activities to keep your nervous system calm: use a weighted blanket, exercise, or listen to curated playlists with noise-canceling headphones.</p>
+                        </li>
+                        <li>
+                            <p><strong>Ease Transitions:</strong> Make hard sensory shifts (like getting out of the shower) easier with soft towels, comfy clothes, and a simple calming routine afterward.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3 class="font-bold mb-4 text-left font-serif">❤️ Protect Your Emotional Energy</h3>
+                    <ul class="list-disc list-inside text-left space-y-4">
+                        <li>
+                            <p><strong>Set Firm Boundaries:</strong> Practice saying "I need a break" or "I don't have energy for this." Plan your exit from social events ahead of time. Leaving early is okay.</p>
+                        </li>
+                        <li>
+                            <p><strong>Schedule Recharge Time:</strong> After being social, plan for intentional alone time with your interests. Honor your natural sleep patterns whenever possible.</p>
+                        </li>
+                        <li>
+                            <p><strong>Use the "Spoon Theory":</strong> Think of your energy as "spoons." Each task costs a spoon. This helps you manage your energy without self-judgment. When you're out, you're out.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">About Me 👾</h2>
+            <!-- New profile card added here -->
+            <div class="profile-card">
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocKbt7sfDcLSlGp7EYryYvUXZKl0RnqnsVi9sIRFwWTIphxA_zg0=s576-c-no" alt="Vivian Mitchell professional photo">
+                <div class="name-title">
+                    <p>Vivian Mitchell</p>
+                    <p>MA, APCC, Ph.D. student</p>
+                </div>
+            </div>
+            <!-- Original paragraph follows -->
+            <p>Greetings! My name is Vivian (they/them) and I'm a pscyhology-enjoyer, poetry enthusiast, and practicing psychotherapist. I'm also in training to become a psychologist, and I currently work as an APCC in private practice, focusing on differential diagnosis, clinical assessment and evaluation, person-centered approaches, and neurodiversity. My work is dedicated to creating validating, person-centered tools that challenge systemic invalidation. My focus is on neurodiversity, trauma, and the LGBTQ+ community, blending evidence-based practices with the humanistic need for creativity and connection. This space is where I share my work to help build kinder, more effective systems for therapy and understanding.</p>
+        </div>
+        
+        <div class="section simple-nav">
+            <a href="https://www.tiktok.com/@vivi.yum?lang=en" target="_blank">TikTok</a>
+            <a href="https://www.linkedin.com/in/vivianmmitchell/" target="_blank">LinkedIn</a>
+            <p>Email: <a href="mailto:cindnesskult@gmail.com" class="contact-button">cindnesskult@gmail.com</a></p>
+        </div>
+
+        <div class="section">
+            <h2 class="gradient-text">Resource Hub 👾</h2>
+            
+            <h3>For Understanding</h3>
+            <ul class="link-pool">
+                <li><a href="diff2.html">It's a Different Operating System, Not a Deficit</a></li>
+                <li><a href="duality.html">The Duality Framework</a></li>
+                <li><a href="erp.info.html">ERP (OCD) therapy: an intro </a></li>
+                <li><a href="evolution.html">Evolution of Harm (The Roots)</a></li>
+                <li><a href="maintheory.html">Interwoven Roots Theory (The Main Theory)</a></li>
+                <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
+                <li><a href="dynamic.html">Dynamic Systems Theory</a></li>
+                <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
+                <li><a href="social.diff.html">Social Differences & Communication</a></li>
+            </ul>
+
+            <h3>Free Resources/Tools</h3>
+            <ul class="link-pool" style="margin-top: 20px;">
+                <li><a href="NDguide.resources.html">Support/Accommodations for NDs</a></li>
+                <li><a href="creativityvstructure.html">Creativity & Structure</a></li>
+                <li><a href="printerfriendlyCS.html">Creativity & Structure (Printer Friendly)</a></li>
+                <li><a href="sensorygame.html">Free Sensory Game (Printable)</a></li>
+                <li><a href="planner.html">Free Printable Planner Pages</a></li>
+                <li><a href="adhdmeds.html">Info on ADHD Medication Options (For Education Only)</a></li>
+                <li class="attention-button-li"><a href="link.to.more.docs.html" class="attention-button">Printables & Downloads</a></li>
+            </ul>
+
+            <h3>For Clinicians</h3>
+            <ul class="link-pool" style="margin-top: 20px;">
+                 <li><a href="clinicians.korner.html">Clinician's Korner</a></li>
+            </ul>
+
+            <h3>Creative Works & Socials</h3>
+             <ul class="link-pool" style="margin-top: 20px;">
+                <li><a href="https://plasma-pet.tumblr.com/tagged/ocpoetry">Some Poems</a></li>
+                <li><a href="https://www.instagram.com/viviyum/" target="_blank">Instagram (@viviyum)</a></li>
+             </ul>
+        </div>
+
+        <!-- TASK MANAGER MOVED HERE -->
+        <div class="section task-manager-body">
+            <div id="app">
+                <header class="text-center mb-8">
+                    <h2 class="gradient-text">Daily Game Plan</h2>
+                    <p class="text-sm" style="color: var(--light-text); opacity: 0.7;">A Dynamic Task Manager</p>
+                </header>
+
+                <section id="controls" class="mb-8 p-4 bg-black/20 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button id="show-modal-btn" class="w-full sm:w-auto contact-button">
+                        ✨ Add New Task
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-semibold">Sort By:</span>
+                        <button id="sort-importance-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Importance</button>
+                        <button id="sort-time-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-sm">Time</button>
+                    </div>
+                </section>
+
+                <section id="progress-section" class="mb-12">
+                     <h3 class="text-xl font-bold text-center mb-4" style="color: var(--light-text);">Your Progress</h3>
+                     <div class="task-manager-chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </section>
+
+                <main id="tasks-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </main>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
+        </footer>
+
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="task-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="rounded-lg shadow-xl p-6 w-full max-w-md" style="background-color: var(--dark-bg); border: 1px solid rgba(52, 152, 219, 0.3);">
+            <h2 class="text-2xl font-bold mb-4" style="font-family: 'Press Start 2P', cursive; color: var(--light-text);">Add a New Task</h2>
+            <form id="task-form">
+                <div class="space-y-4">
+                    <input type="text" id="task-title" placeholder="Task Title" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="number" id="task-time" placeholder="Time (mins)" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                        <select id="task-pinch" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                            <option>Passion</option>
+                            <option>Interest</option>
+                            <option>Hurry</option>
+                            <option>Urgency</option>
+                            <option>Competition</option>
+                            <option>Coordination</option>
+                            <option>Novelty</option>
+                        </select>
+                    </div>
+                    <select id="task-importance" class="w-full p-2 rounded-lg border focus:ring-2" style="background-color: rgba(13, 15, 26, 0.8); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3); --tw-ring-color: var(--blue);" required>
+                        <option value="1">🔥 Do It Now</option>
+                        <option value="2">🎯 Focus Next</option>
+                        <option value="3">⏳ Schedule It</option>
+                        <option value="4">✨ Someday/Maybe</option>
+                    </select>
+                </div>
+                <div class="mt-6 flex justify-end gap-4">
+                    <button type="button" id="close-modal-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">Cancel</button>
+                    <button type="submit" class="contact-button">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        const oceanForest = {
+            primary: '#2ECC71', // Green
+            secondary: '#3498DB', // Blue
+            tertiary: '#1A5276', // Darker Blue
+            text: '#ecf0f1', // light text
+            grid: 'rgba(236, 240, 241, 0.1)', // light grid lines
+            primaryTransparent: 'rgba(46, 204, 113, 0.4)',
+            secondaryTransparent: 'rgba(52, 152, 219, 0.4)'
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false // Hide legend by default on most charts
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: oceanForest.text, font: { family: "'Source Serif Pro', serif" } },
+                    grid: { color: oceanForest.grid }
+                },
+                x: {
+                    ticks: { color: oceanForest.text, font: { family: "'Source Serif Pro', serif" } },
+                    grid: { color: oceanForest.grid }
+                }
+            }
+        };
+
+        // NEW BELL CURVE CHART
+        const bellCurveCtx = document.getElementById('bellCurveChart').getContext('2d');
+        new Chart(bellCurveCtx, {
+            type: 'line',
+            data: {
+                labels: ['STRUCTURE\n(Rigidity)', 'EQUILIBRIUM\n(Flexibility)', 'CREATIVITY\n(Chaos)'],
+                datasets: [{
+                    label: 'Mental Health',
+                    data: [20, 100, 20],
+                    borderColor: oceanForest.primary,
+                    backgroundColor: oceanForest.primaryTransparent,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                scales: {
+                    y: {
+                       display: false // Hide Y axis
+                    },
+                    x: {
+                        ...defaultChartOptions.scales.x,
+                        grid: {
+                            display: false // Hide X axis grid lines
+                        },
+                        ticks: {
+                           ...defaultChartOptions.scales.x.ticks,
+                           font: {
+                               size: 14,
+                               family: "'Source Serif Pro', serif"
+                           }
+                        }
+                    }
+                }
+            }
+        });
+
+        const oscillationCtx = document.getElementById('oscillationChart').getContext('2d');
+        new Chart(oscillationCtx, {
+            type: 'line',
+            data: {
+                labels: ['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'Phase 5', 'Phase 6'],
+                datasets: [{
+                    label: 'Creative Energy',
+                    data: [10, 90, 85, 20, 15, 70],
+                    borderColor: oceanForest.primary,
+                    backgroundColor: oceanForest.primaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Rigid Structure',
+                    data: [90, 10, 15, 80, 85, 30],
+                    borderColor: oceanForest.secondary,
+                    backgroundColor: oceanForest.secondaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                plugins: { ...defaultChartOptions.plugins, legend: { display: true, labels: { color: oceanForest.text, font: { family: "'Source Serif Pro', serif" } } } }
+            }
+        });
+
+        // --- NEW TASK MANAGER SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if the task manager elements exist before running the script
+            if (!document.getElementById('app')) return;
+
+            let tasks = [];
+            let currentSort = 'importance';
+
+            const tasksContainer = document.getElementById('tasks-container');
+            const modal = document.getElementById('task-modal');
+            const showModalBtn = document.getElementById('show-modal-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const taskForm = document.getElementById('task-form');
+            const sortImportanceBtn = document.getElementById('sort-importance-btn');
+            const sortTimeBtn = document.getElementById('sort-time-btn');
+            
+            const importanceMeta = {
+                '1': { title: '🔥 Do It Now' },
+                '2': { title: '🎯 Focus Next' },
+                '3': { title: '⏳ Schedule It' },
+                '4': { title: '✨ Someday/Maybe' }
+            };
+            
+            const pinchColors = {
+                'Hurry': 'bg-red-900/70 text-red-200',
+                'Urgency': 'bg-yellow-900/70 text-yellow-200',
+                'Passion': 'bg-pink-900/70 text-pink-200',
+                'Interest': 'bg-sky-900/70 text-sky-200',
+                'Competition': 'bg-indigo-900/70 text-indigo-200',
+                'Coordination': 'bg-teal-900/70 text-teal-200',
+                'Novelty': 'bg-purple-900/70 text-purple-200',
+            };
+
+            function saveTasks() {
+                localStorage.setItem('gamePlanTasks', JSON.stringify(tasks));
+            }
+
+            function loadTasks() {
+                const savedTasks = localStorage.getItem('gamePlanTasks');
+                tasks = savedTasks ? JSON.parse(savedTasks) : [];
+            }
+
+            function renderTasks() {
+                saveTasks();
+                tasksContainer.innerHTML = '';
+                
+                let sortedTasks = [...tasks];
+                if (currentSort === 'time') {
+                    sortedTasks.sort((a, b) => a.time - b.time);
+                } else { 
+                    sortedTasks.sort((a, b) => a.importance - b.importance);
+                }
+
+                if (tasks.length === 0) {
+                    tasksContainer.innerHTML = `<div class="col-span-full text-center p-8 rounded-lg" style="background-color: rgba(13, 15, 26, 0.5);">
+                        <p style="color: var(--light-text); opacity: 0.7;">Your task list is empty.</p>
+                        <p style="color: var(--light-text); opacity: 0.5;">Click '✨ Add New Task' to get started!</p>
+                    </div>`;
+                    updateChart();
+                    return;
+                }
+
+                const groupedTasks = sortedTasks.reduce((acc, task) => {
+                    const key = currentSort === 'importance' ? task.importance : 'allTasks';
+                    if (!acc[key]) acc[key] = [];
+                    acc[key].push(task);
+                    return acc;
+                }, {});
+                
+                tasksContainer.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6';
+
+                Object.keys(groupedTasks).sort().forEach(groupKey => {
+                    const groupTasks = groupedTasks[groupKey];
+                    
+                    if (currentSort === 'importance') {
+                        const groupWrapper = document.createElement('div');
+                        const meta = importanceMeta[groupKey];
+                        const titleEl = document.createElement('h3');
+                        titleEl.className = "font-bold text-lg mb-4";
+                        titleEl.style.color = "var(--light-text)";
+                        titleEl.textContent = meta.title;
+                        groupWrapper.appendChild(titleEl);
+                        
+                        const tasksDiv = document.createElement('div');
+                        tasksDiv.className = "space-y-4";
+                        groupTasks.forEach(task => tasksDiv.appendChild(createTaskElement(task)));
+                        groupWrapper.appendChild(tasksDiv);
+                        tasksContainer.appendChild(groupWrapper);
+                    } else {
+                        groupTasks.forEach(task => tasksContainer.appendChild(createTaskElement(task)));
+                    }
+                });
+                
+                if (currentSort === 'time') {
+                     tasksContainer.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4';
+                }
+                updateChart();
+            }
+
+            function createTaskElement(task) {
+                const timeText = task.time > 0 ? `<p class="text-xs" style="color: var(--light-text); opacity: 0.6;">🕰️ ${task.time} min</p>` : '';
+                const pinchColor = pinchColors[task.pinch] || 'bg-gray-700 text-gray-200';
+                const completedClass = task.completed ? 'completed' : '';
+                const subStepsHtml = (task.subSteps || []).map((step, index) => 
+                    `<li data-index="${index}" class="${step.completed ? 'completed' : ''}">
+                        <input type="checkbox" ${step.completed ? 'checked' : ''} class="sub-step-checkbox accent-purple-400">
+                        <span>${step.text}</span>
+                    </li>`
+                ).join('');
+
+                const card = document.createElement('div');
+                card.id = task.id;
+                card.className = `task-card rounded-lg p-4 shadow-sm ${completedClass}`;
+                card.innerHTML = `
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start cursor-pointer" data-action="toggle-main">
+                            <h3 class="font-bold pr-2" style="color: var(--light-text);">${task.title}</h3>
+                            ${timeText}
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm font-semibold mb-2" style="color: var(--light-text); opacity: 0.8;">Smallest Next Steps:</p>
+                            <ul class="sub-steps-list text-sm space-y-2">${subStepsHtml}</ul>
+                            <input type="text" class="sub-step-input w-full p-1.5 rounded-md mt-2 border text-sm" placeholder="Add a small step..." style="background-color: var(--dark-bg); color: var(--light-text); border-color: rgba(52, 152, 219, 0.3);">
+                        </div>
+                    </div>
+                    <div class="flex justify-end items-center mt-4 pt-4 border-t" style="border-color: rgba(52, 152, 219, 0.2);">
+                        <span class="pinch-motivator text-xs font-semibold px-2 py-1 rounded-full ${pinchColor}">${task.pinch}</span>
+                    </div>
+                `;
+                return card;
+            }
+
+            function updateChart() {
+                const totalTasks = tasks.length;
+                const completedTasks = tasks.filter(t => t.completed).length;
+                if (window.progressChart) {
+                    window.progressChart.data.datasets[0].data = [completedTasks, totalTasks - completedTasks];
+                    window.progressChart.update();
+                }
+            }
+            
+            function handleContainerClick(e) {
+                const card = e.target.closest('.task-card');
+                if (!card) return;
+
+                const taskId = card.id;
+                const task = tasks.find(t => t.id === taskId);
+                if (!task) return;
+
+                if (e.target.closest('[data-action="toggle-main"]')) {
+                    task.completed = !task.completed;
+                    renderTasks();
+                }
+
+                if (e.target.classList.contains('sub-step-checkbox')) {
+                    const subStepIndex = parseInt(e.target.closest('li').dataset.index, 10);
+                    task.subSteps[subStepIndex].completed = e.target.checked;
+                    renderTasks();
+                }
+            }
+
+            function handleInputKeydown(e) {
+                if (e.key === 'Enter' && e.target.classList.contains('sub-step-input')) {
+                    const card = e.target.closest('.task-card');
+                    if (!card) return;
+
+                    const taskId = card.id;
+                    const task = tasks.find(t => t.id === taskId);
+                    if (!task) return;
+                    
+                    const text = e.target.value.trim();
+                    if (text) {
+                        if (!task.subSteps) task.subSteps = [];
+                        task.subSteps.push({ text: text, completed: false });
+                        e.target.value = '';
+                        renderTasks();
+                    }
+                }
+            }
+
+            function toggleModal() {
+                modal.classList.toggle('hidden');
+            }
+
+            showModalBtn.addEventListener('click', toggleModal);
+            closeModalBtn.addEventListener('click', toggleModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target.closest('.modal-backdrop') && !e.target.closest('.modal-backdrop > div')) {
+                    toggleModal();
+                }
+            });
+
+            taskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newTask = {
+                    id: `task_${Date.now()}`,
+                    title: document.getElementById('task-title').value,
+                    time: parseInt(document.getElementById('task-time').value, 10),
+                    pinch: document.getElementById('task-pinch').value,
+                    importance: document.getElementById('task-importance').value,
+                    subSteps: [],
+                    completed: false
+                };
+                tasks.push(newTask);
+                taskForm.reset();
+                toggleModal();
+                renderTasks();
+            });
+            
+            sortImportanceBtn.addEventListener('click', () => {
+                currentSort = 'importance';
+                renderTasks();
+            });
+            sortTimeBtn.addEventListener('click', () => {
+                currentSort = 'time';
+                renderTasks();
+            });
+
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            window.progressChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'To Do'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: ['var(--green)', 'rgba(236, 240, 241, 0.1)'],
+                        borderColor: ['var(--green)', 'rgba(236, 240, 241, 0.1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
+                    }
+                }
+            });
+
+            loadTasks();
+            renderTasks();
+            tasksContainer.addEventListener('click', handleContainerClick);
+            tasksContainer.addEventListener('keydown', handleInputKeydown);
+
+            // --- NEW: Clock and Visitor Counter Initialization ---
+            function updateClock() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const timeString = `${hours}:${minutes}:${seconds}`;
+                document.getElementById('circular-clock').textContent = timeString;
+            }
+
+            function updateVisitorCount() {
+                let count = localStorage.getItem('visitorCount');
+                if (count === null) {
+                    count = 1;
+                } else {
+                    count = parseInt(count) + 1;
+                }
+                localStorage.setItem('visitorCount', count);
+                document.getElementById('visitor-counter').textContent = `Visitor #${count}`;
+            }
+
+            updateClock();
+            setInterval(updateClock, 1000);
+            updateVisitorCount();
+        });
+    </script>
+</body>
+</html>
+" code between  and  in the most up-to-date Canvas "Kindness KULT Homepage (Updated)" document above and am asking a query about/based on this code below.
+Instructions to follow:
+  * Don't output/edit the document if the query is Direct/Simple. For example, if the query asks for a simple explanation, output a direct answer.
+  * Make sure to **edit** the document if the query shows the intent of editing the document, in which case output the entire edited document, **not just that section or the edits**.
+    * Don't output the same document/empty document and say that you have edited it.
+    * Don't change unrelated code in the document.
+  * Don't output  and  in your final response.
+  * Any references like "this" or "selected code" refers to the code between  and  tags.
+  * Just acknowledge my request in the introduction.
+  * Make sure to refer to the document as "Canvas" in your response.
+
+ok i need my cindness korner one to link directly to a forum im hosting thru something else connectkorner.cindnesskult.
