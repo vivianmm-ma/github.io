@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensory Profile Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #b8c3e8; /* Light purple background */
+            color: #304694; /* Dark blue text */
+        }
+        .content-box {
+            background-color: #e8e6ff; /* Lighter purple for content */
+            border: 4px solid #98c379; /* Green outline */
+        }
+        .title {
+            text-shadow: -2px -2px 0 #98c379, 2px -2px 0 #98c379, -2px 2px 0 #98c379, 2px 2px 0 #98c379;
+        }
+        .btn {
+            border: 2px solid #304694;
+            padding: 6px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+        .btn:hover {
+            background-color: #98c379;
+            color: #e8e6ff;
+        }
+        .btn.active {
+            background-color: #556fc8;
+            color: #e8e6ff;
+            border-color: #556fc8;
+        }
+        .btn-primary {
+            background-color: #556fc8;
+            color: #e8e6ff;
+            border: 4px solid #98c379;
+            padding: 15px 25px;
+            font-size: 18px;
+        }
+         .btn-primary:hover {
+            background-color: #304694;
+        }
+        .card-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+        }
+        .selection-buttons button {
+            margin-left: 5px;
+        }
+        #results-container {
+            white-space: pre-wrap;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px dashed #556fc8;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="content-box max-w-4xl mx-auto p-6 md:p-10 rounded-lg">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="title text-3xl md:text-4xl">Sensory Profile</h1>
+            <p class="mt-4 text-sm">Select a category for each item below.</p>
+        </header>
+
+        <main>
+            <!-- Card Selection List -->
+            <div id="card-list" class="space-y-2 mb-8 max-h-[50vh] overflow-y-auto p-4 bg-black bg-opacity-10 rounded-md">
+                <!-- Cards will be dynamically inserted here -->
+            </div>
+
+            <!-- Action Button -->
+            <div class="text-center my-8">
+                <button id="make-list-btn" class="btn btn-primary">Make My List</button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="hidden">
+                <h2 class="title text-2xl text-center mb-6">Your Sensory Profile</h2>
+                <div id="results-container" class="text-sm">
+                    <!-- Generated list will appear here -->
+                </div>
+                <div class="flex justify-center gap-4 mt-6">
+                    <button id="download-btn" class="btn">Download .txt</button>
+                </div>
+                 <p class="text-center text-xs mt-4">Note: "Save to Drive" requires you to be logged into a Google account.</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // --- DATA --- //
+        const cardData = [
+            // Combined and shuffled data from all decks
+            { id: 'like1', text: 'Natural lighting 👁️', type: 'like' }, { id: 'like2', text: 'Dim lighting 👁️', type: 'like' }, { id: 'like3', text: 'Bright lighting 👁️', type: 'like' },
+            { id: 'like4', text: 'Artificial light 👁️', type: 'like' }, { id: 'like5', text: 'Colorful lighting (LED) 👁️', type: 'like' }, { id: 'like6', text: 'Moderate lighting 👁️', type: 'like' },
+            { id: 'like7', text: 'Yellow hues (warm) 👁️', type: 'like' }, { id: 'like8', text: 'White hues (cool) 👁️', type: 'like' }, { id: 'like9', text: 'Visually sparse & organized 👁️', type: 'like' },
+            { id: 'like10', text: 'Neutral colors 👁️', type: 'like' }, { id: 'like11', text: 'Vibrant colors 👁️', type: 'like' }, { id: 'like12', text: 'Patterns & bright decor 👁️', type: 'like' },
+            { id: 'like13', text: 'Solid colors 👁️', type: 'like' }, { id: 'like14', text: 'Minimalism 👁️', type: 'like' }, { id: 'like15', text: 'Everything spread out/visible 👁️', type: 'like' },
+            { id: 'like16', text: 'Quiet 🔊', type: 'like' }, { id: 'like17', text: 'White noise 🔊', type: 'like' }, { id: 'like18', text: 'Brown noise 🔊', type: 'like' },
+            { id: 'like19', text: 'Binaural beats 🔊', type: 'like' }, { id: 'like20', text: 'Loud and lively 🔊', type: 'like' }, { id: 'like21', text: 'Music/background noise 🔊', type: 'like' },
+            { id: 'like22', text: 'Television on in background 🔊', type: 'like' }, { id: 'like23', text: 'Stim song (song on repeat) 🔊', type: 'like' }, { id: 'like24', text: 'Mild or subtle scents 👃', type: 'like' },
+            { id: 'like25', text: 'Fresh or clean smells 👃', type: 'like' }, { id: 'like26', text: 'Citrus or fruity scents 👃', type: 'like' }, { id: 'like27', text: 'Bakery or food-related scents 👃', type: 'like' },
+            { id: 'like28', text: 'Herbal or earthy scents 👃', type: 'like' }, { id: 'like29', text: 'Aromatherapy scents 👃', type: 'like' }, { id: 'like30', text: 'Natural scents (flowers, trees) 👃', type: 'like' },
+            { id: 'like31', text: 'Scents of joyful memories 👃', type: 'like' }, { id: 'like32', text: 'Light touch ✋', type: 'like' }, { id: 'like33', text: 'Deep pressure touch ✋', type: 'like' },
+            { id: 'like34', text: 'No touch ✋', type: 'like' }, { id: 'like35', text: 'Twirling hair ✋', type: 'like' }, { id: 'like36', text: 'Fidget toy ✋', type: 'like' },
+            { id: 'like37', text: 'Soft textures ✋', type: 'like' }, { id: 'like38', text: 'Petting a dog or cat ✋', type: 'like' }, { id: 'like39', text: 'Rub or pick at clothes ✋', type: 'like' },
+            { id: 'like40', text: 'Warm bath or shower ✋', type: 'like' }, { id: 'like41', text: 'Chewing gum 👅', type: 'like' }, { id: 'like42', text: 'Crunchy snack 👅', type: 'like' },
+            { id: 'like43', text: 'Suck or bite lips or cheeks 👅', type: 'like' }, { id: 'like44', text: 'Chewing ice 👅', type: 'like' }, { id: 'like45', text: 'Spicy food 👅', type: 'like' },
+            { id: 'like46', text: 'Drinking a warm beverage 👅', type: 'like' }, { id: 'like47', text: 'Hard candy 👅', type: 'like' }, { id: 'like48', text: 'Drinking a carbonated drink 👅', type: 'like' },
+            { id: 'like49', text: 'Constriction clothing (tight) 👕', type: 'like' }, { id: 'like50', text: 'Loose-fitting clothing 👕', type: 'like' }, { id: 'like51', text: 'Cotton fabric 👕', type: 'like' },
+            { id: 'like52', text: 'Tagless clothing 👕', type: 'like' }, { id: 'like53', text: 'Seamless garments 👕', type: 'like' }, { id: 'like54', text: 'Breathable materials 👕', type: 'like' },
+            { id: 'like55', text: 'Stretchy and flexible clothing 👕', type: 'like' }, { id: 'like56', text: 'Non-restrictive waistbands 👕', type: 'like' }, { id: 'like57', text: 'Gentle rocking or swaying 🤸', type: 'like' },
+            { id: 'like58', text: 'Swinging 🤸', type: 'like' }, { id: 'like59', text: 'Jumping or bouncing 🤸', type: 'like' }, { id: 'like60', text: 'Stimming 🤸', type: 'like' },
+            { id: 'like61', text: 'Spinning or twirling 🤸', type: 'like' }, { id: 'like62', text: 'Pacing 🤸', type: 'like' }, { id: 'like63', text: 'Outdoors 🌳', type: 'like' },
+            { id: 'like64', text: 'Indoors 🌳', type: 'like' }, { id: 'like65', text: 'Open space 🌳', type: 'like' }, { id: 'like66', text: 'Nooks and crannies 🌳', type: 'like' },
+            { id: 'like67', text: 'Urban environments 🌳', type: 'like' }, { id: 'like68', text: 'Rural settings 🌳', type: 'like' }, { id: 'like69', text: 'Cool 🌡️', type: 'like' },
+            { id: 'like70', text: 'Warm 🌡️', type: 'like' }, { id: 'like71', text: 'Breeze/airflow 🌡️', type: 'like' }, { id: 'like72', text: 'Neutral temperature 🌡️', type: 'like' },
+            { id: 'like73', text: 'Lots of people 👥', type: 'like' }, { id: 'like74', text: 'Only a few people 👥', type: 'like' }, { id: 'like75', text: 'A small group of people 👥', type: 'like' },
+            { id: 'like76', text: 'Alone 👥', type: 'like' }, { id: 'like77', text: 'People you don\'t know 👥', type: 'like' }, { id: 'like78', text: 'Lifting weights 💪', type: 'like' },
+            { id: 'like79', text: 'Pressure 💪', type: 'like' }, { id: 'like80', text: 'Weight 💪', type: 'like' }, { id: 'like81', text: 'No pressure (avoidance) 💪', type: 'like' },
+            { id: 'like82', text: 'Pillow/weighted blanket 💪', type: 'like' }, { id: 'like83', text: 'Weight on lap 💪', type: 'like' },
+            { id: 'trigger1', text: 'Bright or harsh lighting 👁️', type: 'trigger' }, { id: 'trigger2', text: 'Flickering or flashing lights 👁️', type: 'trigger' }, { id: 'trigger3', text: 'Fluorescent lighting 👁️', type: 'trigger' },
+            { id: 'trigger4', text: 'Intense or direct sunlight 👁️', type: 'trigger' }, { id: 'trigger5', text: 'Rapid changes in lighting 👁️', type: 'trigger' }, { id: 'trigger6', text: 'Dim or low lighting 👁️', type: 'trigger' },
+            { id: 'trigger7', text: 'Glare or reflections 👁️', type: 'trigger' }, { id: 'trigger8', text: 'Colored or neon lights 👁️', type: 'trigger' }, { id: 'trigger9', text: 'Strobe lights 👁️', type: 'trigger' },
+            { id: 'trigger10', text: 'Busy visual environments 👁️', type: 'trigger' }, { id: 'trigger11', text: 'Cluttered environments 👁️', type: 'trigger' }, { id: 'trigger12', text: 'Rapidly moving visuals 👁️', type: 'trigger' },
+            { id: 'trigger13', text: 'Specific colors or contrasts 👁️', type: 'trigger' }, { id: 'trigger14', text: 'Overwhelming patterns 👁️', type: 'trigger' }, { id: 'trigger15', text: 'Fast-paced movies or games 👁️', type: 'trigger' },
+            { id: 'trigger16', text: 'Strained or intense eye contact 👁️', type: 'trigger' }, { id: 'trigger17', text: 'Loud noises 🔊', type: 'trigger' }, { id: 'trigger18', text: 'Sudden bursts of sound 🔊', type: 'trigger' },
+            { id: 'trigger19', text: 'Background noise or chatter 🔊', type: 'trigger' }, { id: 'trigger20', text: 'Echoes or reverberations 🔊', type: 'trigger' }, { id: 'trigger21', text: 'People chewing 🔊', type: 'trigger' },
+            { id: 'trigger22', text: 'High-pitched sounds 🔊', type: 'trigger' }, { id: 'trigger23', text: 'Repetitive noise (pen clicking) 🔊', type: 'trigger' }, { id: 'trigger24', text: 'Strong odors 👃', type: 'trigger' },
+            { id: 'trigger25', text: 'Chemical smells 👃', type: 'trigger' }, { id: 'trigger26', text: 'Perfumes or colognes 👃', type: 'trigger' }, { id: 'trigger27', text: 'Cooking smells 👃', type: 'trigger' },
+            { id: 'trigger28', text: 'Smoke or pollution 👃', type: 'trigger' }, { id: 'trigger29', text: 'Cleaning products 👃', type: 'trigger' }, { id: 'trigger30', text: 'Floral or fragrant scents 👃', type: 'trigger' },
+            { id: 'trigger31', text: 'Rough or abrasive textures ✋', type: 'trigger' }, { id: 'trigger32', text: 'Itchy or scratchy materials ✋', type: 'trigger' }, { id: 'trigger33', text: 'Light or gentle touch ✋', type: 'trigger' },
+            { id: 'trigger34', text: 'Heavy or deep pressure ✋', type: 'trigger' }, { id: 'trigger35', text: 'Wet or sticky sensations ✋', type: 'trigger' }, { id: 'trigger36', text: 'Moisture ✋', type: 'trigger' },
+            { id: 'trigger37', text: 'Hot or cold objects ✋', type: 'trigger' }, { id: 'trigger38', text: 'Overpowering flavors 👅', type: 'trigger' }, { id: 'trigger39', text: 'Spicy or hot foods 👅', type: 'trigger' },
+            { id: 'trigger40', text: 'Bitter tastes 👅', type: 'trigger' }, { id: 'trigger41', text: 'Sour tastes 👅', type: 'trigger' }, { id: 'trigger42', text: 'Sweet tastes 👅', type: 'trigger' },
+            { id: 'trigger43', text: 'Food touching sensitivities 👅', type: 'trigger' }, { id: 'trigger44', text: 'Food temperature issues �', type: 'trigger' }, { id: 'trigger45', text: 'Unfamiliar or new foods 👅', type: 'trigger' },
+            { id: 'trigger46', text: 'Mushy textures (yogurt, etc.) 👅', type: 'trigger' }, { id: 'trigger47', text: 'Tags or labels on clothing 👕', type: 'trigger' }, { id: 'trigger48', text: 'Tight or constricting clothing 👕', type: 'trigger' },
+            { id: 'trigger49', text: 'Uncomfortable footwear 👕', type: 'trigger' }, { id: 'trigger50', text: 'Sensitivity to certain fabrics 👕', type: 'trigger' }, { id: 'trigger51', text: 'Fast or erratic movements 🤸', type: 'trigger' },
+            { id: 'trigger52', text: 'Being in crowds 🤸', type: 'trigger' }, { id: 'trigger53', text: 'Rapid changes in motion 🤸', type: 'trigger' }, { id: 'trigger54', text: 'Intense physical activity 🤸', type: 'trigger' },
+            { id: 'trigger55', text: 'Certain transportation (elevators) 🤸', type: 'trigger' }, { id: 'trigger56', text: 'Spinning or rotating 🤸', type: 'trigger' }, { id: 'trigger57', text: 'Crowded or busy spaces 🌳', type: 'trigger' },
+            { id: 'trigger58', text: 'Confined environments 🌳', type: 'trigger' }, { id: 'trigger59', text: 'Lack of personal space 🌳', type: 'trigger' }, { id: 'trigger60', text: 'Unfamiliar environments 🌳', type: 'trigger' },
+            { id: 'trigger61', text: 'Extreme heat or cold 🌡️', type: 'trigger' }, { id: 'trigger62', text: 'Stuffy or stagnant air 🌡️', type: 'trigger' }, { id: 'trigger63', text: 'Humidity or dryness 🌡️', type: 'trigger' },
+            { id: 'trigger64', text: 'Loud or intrusive voices 👥', type: 'trigger' }, { id: 'trigger65', text: 'Personal space invasion 👥', type: 'trigger' }, { id: 'trigger66', text: 'Social demands / small talk 👥', type: 'trigger' },
+            { id: 'trigger67', text: 'Physical touch from others 👥', type: 'trigger' },
+            { id: 'soother1', text: 'Darkness 👁️', type: 'soother' }, { id: 'soother2', text: 'Himalayan salt lamp 👁️', type: 'soother' }, { id: 'soother3', text: 'Candlelight 👁️', type: 'soother' },
+            { id: 'soother4', text: 'Twinkle or fairy lights 👁️', type: 'soother' }, { id: 'soother5', text: 'Light-filtering glasses 👁️', type: 'soother' }, { id: 'soother6', text: 'Nature scenery 👁️', type: 'soother' },
+            { id: 'soother7', text: 'Calming artwork 👁️', type: 'soother' }, { id: 'soother8', text: 'Closing eyes/visual detox 👁️', type: 'soother' }, { id: 'soother9', text: 'Lava lamp or bubble lamp 👁️', type: 'soother' },
+            { id: 'soother10', text: 'Tinted glasses or sunglasses 👁️', type: 'soother' }, { id: 'soother11', text: 'Eye masks or sleep masks 👁️', type: 'soother' }, { id: 'soother12', text: 'Calming music 🔊', type: 'soother' },
+            { id: 'soother13', text: 'Instrumental tunes 🔊', type: 'soother' }, { id: 'soother14', text: 'ASMR videos 🔊', type: 'soother' }, { id: 'soother15', text: 'Guided meditation 🔊', type: 'soother' },
+            { id: 'soother16', text: 'Noise-canceling headphones 🔊', type: 'soother' }, { id: 'soother17', text: 'Essential oils or sachets 👃', type: 'soother' }, { id: 'soother18', text: 'Freshly brewed coffee or tea 👃', type: 'soother' },
+            { id: 'soother19', text: 'Baking or food aromas 👃', type: 'soother' }, { id: 'soother20', text: 'Scented lotions or body oils 👃', type: 'soother' }, { id: 'soother21', text: 'Engaging in tactile crafts ✋', type: 'soother' },
+            { id: 'soother22', text: 'Exploring sensory bins ✋', type: 'soother' }, { id: 'soother23', text: 'Kinetic sand or play-dough ✋', type: 'soother' }, { id: 'soother24', text: 'Gardening or working with soil ✋', type: 'soother' },
+            { id: 'soother25', text: 'Seeking touch (massage, etc) ✋', type: 'soother' }, { id: 'soother26', text: 'Weighted blanket or lap pad ✋', type: 'soother' }, { id: 'soother27', text: 'Squishy stress balls ✋', type: 'soother' },
+            { id: 'soother28', text: 'TENS unit ✋', type: 'soother' }, { id: 'soother29', text: 'Savoring a favorite food 👅', type: 'soother' }, { id: 'soother30', text: 'Enjoying a warm cup of tea 👅', type: 'soother' },
+            { id: 'soother31', text: 'Trying soothing foods 👅', type: 'soother' }, { id: 'soother32', text: 'Chewable jewelry 👅', type: 'soother' }, { id: 'soother33', text: 'Oral sensory tools (chewy tubes) 👅', type: 'soother' },
+            { id: 'soother34', text: 'Compression clothing 👕', type: 'soother' }, { id: 'soother35', text: 'Tagless clothes/seamless socks 👕', type: 'soother' }, { id: 'soother36', text: 'Adaptive clothing 👕', type: 'soother' },
+            { id: 'soother37', text: 'Gentle stretching or yoga 🤸', type: 'soother' }, { id: 'soother38', text: 'Walking or hiking in nature 🤸', type: 'soother' }, { id: 'soother39', text: 'Dancing 🤸', type: 'soother' },
+            { id: 'soother40', text: 'Fidget cubes or tools 🤸', type: 'soother' }, { id: 'soother41', text: 'Exercise balls 🤸', type: 'soother' }, { id: 'soother42', text: 'De-cluttered space 🌳', type: 'soother' },
+            { id: 'soother43', text: 'Cozy & comfortable seating 🌳', type: 'soother' }, { id: 'soother44', text: 'Access to a quiet area 🌳', type: 'soother' }, { id: 'soother45', text: 'Warm or cozy blankets 🌡️', type: 'soother' },
+            { id: 'soother46', text: 'Cooling gel packs / ice packs 🌡️', type: 'soother' }, { id: 'soother47', text: 'Heating pad 🌡️', type: 'soother' }, { id: 'soother48', text: 'Air conditioner or fan 🌡️', type: 'soother' },
+            { id: 'soother49', text: 'Time alone 👥', type: 'soother' }, { id: 'soother50', text: 'A designated advocate 👥', type: 'soother' }, { id: 'soother51', text: 'Supportive friend 👥', type: 'soother' }
+        ];
+
+        // --- STATE --- //
+        const selections = {}; // Object to store user's choices { cardId: 'category' }
+
+        // --- DOM ELEMENTS --- //
+        const cardListContainer = document.getElementById('card-list');
+        const makeListBtn = document.getElementById('make-list-btn');
+        const resultsSection = document.getElementById('results-section');
+        const resultsContainer = document.getElementById('results-container');
+        const downloadBtn = document.getElementById('download-btn');
+
+        // --- FUNCTIONS --- //
+
+        // Function to render all the card items
+        function renderCardList() {
+            cardData.sort(() => Math.random() - 0.5); // Shuffle for variety
+            cardData.forEach(card => {
+                const item = document.createElement('div');
+                item.className = 'card-item';
+                item.dataset.id = card.id;
+                
+                const originalTypeEmoji = card.type === 'like' ? '❤️' : card.type === 'trigger' ? '⚡' : '🌿';
+
+                item.innerHTML = `
+                    <span class="text-sm">${originalTypeEmoji} ${card.text}</span>
+                    <div class="selection-buttons" data-id="${card.id}">
+                        <button class="btn" data-category="like">Like</button>
+                        <button class="btn" data-category="dislike">Dislike</button>
+                        <button class="btn" data-category="soother">Soother</button>
+                        <button class="btn" data-category="neutral">Neutral</button>
+                    </div>
+                `;
+                cardListContainer.appendChild(item);
+            });
+        }
+
+        // Function to handle button clicks for selection
+        function handleSelection(event) {
+            const target = event.target;
+            if (target.tagName !== 'BUTTON') return;
+
+            const category = target.dataset.category;
+            const cardId = target.parentElement.dataset.id;
+            
+            // Update state
+            selections[cardId] = category;
+
+            // Update button styles
+            const buttons = target.parentElement.querySelectorAll('button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            target.classList.add('active');
+        }
+
+        // Function to generate and display the final list
+        function makeList() {
+            const categorized = {
+                like: [],
+                dislike: [],
+                soother: [],
+                neutral: []
+            };
+
+            for (const cardId in selections) {
+                const category = selections[cardId];
+                const card = cardData.find(c => c.id === cardId);
+                if (card) {
+                    categorized[category].push(card);
+                }
+            }
+
+            let resultsText = `♡ ⟡ ˙⋆ SENSORY PROFILE ⋆˙ ⟡ ♡\n`;
+            resultsText += `============================\n\n`;
+
+            resultsText += `--- LIKES ❤️ ---\n`;
+            if (categorized.like.length > 0) {
+                categorized.like.forEach(c => resultsText += `• ${c.text}\n`);
+            } else {
+                resultsText += `(none selected)\n`;
+            }
+            
+            resultsText += `\n--- DISLIKES / TRIGGERS ⚡ ---\n`;
+            if (categorized.dislike.length > 0) {
+                categorized.dislike.forEach(c => resultsText += `• ${c.text}\n`);
+            } else {
+                resultsText += `(none selected)\n`;
+            }
+            
+            resultsText += `\n--- SOOTHERS / HELPERS 🌿 ---\n`;
+            if (categorized.soother.length > 0) {
+                categorized.soother.forEach(c => resultsText += `• ${c.text}\n`);
+            } else {
+                resultsText += `(none selected)\n`;
+            }
+
+            resultsText += `\n--- NEUTRAL 😐 ---\n`;
+            if (categorized.neutral.length > 0) {
+                categorized.neutral.forEach(c => resultsText += `• ${c.text}\n`);
+            } else {
+                resultsText += `(none selected)\n`;
+            }
+
+            resultsContainer.textContent = resultsText;
+            resultsSection.classList.remove('hidden');
+            makeListBtn.classList.add('hidden');
+            cardListContainer.classList.add('hidden');
+
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Function to download the list as a .txt file
+        function downloadList() {
+            const textToDownload = resultsContainer.textContent;
+            const blob = new Blob([textToDownload], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'my-sensory-profile.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // --- EVENT LISTENERS --- //
+        cardListContainer.addEventListener('click', handleSelection);
+        makeListBtn.addEventListener('click', makeList);
+        downloadBtn.addEventListener('click', downloadList);
+
+        // --- INITIALIZATION --- //
+        renderCardList();
+    </script>
+</body>
+</html>
+�
