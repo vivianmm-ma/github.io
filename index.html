@@ -34,7 +34,7 @@
             font-family: 'Source Serif Pro', serif;
             color: var(--light-text);
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px; /* Adjusted padding */
             min-height: 100vh;
             line-height: 1.7;
             overflow-x: hidden;
@@ -48,6 +48,15 @@
             text-align: center;
             position: relative;
             z-index: 1;
+        }
+        
+        /* --- NEW: Visitor Counter at Top --- */
+        .visitor-counter-top {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            color: var(--blue);
         }
 
         /* --- General Section Styling --- */
@@ -136,10 +145,9 @@
         /* --- UPDATED: Dashboard Banner (was stats-bar) --- */
         .dashboard-banner {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Centered title */
             align-items: center;
-            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-            gap: 20px;
+            text-align: center;
             background-color: rgba(13, 15, 26, 0.92);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(52, 152, 219, 0.2);
@@ -149,35 +157,96 @@
         }
 
         .dashboard-banner .header-content {
-            text-align: left;
-            flex-grow: 1;
+            text-align: center; /* Ensure text is centered */
+            flex-grow: 0; /* Don't grow to fill space */
         }
 
-        .dashboard-banner .stats-content {
+        /* --- NEW: Top Bar for Clock --- */
+        .top-bar {
             display: flex;
+            justify-content: space-between; /* Positions items on opposite ends */
             align-items: center;
-            gap: 20px;
-            flex-shrink: 0;
+            margin-bottom: 20px;
         }
 
         #circular-clock {
-            width: 120px;
-            height: 120px;
+            width: 100px; /* Slightly smaller */
+            height: 100px;
             border-radius: 50%;
-            border: 4px solid var(--green);
+            border: 3px solid var(--green);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             color: var(--green);
             background-color: rgba(13, 15, 26, 0.5);
-            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3), inset 0 0 15px rgba(46, 204, 113, 0.2);
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.3), inset 0 0 10px rgba(46, 204, 113, 0.2);
         }
-
-        #visitor-counter {
-            font-size: 1rem;
+        
+        /* --- NEW: Navigation Dropdown --- */
+        .banner-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-btn {
+            background-color: transparent;
             color: var(--blue);
-            font-family: 'Press Start 2P', cursive;
+            padding: 12px;
+            font-size: 1.5rem; /* Larger heart icon */
+            border: 2px solid var(--blue);
+            border-radius: 50%;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .dropdown-btn:hover {
+            background-color: var(--blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--dark-bg);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            min-width: 240px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+            z-index: 100;
+            border-radius: 12px;
+            padding: 10px 0;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .dropdown-content a {
+            color: var(--light-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-family: 'Source Serif Pro', serif;
+            transition: background-color 0.2s;
+        }
+        .dropdown-content a:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content hr {
+            border: none;
+            height: 1px;
+            background-color: rgba(52, 152, 219, 0.2);
+            margin: 8px 0;
         }
 
         /* --- Simple Nav Links --- */
@@ -544,17 +613,40 @@
     </style>
 </head>
 <body>
+    <!-- NEW VISITOR COUNTER LOCATION -->
+    <div class="visitor-counter-top">
+        <p>✨ <span id="visits">Loading...</span> spoonfuls of sugar ✨</p>
+    </div>
+
     <div class="container">
+
+        <!-- NEW Top Bar for Clock and Nav -->
+        <div class="top-bar">
+            <div id="circular-clock"></div>
+            <div class="banner-nav">
+                <div class="dropdown">
+                    <button class="dropdown-btn">♡</button>
+                    <div class="dropdown-content">
+                        <a href="#">♡ Back Home ♡</a>
+                        <hr>
+                        <a href="http://connectkorner.cindnesskult.com" target="_blank" rel="noopener noreferrer">♡ Connect Korner Forum ♡</a>
+                        <a href="NDguide.resources.html">♡ Support Suggestions ♡</a>
+                        <a href="creativityvstructure.html">♡ Creativity & Structure ♡</a>
+                        <a href="adhdmeds.html">♡ ADHD Med Psychoed ♡</a>
+                        <a href="glutamate.gaba.html">♡ Holistic ADHD Recs ♡</a>
+                        <hr>
+                        <a href="link.to.more.docs.html">♡ Printables & Downloads ♡</a>
+                        <a href="#resource-hub">♡ More Links ♡</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        <!-- UPDATED: Dashboard Banner -->
+        <!-- UPDATED: Dashboard Banner (Title Only) -->
         <div class="dashboard-banner">
             <div class="header-content">
                 <h1 class="title gradient-text">Cindness KULT</h1>
                 <p class="subtitle">a non-cult collaboration zone for growth and learning 👾</p>
-            </div>
-            <div class="stats-content">
-                <div id="circular-clock"></div>
-                <div id="visitor-counter"></div>
             </div>
         </div>
         
@@ -665,7 +757,7 @@
             <!-- NEW MAILCHIMP FORM EMBED -->
             <div id="mc_embed_shell" class="mt-6">
                 <div id="mc_embed_signup">
-                    <form action="https://cindnesskult.us16.list-manage.com/subscribe/post?u=d60ef7df43ebff6df64112978&amp;id=02266560a9&amp;f_id=00b89ee0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                    <form action="https://cindnesskult.us16.list-manage.com/subscribe/post?u=d60ef7df43ebff6df64112978&id=02266560a9&f_id=00b89ee0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
                         <div id="mc_embed_signup_scroll">
                             <h2>sign up for updates :)</h2>
                             <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
@@ -753,7 +845,7 @@
             <p>Email: <a href="mailto:cindnesskult@gmail.com" class="contact-button">cindnesskult@gmail.com</a></p>
         </div>
 
-        <div class="section">
+        <div class="section" id="resource-hub">
             <h2 class="gradient-text">Resource Hub 👾</h2>
             
             <h3>For Understanding</h3>
@@ -767,6 +859,8 @@
                 <li><a href="dynamic.html">Dynamic Systems Theory</a></li>
                 <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
                 <li><a href="social.diff.html">Social Differences & Communication</a></li>
+                <!-- NEW TIER LIST LINK -->
+                <li><a href="tierlist.html">ERP Tier List</a></li>
             </ul>
 
             <h3>Free Resources/Tools</h3>
@@ -777,6 +871,8 @@
                 <li><a href="sensorygame.html">Free Sensory Game (Printable)</a></li>
                 <li><a href="planner.html">Free Printable Planner Pages</a></li>
                 <li><a href="adhdmeds.html">Info on ADHD Medication Options (For Education Only)</a></li>
+                <!-- STYLING UPDATED HERE -->
+                <li class="attention-button-li"><a href="interactive.sensory.html" class="attention-button">Interactive Sensory Page</a></li>
                 <li class="attention-button-li"><a href="link.to.more.docs.html" class="attention-button">Printables & Downloads</a></li>
             </ul>
 
@@ -824,7 +920,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2025 Vivian Mitchell. Built with kindness.</p>
+            <p>© 2025 Vivian Mitchell. Built with kindness.</p>
         </footer>
 
     </div>
@@ -1222,43 +1318,38 @@
             tasksContainer.addEventListener('click', handleContainerClick);
             tasksContainer.addEventListener('keydown', handleInputKeydown);
 
-            // --- NEW: Clock and Visitor Counter Initialization ---
+            // --- Clock and Visitor Counter Initialization ---
             function updateClock() {
                 const now = new Date();
                 const hours = String(now.getHours()).padStart(2, '0');
                 const minutes = String(now.getMinutes()).padStart(2, '0');
                 const seconds = String(now.getSeconds()).padStart(2, '0');
                 const timeString = `${hours}:${minutes}:${seconds}`;
-                document.getElementById('circular-clock').textContent = timeString;
-            }
-
-            function updateVisitorCount() {
-                let count = localStorage.getItem('visitorCount');
-                if (count === null) {
-                    count = 1;
-                } else {
-                    count = parseInt(count) + 1;
+                const clockElement = document.getElementById('circular-clock');
+                if (clockElement) {
+                    clockElement.textContent = timeString;
                 }
-                localStorage.setItem('visitorCount', count);
-                document.getElementById('visitor-counter').textContent = `Visitor #${count}`;
             }
 
             updateClock();
             setInterval(updateClock, 1000);
-            updateVisitorCount();
         });
+    </script>
+    
+    <!-- NEW VISITOR COUNTER SCRIPT -->
+    <script>
+        const visitsSpan = document.getElementById('visits');
+        const apiUrl = 'https://api.countapi.xyz/hit/cindnesskult.com/main';
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                visitsSpan.innerText = data.value.toLocaleString('en-US');
+            })
+            .catch(error => {
+                console.error("Error fetching visitor count:", error);
+                visitsSpan.innerText = 'N/A';
+            });
     </script>
 </body>
 </html>
-" code between  and  in the most up-to-date Canvas "Kindness KULT Homepage (Updated)" document above and am asking a query about/based on this code below.
-Instructions to follow:
-  * Don't output/edit the document if the query is Direct/Simple. For example, if the query asks for a simple explanation, output a direct answer.
-  * Make sure to **edit** the document if the query shows the intent of editing the document, in which case output the entire edited document, **not just that section or the edits**.
-    * Don't output the same document/empty document and say that you have edited it.
-    * Don't change unrelated code in the document.
-  * Don't output  and  in your final response.
-  * Any references like "this" or "selected code" refers to the code between  and  tags.
-  * Just acknowledge my request in the introduction.
-  * Make sure to refer to the document as "Canvas" in your response.
-
-ok i need my cindness korner one to link directly to a forum im hosting thru something else connectkorner.cindnesskult.
