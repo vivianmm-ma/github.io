@@ -6,10 +6,8 @@
     <title>INTRUDER THOUGHTS!</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* * By adding #erp-page to every style, we make these rules very specific.
-         * This should prevent your main website's CSS from overriding them.
-        */
-        #erp-page {
+        /* General Body & Font Styling */
+        body {
             background-color: #120d21; /* Dark purple-blue background */
             color: #4affff; /* Bright cyan text */
             font-family: 'Courier New', Courier, monospace;
@@ -18,7 +16,7 @@
         }
 
         /* Header Styling */
-        #erp-page h1 {
+        h1 {
             color: #ff47ff; /* Bright magenta */
             font-size: 3rem;
             text-shadow: 3px 3px 0px #4affff; /* Cyan shadow for a glitch effect */
@@ -26,7 +24,7 @@
             margin-bottom: 0;
         }
 
-        #erp-page h2 {
+        h2 {
             color: #fffb91; /* Bright yellow */
             font-size: 1.8rem;
             text-shadow: 2px 2px 0px #ff47ff; /* Magenta shadow */
@@ -37,14 +35,14 @@
         }
 
         /* Main Content Layout */
-        #erp-page p {
+        p {
             font-size: 1.1rem;
             line-height: 1.6;
             max-width: 800px;
             margin: 15px auto;
         }
 
-        #erp-page .main-container {
+        .main-container {
             display: flex;
             flex-wrap: wrap; /* Allows columns to stack on smaller screens */
             justify-content: center;
@@ -52,7 +50,7 @@
             margin-top: 30px;
         }
 
-        #erp-page .column {
+        .column {
             flex: 1;
             min-width: 350px;
             max-width: 500px;
@@ -62,27 +60,27 @@
             box-shadow: 0 0 15px rgba(74, 255, 255, 0.3);
         }
 
-        #erp-page .column h3 {
+        .column h3 {
             font-size: 1.5rem;
             color: #4affff;
             margin-top: 0;
         }
 
         /* Tier List Styling */
-        #erp-page .tier-list {
+        .tier-list {
             list-style-type: none;
             padding: 0;
             margin-top: 20px;
         }
 
-        #erp-page .tier-row {
+        .tier-row {
             display: flex;
             align-items: stretch; /* Make items in the row the same height */
             margin-bottom: 8px;
             min-height: 60px;
         }
 
-        #erp-page .tier-label {
+        .tier-label {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -95,13 +93,13 @@
         }
 
         /* Tier Colors */
-        #erp-page .tier-s { background-color: #ff595e; } /* Red */
-        #erp-page .tier-a { background-color: #ffca3a; } /* Orange-Yellow */
-        #erp-page .tier-b { background-color: #8ac926; } /* Green */
-        #erp-page .tier-c { background-color: #1982c4; } /* Blue */
-        #erp-page .tier-d { background-color: #6a4c93; } /* Purple */
+        .tier-s { background-color: #ff595e; } /* Red */
+        .tier-a { background-color: #ffca3a; } /* Orange-Yellow */
+        .tier-b { background-color: #8ac926; } /* Green */
+        .tier-c { background-color: #1982c4; } /* Blue */
+        .tier-d { background-color: #6a4c93; } /* Purple */
 
-        #erp-page .tier-content {
+        .tier-content {
             flex-grow: 1;
             background-color: #1f1a30;
             border: 2px dashed #4affff;
@@ -111,35 +109,35 @@
             text-align: left;
         }
 
-        #erp-page .tier-content:focus {
+        .tier-content:focus {
             outline: 2px solid #ff47ff;
             background-color: #2a2440;
         }
         
         /* Exposure Trials Table */
-        #erp-page .trials-section {
+        .trials-section {
             margin-top: 40px;
         }
         
-        #erp-page .trials-table {
+        .trials-table {
             width: 100%;
             max-width: 800px;
             margin: 20px auto;
             border-collapse: collapse;
         }
 
-        #erp-page .trials-table th, #erp-page .trials-table td {
+        .trials-table th, .trials-table td {
             border: 2px solid #4affff;
             padding: 12px;
             font-size: 1.1rem;
         }
 
-        #erp-page .trials-table th {
+        .trials-table th {
             color: #fffb91;
             background-color: rgba(255, 251, 145, 0.1);
         }
 
-        #erp-page .trials-table input[type="text"] {
+        .trials-table input[type="text"] {
             width: 95%;
             background-color: transparent;
             border: none;
@@ -150,25 +148,25 @@
             padding: 5px;
         }
 
-        #erp-page .trials-table input[type="text"]:focus {
+        .trials-table input[type="text"]:focus {
             outline: none;
             border-bottom: 2px solid #fffb91;
         }
         
-        #erp-page .disclaimer {
+        .disclaimer {
             color: #ffca3a;
             font-weight: bold;
             margin-top: 20px;
         }
 
         /* Footer and Download Button Styling */
-        #erp-page footer {
+        footer {
             margin-top: 50px;
             padding-top: 20px;
             border-top: 2px solid #333;
         }
         
-        #erp-page .download-btn {
+        .download-btn {
             display: inline-block;
             background-color: #8b008b;
             color: #ffffff;
@@ -183,22 +181,22 @@
             border: 2px solid #500050;
         }
         
-        #erp-page .download-btn:hover {
+        .download-btn:hover {
             background-color: #a000a0;
         }
 
-        #erp-page footer a {
+        footer a {
             color: #3498db;
             text-decoration: none;
         }
         
-        #erp-page footer a:hover {
+        footer a:hover {
             text-decoration: underline;
         }
 
     </style>
 </head>
-<body id="erp-page">
+<body>
 
     <h1>> INTRUDER THOUGHTS!_</h1>
     <p>
@@ -345,4 +343,3 @@ a.href = URL.createObjectURL(blob);
 
 </body>
 </html>
-
