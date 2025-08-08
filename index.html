@@ -576,6 +576,7 @@
             height: 100%;
             background-color: rgba(13, 15, 26, 0.8);
             border: 1px solid rgba(52, 152, 219, 0.3);
+            position: relative; /* Needed for absolute positioning of delete button */
         }
         .task-card.completed {
             background-color: rgba(13, 15, 26, 0.5);
@@ -601,6 +602,7 @@
         .sub-steps-list li {
             display: flex;
             align-items: center;
+            justify-content: space-between; /* Space out content and delete button */
             gap: 0.5rem;
             padding: 0.25rem 0;
             border-bottom: 1px solid rgba(52, 152, 219, 0.2);
@@ -608,6 +610,27 @@
          .sub-steps-list li.completed {
             text-decoration: line-through;
             color: #6b7280;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0 5px;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .delete-btn:hover {
+            opacity: 1;
+        }
+        .task-card .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .sub-steps-list .delete-btn {
+            font-size: 1rem;
         }
         
     </style>
@@ -859,6 +882,7 @@
                 <li><a href="dynamic.html">Dynamic Systems Theory</a></li>
                 <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
                 <li><a href="social.diff.html">Social Differences & Communication</a></li>
+                <li><a href="diss.html">Dissociative Disorders</a></li>
                 <!-- NEW TIER LIST LINK -->
                 <li><a href="tierlist.html">ERP Tier List</a></li>
             </ul>
@@ -1182,8 +1206,11 @@
                 const completedClass = task.completed ? 'completed' : '';
                 const subStepsHtml = (task.subSteps || []).map((step, index) => 
                     `<li data-index="${index}" class="${step.completed ? 'completed' : ''}">
-                        <input type="checkbox" ${step.completed ? 'checked' : ''} class="sub-step-checkbox accent-purple-400">
-                        <span>${step.text}</span>
+                        <div class="flex items-center gap-2">
+                           <input type="checkbox" ${step.completed ? 'checked' : ''} class="sub-step-checkbox accent-purple-400">
+                           <span>${step.text}</span>
+                        </div>
+                        <button class="delete-btn" data-action="delete-sub-step">&times;</button>
                     </li>`
                 ).join('');
 
@@ -1191,9 +1218,10 @@
                 card.id = task.id;
                 card.className = `task-card rounded-lg p-4 shadow-sm ${completedClass}`;
                 card.innerHTML = `
+                    <button class="delete-btn" data-action="delete-task">&times;</button>
                     <div class="flex-grow">
                         <div class="flex justify-between items-start cursor-pointer" data-action="toggle-main">
-                            <h3 class="font-bold pr-2" style="color: var(--light-text);">${task.title}</h3>
+                            <h3 class="font-bold pr-4" style="color: var(--light-text);">${task.title}</h3>
                             ${timeText}
                         </div>
                         <div class="mt-4">
@@ -1223,23 +1251,32 @@
                 if (!card) return;
 
                 const taskId = card.id;
-                const task = tasks.find(t => t.id === taskId);
-                if (!task) return;
+                const taskIndex = tasks.findIndex(t => t.id === taskId);
+                if (taskIndex === -1) return;
+                const task = tasks[taskIndex];
 
-                if (e.target.closest('[data-action="toggle-main"]')) {
+                const action = e.target.dataset.action;
+
+                if (action === 'toggle-main') {
                     task.completed = !task.completed;
-                    renderTasks();
-                }
-
-                if (e.target.classList.contains('sub-step-checkbox')) {
-                    const subStepIndex = parseInt(e.target.closest('li').dataset.index, 10);
+                } else if (action === 'delete-task') {
+                    tasks.splice(taskIndex, 1);
+                } else if (action === 'delete-sub-step') {
+                    const subStepLi = e.target.closest('li');
+                    const subStepIndex = parseInt(subStepLi.dataset.index, 10);
+                    task.subSteps.splice(subStepIndex, 1);
+                } else if (e.target.classList.contains('sub-step-checkbox')) {
+                    const subStepLi = e.target.closest('li');
+                    const subStepIndex = parseInt(subStepLi.dataset.index, 10);
                     task.subSteps[subStepIndex].completed = e.target.checked;
-                    renderTasks();
                 }
+                
+                renderTasks();
             }
 
             function handleInputKeydown(e) {
                 if (e.key === 'Enter' && e.target.classList.contains('sub-step-input')) {
+                    e.preventDefault(); // Prevent form submission
                     const card = e.target.closest('.task-card');
                     if (!card) return;
 
@@ -1261,23 +1298,18 @@
                 modal.classList.toggle('hidden');
             }
             
-            // NEW: Function to download tasks as a .txt file
             function downloadTasksAsTxt() {
                 if (tasks.length === 0) {
-                    // Maybe show a message to the user that there are no tasks
                     return;
                 }
-
                 let content = "Cindness KULT - Daily Game Plan\n";
                 content += "===================================\n\n";
-
                 const importanceMap = {
                     '1': '🔥 Do It Now',
                     '2': '🎯 Focus Next',
                     '3': '⏳ Schedule It',
                     '4': '✨ Someday/Maybe'
                 };
-
                 tasks.sort((a, b) => a.importance - b.importance).forEach(task => {
                     content += `[${task.completed ? 'X' : ' '}] ${task.title}\n`;
                     content += `    Importance: ${importanceMap[task.importance]}\n`;
@@ -1291,7 +1323,6 @@
                     }
                     content += "\n-----------------------------------\n\n";
                 });
-
                 const blob = new Blob([content], { type: 'text/plain' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -1391,9 +1422,18 @@
         const apiUrl = 'https://api.countapi.xyz/hit/cindnesskult.com/main';
 
         fetch(apiUrl)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                visitsSpan.innerText = data.value.toLocaleString('en-US');
+                if (data.value) {
+                    visitsSpan.innerText = data.value.toLocaleString('en-US');
+                } else {
+                    visitsSpan.innerText = 'n/a';
+                }
             })
             .catch(error => {
                 console.error("Error fetching visitor count:", error);
