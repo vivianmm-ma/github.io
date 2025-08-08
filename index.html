@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<head>
-
 <html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cindness KULT</title>
     <!-- Importing fonts for the title and body -->
-   
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -118,6 +116,16 @@
             margin-top: 25px;
             text-align: center;
         }
+
+        h4 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.1rem;
+            color: var(--blue);
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
         p {
             font-family: 'Source Serif Pro', serif;
             font-size: 1.1rem;
@@ -294,17 +302,18 @@
             padding: 0;
             margin: 0;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column; /* Changed to column for vertical list */
+            align-items: center; /* Center items horizontally */
+            gap: 15px; /* Spacing between links */
         }
 
         .link-pool li a {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 250px;
-            height: 80px;
+            width: 100%; /* Full width within the column */
+            max-width: 300px; /* Max width for links */
+            height: 60px; /* Adjusted height */
             padding: 10px;
             position: relative;
             background-color: var(--dark-bg);
@@ -640,7 +649,7 @@
 <body>
     <!-- NEW VISITOR COUNTER LOCATION -->
     <div class="visitor-counter-top">
-        <p><style></style><script type="text/javascript" src="https://counter.websiteout.com/js/7/0/0/0"></script></p>
+        <p><script type="text/javascript" src="https://counter.websiteout.com/js/7/0/0/0"></script></p>
     </div>
 
     <div class="container">
@@ -660,7 +669,7 @@
                         <a href="adhdmeds.html">♡ ADHD Med Psychoed ♡</a>
                         <a href="glutamate.gaba.html">♡ Holistic ADHD Recs ♡</a>
                         <hr>
-                        <a href="link.to.more.docs.html">♡ Printables & Downloads ♡</a>
+                        <a href="link.to.more.docs.html">♡ Printables&Downloads ♡</a>
                         <a href="#resource-hub">♡ More Links ♡</a>
                     </div>
                 </div>
@@ -873,42 +882,65 @@
         <div class="section" id="resource-hub">
             <h2 class="gradient-text">Resource Hub 👾</h2>
             
-            <h3>For Understanding</h3>
-            <ul class="link-pool">
-                <li><a href="diff2.html">It's a Different Operating System, Not a Deficit</a></li>
-                <li><a href="duality.html">The Duality Framework</a></li>
-                <li><a href="erp.info.html">ERP (OCD) therapy: an intro </a></li>
-                <li><a href="evolution.html">Evolution of Harm (The Roots)</a></li>
-                <li><a href="maintheory.html">Interwoven Roots Theory (The Main Theory)</a></li>
-                <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
-                <li><a href="dynamic.html">Dynamic Systems Theory</a></li>
-                <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
-                <li><a href="social.diff.html">Social Differences & Communication</a></li>
-                <li><a href="diss.html">Dissociative Disorders</a></li>
-                <!-- NEW TIER LIST LINK -->
-                <li><a href="tierlist.html">ERP Tier List</a></li>
-            </ul>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4>OCD</h4>
+                    <ul class="link-pool">
+                        <li><a href="erp.info.html">ERP (OCD) therapy: an intro </a></li>
+                        <li><a href="ocd.risk.html">Understanding OCD & Risk</a></li>
+                        <li><a href="tierlist.html">ERP Tier List</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>ASD/ADHD</h4>
+                    <ul class="link-pool">
+                        <li><a href="diff2.html">It's a Different Operating System, Not a Deficit</a></li>
+                        <li><a href="social.diff.html">Autistic Super-Strengths</a></li>
+                        <li><a href="ExecFun.html">Executive Functioning & ADHD</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Other Mental Health</h4>
+                    <ul class="link-pool">
+                        <li><a href="duality.html">The Duality Framework</a></li>
+                        <li><a href="evolution.html">Evolution of Harm (The Roots)</a></li>
+                        <li><a href="maintheory.html">Interwoven Roots Theory</a></li>
+                        <li><a href="glutamate.gaba.html">Glutamate & GABA Balance</a></li>
+                        <li><a href="diss.html">Dissociative Disorders</a></li>
+                    </ul>
+                </div>
+            </div>
 
-            <h3>Free Resources/Tools</h3>
-            <ul class="link-pool" style="margin-top: 20px;">
-                <li><a href="NDguide.resources.html">Support/Accommodations for NDs</a></li>
-                <li><a href="creativityvstructure.html">Creativity & Structure</a></li>
-                <li><a href="printerfriendlyCS.html">Creativity & Structure (Printer Friendly)</a></li>
-                <li><a href="sensorygame.html">Free Sensory Game (Printable)</a></li>
-                <li><a href="planner.html">Free Printable Planner Pages</a></li>
-                <li><a href="adhdmeds.html">Info on ADHD Medication Options (For Education Only)</a></li>
-                <!-- STYLING UPDATED HERE -->
-                <li class="attention-button-li"><a href="interactive.sensory.html" class="attention-button">Interactive Sensory Page</a></li>
-                <li class="attention-button-li"><a href="link.to.more.docs.html" class="attention-button">Printables & Downloads</a></li>
-            </ul>
+            <h3 class="mt-12">Free Resources/Tools</h3>
+   
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <h3>For Clinicians</h3>
-            <ul class="link-pool" style="margin-top: 20px;">
+    <ul class="link-pool">
+        <li><a href="NDguide.resources.html">Support/Accommodations for NDs</a></li>
+        <li><a href="creativityvstructure.html">Creativity & Structure</a></li>
+        <li><a href="printerfriendlyCS.html">Creativity & Structure (Printer Friendly)</a></li>
+    </ul>
+
+    <ul class="link-pool">
+        <li><a href="sensorygame.html">Free Sensory Game (Printable)</a></li>
+        <li><a href="planner.html">Free Printable Planner Pages</a></li>
+        <li><a href="adhdmeds.html">Info on ADHD Medication Options (For Education Only)</a></li>
+    </ul>
+
+    <ul class="link-pool">
+        <li class="attention-button-li"><a href="interactive.sensory.html" class="attention-button">Interactive Sensory</a></li>
+        <li class="attention-button-li"><a href="link.to.more.docs.html" class="attention-button">Printables& Downloads</a></li>
+    </ul>
+ 
+</div>
+
+            <h3 class="mt-12">For Clinicians</h3>
+            <ul class="link-pool" style="margin-top: 20px; flex-direction: row; justify-content: center;">
                  <li><a href="clinicians.korner.html">Clinician's Korner</a></li>
             </ul>
 
-            <h3>Creative Works & Socials</h3>
-             <ul class="link-pool" style="margin-top: 20px;">
+            <h3 class="mt-12">Creative Works & Socials</h3>
+             <ul class="link-pool" style="margin-top: 20px; flex-direction: row; justify-content: center;">
                 <li><a href="https://plasma-pet.tumblr.com/tagged/ocpoetry">Some Poems</a></li>
                 <li><a href="https://www.instagram.com/viviyum/" target="_blank">Instagram (@viviyum)</a></li>
              </ul>
