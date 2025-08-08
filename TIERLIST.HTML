@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INTRUDER THOUGHTS!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* General Body & Font Styling */
-        body {
+        /* * By adding #erp-page to every style, we make these rules very specific.
+         * This should prevent your main website's CSS from overriding them.
+        */
+        #erp-page {
             background-color: #120d21; /* Dark purple-blue background */
             color: #4affff; /* Bright cyan text */
             font-family: 'Courier New', Courier, monospace;
@@ -15,7 +18,7 @@
         }
 
         /* Header Styling */
-        h1 {
+        #erp-page h1 {
             color: #ff47ff; /* Bright magenta */
             font-size: 3rem;
             text-shadow: 3px 3px 0px #4affff; /* Cyan shadow for a glitch effect */
@@ -23,7 +26,7 @@
             margin-bottom: 0;
         }
 
-        h2 {
+        #erp-page h2 {
             color: #fffb91; /* Bright yellow */
             font-size: 1.8rem;
             text-shadow: 2px 2px 0px #ff47ff; /* Magenta shadow */
@@ -34,14 +37,14 @@
         }
 
         /* Main Content Layout */
-        p {
+        #erp-page p {
             font-size: 1.1rem;
             line-height: 1.6;
             max-width: 800px;
             margin: 15px auto;
         }
 
-        .main-container {
+        #erp-page .main-container {
             display: flex;
             flex-wrap: wrap; /* Allows columns to stack on smaller screens */
             justify-content: center;
@@ -49,7 +52,7 @@
             margin-top: 30px;
         }
 
-        .column {
+        #erp-page .column {
             flex: 1;
             min-width: 350px;
             max-width: 500px;
@@ -59,27 +62,27 @@
             box-shadow: 0 0 15px rgba(74, 255, 255, 0.3);
         }
 
-        .column h3 {
+        #erp-page .column h3 {
             font-size: 1.5rem;
             color: #4affff;
             margin-top: 0;
         }
 
         /* Tier List Styling */
-        .tier-list {
+        #erp-page .tier-list {
             list-style-type: none;
             padding: 0;
             margin-top: 20px;
         }
 
-        .tier-row {
+        #erp-page .tier-row {
             display: flex;
             align-items: stretch; /* Make items in the row the same height */
             margin-bottom: 8px;
             min-height: 60px;
         }
 
-        .tier-label {
+        #erp-page .tier-label {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -92,13 +95,13 @@
         }
 
         /* Tier Colors */
-        .tier-s { background-color: #ff595e; } /* Red */
-        .tier-a { background-color: #ffca3a; } /* Orange-Yellow */
-        .tier-b { background-color: #8ac926; } /* Green */
-        .tier-c { background-color: #1982c4; } /* Blue */
-        .tier-d { background-color: #6a4c93; } /* Purple */
+        #erp-page .tier-s { background-color: #ff595e; } /* Red */
+        #erp-page .tier-a { background-color: #ffca3a; } /* Orange-Yellow */
+        #erp-page .tier-b { background-color: #8ac926; } /* Green */
+        #erp-page .tier-c { background-color: #1982c4; } /* Blue */
+        #erp-page .tier-d { background-color: #6a4c93; } /* Purple */
 
-        .tier-content {
+        #erp-page .tier-content {
             flex-grow: 1;
             background-color: #1f1a30;
             border: 2px dashed #4affff;
@@ -108,35 +111,35 @@
             text-align: left;
         }
 
-        .tier-content:focus {
+        #erp-page .tier-content:focus {
             outline: 2px solid #ff47ff;
             background-color: #2a2440;
         }
         
         /* Exposure Trials Table */
-        .trials-section {
+        #erp-page .trials-section {
             margin-top: 40px;
         }
         
-        .trials-table {
+        #erp-page .trials-table {
             width: 100%;
             max-width: 800px;
             margin: 20px auto;
             border-collapse: collapse;
         }
 
-        .trials-table th, .trials-table td {
+        #erp-page .trials-table th, #erp-page .trials-table td {
             border: 2px solid #4affff;
             padding: 12px;
             font-size: 1.1rem;
         }
 
-        .trials-table th {
+        #erp-page .trials-table th {
             color: #fffb91;
             background-color: rgba(255, 251, 145, 0.1);
         }
 
-        .trials-table input[type="text"] {
+        #erp-page .trials-table input[type="text"] {
             width: 95%;
             background-color: transparent;
             border: none;
@@ -147,20 +150,55 @@
             padding: 5px;
         }
 
-        .trials-table input[type="text"]:focus {
+        #erp-page .trials-table input[type="text"]:focus {
             outline: none;
             border-bottom: 2px solid #fffb91;
         }
         
-        .disclaimer {
+        #erp-page .disclaimer {
             color: #ffca3a;
             font-weight: bold;
             margin-top: 20px;
         }
 
+        /* Footer and Download Button Styling */
+        #erp-page footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #333;
+        }
+        
+        #erp-page .download-btn {
+            display: inline-block;
+            background-color: #8b008b;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid #500050;
+        }
+        
+        #erp-page .download-btn:hover {
+            background-color: #a000a0;
+        }
+
+        #erp-page footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        #erp-page footer a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
-<body>
+<body id="erp-page">
 
     <h1>> INTRUDER THOUGHTS!_</h1>
     <p>
@@ -229,9 +267,7 @@
     <div class="trials-section">
         <h2>BOSS RUSH: EXPOSURE TRIALS</h2>
         <p>Log your training sessions here. An exposure trial means facing a feared thought or situation **without** doing the compulsion. Start your training!</p>
-        <p class="disclaimer">
-            NOTE: This page does not save your data! To keep a record of your progress, please print this page or use "Save Page As..." in your browser.
-        </p>
+        
         <table class="trials-table">
             <thead>
                 <tr>
@@ -269,6 +305,43 @@
             </tbody>
         </table>
     </div>
+
+    <footer>
+        <button class="download-btn" onclick="downloadPage()">Download Page</button>
+        <p class="disclaimer">
+            NOTE: This page does not save your data automatically! Click the download button to save your progress.
+        </p>
+        <p>
+            <a href="https://www.kindnesskult.com" target="_blank">Return to KindnessKult.com</a>
+        </p>
+    </footer>
+
+    <script>
+        // This function saves the current state of the page as an HTML file.
+        function downloadPage() {
+            // First, update the value of the input fields so the saved file reflects the typed text.
+            const inputs = document.querySelectorAll('input[type="text"]');
+            inputs.forEach(input => {
+                input.setAttribute('value', input.value);
+            });
+
+            // Get the entire current HTML of the page
+            const pageHTML = document.documentElement.outerHTML;
+            
+            // Create a Blob, which is a file-like object of immutable, raw data.
+            const blob = new Blob([pageHTML], { type: 'text/html' });
+            
+            // Create a temporary link element to trigger the download.
+            const a = document.createElement('a');
+a.href = URL.createObjectURL(blob);
+            a.download = 'my-exposure-hierarchy.html'; // The default filename for the download
+            
+            // Append the link to the body, click it, and then remove it.
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
 
 </body>
 </html>
