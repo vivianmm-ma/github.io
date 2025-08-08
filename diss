@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dissociation Quest</title>
+    <style>
+        /* --- General Setup & Font --- */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            font-family: 'Press Start 2P', 'Courier New', Courier, monospace;
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* --- Main Container & Layout --- */
+        .game-container {
+            width: 100%;
+            max-width: 900px;
+            border: 4px solid #5c5cff;
+            background-color: #1a1a1a;
+            padding: 20px;
+            box-shadow: 0 0 15px #5c5cff, inset 0 0 10px #5c5cff33;
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #5c5cff;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            text-shadow: 3px 3px 0 #c00;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #00ff00;
+            margin-top: 10px;
+            animation: blink 1.5s step-end infinite;
+        }
+
+        /* --- Blinking Animation --- */
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* --- Content Sections (Levels) --- */
+        .level {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #ff7f50; /* Coral color */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Pixelated icon before headings */
+        h2::before {
+            content: '>';
+            margin-right: 15px;
+            color: #00ff00;
+            font-size: 1.5rem;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        .dialogue-box {
+            background-color: #00005a;
+            border: 3px solid #aaaaff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .dialogue-box p {
+            margin: 0 0 15px 0;
+        }
+        
+        .dialogue-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        strong {
+            color: #00ff00; /* Green for emphasis */
+        }
+
+        /* --- Specific Disorder Sections --- */
+        .disorder-card {
+            background: #2a002a;
+            border: 3px solid #ff00ff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: #ffcc00;
+            margin-top: 0;
+        }
+        
+        .analogy {
+            color: #aaaaff;
+            font-style: italic;
+            display: block;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 3px solid #ff7f50;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 4px solid #5c5cff;
+            font-size: 0.8rem;
+            color: #aaaaaa;
+        }
+        
+        footer a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #ffcc00;
+            text-decoration: underline;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 600px) {
+            body {
+                font-size: 14px;
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .game-container {
+                padding: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <header>
+            <h1>DISSOCIATION QUEST</h1>
+            <p class="subtitle">Press Start to Learn</p>
+        </header>
+
+        <main>
+            <!-- LEVEL 1: WHAT IS DISSOCIATION? -->
+            <section id="level1" class="level">
+                <h2>Level 1: The Glitch</h2>
+                <div class="dialogue-box">
+                    <p>
+                        Welcome, Player. You've encountered <strong>dissociation</strong>. Think of it as a glitch in the connection between your mind and the world. It's a disconnect from your thoughts, feelings, memories, identity, or surroundings.
+                    </p>
+                    <p>
+                        Everyone experiences a mild version of this. It's like your character is on autopilot while driving a familiar route, or getting so lost in a book that you don't hear someone call your name. That's the tutorial level.
+                    </p>
+                    <p>
+                        It becomes a challenge when this "glitch" happens often, is distressing, and interferes with your main quest: daily life. It's a defense mechanism your brain uses to cope with overwhelming stress or trauma—like a temporary pause screen for your consciousness.
+                    </p>
+                </div>
+            </section>
+
+            <!-- LEVEL 2: DISSOCIATIVE DISORDERS -->
+            <section id="level2" class="level">
+                <h2>Level 2: The Boss Battles</h2>
+                <div class="dialogue-box">
+                    <p>
+                        When dissociation becomes the main game mechanic and is severe, it might be a <strong>dissociative disorder</strong>. These are the boss battles—complex challenges that require strategy and support to overcome.
+                    </p>
+                </div>
+
+                <!-- Boss 1: DID -->
+                <div class="disorder-card">
+                    <h3>Dissociative Identity Disorder (DID)</h3>
+                    <p>This is characterized by having two or more distinct identity states, or "alters." It's as if there are multiple player characters in one game, but you don't always control who is playing or remember what happened when another was active.</p>
+                    <span class="analogy">Game Analogy: Your controller gets passed between different players, each with their own play style and memories of the game.</span>
+                </div>
+
+                <!-- Boss 2: Dissociative Amnesia -->
+                <div class="disorder-card">
+                    <h3>Dissociative Amnesia</h3>
+                    <p>This involves an inability to recall important personal information, usually related to a traumatic or stressful event. It's more severe than normal forgetfulness.</p>
+                    <p>Sometimes, this includes a "fugue state," a rare side quest where a person travels to a new location with no memory of their past identity.</p>
+                    <span class="analogy">Game Analogy: A crucial part of your save file is corrupted and cannot be loaded.</span>
+                </div>
+
+                <!-- Boss 3: Depersonalization/Derealization -->
+                <div class="disorder-card">
+                    <h3>Depersonalization/Derealization Disorder</h3>
+                    <p>This involves ongoing or recurring feelings of being detached from oneself (depersonalization) or from reality (derealization).</p>
+                    <ul>
+                        <li><strong>Depersonalization:</strong> Feeling like you're an outside observer of your own thoughts, feelings, or body.</li>
+                        <li><strong>Derealization:</strong> Feeling that the world around you is unreal, dreamlike, or distorted.</li>
+                    </ul>
+                    <span class="analogy">Game Analogy: Playing in a permanent third-person view (Depersonalization) or feeling like the game world is a fake, glitching set (Derealization).</span>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>This quest is for informational purposes only. If these challenges feel familiar, consider seeking support from a mental health professional to help you navigate the game.</p>
+            <p>Knowledge is power. Quest complete.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
