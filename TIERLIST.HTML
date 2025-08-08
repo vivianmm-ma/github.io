@@ -4,22 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INTRUDER THOUGHTS!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* * The #erp-container is a wrapper for the whole page. 
-         * This helps protect the page's styles from being overridden by your website's main CSS.
-         */
-        #erp-container {
+        /* General Body & Font Styling */
+        body {
             background-color: #120d21; /* Dark purple-blue background */
             color: #4affff; /* Bright cyan text */
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
             padding: 20px;
-            min-height: 100vh;
         }
 
         /* Header Styling */
-        #erp-container h1 {
+        h1 {
             color: #ff47ff; /* Bright magenta */
             font-size: 3rem;
             text-shadow: 3px 3px 0px #4affff; /* Cyan shadow for a glitch effect */
@@ -27,7 +23,7 @@
             margin-bottom: 0;
         }
 
-        #erp-container h2 {
+        h2 {
             color: #fffb91; /* Bright yellow */
             font-size: 1.8rem;
             text-shadow: 2px 2px 0px #ff47ff; /* Magenta shadow */
@@ -38,7 +34,7 @@
         }
 
         /* Main Content Layout */
-        #erp-container p {
+        p {
             font-size: 1.1rem;
             line-height: 1.6;
             max-width: 800px;
@@ -156,195 +152,123 @@
             border-bottom: 2px solid #fffb91;
         }
         
-        #erp-container .disclaimer {
+        .disclaimer {
             color: #ffca3a;
             font-weight: bold;
             margin-top: 20px;
-        }
-
-        /* Footer and Download Button Styling */
-        #erp-container footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 2px solid #333;
-        }
-        
-        .download-btn {
-            display: inline-block;
-            background-color: #8b008b;
-            color: #ffffff;
-            padding: 10px 20px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            cursor: pointer;
-            border: 2px solid #500050;
-        }
-        
-        .download-btn:hover {
-            background-color: #a000a0;
-        }
-
-        #erp-container footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        #erp-container footer a:hover {
-            text-decoration: underline;
         }
 
     </style>
 </head>
 <body>
 
-    <div id="erp-container">
-        <h1>> INTRUDER THOUGHTS!_</h1>
-        <p>
-            Your mission, should you choose to accept it: Face down the brain glitches.
-            This page is an **exposure hierarchy**, designed to help you rank your fears and tackle them one by one. The goal is to bravely face the 'S' Tiers until they feel like 'D' Tiers!
-        </p>
+    <h1>> INTRUDER THOUGHTS!_</h1>
+    <p>
+        Your mission, should you choose to accept it: Face down the brain glitches.
+        This page is an **exposure hierarchy**, designed to help you rank your fears and tackle them one by one. The goal is to bravely face the 'S' Tiers until they feel like 'D' Tiers!
+    </p>
 
-        <div class="main-container">
-            <div class="column">
-                <h3>LEVEL 1: INTRUSIVE GLITCHES<br>(Obsessions)</h3>
-                <p>Unwanted thoughts, images, or urges that get stuck on repeat. List your fears from most distressing (S) to least (D).</p>
+    <div class="main-container">
+        <div class="column">
+            <h3>LEVEL 1: INTRUSIVE GLITCHES<br>(Obsessions)</h3>
+            <p>Unwanted thoughts, images, or urges that get stuck on repeat. List your fears from most distressing (S) to least (D).</p>
 
-                <ul class="tier-list">
-                    <li class="tier-row">
-                        <div class="tier-label tier-s">S</div>
-                        <div class="tier-content" contenteditable="true" aria-label="S-Tier Obsessions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-a">A</div>
-                        <div class="tier-content" contenteditable="true" aria-label="A-Tier Obsessions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-b">B</div>
-                        <div class="tier-content" contenteditable="true" aria-label="B-Tier Obsessions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-c">C</div>
-                        <div class="tier-content" contenteditable="true" aria-label="C-Tier Obsessions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-d">D</div>
-                        <div class="tier-content" contenteditable="true" aria-label="D-Tier Obsessions"></div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="column">
-                <h3>SIDE QUEST: DEBUG ROUTINES<br>(Compulsions)</h3>
-                <p>Repetitive rituals or mental acts used to "cancel out" the glitch or reduce distress. What do you feel forced to do?</p>
-                
-                <ul class="tier-list">
-                    <li class="tier-row">
-                        <div class="tier-label tier-s">S</div>
-                        <div class="tier-content" contenteditable="true" aria-label="S-Tier Compulsions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-a">A</div>
-                        <div class="tier-content" contenteditable="true" aria-label="A-Tier Compulsions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-b">B</div>
-                        <div class="tier-content" contenteditable="true" aria-label="B-Tier Compulsions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-c">C</div>
-                        <div class="tier-content" contenteditable="true" aria-label="C-Tier Compulsions"></div>
-                    </li>
-                    <li class="tier-row">
-                        <div class="tier-label tier-d">D</div>
-                        <div class="tier-content" contenteditable="true" aria-label="D-Tier Compulsions"></div>
-                    </li>
-                </ul>
-            </div>
+            <ul class="tier-list">
+                <li class="tier-row">
+                    <div class="tier-label tier-s">S</div>
+                    <div class="tier-content" contenteditable="true" aria-label="S-Tier Obsessions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-a">A</div>
+                    <div class="tier-content" contenteditable="true" aria-label="A-Tier Obsessions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-b">B</div>
+                    <div class="tier-content" contenteditable="true" aria-label="B-Tier Obsessions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-c">C</div>
+                    <div class="tier-content" contenteditable="true" aria-label="C-Tier Obsessions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-d">D</div>
+                    <div class="tier-content" contenteditable="true" aria-label="D-Tier Obsessions"></div>
+                </li>
+            </ul>
         </div>
 
-        <div class="trials-section">
-            <h2>BOSS RUSH: EXPOSURE TRIALS</h2>
-            <p>Log your training sessions here. An exposure trial means facing a feared thought or situation **without** doing the compulsion. Start your training!</p>
+        <div class="column">
+            <h3>SIDE QUEST: DEBUG ROUTINES<br>(Compulsions)</h3>
+            <p>Repetitive rituals or mental acts used to "cancel out" the glitch or reduce distress. What do you feel forced to do?</p>
             
-            <table class="trials-table">
-                <thead>
-                    <tr>
-                        <th>Trial #</th>
-                        <th>Exposure Challenge</th>
-                        <th>Difficulty (1-10)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" aria-label="Exposure Trial 1 Description"></td>
-                        <td><input type="text" aria-label="Exposure Trial 1 Difficulty"></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><input type="text" aria-label="Exposure Trial 2 Description"></td>
-                        <td><input type="text" aria-label="Exposure Trial 2 Difficulty"></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><input type="text" aria-label="Exposure Trial 3 Description"></td>
-                        <td><input type="text" aria-label="Exposure Trial 3 Difficulty"></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><input type="text" aria-label="Exposure Trial 4 Description"></td>
-                        <td><input type="text" aria-label="Exposure Trial 4 Difficulty"></td>
-                    </tr>
-                     <tr>
-                        <td>5</td>
-                        <td><input type="text" aria-label="Exposure Trial 5 Description"></td>
-                        <td><input type="text" aria-label="Exposure Trial 5 Difficulty"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <ul class="tier-list">
+                <li class="tier-row">
+                    <div class="tier-label tier-s">S</div>
+                    <div class="tier-content" contenteditable="true" aria-label="S-Tier Compulsions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-a">A</div>
+                    <div class="tier-content" contenteditable="true" aria-label="A-Tier Compulsions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-b">B</div>
+                    <div class="tier-content" contenteditable="true" aria-label="B-Tier Compulsions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-c">C</div>
+                    <div class="tier-content" contenteditable="true" aria-label="C-Tier Compulsions"></div>
+                </li>
+                <li class="tier-row">
+                    <div class="tier-label tier-d">D</div>
+                    <div class="tier-content" contenteditable="true" aria-label="D-Tier Compulsions"></div>
+                </li>
+            </ul>
         </div>
-
-        <footer>
-            <button class="download-btn" onclick="downloadPage()">Download Page</button>
-            <p class="disclaimer">
-                NOTE: This page does not save your data automatically! Click the download button to save your progress.
-            </p>
-            <p>
-                <a href="https://www.kindnesskult.com" target="_blank">Return to KindnessKult.com</a>
-            </p>
-        </footer>
     </div>
 
-    <script>
-        // This function saves the current state of the page as an HTML file.
-        function downloadPage() {
-            // First, update the value of the input fields so the saved file reflects the typed text.
-            const inputs = document.querySelectorAll('input[type="text"]');
-            inputs.forEach(input => {
-                input.setAttribute('value', input.value);
-            });
-
-            // Get the entire current HTML of the page.
-            const pageHTML = document.documentElement.outerHTML;
-            
-            // Create a Blob, which is a file-like object of immutable, raw data.
-            const blob = new Blob([pageHTML], { type: 'text/html' });
-            
-            // Create a temporary link element to trigger the download.
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'my-exposure-hierarchy.html'; // The default filename for the download
-            
-            // Append the link to the body, click it, and then remove it.
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-    </script>
+    <div class="trials-section">
+        <h2>BOSS RUSH: EXPOSURE TRIALS</h2>
+        <p>Log your training sessions here. An exposure trial means facing a feared thought or situation **without** doing the compulsion. Start your training!</p>
+        <p class="disclaimer">
+            NOTE: This page does not save your data! To keep a record of your progress, please print this page or use "Save Page As..." in your browser.
+        </p>
+        <table class="trials-table">
+            <thead>
+                <tr>
+                    <th>Trial #</th>
+                    <th>Exposure Challenge</th>
+                    <th>Difficulty (1-10)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" aria-label="Exposure Trial 1 Description"></td>
+                    <td><input type="text" aria-label="Exposure Trial 1 Difficulty"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="text" aria-label="Exposure Trial 2 Description"></td>
+                    <td><input type="text" aria-label="Exposure Trial 2 Difficulty"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><input type="text" aria-label="Exposure Trial 3 Description"></td>
+                    <td><input type="text" aria-label="Exposure Trial 3 Difficulty"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><input type="text" aria-label="Exposure Trial 4 Description"></td>
+                    <td><input type="text" aria-label="Exposure Trial 4 Difficulty"></td>
+                </tr>
+                 <tr>
+                    <td>5</td>
+                    <td><input type="text" aria-label="Exposure Trial 5 Description"></td>
+                    <td><input type="text" aria-label="Exposure Trial 5 Difficulty"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
