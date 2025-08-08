@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decisional Balance Tool - CindnessKult</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-bg: #1a1a1d;
+            --primary-text: #e6e6e6;
+            --accent-magenta: #f000f0;
+            --accent-cyan: #00ffff;
+            --accent-lime: #00ff00;
+            --accent-yellow: #ffff00;
+            --border-style: 2px dotted var(--accent-magenta);
+            --font-family: "'Press Start 2P'", monospace;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            text-shadow: 0 0 2px var(--accent-cyan);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .content-section {
+            border: 2px solid var(--accent-magenta);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px var(--accent-magenta);
+            margin-bottom: 40px;
+        }
+
+        a.home-link {
+            display: inline-block;
+            background-color: var(--accent-magenta);
+            color: var(--primary-bg);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-shadow: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-cyan);
+        }
+
+        a.home-link:hover {
+            background-color: var(--accent-cyan);
+            color: var(--primary-bg);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            border-color: var(--accent-magenta);
+        }
+
+        h1, h2 {
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        h1 {
+            color: var(--accent-magenta);
+            font-size: 32px;
+            text-shadow: 0 0 5px var(--accent-magenta), 0 0 10px var(--accent-magenta);
+        }
+
+        h2 {
+            color: var(--accent-yellow);
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        
+        p {
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        
+        strong { color: var(--accent-yellow); }
+        span.highlight-lime { color: var(--accent-lime); }
+
+        /* --- Tool Area --- */
+        .change-definition {
+            margin-bottom: 30px;
+        }
+        .change-definition label {
+            display: block;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: var(--accent-cyan);
+        }
+        .change-definition input[type="text"] {
+            width: 100%;
+            background-color: transparent;
+            border: var(--border-style);
+            border-radius: 5px;
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 16px;
+            padding: 15px;
+            text-shadow: 0 0 2px var(--accent-cyan);
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .change-definition input[type="text"]:focus {
+            outline: 2px solid var(--accent-lime);
+            box-shadow: 0 0 10px var(--accent-lime);
+        }
+
+        .balance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .balance-box {
+            border: 2px solid var(--accent-cyan);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .balance-box h3 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        .balance-box .pro { color: var(--accent-lime); }
+        .balance-box .con { color: #ff7f7f; } /* A retro red/pink */
+
+        .balance-box p {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        .balance-box textarea {
+            width: 100%;
+            flex-grow: 2;
+            background-color: rgba(0,0,0,0.2);
+            border: var(--border-style);
+            border-radius: 5px;
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 14px;
+            padding: 10px;
+            resize: none;
+            text-shadow: 0 0 2px var(--accent-cyan);
+            box-sizing: border-box;
+        }
+        .balance-box textarea:focus {
+            outline: 2px solid var(--accent-lime);
+            box-shadow: 0 0 10px var(--accent-lime);
+        }
+
+        /* --- Scoring Area --- */
+        .scoring-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+        #results-area {
+            border: 2px dotted var(--accent-yellow);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+        }
+        #results-area h3 {
+            font-size: 22px;
+            color: var(--accent-yellow);
+        }
+        .score-display {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .team-score {
+            font-size: 18px;
+        }
+        .team-score span {
+            display: block;
+            font-size: 48px;
+            margin-top: 10px;
+        }
+        #winner-declaration {
+            font-size: 24px;
+            color: var(--accent-lime);
+            padding: 10px;
+            border: 2px solid var(--accent-lime);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        /* --- Footer --- */
+        .tool-footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .action-btn {
+            background-color: var(--accent-lime);
+            color: var(--primary-bg);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: var(--font-family);
+            text-shadow: none;
+            cursor: pointer;
+            border: 2px solid var(--accent-yellow);
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .action-btn:hover {
+            background-color: var(--accent-yellow);
+            box-shadow: 0 0 10px var(--accent-yellow);
+            border-color: var(--accent-lime);
+        }
+        .citation-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 40px;
+        }
+        .citation-list li {
+            margin-bottom: 1em;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #ccc;
+            text-align: center;
+        }
+        .disclaimer {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 12px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <a href="https://www.cindnesskult.com" class="home-link" target="_blank" rel="noopener noreferrer">&lt; Back to CindnessKult.com</a>
+
+        <!-- SECTION 1: DECISIONAL BALANCE TOOL -->
+        <div class="content-section" id="decisional-balance-tool">
+            <h1>&gt; MISSION: DECISION QUEST _</h1>
+            <p>Feeling stuck? This tool, from a method called <span class="highlight-lime">Motivational Interviewing</span>, helps you explore your motivation for change. There are no right or wrong answers. The goal is to get your thoughts out of your head and onto the screen to see them more clearly.</p>
+            
+            <div class="change-definition">
+                <label for="change-input">Define the Change: What are you trying to decide?</label>
+                <input type="text" id="change-input" placeholder="e.g., Start exercising, quit a job, set a boundary...">
+            </div>
+
+            <div class="balance-grid">
+                <div class="balance-box">
+                    <h3 class="pro">PROS of Changing</h3>
+                    <p>List the benefits, pros, and advantages of the change. Think about positive outcomes and new opportunities.</p>
+                    <textarea id="pros-change" rows="10"></textarea>
+                </div>
+                <div class="balance-box">
+                    <h3 class="con">CONS of Changing</h3>
+                    <p>List the downsides, costs, and disadvantages of making this change. Consider the risks and potential problems.</p>
+                    <textarea id="cons-change" rows="10"></textarea>
+                </div>
+                <div class="balance-box">
+                    <h3 class="pro">PROS of NOT Changing</h3>
+                    <p>What are the benefits of keeping things as they are? What do you get out of the current situation?</p>
+                    <textarea id="pros-no-change" rows="10"></textarea>
+                </div>
+                <div class="balance-box">
+                    <h3 class="con">CONS of NOT Changing</h3>
+                    <p>What are the costs or downsides of staying the same? What problems do you avoid by not changing?</p>
+                    <textarea id="cons-no-change" rows="10"></textarea>
+                </div>
+            </div>
+
+            <div class="scoring-area">
+                <button class="action-btn" id="calculate-btn">Calculate Score</button>
+                <div id="results-area">
+                    <h3>FINAL SCORE</h3>
+                    <div class="score-display">
+                        <div class="team-score">Team for Change<span id="change-score">0</span></div>
+                        <div class="team-score">Team for Staying Same<span id="same-score">0</span></div>
+                    </div>
+                    <div id="winner-declaration"></div>
+                </div>
+            </div>
+
+            <div class="tool-footer">
+                <button class="action-btn" id="download-balance-btn">Download Worksheet</button>
+            </div>
+        </div>
+
+        <!-- SECTION 2: CITATIONS -->
+        <div class="content-section">
+            <h2>&gt; INTEL & SOURCES _</h2>
+            <ul class="citation-list">
+                <li>Miller, W. R., & Rollnick, S. (2013). <em>Motivational interviewing: Helping people change</em> (3rd ed.). The Guilford Press.</li>
+            </ul>
+        </div>
+
+        <p class="disclaimer">This website is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+
+    </div>
+
+    <script>
+        // --- Scoring Logic ---
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const countLines = (text) => text.split('\n').filter(line => line.trim() !== '').length;
+
+            const prosChangeCount = countLines(document.getElementById('pros-change').value);
+            const consChangeCount = countLines(document.getElementById('cons-change').value);
+            const prosNoChangeCount = countLines(document.getElementById('pros-no-change').value);
+            const consNoChangeCount = countLines(document.getElementById('cons-no-change').value);
+
+            const teamForChangeScore = prosChangeCount + consNoChangeCount;
+            const teamForSameScore = consChangeCount + prosNoChangeCount;
+
+            document.getElementById('change-score').textContent = teamForChangeScore;
+            document.getElementById('same-score').textContent = teamForSameScore;
+            
+            const winnerDiv = document.getElementById('winner-declaration');
+            if (teamForChangeScore > teamForSameScore) {
+                winnerDiv.textContent = 'Team for Change Wins!';
+                winnerDiv.style.borderColor = 'var(--accent-lime)';
+                winnerDiv.style.color = 'var(--accent-lime)';
+            } else if (teamForSameScore > teamForChangeScore) {
+                winnerDiv.textContent = 'Team for Staying Same Wins!';
+                winnerDiv.style.borderColor = '#ff7f7f';
+                winnerDiv.style.color = '#ff7f7f';
+            } else {
+                winnerDiv.textContent = 'It\'s a Tie!';
+                winnerDiv.style.borderColor = 'var(--accent-cyan)';
+                winnerDiv.style.color = 'var(--accent-cyan)';
+            }
+
+            document.getElementById('results-area').style.display = 'block';
+        });
+
+        // --- Download Logic ---
+        document.getElementById('download-balance-btn').addEventListener('click', function() {
+            const toolElement = document.getElementById('decisional-balance-tool');
+            
+            html2canvas(toolElement, {
+                backgroundColor: '#1a1a1d',
+                onclone: (clonedDoc) => {
+                    const clonedElement = clonedDoc.getElementById('decisional-balance-tool');
+                    
+                    // Handle input field
+                    const inputField = clonedElement.querySelector('#change-input');
+                    if (inputField) {
+                        const pInput = clonedDoc.createElement('div');
+                        pInput.style.cssText = `width: 100%; border: 2px dotted #f000f0; border-radius: 5px; color: #e6e6e6; font-family: "Press Start 2P", monospace; font-size: 16px; padding: 15px; text-shadow: 0 0 2px #00ffff; box-sizing: border-box; text-align: center; min-height: 50px; display: flex; align-items: center; justify-content: center; word-wrap: break-word;`;
+                        pInput.innerText = inputField.value || ' ';
+                        inputField.parentNode.replaceChild(pInput, inputField);
+                    }
+
+                    // Handle textareas
+                    const textareas = clonedElement.querySelectorAll('textarea');
+                    textareas.forEach(textarea => {
+                        const p = clonedDoc.createElement('div');
+                        p.style.cssText = `width: 100%; flex-grow: 2; background-color: rgba(0,0,0,0.2); border: 2px dotted #f000f0; border-radius: 5px; color: #e6e6e6; font-family: "Press Start 2P", monospace; font-size: 14px; padding: 10px; text-shadow: 0 0 2px #00ffff; box-sizing: border-box; min-height: 150px; white-space: pre-wrap; word-wrap: break-word;`;
+                        p.innerText = textarea.value;
+                        textarea.parentNode.replaceChild(p, textarea);
+                    });
+
+                    // Ensure results are visible if they were calculated
+                    const resultsArea = clonedElement.querySelector('#results-area');
+                    if (document.getElementById('results-area').style.display === 'block') {
+                        resultsArea.style.display = 'block';
+                    }
+                }
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'cindnesskult-decisional-balance.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+    </script>
+
+</body>
+</html>
