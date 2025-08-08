@@ -73,6 +73,27 @@
         h1, .pixel-font {
             font-family: 'Press Start 2P', cursive;
         }
+        /* Styling for interactive textareas */
+        textarea {
+            background-color: #1a1a1a;
+            border: 2px solid #00ff00;
+            border-radius: 0;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: #00ff00;
+            font-family: 'Inter', sans-serif;
+            margin-top: 0.5rem;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #ffff00;
+            box-shadow: 0 0 10px #ffff00;
+        }
+        label {
+            font-weight: bold;
+            color: #f0f0f0;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
@@ -88,7 +109,7 @@
         <!-- Player Stats Section -->
         <div class="pixel-border mb-8">
             <h2 class="section-title">Player Stats: The 8 Executive Functions</h2>
-            <p>Your brain's command center! These are the 8 core skills that help you navigate the game of life. [cite: image 11]</p>
+            <p>Your brain's command center! These are the 8 core skills that help you navigate the game of life.</p>
             <ul class="text-base">
                 <li class="list-item"><span class="font-bold">Impulse Control:</span> Resisting the urge to act on a whim. The pause button!</li>
                 <li class="list-item"><span class="font-bold">Emotional Control:</span> Managing feelings to achieve goals. Not letting rage-quitting take over.</li>
@@ -104,7 +125,7 @@
         <!-- ADHD Debuff Section -->
         <div class="pixel-border mb-8">
             <h2 class="section-title">ADHD Debuff: Common Challenges</h2>
-            <p>This isn't just a "work" problem. Executive function challenges affect every part of life. Neurodivergent people might experience several of these difficulties day-to-day. [cite: image 5]</p>
+            <p>This isn't just a "work" problem. Executive function challenges affect every part of life. Neurodivergent people might experience several of these difficulties day-to-day.</p>
              <ul class="text-base">
                 <li class="list-item">Forgetting to text/call friends or pay bills.</li>
                 <li class="list-item">Double booking or missing appointments.</li>
@@ -137,96 +158,100 @@
                 <li class="list-item"><span class="font-bold text-yellow-300">P</span>assion & Play: How can you connect this to something you love? Can you make it a game?</li>
                 <li class="list-item"><span class="font-bold text-yellow-300">I</span>nterest: Find one tiny part of the task that is genuinely interesting and focus on that.</li>
                 <li class="list-item"><span class="font-bold text-yellow-300">N</span>ovelty: Do the task in a new place. Use different tools. Listen to a new playlist.</li>
-                <li class="list-item"><span class="font-bold text-yellow-300">C</span>ooperation & Competition: Race a friend (or the clock)! Work alongside someone else (body doubling). This works because:
-                    <ul class="mt-2 pl-4">
-                        <li class="list-item !text-sm !mb-2"><span class="font-bold">Social Baseline Theory:</span> Our brains perceive workloads as lighter and more manageable when someone else is present [cite: image 10].</li>
-                        <li class="list-item !text-sm !mb-2"><span class="font-bold">Mirror Neurons:</span> They inspire us to do what we see others do, so watching someone else concentrate can help us concentrate [cite: image 10].</li>
-                    </ul>
-                </li>
+                <li class="list-item"><span class="font-bold text-yellow-300">C</span>ooperation & Competition: Race a friend (or the clock)! Work alongside someone else (body doubling).</li>
                 <li class="list-item"><span class="font-bold text-yellow-300">H</span>urry & Urgency: Use a timer (like the Pomodoro Technique) to create a low-stakes deadline.</li>
             </ul>
         </div>
         
-        <!-- Evolutionary Mismatch Section -->
+        <!-- Memory Tricks Section -->
         <div class="pixel-border mb-8">
-            <h2 class="section-title">Origin Story: Evolutionary Mismatch</h2>
-            <p>Neurodivergence describes brain differences that aren't "broken," but are a different "operating system." This is the "hunter" brain in a "farmer's" world.</p>
-             <ul class="text-base">
-                <li class="list-item"><span class="font-bold">Neurotypical (Farmer/Builder):</span> Often uses top-down thinking (big picture first) and is wired for social cohesion and maintaining the community.</li>
-                <li class="list-item"><span class="font-bold">Neurodivergent (Hunter/Innovator):</span> Often uses bottom-up thinking (details first), has heightened senses, and prefers direct communication. This drives progress with novel solutions.</li>
-                <li class="list-item">The modern world, with its rigid schedules and social rules, is built for the "farmer" style, creating a mismatch that can be disabling for "hunter" brains.</li>
+            <h2 class="section-title">Memory Tricks</h2>
+            <p>Working memory for ADHDers can often hold fewer pieces of information. These tricks can help us hold more in mind. [cite: image 8]</p>
+            <ul class="text-base">
+                <li class="list-item"><span class="font-bold">Chunking:</span> Grouping items together (like a phone number).</li>
+                <li class="list-item"><span class="font-bold">Memory Palace:</span> Placing items to remember in a familiar mental location.</li>
+                <li class="list-item"><span class="font-bold">Mnemonics & Acronyms:</span> Creating phrases or words to remember a sequence (e.g., ROY G. BIV).</li>
+                <li class="list-item"><span class="font-bold">Associations & Storytelling:</span> Linking new information to what you already know or creating a story around it.</li>
+                <li class="list-item"><span class="font-bold">Visualization & Mind Mapping:</span> Creating a mental image or a visual diagram of information.</li>
             </ul>
+        </div>
+
+        <!-- Organization Hacks Section -->
+        <div class="pixel-border mb-8">
+            <h2 class="section-title">Organization Hacks</h2>
+            <p>Accommodations aren't about being lazy; they are a form of self-care and an essential part of managing ADHD. The goal is to reduce friction by automating tasks or building in support.</p>
+            <ul class="text-base">
+                <li class="list-item"><span class="font-bold">Build in Accommodations:</span> Use Bluetooth tags (Tile, AirTag) for keys, medication timer caps, automatic pet feeders, or buy duplicates of essential items (like chargers or reading glasses) to keep in different places. [cite: image 6]</li>
+                <li class="list-item"><span class="font-bold">Macro-Organization (DOOM Buckets):</span> DOOM stands for "Don't Organize, Only Move." Instead of detailed organizing, group items into broad, non-specific categories in baskets or bins (e.g., "Dental," "Skincare," "Entryway Stuff"). This makes cleanup fast and manageable. [cite: image 4]</li>
+            </ul>
+        </div>
+
+        <!-- NEW INTERACTIVE ZONE -->
+        <div class="pixel-border mb-8">
+            <h2 class="section-title">Interactive Zone: Apply The Concepts</h2>
+            <p>Use these fields to think through your own experiences. Your text is not saved.</p>
+            
+            <!-- Downward Spiral -->
+            <div class="mt-6">
+                <h3 class="text-xl pixel-font text-yellow-300 mb-2">Downward Spiral</h3>
+                <p class="text-sm mb-4">Map out a time when disorganization led to more stress.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label for="stressor">Original organizational stressor:</label>
+                        <textarea id="stressor" rows="2" placeholder="e.g., Couldn't find my keys..."></textarea>
+                    </div>
+                    <div>
+                        <label for="next1">What happened next?</label>
+                        <textarea id="next1" rows="2" placeholder="e.g., Spent 20 minutes looking for them..."></textarea>
+                    </div>
+                    <div>
+                        <label for="next2">And then?</label>
+                        <textarea id="next2" rows="2" placeholder="e.g., Left the house stressed and forgot my lunch..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upward Spiral -->
+            <div class="mt-8 border-t-4 border-dashed border-gray-600 pt-8">
+                <h3 class="text-xl pixel-font text-yellow-300 mb-2">Upward Spiral</h3>
+                <p class="text-sm mb-4">Think of an organizational change that had positive effects.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label for="org">Organization I implemented: (Start Here)</label>
+                        <textarea id="org" rows="2" placeholder="e.g., Put a bowl for my keys by the door..."></textarea>
+                    </div>
+                    <div>
+                        <label for="benefit1">Initial benefit:</label>
+                        <textarea id="benefit1" rows="2" placeholder="e.g., I stopped losing my keys in the morning..."></textarea>
+                    </div>
+                    <div>
+                        <label for="benefit2">Overall Benefit:</label>
+                        <textarea id="benefit2" rows="2" placeholder="e.g., My mornings are calmer and I save money on buying lunch..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brainstorm Accommodations -->
+             <div class="mt-8 border-t-4 border-dashed border-gray-600 pt-8">
+                <h3 class="text-xl pixel-font text-yellow-300 mb-2">Brainstorm Accommodations</h3>
+                <p class="text-sm mb-4">Identify a friction point and brainstorm ways to reduce it.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label for="struggle1">Struggle:</label>
+                        <textarea id="struggle1" rows="2" placeholder="e.g., The pile of dirty dishes feels overwhelming..."></textarea>
+                    </div>
+                    <div>
+                        <label for="accom1">Potential Accommodations:</label>
+                        <textarea id="accom1" rows="3" placeholder="e.g., Wash one dish every time I enter the kitchen. Use paper plates on low-energy days. Put on a podcast and wash dishes for just one episode."></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <!-- ADHD Strengths Section -->
-        <div class="pixel-border mb-8">
-            <h2 class="section-title">Special Abilities: The ADHD Superpowers</h2>
-            <p>Having an ADHD brain comes with a unique skill tree. Don't forget your strengths:</p>
-             <ul class="text-base">
-                <li class="list-item">Creativity & Divergent Thinking: Making connections others don't see.</li>
-                <li class="list-item">Hyperfocus: Unstoppable focus on topics of high interest.</li>
-                <li class="list-item">Crisis Response: Staying calm and acting decisively under pressure.</li>
-                <li class="list-item">High Energy & Spontaneity: Bringing passion and fun to projects and groups.</li>
-                <li class="list-item">Resilience & Empathy: Bouncing back from challenges with a deep understanding of others' struggles.</li>
-            </ul>
-        </div>
-
-        <!-- The Core Loop: Structure vs. Creation -->
-        <div class="pixel-border mb-8">
-            <h2 class="section-title">The Core Loop: Structure vs. Creation</h2>
-            <p>Mental health is a dynamic balancing act between the need for <span class="font-bold">Structure</span> (safety, predictability) and the drive for <span class="font-bold">Creation</span> (growth, adaptation). A fulfilling life requires both.</p>
-            <ul class="text-base">
-                <li class="list-item">Too much Structure can feel rigid and trapping. Too much Creation can feel chaotic and unstable.</li>
-                <li class="list-item">The goal is "Dynamic Equilibrium," where your creative, spontaneous self (Creation) aligns with your core values (Structure). This is an authentic state Carl Rogers called "congruence".</li>
-                <li class="list-item">Society also has this balance. Healthy cultures have structures (laws, norms) that provide safety while allowing for creation (social movements, new ideas) to drive growth.</li>
-            </ul>
-        </div>
-
-        <!-- Under the Hood: Brain Chemistry -->
-        <div class="pixel-border mb-8">
-            <h2 class="section-title">Under the Hood: Brain Chemistry</h2>
-            <p>Optimal brain function depends on balancing Glutamate (the "gas" pedal) and GABA (the "brakes" pedal). ADHD is often associated with too much "gas" relative to "brakes," leading to anxiety, sensory overload, and restlessness.</p>
-            <ul class="text-base">
-                <li class="list-item"><span class="font-bold">Fueling the Brain:</span> Converting glutamate to calming GABA is an energy-intensive process. Complex carbs (oats, beans, sweet potatoes) provide the slow, steady fuel the brain needs for this, unlike the "spike and crash" from simple sugars.</li>
-                <li class="list-item"><span class="font-bold">Key Nutrients:</span> Several nutrients are evidenced to help this balance. <span class="underline">Always consult a doctor before starting supplements.</span>
-                    <ul class="mt-2 pl-4">
-                        <li class="list-item !text-sm !mb-2"><span class="font-bold">Magnesium:</span> Helps reduce excess glutamate signals.</li>
-                        <li class="list-item !text-sm !mb-2"><span class="font-bold">Vitamin B6 (P5P):</span> A critical helper to convert glutamate into GABA.</li>
-                        <li class="list-item !text-sm !mb-2"><span class="font-bold">Zinc:</span> Supports GABA synthesis.</li>
-                        <li class="list-item !text-sm !mb-2"><span class="font-bold">NAC:</span> An antioxidant that helps restore glutamate balance.</li>
-                        <li class="list-item !text-sm !mb-2"><span class="font-bold">L-Theanine:</span> Can block glutamate receptors and increase GABA.</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Level Select: Stimulus Adjustment -->
-        <div class="pixel-border mb-8">
-            <h2 class="section-title">Level Select: Stimulus Adjustment</h2>
-            <p>We have a "Goldilocks" need for stimulation: not too much, not too little [cite: image 3]. If a task feels too dull (understimulating) or too chaotic (overstimulating), you can't focus. The goal is to create an environment that fits your ideal stimulus range for the task at hand [cite: image 3, 7].</p>
-            <ul class="text-base">
-                <li class="list-item"><span class="font-bold">If Understimulated:</span> Add healthy stimulation. Consider a cold or carbonated drink, a crunchy snack, listening to energizing music, or movement [cite: image 7].</li>
-                <li class="list-item"><span class="font-bold">If Overstimulated:</span> Down-regulate your system. Consider using a weighted blanket, dimming the lights, or listening to calming music [cite: image 7].</li>
-            </ul>
-        </div>
-
-        <!-- System Reboot: Sensory Embodiment -->
-        <div class="pixel-border mb-8">
-            <h2 class="section-title">System Reboot: Sensory Embodiment</h2>
-            <p>Embodiment practices create a direct link between brain and body, which can warm up a nervous system stuck in task shutdown [cite: image 2]. Try switching up sensory sensations to shift your mind [cite: image 2].</p>
-            <ul class="text-base">
-                <li class="list-item">Take a shower or wash your face.</li>
-                <li class="list-item">Drink a carbonated drink or eat a sour candy.</li>
-                <li class="list-item">Stand in the sun or change the temperature.</li>
-                <li class="list-item">Stretch your body or change your clothes.</li>
-            </ul>
-        </div>
-        
-        <!-- NEW SECTION: Interactive Tool -->
+        <!-- Interactive Tool Section -->
         <div class="pixel-border mb-8 text-center">
             <h2 class="section-title">Interactive Tool: Sensory Check-In Game</h2>
             <p>Apply these concepts with a game designed to help you check in with your sensory needs.</p>
-            <!-- ASK USER FOR THIS LINK -->
             <a href="#" target="_blank" class="info-link text-lg">Play the Game</a>
         </div>
 
