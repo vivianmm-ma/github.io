@@ -3,342 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INTRUDER THOUGHTS!</title>
+    <title>Intruder Thoughts! - KindnessKult</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        /* General Body & Font Styling */
+        :root {
+            --primary-bg: #1a1a1d;
+            --primary-text: #e6e6e6;
+            --accent-magenta: #f000f0;
+            --accent-cyan: #00ffff;
+            --accent-lime: #00ff00;
+            --accent-yellow: #ffff00;
+            --border-style: 2px dotted var(--accent-magenta);
+            --font-family: "'Press Start 2P'", monospace;
+        }
+
         body {
-            background-color: #120d21; /* Dark purple-blue background */
-            color: #4affff; /* Bright cyan text */
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
             padding: 20px;
+            text-shadow: 0 0 2px var(--accent-cyan);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Header Styling */
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            border: 2px solid var(--accent-magenta);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px var(--accent-magenta);
+        }
+
+        a.home-link {
+            display: inline-block;
+            background-color: var(--accent-magenta);
+            color: var(--primary-bg);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-shadow: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-cyan);
+        }
+
+        a.home-link:hover {
+            background-color: var(--accent-cyan);
+            color: var(--primary-bg);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            border-color: var(--accent-magenta);
+        }
+
         h1 {
-            color: #ff47ff; /* Bright magenta */
-            font-size: 3rem;
-            text-shadow: 3px 3px 0px #4affff; /* Cyan shadow for a glitch effect */
-            letter-spacing: 4px;
-            margin-bottom: 0;
+            color: var(--accent-magenta);
+            font-size: 32px;
+            text-align: center;
+            margin: 0 0 10px 0;
+            text-shadow: 0 0 5px var(--accent-magenta), 0 0 10px var(--accent-magenta);
+            line-height: 1.2;
         }
 
-        h2 {
-            color: #fffb91; /* Bright yellow */
-            font-size: 1.8rem;
-            text-shadow: 2px 2px 0px #ff47ff; /* Magenta shadow */
-            border-top: 3px solid #fffb91;
-            border-bottom: 3px solid #fffb91;
-            padding: 10px 0;
-            margin-top: 40px;
-        }
-
-        /* Main Content Layout */
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
+        .intro-text {
+            text-align: center;
+            color: var(--accent-cyan);
             max-width: 800px;
-            margin: 15px auto;
+            margin: 0 auto 30px auto;
         }
 
-        .main-container {
+        .intro-text span {
+            color: var(--accent-yellow);
+        }
+
+        .main-content {
             display: flex;
-            flex-wrap: wrap; /* Allows columns to stack on smaller screens */
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .column {
+        .panel {
             flex: 1;
-            min-width: 350px;
-            max-width: 500px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 2px solid #4affff;
-            padding: 15px;
-            box-shadow: 0 0 15px rgba(74, 255, 255, 0.3);
+            min-width: 300px;
+            padding: 20px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 10px;
         }
 
-        .column h3 {
-            font-size: 1.5rem;
-            color: #4affff;
+        .panel h2 {
+            color: var(--accent-lime);
+            font-size: 20px;
             margin-top: 0;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        .panel p {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        /* Tier List Styling */
-        .tier-list {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        .tier-row {
+        .tier-list .tier {
             display: flex;
-            align-items: stretch; /* Make items in the row the same height */
-            margin-bottom: 8px;
-            min-height: 60px;
+            align-items: stretch;
+            margin-bottom: 10px;
         }
 
         .tier-label {
+            width: 40px;
+            height: auto;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 2rem;
+            justify-content: center;
+            font-size: 24px;
             font-weight: bold;
-            width: 60px;
-            flex-shrink: 0;
-            color: #120d21;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            color: var(--primary-bg);
+            margin-right: 10px;
+            border-radius: 5px;
         }
 
-        /* Tier Colors */
-        .tier-s { background-color: #ff595e; } /* Red */
-        .tier-a { background-color: #ffca3a; } /* Orange-Yellow */
-        .tier-b { background-color: #8ac926; } /* Green */
-        .tier-c { background-color: #1982c4; } /* Blue */
-        .tier-d { background-color: #6a4c93; } /* Purple */
+        .tier-s { background-color: #ff7f7f; }
+        .tier-a { background-color: #ffbf7f; }
+        .tier-b { background-color: #ffff7f; }
+        .tier-c { background-color: #7fff7f; }
+        .tier-d { background-color: #7fbfff; }
 
-        .tier-content {
+        .tier textarea {
             flex-grow: 1;
-            background-color: #1f1a30;
-            border: 2px dashed #4affff;
+            background-color: transparent;
+            border: var(--border-style);
+            border-radius: 5px;
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 14px;
             padding: 10px;
-            color: #fff;
-            font-size: 1rem;
-            text-align: left;
+            resize: vertical;
+            min-height: 80px;
+            text-shadow: 0 0 2px var(--accent-cyan);
         }
 
-        .tier-content:focus {
-            outline: 2px solid #ff47ff;
-            background-color: #2a2440;
+        textarea:focus {
+            outline: 2px solid var(--accent-lime);
+            box-shadow: 0 0 10px var(--accent-lime);
         }
-        
-        /* Exposure Trials Table */
-        .trials-section {
+
+        .boss-rush {
             margin-top: 40px;
+            border-top: 2px solid var(--accent-magenta);
+            padding-top: 20px;
+        }
+
+        .boss-rush h2 {
+            color: var(--accent-yellow);
+            font-size: 24px;
+            text-align: center;
         }
         
-        .trials-table {
+        .boss-rush p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .boss-rush span {
+             color: var(--accent-lime);
+        }
+
+        .exposure-table {
             width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
             border-collapse: collapse;
         }
 
-        .trials-table th, .trials-table td {
-            border: 2px solid #4affff;
-            padding: 12px;
-            font-size: 1.1rem;
-        }
-
-        .trials-table th {
-            color: #fffb91;
-            background-color: rgba(255, 251, 145, 0.1);
-        }
-
-        .trials-table input[type="text"] {
-            width: 95%;
-            background-color: transparent;
-            border: none;
-            border-bottom: 2px dotted #ff47ff;
-            color: #fff;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
+        .exposure-table th, .exposure-table td {
+            border: var(--border-style);
             padding: 5px;
+            text-align: center;
         }
 
-        .trials-table input[type="text"]:focus {
+        .exposure-table th {
+            color: var(--accent-cyan);
+            font-size: 16px;
+            padding-bottom: 10px;
+        }
+
+        .exposure-table td {
+            padding: 0;
+        }
+
+        .exposure-table textarea {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 14px;
+            padding: 10px;
+            resize: none;
+            box-sizing: border-box;
+            min-height: 50px;
+        }
+        
+        .exposure-table textarea:focus {
             outline: none;
-            border-bottom: 2px solid #fffb91;
-        }
-        
-        .disclaimer {
-            color: #ffca3a;
-            font-weight: bold;
-            margin-top: 20px;
         }
 
-        /* Footer and Download Button Styling */
-        footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 2px solid #333;
+        .footer {
+            text-align: center;
+            margin-top: 30px;
         }
-        
+
         .download-btn {
-            display: inline-block;
-            background-color: #8b008b;
-            color: #ffffff;
-            padding: 10px 20px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1rem;
+            background-color: var(--accent-lime);
+            color: var(--primary-bg);
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: var(--font-family);
+            text-shadow: none;
             cursor: pointer;
-            border: 2px solid #500050;
+            border: 2px solid var(--accent-yellow);
+            transition: all 0.3s ease;
         }
-        
+
         .download-btn:hover {
-            background-color: #a000a0;
+            background-color: var(--accent-yellow);
+            box-shadow: 0 0 10px var(--accent-yellow);
+            border-color: var(--accent-lime);
         }
 
-        footer a {
-            color: #3498db;
-            text-decoration: none;
+        .note {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 12px;
         }
         
-        footer a:hover {
-            text-decoration: underline;
+        .note a {
+            color: var(--accent-cyan);
         }
-
     </style>
 </head>
 <body>
 
-    <h1>> INTRUDER THOUGHTS!_</h1>
-    <p>
-        Your mission, should you choose to accept it: Face down the brain glitches.
-        This page is an **exposure hierarchy**, designed to help you rank your fears and tackle them one by one. The goal is to bravely face the 'S' Tiers until they feel like 'D' Tiers!
-    </p>
+    <a href="https://www.kindnesskult.com" class="home-link" target="_blank" rel="noopener noreferrer">&lt; Back to KindnessKult.com</a>
 
-    <div class="main-container">
-        <div class="column">
-            <h3>LEVEL 1: INTRUSIVE GLITCHES<br>(Obsessions)</h3>
-            <p>Unwanted thoughts, images, or urges that get stuck on repeat. List your fears from most distressing (S) to least (D).</p>
+    <div class="container" id="capture-area">
+        <h1>&gt; INTRUDER THOUGHTS! _</h1>
+        <p class="intro-text">
+            Your mission, should you choose to accept it: Face down the brain glitches.
+            This page is an <span>**exposure hierarchy**</span>, designed to help you rank your
+            fears and tackle them one by one. The goal is to bravely face the 'S' Tiers
+            until they feel like 'D' Tiers!
+        </p>
 
-            <ul class="tier-list">
-                <li class="tier-row">
-                    <div class="tier-label tier-s">S</div>
-                    <div class="tier-content" contenteditable="true" aria-label="S-Tier Obsessions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-a">A</div>
-                    <div class="tier-content" contenteditable="true" aria-label="A-Tier Obsessions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-b">B</div>
-                    <div class="tier-content" contenteditable="true" aria-label="B-Tier Obsessions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-c">C</div>
-                    <div class="tier-content" contenteditable="true" aria-label="C-Tier Obsessions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-d">D</div>
-                    <div class="tier-content" contenteditable="true" aria-label="D-Tier Obsessions"></div>
-                </li>
-            </ul>
+        <div class="main-content">
+            <div class="panel">
+                <h2>LEVEL 1: INTRUSIVE GLITCHES (Obsessions)</h2>
+                <p>Unwanted thoughts, images, or urges that get stuck on repeat. List your fears from most distressing (S) to least (D).</p>
+                <div class="tier-list">
+                    <div class="tier"><div class="tier-label tier-s">S</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-a">A</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-b">B</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-c">C</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-d">D</div><textarea></textarea></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>SIDE QUEST: DEBUG ROUTINES (Compulsions)</h2>
+                <p>Repetitive rituals or mental acts used to "cancel out" the glitch or reduce distress. What do you feel forced to do?</p>
+                <div class="tier-list">
+                    <div class="tier"><div class="tier-label tier-s">S</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-a">A</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-b">B</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-c">C</div><textarea></textarea></div>
+                    <div class="tier"><div class="tier-label tier-d">D</div><textarea></textarea></div>
+                </div>
+            </div>
         </div>
 
-        <div class="column">
-            <h3>SIDE QUEST: DEBUG ROUTINES<br>(Compulsions)</h3>
-            <p>Repetitive rituals or mental acts used to "cancel out" the glitch or reduce distress. What do you feel forced to do?</p>
-            
-            <ul class="tier-list">
-                <li class="tier-row">
-                    <div class="tier-label tier-s">S</div>
-                    <div class="tier-content" contenteditable="true" aria-label="S-Tier Compulsions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-a">A</div>
-                    <div class="tier-content" contenteditable="true" aria-label="A-Tier Compulsions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-b">B</div>
-                    <div class="tier-content" contenteditable="true" aria-label="B-Tier Compulsions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-c">C</div>
-                    <div class="tier-content" contenteditable="true" aria-label="C-Tier Compulsions"></div>
-                </li>
-                <li class="tier-row">
-                    <div class="tier-label tier-d">D</div>
-                    <div class="tier-content" contenteditable="true" aria-label="D-Tier Compulsions"></div>
-                </li>
-            </ul>
+        <div class="boss-rush">
+            <h2>BOSS RUSH: EXPOSURE TRIALS</h2>
+            <p>Log your training sessions here. An exposure trial means facing a feared thought or situation <span>**without**</span> doing the compulsion. Start your training!</p>
+            <table class="exposure-table">
+                <thead>
+                    <tr>
+                        <th>Trial #</th>
+                        <th>Exposure Challenge</th>
+                        <th>Difficulty (1-10)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><textarea></textarea></td>
+                        <td><textarea></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div class="trials-section">
-        <h2>BOSS RUSH: EXPOSURE TRIALS</h2>
-        <p>Log your training sessions here. An exposure trial means facing a feared thought or situation **without** doing the compulsion. Start your training!</p>
-        
-        <table class="trials-table">
-            <thead>
-                <tr>
-                    <th>Trial #</th>
-                    <th>Exposure Challenge</th>
-                    <th>Difficulty (1-10)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><input type="text" aria-label="Exposure Trial 1 Description"></td>
-                    <td><input type="text" aria-label="Exposure Trial 1 Difficulty"></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><input type="text" aria-label="Exposure Trial 2 Description"></td>
-                    <td><input type="text" aria-label="Exposure Trial 2 Difficulty"></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><input type="text" aria-label="Exposure Trial 3 Description"></td>
-                    <td><input type="text" aria-label="Exposure Trial 3 Difficulty"></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><input type="text" aria-label="Exposure Trial 4 Description"></td>
-                    <td><input type="text" aria-label="Exposure Trial 4 Difficulty"></td>
-                </tr>
-                 <tr>
-                    <td>5</td>
-                    <td><input type="text" aria-label="Exposure Trial 5 Description"></td>
-                    <td><input type="text" aria-label="Exposure Trial 5 Difficulty"></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="footer">
+        <button class="download-btn" id="download-btn">Download Page</button>
+        <p class="note">
+            NOTE: This page does not save your data automatically! Click the download button to save your progress as an image.
+            <br>
+            You can then upload the saved image to your Google Drive or other cloud storage.
+        </p>
     </div>
-
-    <footer>
-        <button class="download-btn" onclick="downloadPage()">Download Page</button>
-        <p class="disclaimer">
-            NOTE: This page does not save your data automatically! Click the download button to save your progress.
-        </p>
-        <p>
-            <a href="https://www.kindnesskult.com" target="_blank">Return to KindnessKult.com</a>
-        </p>
-    </footer>
 
     <script>
-        // This function saves the current state of the page as an HTML file.
-        function downloadPage() {
-            // First, update the value of the input fields so the saved file reflects the typed text.
-            const inputs = document.querySelectorAll('input[type="text"]');
-            inputs.forEach(input => {
-                input.setAttribute('value', input.value);
-            });
+        // --- JavaScript for Download Functionality ---
+        document.getElementById('download-btn').addEventListener('click', function() {
+            // Temporarily remove focus outlines for a cleaner screenshot
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(ta => ta.style.outline = 'none');
 
-            // Get the entire current HTML of the page
-            const pageHTML = document.documentElement.outerHTML;
-            
-            // Create a Blob, which is a file-like object of immutable, raw data.
-            const blob = new Blob([pageHTML], { type: 'text/html' });
-            
-            // Create a temporary link element to trigger the download.
-            const a = document.createElement('a');
-a.href = URL.createObjectURL(blob);
-            a.download = 'my-exposure-hierarchy.html'; // The default filename for the download
-            
-            // Append the link to the body, click it, and then remove it.
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+            html2canvas(document.getElementById('capture-area'), {
+                backgroundColor: '#1a1a1d', // Ensure background is captured
+                onclone: (document) => {
+                    // This ensures text inside textareas is visible in the canvas
+                    const textareas = document.querySelectorAll('textarea');
+                    textareas.forEach(textarea => {
+                        const p = document.createElement('p');
+                        p.style.margin = '10px';
+                        p.style.padding = '10px';
+                        p.style.whiteSpace = 'pre-wrap'; // Preserve line breaks
+                        p.style.wordWrap = 'break-word'; // Wrap long text
+                        p.style.fontFamily = "'Press Start 2P', monospace";
+                        p.style.fontSize = "14px";
+                        p.style.color = "#e6e6e6";
+                        p.innerText = textarea.value;
+                        textarea.parentNode.replaceChild(p, textarea);
+                    });
+                }
+            }).then(canvas => {
+                // Create a link element
+                const link = document.createElement('a');
+                // Set the download attribute with a filename
+                link.download = 'kindnesskult-intruder-thoughts.png';
+                // Set the href to the canvas data URL
+                link.href = canvas.toDataURL('image/png');
+                // Trigger the download
+                link.click();
+
+                // Restore focus outlines after screenshot
+                 textareas.forEach(ta => ta.style.outline = '');
+            });
+        });
     </script>
 
 </body>
