@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCD: Understanding & Tools - CindnessKult</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-bg: #1a1a1d;
+            --primary-text: #e6e6e6;
+            --accent-magenta: #f000f0;
+            --accent-cyan: #00ffff;
+            --accent-lime: #00ff00;
+            --accent-yellow: #ffff00;
+            --border-style: 2px dotted var(--accent-magenta);
+            --font-family: "'Press Start 2P'", monospace;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            text-shadow: 0 0 2px var(--accent-cyan);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .content-section {
+            border: 2px solid var(--accent-magenta);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px var(--accent-magenta);
+            margin-bottom: 40px;
+        }
+
+        a.home-link {
+            display: inline-block;
+            background-color: var(--accent-magenta);
+            color: var(--primary-bg);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-shadow: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-cyan);
+        }
+
+        a.home-link:hover {
+            background-color: var(--accent-cyan);
+            color: var(--primary-bg);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            border-color: var(--accent-magenta);
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        h1 {
+            color: var(--accent-magenta);
+            font-size: 32px;
+            text-shadow: 0 0 5px var(--accent-magenta), 0 0 10px var(--accent-magenta);
+        }
+
+        h2 {
+            color: var(--accent-yellow);
+            font-size: 24px;
+        }
+        
+        h3 {
+             color: var(--accent-lime);
+             font-size: 20px;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        span.highlight-yellow { color: var(--accent-yellow); }
+        span.highlight-lime { color: var(--accent-lime); }
+        span.highlight-cyan { color: var(--accent-cyan); }
+        
+        strong {
+            color: var(--accent-yellow);
+        }
+
+        /* --- Resource List & Citations --- */
+        .resource-list, .citation-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .resource-list li {
+            margin-bottom: 15px;
+            background-color: rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-cyan);
+        }
+        .resource-list a {
+            color: var(--accent-lime);
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .resource-list a:hover {
+            text-decoration: underline;
+        }
+        .citation-list li {
+            margin-bottom: 1em;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        /* --- Downward Arrow Tool --- */
+        .downward-arrow-tool .step {
+            margin-bottom: 15px;
+        }
+        .downward-arrow-tool label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent-cyan);
+        }
+        .downward-arrow-tool textarea {
+            width: 100%;
+            background-color: transparent;
+            border: var(--border-style);
+            border-radius: 5px;
+            color: var(--primary-text);
+            font-family: var(--font-family);
+            font-size: 14px;
+            padding: 10px;
+            resize: vertical;
+            min-height: 60px;
+            text-shadow: 0 0 2px var(--accent-cyan);
+            box-sizing: border-box;
+        }
+        .downward-arrow-tool textarea:focus {
+            outline: 2px solid var(--accent-lime);
+            box-shadow: 0 0 10px var(--accent-lime);
+        }
+        .arrow-symbol {
+            text-align: center;
+            font-size: 30px;
+            color: var(--accent-magenta);
+            margin: 5px 0;
+        }
+
+        /* --- Y-BOCS Checklist --- */
+        .checklist-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .checklist-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .checklist-column ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .checklist-column li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .checklist-column input[type="checkbox"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: var(--primary-bg);
+            margin: 5px 10px 0 0;
+            font: inherit;
+            color: var(--accent-lime);
+            width: 1.15em;
+            height: 1.15em;
+            border: 2px solid var(--accent-lime);
+            border-radius: 3px;
+            transform: translateY(-0.075em);
+            display: grid;
+            place-content: center;
+            flex-shrink: 0;
+        }
+        .checklist-column input[type="checkbox"]::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--accent-lime);
+        }
+        .checklist-column input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+        .checklist-column label {
+            line-height: 1.5;
+        }
+
+        /* --- Buttons & Footer --- */
+        .tool-footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .download-btn {
+            background-color: var(--accent-lime);
+            color: var(--primary-bg);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: var(--font-family);
+            text-shadow: none;
+            cursor: pointer;
+            border: 2px solid var(--accent-yellow);
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            background-color: var(--accent-yellow);
+            box-shadow: 0 0 10px var(--accent-yellow);
+            border-color: var(--accent-lime);
+        }
+        .disclaimer {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 12px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <a href="https://www.cindnesskult.com" class="home-link" target="_blank" rel="noopener noreferrer">&lt; Back to CindnessKult.com</a>
+
+        <!-- SECTION 1: INTRODUCTION -->
+        <div class="content-section">
+            <h1>&gt; OCD: HACKING THE LOOP _</h1>
+            <p>Obsessive-Compulsive Disorder (OCD) isn't about being tidy. It's a neurobiological condition that creates a loop of unwanted intrusive thoughts (<span class="highlight-yellow">obsessions</span>) and urges to perform repetitive behaviors (<span class="highlight-yellow">compulsions</span>) to relieve the anxiety.</p>
+            <p>If you're fighting this battle, you are not alone. About <span class="highlight-lime">1 in 3 people</span> experience OCD symptoms at some point, and research shows that <span class="highlight-lime">60-70% of people</span> respond well to therapy, especially Exposure and Response Prevention (ERP).</p>
+            <h3>Your Thoughts Are Not You</h3>
+            <p>A key thing to understand is that OCD thoughts are <strong class="highlight-cyan">ego-dystonic</strong>. This is a fancy way of saying they are the OPPOSITE of what you truly believe, value, or want. They feel so distressing precisely because they are alien to your true self. The goal isn't to stop the thoughts, but to change your response to them.</p>
+            <h3>Your Mission:</h3>
+            <p>Instead of fighting, avoiding, or neutralizing the thought, your mission is to <strong class="highlight-lime">ground yourself in reality</strong>, <strong class="highlight-lime">sit with the emotion</strong> without judgment, and <strong class="highlight-lime">resist the compulsion</strong>. This is hard, but it's how you break the loop.</p>
+        </div>
+
+        <!-- SECTION 2: RESOURCES -->
+        <div class="content-section">
+            <h2>&gt; LEVEL UP: TOOLS & ALLIES _</h2>
+            <p>You don't have to fight this boss alone. Here are some powerful resources to add to your inventory.</p>
+            <ul class="resource-list">
+                <li><a href="https://www.treatmyocd.com/" target="_blank" rel="noopener noreferrer">NOCD: Find a Therapist & Free Resources</a><br>Specialized OCD therapists who provide ERP. A gold-standard place to start.</li>
+                <li><a href="https://psychology-tools.com/test/obsessive-compulsive-inventory-revised" target="_blank" rel="noopener noreferrer">Free OCD Prescreen Tool</a><br>A revised inventory you can fill out and discuss with a professional.</li>
+                <li><a href="https://www.treatmyocd.com/what-is-ocd/info/ocd-stats-and-science/5-free-worksheets-for-people-struggling-with-ocd-developed-by-experts" target="_blank" rel="noopener noreferrer">5 Free OCD Worksheets</a><br>Expert-developed worksheets to help you on your journey.</li>
+                <li><a href="https://www.psychologytoday.com/us/therapists" target="_blank" rel="noopener noreferrer">Psychology Today</a> & <a href="https://www.zocdoc.com/" target="_blank" rel="noopener noreferrer">Zocdoc</a><br>Search these directories for local therapists who specialize in "ERP" (Exposure and Response Prevention).</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 3: DOWNWARD ARROW TOOL -->
+        <div class="content-section" id="core-fear-tool">
+            <h2>&gt; BOSS BATTLE: FIND THE CORE FEAR _</h2>
+            <p>Sometimes, a "what if" thought is a clue to a deeper fear. This tool helps you follow the trail. Be curious, not judgmental. Don't engage in compulsions as you explore.</p>
+            <div class="downward-arrow-tool">
+                <div class="step">
+                    <label for="initial-thought">Start with an obsession or "What if..." thought:</label>
+                    <textarea id="initial-thought" rows="2"></textarea>
+                </div>
+                <div class="arrow-symbol">↓</div>
+                <div class="step">
+                    <label for="step1">If that were true, what would it mean?</label>
+                    <textarea id="step1" rows="2"></textarea>
+                </div>
+                <div class="arrow-symbol">↓</div>
+                <div class="step">
+                    <label for="step2">And if THAT were true, then what?</label>
+                    <textarea id="step2" rows="2"></textarea>
+                </div>
+                <div class="arrow-symbol">↓</div>
+                <div class="step">
+                    <label for="step3">And what's the worst part about that?</label>
+                    <textarea id="step3" rows="2"></textarea>
+                </div>
+                <div class="arrow-symbol">↓</div>
+                <div class="step">
+                    <label for="core-fear">What is the <span class="highlight-yellow">Core Fear</span> at the bottom of this?</label>
+                    <textarea id="core-fear" rows="2"></textarea>
+                </div>
+            </div>
+            <div class="tool-footer">
+                <button class="download-btn" id="download-fear-btn">Download Your Findings</button>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Y-BOCS CHECKLIST -->
+        <div class="content-section" id="checklist-tool">
+            <h2>&gt; SYSTEM SCAN: IDENTIFY GLITCHES _</h2>
+            <p>OCD shows up in many forms. This is not a diagnostic tool, but a way to identify patterns. Check any that feel familiar. Remember <strong class="highlight-cyan">mental compulsions</strong> (like reviewing memories, neutralizing, or "just right" thinking) are just as real as physical ones.</p>
+            <div class="checklist-container">
+                <div class="checklist-column">
+                    <h3>Obsessions (Intrusive Glitches)</h3>
+                    <ul>
+                        <li><input type="checkbox" id="obs1"><label for="obs1">Fear might harm self</label></li>
+                        <li><input type="checkbox" id="obs2"><label for="obs2">Fear might harm others</label></li>
+                        <li><input type="checkbox" id="obs3"><label for="obs3">Violent or horrific images</label></li>
+                        <li><input type="checkbox" id="obs4"><label for="obs4">Fear of blurting out obscenities</label></li>
+                        <li><input type="checkbox" id="obs5"><label for="obs5">Fear of doing something embarrassing</label></li>
+                        <li><input type="checkbox" id="obs6"><label for="obs6">Fear will act on unwanted impulses</label></li>
+                        <li><input type="checkbox" id="obs7"><label for="obs7">Concerns with dirt, germs, contamination</label></li>
+                        <li><input type="checkbox" id="obs8"><label for="obs8">Forbidden or perverse sexual thoughts</label></li>
+                        <li><input type="checkbox" id="obs9"><label for="obs9">Concern with right/wrong, morality</label></li>
+                        <li><input type="checkbox" id="obs10"><label for="obs10">Accompanied by magical thinking</label></li>
+                        <li><input type="checkbox" id="obs11"><label for="obs11">Fear of losing things</label></li>
+                        <li><input type="checkbox" id="obs12"><label for="obs12">Concern with illness or disease</label></li>
+                    </ul>
+                </div>
+                <div class="checklist-column">
+                    <h3>Compulsions (Debug Routines)</h3>
+                    <ul>
+                        <li><input type="checkbox" id="comp1"><label for="comp1">Excessive/ritualized washing/cleaning</label></li>
+                        <li><input type="checkbox" id="comp2"><label for="comp2">Checking locks, stove, appliances, etc.</label></li>
+                        <li><input type="checkbox" id="comp3"><label for="comp3">Checking you did not/will not harm others</label></li>
+                        <li><input type="checkbox"id="comp4"><label for="comp4">Repeating routine activities (in/out door)</label></li>
+                        <li><input type="checkbox" id="comp5"><label for="comp5">Counting compulsions</label></li>
+                        <li><input type="checkbox" id="comp6"><label for="comp6">Ordering or arranging compulsions</label></li>
+                        <li><input type="checkbox" id="comp7"><label for="comp7">Mental rituals (other than checking/counting)</label></li>
+                        <li><input type="checkbox" id="comp8"><label for="comp8">Need to tell, ask, or confess</label></li>
+                        <li><input type="checkbox" id="comp9"><label for="comp9">Measures to prevent harm to self/others</label></li>
+                        <li><input type="checkbox" id="comp10"><label for="comp10">Rituals involving blinking or staring</label></li>
+                        <li><input type="checkbox" id="comp11"><label for="comp11">Mental review / "Figuring it out"</label></li>
+                        <li><input type="checkbox" id="comp12"><label for="comp12">Googling / seeking reassurance online</label></li>
+                    </ul>
+                </div>
+            </div>
+             <div class="tool-footer">
+                <button class="download-btn" id="download-checklist-btn">Download Checklist</button>
+            </div>
+        </div>
+        
+        <!-- SECTION 5: CITATIONS -->
+        <div class="content-section">
+            <h2>&gt; CREDITS & SOURCES _</h2>
+            <ul class="citation-list">
+                <li>Goodman, W. K., Price, L. H., Rasmussen, S. A., Mazure, C., Fleischmann, R. L., Hill, C. L., Heninger, G. R., & Charney, D. S. (1989). The Yale-Brown Obsessive-Compulsive Scale. I. Development, use, and reliability. <em>Archives of General Psychiatry, 46</em>(11), 1006–1011.</li>
+                <li>NOCD. (2022). <em>Core Fear</em> [PDF]. NOCD, Inc.</li>
+                <li>Checklist items adapted from the Yale-Brown Obsessive-Compulsive Scale (Y-BOCS).</li>
+            </ul>
+        </div>
+
+
+        <p class="disclaimer">This website is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+
+    </div>
+
+    <script>
+        // --- Generic Download Function for Tools ---
+        function downloadToolAsImage(buttonId, toolElementId, filename) {
+            document.getElementById(buttonId).addEventListener('click', function() {
+                const toolElement = document.getElementById(toolElementId);
+                
+                html2canvas(toolElement, {
+                    backgroundColor: '#1a1a1d',
+                    onclone: (clonedDoc) => {
+                        const clonedElement = clonedDoc.getElementById(toolElementId);
+                        
+                        // Handle textareas
+                        const textareas = clonedElement.querySelectorAll('textarea');
+                        textareas.forEach(textarea => {
+                            const p = clonedDoc.createElement('div');
+                            p.style.cssText = `width: 100%; background-color: transparent; border: 2px dotted #f000f0; border-radius: 5px; color: #e6e6e6; font-family: "Press Start 2P", monospace; font-size: 14px; padding: 10px; min-height: 60px; text-shadow: 0 0 2px #00ffff; box-sizing: border-box; white-space: pre-wrap; word-wrap: break-word;`;
+                            p.innerText = textarea.value;
+                            textarea.parentNode.replaceChild(p, textarea);
+                        });
+
+                        // Handle checklists
+                        const checkboxes = clonedElement.querySelectorAll('input[type="checkbox"]');
+                        checkboxes.forEach(checkbox => {
+                            const span = clonedDoc.createElement('span');
+                            span.innerText = checkbox.checked ? '[X] ' : '[ ] ';
+                            span.style.fontFamily = "'Press Start 2P', monospace";
+                            span.style.color = '#00ff00';
+                            checkbox.parentNode.insertBefore(span, checkbox);
+                            checkbox.style.display = 'none';
+                        });
+                    }
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = filename;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+        }
+
+        // --- Initialize Download Buttons ---
+        downloadToolAsImage('download-fear-btn', 'core-fear-tool', 'cindnesskult-core-fear-findings.png');
+        downloadToolAsImage('download-checklist-btn', 'checklist-tool', 'cindnesskult-ocd-checklist.png');
+    </script>
+
+</body>
+</html>
