@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CindnessKult | The Mind-Body Dialectic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Serif Pro', serif;
+            background-color: #bbb4fe;
+            color: #2c3e50;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, .game-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        .card {
+            background-color: #e8e6ff;
+            border: 4px solid #98c379;
+            box-shadow: 8px 8px 0px #322277;
+            border-radius: 0.5rem;
+        }
+        .text-shadow-green {
+            text-shadow: -2px -2px 0 #98c379, 2px -2px 0 #98c379, -2px 2px 0 #98c379, 2px 2px 0 #98c379;
+        }
+        .yin-yang {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-color: #304694;
+            border-style: solid;
+            border-width: 4px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #556fc8 50%, #e8e6ff 50%);
+        }
+        .yin-yang::before,
+        .yin-yang::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #304694;
+        }
+        .yin-yang::before {
+            top: 20px;
+            background-color: #e8e6ff;
+        }
+        .yin-yang::after {
+            bottom: 20px;
+            background-color: #556fc8;
+        }
+        .vagus-path {
+            position: relative;
+            width: 100%;
+            padding: 20px 0;
+        }
+        .vagus-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #98c379, #556fc8, #304694);
+            border-radius: 2px;
+            transform: translateX(-50%);
+        }
+        .vagus-point {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        .vagus-point .content {
+            width: calc(50% - 40px);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: rgba(48, 70, 148, 0.8);
+            color: #e8e6ff;
+        }
+        .vagus-point .dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #98c379;
+            border: 4px solid #e8e6ff;
+            z-index: 10;
+        }
+        .vagus-point.left .content {
+            text-align: right;
+            margin-right: 40px;
+        }
+        .vagus-point.right .content {
+            text-align: left;
+            margin-left: 40px;
+        }
+        .vagus-point.right {
+            flex-direction: row-reverse;
+        }
+        .imperfect-box {
+            border: 3px dashed #556fc8;
+            transform: rotate(-2deg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-[#bbb4fe]">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-[#304694] text-shadow-green mb-2">The Mind-Body Dialectic</h1>
+            <p class="text-xl md:text-2xl text-[#306c82] game-font">A CindnessKult Guide</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <section id="healing-dialectic" class="card p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-[#304694]">Player 1: Start Game</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
+                    <div class="space-y-2">
+                        <h3 class="text-xl font-bold text-[#556fc8]">Yin / Structure</h3>
+                        <p class="text-[#306c82] text-sm game-font">Safety, Rest, Boundaries, The Body. The Foundational. <br> <span class="text-red-500">Too much leads to: STAGNATION</span></p>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <div class="yin-yang"></div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h3 class="text-xl font-bold text-[#556fc8]">Yang / Creativity</h3>
+                        <p class="text-[#306c82] text-sm game-font">Action, Growth, Adaptation, Epigenetics. The Response. <br> <span class="text-red-500">Too much leads to: CHAOS</span></p>
+                    </div>
+                </div>
+                <p class="text-center mt-8 text-xl text-[#304694]">Healing is not about winning. It's about finding the <span class="font-bold text-[#98c379] game-font">dynamic equilibrium</span> between the forces that shape us.</p>
+            </section>
+
+            <section id="philosophy" class="card p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-[#304694]">The CindnessKult Philosophy</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <p>Many of us are taught to chase a "perfect" or "Just Right" feeling. But for those with trauma or neurodivergence, this chase is a trap. It's a core feature of OCD known as the "Not Just Right Experience" (NJRE)—a constant, nagging sense that things are wrong.</p>
+                        <p><span class="font-bold text-[#556fc8]">CindnessKult reclaims this.</span> We believe the "not just right" feeling isn't a flaw; it's a feature. It's a signal from a system that has creatively adapted to survive. Instead of fighting for an impossible perfection, we find the kindness and beauty in the imperfect.</p>
+                    </div>
+                    <div class="imperfect-box">
+                        <h3 class="text-xl font-bold text-center text-[#556fc8]">Embrace the 'Not Just Right'</h3>
+                        <p class="text-center text-[#306c82]">Your authentic self isn't flawless. It's resilient. It's real. That's where kindness begins.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="vagus-nerve" class="card p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-[#304694]">Level 1: The Conductor of Calm</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <p>The <span class="font-bold text-[#556fc8]">Vagus Nerve</span> is your body's main quest line for the "rest and digest" system. It connects your brain (control center) to your organs, regulating your HP, MP, and emotional state.</p>
+                        <p>A high vagal tone is like a powerful buff, increasing your resilience stat and allowing you to recover from debuffs (stress).</p>
+                    </div>
+                    <div class="vagus-path h-96 md:h-auto">
+                        <div class="vagus-line"></div>
+                        <div class="vagus-point left">
+                            <div class="content">
+                                <h3 class="font-bold text-lg">Brain</h3>
+                                <p class="text-sm game-font">Control Center</p>
+                            </div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="vagus-point right">
+                            <div class="content">
+                                <h3 class="font-bold text-lg">Heart & Lungs</h3>
+                                <p class="text-sm game-font">Regulates Stamina</p>
+                            </div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="vagus-point left">
+                             <div class="content">
+                                <h3 class="font-bold text-lg">Gut</h3>
+                                <p class="text-sm game-font">Manages Status Effects</p>
+                            </div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trauma-connection" class="card p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-[#304694]">System Error: The Trauma Connection</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4 text-center">
+                        <div class="p-4 bg-[#bbb4fe] border-2 border-[#98c379] rounded-lg">
+                            <h3 class="text-xl font-bold text-[#304694]">Chronic Stress Debuff</h3>
+                            <p class="text-[#306c82] text-xs game-font">(ACEs, Invalidation, Masking)</p>
+                        </div>
+                        <div class="text-4xl font-bold text-[#556fc8]">↓</div>
+                        <div class="p-4 bg-[#bbb4fe] border-2 border-[#98c379] rounded-lg">
+                            <h3 class="text-xl font-bold text-[#304694]">Low Vagal Tone</h3>
+                            <p class="text-[#306c82] text-xs game-font">"Vagal Brake" fails</p>
+                        </div>
+                        <div class="text-4xl font-bold text-[#556fc8]">↓</div>
+                         <div class="p-4 bg-[#bbb4fe] border-2 border-[#98c379] rounded-lg">
+                            <h3 class="text-xl font-bold text-[#304694]">Permanent Alert Mode</h3>
+                            <p class="text-[#306c82] text-xs game-font">System stuck in a threat state</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <p>Trauma is a persistent status effect. ACEs, the invalidation of being neurodivergent, or the high mana cost of masking forces your system into a permanent combat stance.</p>
+                        <p>This drains the vagus nerve's power, leading to chronic inflammation and a cascade of system failures.</p>
+                        <div class="p-4 bg-gradient-to-r from-[#556fc8] to-[#98c379] rounded-lg text-center mt-6">
+                            <p class="text-lg font-bold text-white">The ACE Study: High scores in the tutorial level (childhood) correlate with critical failures in the endgame (adulthood).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="manifestations" class="card p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-[#304694]">Character Sheet: Debuffs & Conditions</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container relative w-full max-w-sm mx-auto h-80 md:h-96">
+                        <canvas id="comorbidityChart"></canvas>
+                    </div>
+                    <div class="space-y-4">
+                        <p>A dysregulated system creates real-world consequences. Low vagal tone is a primary driver of <span class="font-bold text-[#556fc8]">chronic inflammation</span>, the root of many difficult boss battles.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><span class="font-bold">Autoimmune Disease:</span> Friendly fire is enabled. Your defense system attacks your own character.</li>
+                            <li><span class="font-bold">POTS & Dysautonomia:</span> Your controls are inverted. Basic functions like heart rate become unpredictable.</li>
+                            <li><span class="font-bold">hEDS & MCAS:</span> Your character model has collision issues. Trauma exacerbates physical instability.</li>
+                             <li><span class="font-bold">OCD & Anxiety:</span> Your character gets stuck in behavioral loops to cope with overwhelming internal data.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="roadmap" class="card p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#304694]">Player's Guide: The Path to Regulation</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="p-4 bg-[#bbb4fe] border-2 border-[#98c379] rounded-lg h-full flex flex-col justify-center">
+                        <div class="text-5xl mb-2">🧠</div>
+                        <h3 class="text-lg font-bold text-[#304694]">Regulate Your System</h3>
+                        <p class="text-[#306c82] text-xs game-font">Trauma therapy, breathwork, meditation. Signal "peaceful mode" to your body.</p>
+                    </div>
+                    <div class="p-4 bg-[#bbb4fe] border-2 border-[#98c379] rounded-lg h-full flex flex-col justify-center">
+                        <div class="text-5xl mb-2">🌿</div>
+                        <h3 class="text-lg font-bold text-[#304694]">Heal Your Gut</h3>
+                        <p class="text-[#306c82] text-xs game-font">Anti-inflammatory diets (AIP) to reduce aggro from your immune system.</p>
+                    </div>
+                    <div class="p-4 bg-[#bbb4fe] border-2 border-[#98c379] rounded-lg h-full flex flex-col justify-center">
+                        <div class="text-5xl mb-2">💧</div>
+                        <h3 class="text-lg font-bold text-[#304694]">Reduce Toxic Load</h3>
+                        <p class="text-[#306c82] text-xs game-font">Use non-toxic items. Free up processing power for healing subroutines.</p>
+                    </div>
+                    <div class="p-4 bg-[#bbb4fe] border-2 border-[#98c379] rounded-lg h-full flex flex-col justify-center">
+                        <div class="text-5xl mb-2">❤️</div>
+                        <h3 class="text-lg font-bold text-[#304694]">Shift Your Mindset</h3>
+                        <p class="text-[#306c82] text-xs game-font">Find your party. See debuffs as quest markers, not character flaws.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 text-[#306c82] space-y-2">
+            <p class="font-bold text-lg game-font text-[#304694]">CindnessKult.com</p>
+            <p class="game-font text-sm">Embrace the 'Not Just Right'. Find Your Kindness.</p>
+            <p class="text-xs">This is your strategy guide, not the whole game. Consult a master-level healer for your unique quest.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('comorbidityChart').getContext('2d');
+            
+            const chartData = {
+                labels: ['Autoimmune', 'Fibromyalgia', 'Dysautonomia', 'Hypermobility', 'OCD/Anxiety'],
+                datasets: [{
+                    label: 'High Comorbidity with Trauma',
+                    data: [30, 25, 20, 15, 10],
+                    backgroundColor: [
+                        '#556fc8',
+                        '#304694',
+                        '#98c379',
+                        '#306c82',
+                        '#322277'
+                    ],
+                    borderColor: '#e8e6ff',
+                    borderWidth: 4,
+                    hoverOffset: 4
+                }]
+            };
+
+            const comorbidityChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#2c3e50',
+                                font: {
+                                    family: "'Press Start 2P', cursive",
+                                    size: 10
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Common Debuffs from System Dysregulation',
+                            color: '#304694',
+                            font: {
+                                family: "'Press Start 2P', cursive",
+                                size: 12
+                            },
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    } else {
+                                      return label;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    cutout: '50%',
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
