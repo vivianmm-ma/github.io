@@ -48,15 +48,87 @@
             margin-top: 0.5rem;
         }
         
-        .back-link {
-            text-align: center;
-            margin-bottom: 1rem;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.75rem;
-        }
-        .back-link a {
-            color: #483d8b;
+        /* New Sticker Button Styles */
+        .sticker-link {
+            display: block;
+            width: 200px; /* Smaller size for a button */
+            height: 200px;
+            margin: 0 auto 2rem auto; /* Center the button */
             text-decoration: none;
+        }
+        .sticker-container {
+            width: 100%;
+            height: 100%;
+            background-color: #e8e6ff;
+            border: 4px solid #98c379; /* Green border */
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2), 0 0 0 5px #fff;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        .sticker-link:hover .sticker-container {
+            transform: scale(1.05);
+        }
+        .yin-yang {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-color: #304694;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #556fc8 50%, #e8e6ff 50%);
+            flex-shrink: 0;
+            margin-top: -20px; /* Adjust position */
+        }
+        .yin-yang::before,
+        .yin-yang::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid #304694;
+        }
+        .yin-yang::before {
+            top: 7.5px;
+            background-color: #e8e6ff;
+        }
+        .yin-yang::after {
+            bottom: 7.5px;
+            background-color: #556fc8;
+        }
+        .curved-text-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .char {
+            position: absolute;
+            height: 100px; /* Half of container height */
+            transform-origin: bottom center;
+            left: 50%;
+            top: 0;
+            color: #304694;
+            font-size: 0.8rem;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: -1px 1px 0 #98c379;
+        }
+        .bottom-text {
+            color: #322277;
+            font-size: 0.75rem;
+            font-family: 'Press Start 2P', cursive;
+            margin-top: 0.5rem;
+            transform: rotate(-5deg);
         }
 
         .content-section {
@@ -170,9 +242,15 @@
 
     <div class="main-container">
         
-        <div class="back-link">
-            <a href="https://www.cindnesskult.com">-- back to cindnesskult.com --</a>
-        </div>
+        <a href="https://www.cindnesskult.com" class="sticker-link">
+            <div class="sticker-container">
+                <div class="curved-text-container">
+                    <!-- JS will populate this -->
+                </div>
+                <div class="yin-yang"></div>
+                <p class="bottom-text">not just right</p>
+            </div>
+        </a>
         
         <header class="site-header">
             <h1>Cindness KULT</h1>
@@ -276,6 +354,24 @@
         <p class="disclaimer">This page is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
 
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const text = "CindnessKult.com";
+            const container = document.querySelector('.curved-text-container');
+            const textLength = text.length;
+            const totalAngle = 180;
+            const angleIncrement = totalAngle / (textLength - 1);
+            const startAngle = -totalAngle / 2;
 
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.innerText = char;
+                const angle = startAngle + (i * angleIncrement);
+                span.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+                container.appendChild(span);
+            });
+        });
+    </script>
 </body>
 </html>
