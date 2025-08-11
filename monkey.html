@@ -642,16 +642,6 @@
                 <p class="note-text mb-4">Track your kindness stats! (Manual tally)</p>
                 <div class="tally-board">
                     <div class="tally-item">
-                        <span>Kindness Level:</span>
-                        <span class="tally-count" id="kindnessLevelCount">0</span>
-                        <button class="tally-button" id="kindnessLevelAdd">+</button>
-                    </div>
-                    <div class="tally-item">
-                        <span>Kind to Self:</span>
-                        <span class="tally-count" id="kindToSelfCount">0</span>
-                        <button class="tally-button" id="kindToSelfAdd">+</button>
-                    </div>
-                    <div class="tally-item">
                         <span>Kind to Monkey:</span>
                         <span class="tally-count" id="kindToMonkeyCount">0</span>
                         <button class="tally-button" id="kindToMonkeyAdd">+</button>
@@ -660,6 +650,21 @@
                         <span>Kind to Bonobo:</span>
                         <span class="tally-count" id="kindToBonoboCount">0</span>
                         <button class="tally-button" id="kindToBonoboAdd">+</button>
+                    </div>
+                    <div class="tally-item">
+                        <span>Kind to Self (Bonobo):</span>
+                        <span class="tally-count" id="kindToSelfBonoboCount">0</span>
+                        <button class="tally-button" id="kindToSelfBonoboAdd">+</button>
+                    </div>
+                    <div class="tally-item">
+                        <span>Kind to Self (Monkey):</span>
+                        <span class="tally-count" id="kindToSelfMonkeyCount">0</span>
+                        <button class="tally-button" id="kindToSelfMonkeyAdd">+</button>
+                    </div>
+                    <div class="tally-item">
+                        <span>Kindness Level:</span>
+                        <span class="tally-count" id="kindnessLevelCount">0</span>
+                        <button class="tally-button" id="kindnessLevelAdd">+</button>
                     </div>
                     <p class="tally-explanation mt-4">Increase your kindness level by being intentional and thoughtful in your actions towards yourself and each other. Remember, the answer is always kindness! ✨</p>
                     <div class="mt-4 text-center">
@@ -1016,12 +1021,14 @@
 
         // Kindness Tally Elements
         const kindnessLevelCount = document.getElementById('kindnessLevelCount');
-        const kindToSelfCount = document.getElementById('kindToSelfCount');
+        const kindToSelfBonoboCount = document.getElementById('kindToSelfBonoboCount'); // New ID
+        const kindToSelfMonkeyCount = document.getElementById('kindToSelfMonkeyCount'); // New ID
         const kindToMonkeyCount = document.getElementById('kindToMonkeyCount');
         const kindToBonoboCount = document.getElementById('kindToBonoboCount');
 
         const kindnessLevelAdd = document.getElementById('kindnessLevelAdd');
-        const kindToSelfAdd = document.getElementById('kindToSelfAdd');
+        const kindToSelfBonoboAdd = document.getElementById('kindToSelfBonoboAdd'); // New ID
+        const kindToSelfMonkeyAdd = document.getElementById('kindToSelfMonkeyAdd'); // New ID
         const kindToMonkeyAdd = document.getElementById('kindToMonkeyAdd');
         const kindToBonoboAdd = document.getElementById('kindToBonoboAdd');
         const resetKindnessTallyButton = document.getElementById('resetKindnessTally');
@@ -1034,7 +1041,8 @@
         function saveTallyState() {
             const tallyState = {
                 kindnessLevel: parseInt(kindnessLevelCount.textContent),
-                kindToSelf: parseInt(kindToSelfCount.textContent),
+                kindToSelfBonobo: parseInt(kindToSelfBonoboCount.textContent), // Save new ID
+                kindToSelfMonkey: parseInt(kindToSelfMonkeyCount.textContent), // Save new ID
                 kindToMonkey: parseInt(kindToMonkeyCount.textContent),
                 kindToBonobo: parseInt(kindToBonoboCount.textContent),
                 questionsAsked: parseInt(questionsAskedCount.textContent)
@@ -1046,11 +1054,12 @@
             const storedState = localStorage.getItem('tallyBoardState');
             if (storedState) {
                 const state = JSON.parse(storedState);
-                kindnessLevelCount.textContent = state.kindnessLevel;
-                kindToSelfCount.textContent = state.kindToSelf;
-                kindToMonkeyCount.textContent = state.kindToMonkey;
-                kindToBonoboCount.textContent = state.kindToBonobo;
-                questionsAskedCount.textContent = state.questionsAsked;
+                kindnessLevelCount.textContent = state.kindnessLevel || 0; // Default to 0 if undefined
+                kindToSelfBonoboCount.textContent = state.kindToSelfBonobo || 0; // Load new ID
+                kindToSelfMonkeyCount.textContent = state.kindToSelfMonkey || 0; // Load new ID
+                kindToMonkeyCount.textContent = state.kindToMonkey || 0;
+                kindToBonoboCount.textContent = state.kindToBonobo || 0;
+                questionsAskedCount.textContent = state.questionsAsked || 0;
             }
         }
 
@@ -1059,8 +1068,12 @@
             kindnessLevelCount.textContent = parseInt(kindnessLevelCount.textContent) + 1;
             saveTallyState();
         });
-        kindToSelfAdd.addEventListener('click', () => {
-            kindToSelfCount.textContent = parseInt(kindToSelfCount.textContent) + 1;
+        kindToSelfBonoboAdd.addEventListener('click', () => { // New Listener
+            kindToSelfBonoboCount.textContent = parseInt(kindToSelfBonoboCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToSelfMonkeyAdd.addEventListener('click', () => { // New Listener
+            kindToSelfMonkeyCount.textContent = parseInt(kindToSelfMonkeyCount.textContent) + 1;
             saveTallyState();
         });
         kindToMonkeyAdd.addEventListener('click', () => {
@@ -1075,7 +1088,8 @@
         // Kindness Tally Reset
         resetKindnessTallyButton.addEventListener('click', () => {
             kindnessLevelCount.textContent = 0;
-            kindToSelfCount.textContent = 0;
+            kindToSelfBonoboCount.textContent = 0; // Reset new ID
+            kindToSelfMonkeyCount.textContent = 0; // Reset new ID
             kindToMonkeyCount.textContent = 0;
             kindToBonoboCount.textContent = 0;
             saveTallyState();
