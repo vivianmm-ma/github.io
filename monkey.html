@@ -851,7 +851,8 @@
         }
         
         // === Daily Quests Persistence & Reset Functionality ===
-        const dailyQuestCheckboxes = document.querySelectorAll('.game-panel:nth-of-type(2) .checkbox-item input[type="checkbox"]');
+        // Moved inside DOMContentLoaded to ensure elements are available
+        let dailyQuestCheckboxes; // Declare globally, assign in DOMContentLoaded
         const resetDailyQuestsButton = document.getElementById('resetDailyQuestsButton');
 
         function saveDailyQuestsState() {
@@ -873,14 +874,6 @@
                 });
             }
         }
-
-        // Add event listeners for changes on daily quest checkboxes to save their state
-        dailyQuestCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                saveDailyQuestsState();
-                updateProgressBar();
-            });
-        });
 
         // Reset Daily Quests Button Functionality
         resetDailyQuestsButton.addEventListener('click', () => {
@@ -977,11 +970,23 @@
             }
         });
 
-        // Initial update of the progress bar and load custom tasks when the page loads
+        // Initial setup when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
-            loadDailyQuestsState(); // Load daily quests state first
+            // Assign dailyQuestCheckboxes here to ensure all elements are in the DOM
+            dailyQuestCheckboxes = document.querySelectorAll('.game-panel:nth-of-type(2) .checkbox-item input[type="checkbox"]');
+            
+            loadDailyQuestsState(); // Load daily quests state
             loadCustomTasks(); // Load custom tasks
             updateProgressBar(); // Then update progress bar to include all of them
+
+            // Attach event listeners for pre-defined daily quest checkboxes here
+            // This loop was previously outside DOMContentLoaded, now it's inside to ensure elements are present.
+            dailyQuestCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    saveDailyQuestsState();
+                    updateProgressBar();
+                });
+            });
         });
     </script>
 </body>
