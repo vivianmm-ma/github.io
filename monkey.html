@@ -1,570 +1,1132 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously } from 'firebase/auth';
-import { getFirestore, doc, setDoc, onSnapshot } from 'firebase/firestore';
-
-// Global variables provided by the Canvas environment
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-// Initialize Firebase (only once)
-let app;
-let db;
-let auth;
-
-try {
-  app = initializeApp(firebaseConfig);
-  db = getFirestore(app);
-  auth = getAuth(app);
-} catch (error) {
-  console.error("Firebase initialization error:", error);
-  // Handle error gracefully in UI if needed
-}
-
-// Main App Component
-const App = () => {
-    // State for daily quests (pre-defined)
-    const [dailyQuests, setDailyQuests] = useState({
-        feedDogDaily: false, letDogOutDaily: false, closeWindowsAC: false,
-        upstairsAC: false, kitchenMorning: false, clearFloorsMorning: false,
-        sweepMorning: false, coffeePrepCheck: false, dogDinner: false,
-        sayHello: false, aloneTime: false, dogBed: false,
-        monkeyAloneTimeTasks: false, bonoboAloneTimeTasks: false, checkChoresLate: false,
-        bedtimeRoutine: false
-    });
-
-    // State for custom quests (user-added)
-    const [customQuests, setCustomQuests] = useState([]);
-    const [newCustomTaskInput, setNewCustomTaskInput] = useState('');
-
-    // State for tally boards
-    const [kindnessTally, setKindnessTally] = useState({
-        kindnessLevel: 0, kindToSelfBonobo: 0, kindToSelfMonkey: 0,
-        kindToMonkey: 0, kindToBonobo: 0
-    });
-    const [questionsAsked, setQuestionsAsked] = useState(0);
-
-    // Stopwatch state
-    const [stopwatchTime, setStopwatchTime] = useState({ hours: 0, minutes: 0, seconds: 0 });
-    const [isRunning, setIsRunning] = useState(false);
-    const timerRef = useRef(null); // Ref to hold the setInterval ID
-
-    // Firestore document reference
-    const docRef = useRef(null);
-
-    // Authenticate and set up Firestore listener
-    useEffect(() => {
-        const setupFirebase = async () => {
-            if (!db || !auth) {
-                console.error("Firebase is not initialized.");
-                return;
-            }
-
-            try {
-                if (initialAuthToken) {
-                    await signInAnonymously(auth); // Using anonymous sign-in for simplicity
-                } else {
-                    await signInAnonymously(auth);
-                }
-                console.log("Firebase authenticated anonymously.");
-
-                // Use a fixed document ID for shared data within the public collection
-                // This means anyone with access to this app ID can see/edit this document.
-                docRef.current = doc(db, `artifacts/${appId}/public/data/shared-quest-log`);
-
-                // Set up real-time listener for the document
-                const unsubscribe = onSnapshot(docRef.current, (docSnap) => {
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        console.log("Firestore data received:", data);
-                        // Update states based on Firestore data
-                        if (data.dailyQuests) setDailyQuests(data.dailyQuests);
-                        if (data.customQuests) setCustomQuests(data.customQuests);
-                        if (data.kindnessTally) setKindnessTally(data.kindnessTally);
-                        if (data.questionsAsked !== undefined) setQuestionsAsked(data.questionsAsked);
-                    } else {
-                        console.log("No such document! Initializing with default data.");
-                        // If document doesn't exist, create it with default states
-                        saveAllStates();
-                    }
-                }, (error) => {
-                    console.error("Error listening to Firestore document:", error);
-                });
-
-                return () => unsubscribe(); // Cleanup listener on unmount
-
-            } catch (error) {
-                console.error("Firebase auth or listener setup failed:", error);
-            }
-        };
-
-        setupFirebase();
-    }, []); // Run once on component mount
-
-    // Function to save all states to Firestore
-    const saveAllStates = useCallback(async () => {
-        if (!docRef.current) {
-            console.warn("Document reference not yet available. Cannot save states.");
-            return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Changed the title for this specific page -->
+    <title>Quest Log: Our Flow & Teamwork - CindnessKult</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start 2P&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* CindnessKult Base Styling from headercode.docx */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #2c2c44; /* Dark blue/purple background for retro feel */
+            color: #e6e6fa; /* Light lavender text */
+            margin: 0;
+            padding: 20px;
         }
-        try {
-            await setDoc(docRef.current, {
-                dailyQuests,
-                customQuests,
-                kindnessTally,
-                questionsAsked
-            }, { merge: true }); // Use merge to avoid overwriting other fields
-            console.log("States saved to Firestore.");
-        } catch (error) {
-            console.error("Error saving states to Firestore:", error);
+        .main-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
         }
-    }, [dailyQuests, customQuests, kindnessTally, questionsAsked]);
-
-    // Save states whenever they change (debounced for performance if needed, but simple for now)
-    useEffect(() => {
-        saveAllStates();
-    }, [dailyQuests, customQuests, kindnessTally, questionsAsked, saveAllStates]);
-
-    // === Stopwatch Logic ===
-    useEffect(() => {
-        if (isRunning) {
-            timerRef.current = setInterval(() => {
-                setStopwatchTime(prevTime => {
-                    let { hours, minutes, seconds } = prevTime;
-                    seconds++;
-                    if (seconds === 60) {
-                        seconds = 0;
-                        minutes++;
-                        if (minutes === 60) {
-                            minutes = 0;
-                            hours++;
-                        }
-                    }
-                    return { hours, minutes, seconds };
-                });
-            }, 1000);
-        } else {
-            clearInterval(timerRef.current);
+        
+        .site-header {
+            border: 4px solid #9370db; /* Medium purple border */
+            background-color: #483d8b; /* Darker purple for header */
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: 8px 8px 0px #6366f1; /* Stronger shadow for retro depth */
+            border-radius: 0.75rem; /* Rounded corners for the header */
+            font-family: 'Press Start 2P', cursive; /* Apply retro font */
         }
-        return () => clearInterval(timerRef.current); // Cleanup on unmount
-    }, [isRunning]);
-
-    const formatTime = (h, m, s) => {
-        const pad = (num) => String(num).padStart(2, '0');
-        return `Stopwatch: ${pad(h)}:${pad(m)}:${pad(s)}`;
-    };
-
-    const handleStartStopwatch = () => {
-        setIsRunning(prev => !prev);
-    };
-
-    const handleResetStopwatch = () => {
-        setIsRunning(false);
-        setStopwatchTime({ hours: 0, minutes: 0, seconds: 0 });
-    };
-
-    // === Progress Bar Logic ===
-    const updateProgressBar = useCallback(() => {
-        const allCheckboxes = document.querySelectorAll('.game-panel input[type="checkbox"]');
-        let checkedCount = 0;
-        allCheckboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                checkedCount++;
-            }
-        });
-        const totalTasks = allCheckboxes.length;
-        const percentage = totalTasks > 0 ? (checkedCount / totalTasks) * 100 : 0;
-        return `${Math.round(percentage)}%`;
-    }, []);
-
-    // Re-calculate progress bar percentage whenever relevant states change
-    const progressBarPercentage = updateProgressBar();
-
-    // === Daily Quests Logic ===
-    const handleDailyQuestChange = (id) => {
-        setDailyQuests(prev => ({
-            ...prev,
-            [id]: !prev[id]
-        }));
-    };
-
-    const handleResetDailyQuests = () => {
-        const resetState = Object.fromEntries(
-            Object.keys(dailyQuests).map(key => [key, false])
-        );
-        setDailyQuests(resetState);
-    };
-
-    // === Custom Quests Logic ===
-    const handleAddCustomTask = () => {
-        if (newCustomTaskInput.trim()) {
-            setCustomQuests(prev => [
-                ...prev,
-                { id: Date.now().toString(), text: newCustomTaskInput.trim(), checked: false, timeNote: '' }
-            ]);
-            setNewCustomTaskInput('');
+        .site-header h1 {
+            color: #98c379; /* Green for main title */
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: -2px 2px 0 #304694; /* Pixel-like shadow */
         }
-    };
+        .site-header p {
+            font-size: 0.75rem;
+            color: #e8e6ff; /* Lighter text for subtitle */
+            margin-top: 0.5rem;
+        }
+        
+        .sticker-link {
+            display: block;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem auto;
+            text-decoration: none;
+        }
+        .sticker-container {
+            width: 100%;
+            height: 100%;
+            background-color: #e8e6ff;
+            border: 4px solid #98c379; /* Green border */
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2), 0 0 0 5px #fff;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        .sticker-link:hover .sticker-container {
+            transform: scale(1.05);
+        }
+        .yin-yang {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-color: #304694;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #556fc8 50%, #e8e6ff 50%);
+            flex-shrink: 0;
+            margin-top: -20px;
+        }
+        .yin-yang::before,
+        .yin-yang::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid #304694;
+        }
+        .yin-yang::before {
+            top: 7.5px;
+            background-color: #e8e6ff;
+        }
+        .yin-yang::after {
+            bottom: 7.5px;
+            background-color: #556fc8;
+        }
+        .curved-text-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .char {
+            position: absolute;
+            height: 100px;
+            transform-origin: bottom center;
+            left: 50%;
+            top: 0;
+            color: #304694;
+            font-size: 0.8rem;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: -1px 1px 0 #98c379;
+        }
+        .bottom-text {
+            color: #322277;
+            font-size: 0.75rem;
+            font-family: 'Press Start 2P', cursive;
+            margin-top: 0.5rem;
+            transform: rotate(-5deg);
+        }
 
-    const handleCustomTaskChange = (id) => {
-        setCustomQuests(prev =>
-            prev.map(task =>
-                task.id === id ? { ...task, checked: !task.checked } : task
-            )
-        );
-    };
+        /* Retro Game Checklist Specific Styles */
+        .game-container {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #1a1a2e; /* Darker background for game area */
+            border-radius: 1rem;
+            box-shadow: 10px 10px 0px #0f0f1c; /* Deep shadow for 3D effect */
+            border: 4px solid #6366f1; /* Game-like border */
+            font-family: 'Press Start 2P', cursive; /* Apply retro font */
+            color: #98c379; /* Green text for content */
+            text-shadow: -1px 1px 0 #304694; /* Pixel-like shadow for text */
+        }
+        .game-title {
+            font-size: 2.25rem;
+            color: #e8e6ff; /* Light purple for main title */
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-shadow: -2px 2px 0 #6366f1; /* Stronger pixel shadow */
+        }
+        .game-subtitle {
+            font-size: 0.85rem;
+            color: #bebebe;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .game-panel {
+            background-color: #304694; /* Dark blue for panel background */
+            border: 4px solid #e8e6ff; /* Light border */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 6px 6px 0px #556fc8; /* Panel shadow */
+        }
+        .panel-title {
+            font-size: 1.5rem;
+            color: #98c379; /* Green for panel titles */
+            border-bottom: 3px solid #6366f1; /* Bold border under title */
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            text-shadow: -1px 1px 0 #e8e6ff; /* Pixel shadow */
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center; /* Align items vertically */
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background-color: #483d8b; /* Item background */
+            border-radius: 0.25rem;
+            border: 2px solid #6366f1; /* Item border */
+            box-shadow: 2px 2px 0px #322277; /* Item shadow */
+            transition: background-color 0.1s ease;
+        }
+        .checkbox-item:last-child {
+            margin-bottom: 0;
+        }
+        .checkbox-item input[type="checkbox"] {
+            appearance: none; /* Hide default checkbox */
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid #e8e6ff; /* White border for custom checkbox */
+            background-color: #1a1a2e; /* Dark inner color */
+            margin-right: 1rem;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            border-radius: 0.125rem; /* Slightly rounded corners for checkbox */
+        }
+        .checkbox-item input[type="checkbox"]:checked {
+            background-color: #98c379; /* Green when checked */
+            border-color: #304694; /* Dark border when checked */
+        }
+        .checkbox-item input[type="checkbox"]:checked::after {
+            content: '✓'; /* Checkmark symbol */
+            font-size: 1.2rem;
+            color: #2c2c44; /* Dark text for checkmark */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1;
+        }
+        .checkbox-item label {
+            font-size: 0.9rem; /* Smaller font for list items */
+            color: #e8e6ff; /* Light purple for label text */
+            flex-grow: 1;
+        }
+        .time-estimate {
+            font-size: 0.75rem;
+            color: #dcdcdc; /* Lighter color for time */
+            margin-left: auto; /* Push to the right */
+            white-space: nowrap;
+        }
+        
+        /* Progress Bar Styling */
+        .progress-bar-area {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            background-color: #304694;
+            border: 4px solid #e8e6ff;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 6px 6px 0px #556fc8;
+        }
+        .progress-bar-label {
+            font-size: 1.1rem;
+            color: #98c379;
+            margin-bottom: 0.75rem;
+            text-shadow: -1px 1px 0 #e8e6ff;
+        }
+        .progress-bar-container {
+            width: 90%;
+            height: 30px;
+            background-color: #1a1a2e; /* Empty bar color */
+            border: 2px solid #e8e6ff; /* Bar border */
+            margin: 0 auto;
+            border-radius: 0.25rem;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5); /* Inner shadow for depth */
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%; /* Start at 0% for dynamic update */
+            background-color: #98c379; /* Green fill color */
+            transition: width 0.5s ease-in-out; /* Smooth transition */
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5); /* Inner shadow for fill */
+            position: relative;
+        }
+        .progress-bar-percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #2c2c44; /* Dark text on green bar */
+            font-size: 0.75rem;
+            font-family: 'Press Start 2P', cursive;
+            white-space: nowrap;
+        }
 
-    const handleCustomTimeNoteChange = (id, value) => {
-        setCustomQuests(prev =>
-            prev.map(task =>
-                task.id === id ? { ...task, timeNote: value } : task
-            )
-        );
-    };
+        /* Mission Control / Timer Styling */
+        .mission-control-panel {
+            background-color: #304694;
+            border: 4px solid #e8e6ff;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 6px 6px 0px #556fc8;
+            text-align: center; /* Center content */
+        }
+        .mission-control-title {
+            font-size: 1.5rem;
+            color: #98c379;
+            border-bottom: 3px solid #6366f1;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            text-shadow: -1px 1px 0 #e8e6ff;
+        }
+        .timer-display {
+            background-color: #1a1a2e;
+            border: 2px solid #e8e6ff;
+            border-radius: 0.25rem;
+            padding: 0.75rem;
+            margin: 1rem auto;
+            width: fit-content;
+            font-size: 1.5rem;
+            color: #98c379;
+            text-shadow: -1px 1px 0 #304694;
+        }
+        .action-button {
+            display: inline-block;
+            background-color: #6366f1;
+            color: #e8e6ff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid #e8e6ff;
+            box-shadow: 4px 4px 0px #483d8b;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: background-color 0.1s ease, box-shadow 0.1s ease;
+        }
+        .action-button:hover {
+            background-color: #556fc8;
+            box-shadow: 2px 2px 0px #322277;
+        }
+        .note-text {
+            font-size: 0.75rem;
+            color: #bebebe;
+            margin-top: 1rem;
+        }
 
-    const handleDeleteCustomTask = (id) => {
-        setCustomQuests(prev => prev.filter(task => task.id !== id));
-    };
+        /* Content Editable Styling */
+        .editable-list-area {
+            background-color: #483d8b; /* Item background */
+            border-radius: 0.25rem;
+            border: 2px solid #6366f1; /* Item border */
+            box-shadow: 2px 2px 0px #322277; /* Item shadow */
+            padding: 1rem;
+            min-height: 100px; /* Ensure visible height */
+            color: #e8e6ff; /* Light purple for text */
+            text-align: left; /* Align text left within editable area */
+        }
+        .editable-list-area:empty::before {
+            content: attr(data-placeholder);
+            color: #bebebe; /* Placeholder text color */
+        }
 
-    // === Tally Board Logic ===
-    const handleTallyIncrement = (tallyKey) => {
-        setKindnessTally(prev => ({
-            ...prev,
-            [tallyKey]: prev[tallyKey] + 1
-        }));
-    };
+        /* Tally Board Specific Styles */
+        .tally-board {
+            background-color: #1a1a2e;
+            border: 3px solid #98c379;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            box-shadow: 4px 4px 0px #304694;
+            text-align: left;
+        }
+        .tally-item {
+            font-size: 0.9rem;
+            color: #e8e6ff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tally-count {
+            background-color: #6366f1;
+            color: #e8e6ff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.2rem;
+            border: 1px solid #e8e6ff;
+            min-width: 2.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            box-shadow: 1px 1px 0px #322277;
+        }
+        .tally-explanation {
+            font-size: 0.7rem;
+            color: #bebebe;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+        .tally-button {
+            background-color: #556fc8;
+            color: #e8e6ff;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.2rem;
+            border: 1px solid #e8e6ff;
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            box-shadow: 1px 1px 0px #304694;
+            transition: background-color 0.1s ease, box-shadow 0.1s ease;
+        }
+        .tally-button:hover {
+            background-color: #483d8b;
+            box-shadow: 0.5px 0.5px 0px #223a6b;
+        }
+        .tally-reset-button {
+            background-color: #e74c3c; /* Red for reset */
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            border: 2px solid #c0392b;
+            box-shadow: 4px 4px 0px #8f2d22;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+        .tally-reset-button:hover {
+            background-color: #c0392b;
+            box-shadow: 2px 2px 0px #6d1e18;
+        }
 
-    const handleResetKindnessTally = () => {
-        setKindnessTally({
-            kindnessLevel: 0, kindToSelfBonobo: 0, kindToSelfMonkey: 0,
-            kindToMonkey: 0, kindToBonobo: 0
-        });
-    };
-
-    const handleQuestionsAskedIncrement = () => {
-        setQuestionsAsked(prev => prev + 1);
-    };
-
-    const handleResetQuestionsTally = () => {
-        setQuestionsAsked(0);
-    };
-
-    return (
-        <div className="main-container">
-            {/* Reusable Header Code */}
-            <a href="https://www.cindnesskult.com" className="sticker-link">
-                <div className="sticker-container">
-                    {/* JS will populate this (if any, not included in React version directly) */}
-                    <div className="yin-yang"></div>
-                    <p className="bottom-text">not just right</p>
+        /* Custom Task Input Area */
+        .custom-task-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+        .custom-task-input {
+            flex-grow: 1;
+            background-color: #1a1a2e;
+            border: 2px solid #e8e6ff;
+            border-radius: 0.25rem;
+            padding: 0.75rem;
+            color: #e8e6ff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+        }
+        .custom-task-input::placeholder {
+            color: #bebebe;
+        }
+        .add-button {
+            background-color: #98c379;
+            color: #2c2c44;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: 2px solid #304694;
+            box-shadow: 4px 4px 0px #556fc8;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.1s ease, box-shadow 0.1s ease;
+            white-space: nowrap;
+        }
+        .add-button:hover {
+            background-color: #79a164;
+            box-shadow: 2px 2px 0px #223a6b;
+        }
+        .delete-button {
+            background-color: #e74c3c; /* Red color for delete */
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid #c0392b;
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            box-shadow: 1px 1px 0px #8f2d22;
+            transition: background-color 0.1s ease, box-shadow 0.1s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .delete-button:hover {
+            background-color: #c0392b;
+            box-shadow: 0.5px 0.5px 0px #6d1e18;
+        }
+        .custom-time-input {
+            background-color: #1a1a2e;
+            border: 1px solid #e8e6ff;
+            border-radius: 0.15rem;
+            padding: 0.2rem 0.4rem;
+            color: #e8e6ff;
+            font-family: 'Inter', sans-serif; /* Use Inter for smaller text */
+            font-size: 0.7rem;
+            width: 70px; /* Fixed width for time input */
+            margin-left: 0.5rem;
+            flex-shrink: 0;
+        }
+        .custom-time-input::placeholder {
+            color: #bebebe;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        
+        <!-- ===== START OF REUSABLE HEADER CODE ===== -->
+        <a href="https://www.cindnesskult.com" class="sticker-link">
+            <div class="sticker-container">
+                <div class="curved-text-container">
+                    <!-- JS will populate this -->
                 </div>
-            </a>
-            
-            <header className="site-header">
-                <h1>Cindness KULT</h1>
-                <p>* ✧ The answer is always kindness. (not a cult btw) ✧ *</p>
-            </header>
-            {/* End of Reusable Header Code */}
+                <div class="yin-yang"></div>
+                <p class="bottom-text">not just right</p>
+            </div>
+        </a>
+        
+        <header class="site-header">
+            <h1>Cindness KULT</h1>
+            <p>* ✧ The answer is always kindness. (not a cult btw) ✧ *</p>
+        </header>
+        <!-- ===== END OF REUSABLE HEADER CODE ===== -->
 
-            <div className="game-container">
-                <h1 className="game-title">QUEST LOG</h1>
-                <p className="game-subtitle">Track your progress, brave adventurers!</p>
+        <!-- Your Checklist Content Starts Here -->
+        <div class="game-container">
+            <h1 class="game-title">QUEST LOG</h1>
+            <p class="game-subtitle">Track your progress, brave adventurers!</p>
 
-                {/* Progress Bar */}
-                <div className="progress-bar-area">
-                    <div className="progress-bar-label">Overall Progress</div>
-                    <div className="progress-bar-container">
-                        <div className="progress-bar-fill" style={{ width: progressBarPercentage }}>
-                            <span className="progress-bar-percentage">{progressBarPercentage} Complete</span>
-                        </div>
-                    </div>
-                    <p className="note-text">Check off tasks to see your progress update!</p>
-                </div>
-
-                {/* Daily Chore Checklist */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Daily Quests <span className="text-xs text-gray-400 block mt-1">(Split tasks based on days off)</span></h2>
-                    <p className="text-sm text-gray-300 mb-4">
-                        **Monkey's Days Off:** Monday, Tuesday, Wednesday<br/>
-                        **Bonobo's Days Off:** Saturday, Sunday<br/>
-                        **Friday:** Bonobo usually takes lead on evening tasks.
-                    </p>
-                    <ul>
-                        {Object.entries(dailyQuests).map(([id, checked]) => (
-                            <li className="checkbox-item" key={id}>
-                                <input
-                                    type="checkbox"
-                                    id={id}
-                                    checked={checked}
-                                    onChange={() => handleDailyQuestChange(id)}
-                                />
-                                <label htmlFor={id}>
-                                    {id === 'feedDogDaily' && 'Feed the dog breakfast'}
-                                    {id === 'letDogOutDaily' && 'Get the dog up and let him out'}
-                                    {id === 'closeWindowsAC' && 'Close all windows if hot & turn on fan/AC'}
-                                    {id === 'upstairsAC' && 'Ensure upstairs AC is on & windows by AC are shut (daytime)'}
-                                    {id === 'kitchenMorning' && '**Kitchen Cleanup (By Morning):** Dishes done/put away, counters & stove wiped'}
-                                    {id === 'clearFloorsMorning' && '**Clear Surfaces (By Morning):** Pick clothes off floor, clear counters, wipe counters, ensure no clothes on chairs/bed/couch'}
-                                    {id === 'sweepMorning' && '**Sweep (By Morning):** Main living area floor swept'}
-                                    {id === 'coffeePrepCheck' && 'Coffee prepared the night before'}
-                                    {id === 'dogDinner' && 'Feed the dog dinner around 6-7pm'}
-                                    {id === 'sayHello' && '**Evening Connection:** Say hello & hang out (10-11 PM for Bonobo)'}
-                                    {id === 'aloneTime' && '**Alone Time:** Bonobo gets 1-2 hours for tasks/decompression (11 PM - 12/1 AM)'}
-                                    {id === 'dogBed' && 'Dog goes to sleep'}
-                                    {id === 'monkeyAloneTimeTasks' && '**During Bonobo\'s Alone Time:** Monkey works on his own stuff (e.g., planters, school stuff)'}
-                                    {id === 'bonoboAloneTimeTasks' && '**During Bonobo\'s Alone Time:** Bonobo works on work/school or exercises (bike) (Monkey generally should not talk during this)'}
-                                    {id === 'checkChoresLate' && '**Late Night Check (1 AM):** Confirm daily chores (dishes, etc.) are done'}
-                                    {id === 'bedtimeRoutine' && '**Bedtime Routine (By 2:30 AM):** Prepare outfits for next day, brush teeth, meds/water by bed, aim to be *in bed* by 3 AM'}
-                                </label>
-                                <span className="time-estimate">
-                                    {id === 'feedDogDaily' && '~3 min'}
-                                    {id === 'letDogOutDaily' && '~5 min'}
-                                    {id === 'closeWindowsAC' && '~3 min'}
-                                    {id === 'upstairsAC' && '~5 min'}
-                                    {id === 'kitchenMorning' && '~10 min'}
-                                    {id === 'clearFloorsMorning' && '~10 min'}
-                                    {id === 'sweepMorning' && '~5 min'}
-                                    {id === 'coffeePrepCheck' && '~5 min'}
-                                    {id === 'dogDinner' && '~3 min'}
-                                    {id === 'sayHello' && '30-60 min'}
-                                    {id === 'aloneTime' && '60-120 min'}
-                                    {id === 'dogBed' && '5 min'}
-                                    {id === 'monkeyAloneTimeTasks' && '~30 min'}
-                                    {id === 'bonoboAloneTimeTasks' && '~30 min'}
-                                    {id === 'checkChoresLate' && '~5 min'}
-                                    {id === 'bedtimeRoutine' && '~30 min'}
-                                </span>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="mt-6 text-center">
-                        <button id="resetDailyQuestsButton" className="add-button" onClick={handleResetDailyQuests}>RESET DAILY QUESTS</button>
-                        <p className="note-text mt-2">Click to uncheck all quests in this section.</p>
+            <!-- Progress Bar -->
+            <div class="progress-bar-area">
+                <div class="progress-bar-label">Overall Progress</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill">
+                        <span class="progress-bar-percentage">0% Complete</span>
                     </div>
                 </div>
+                <p class="note-text">Check off tasks to see your progress update!</p>
+            </div>
 
-                {/* Personal Daily Quests */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Personal Daily Quests <span className="text-xs text-gray-400 block mt-1">(Add your custom tasks!)</span></h2>
-                    <div className="custom-task-input-group">
-                        <input
-                            type="text"
-                            id="newCustomTaskInput"
-                            className="custom-task-input"
-                            placeholder="Enter new custom quest..."
-                            value={newCustomTaskInput}
-                            onChange={(e) => setNewCustomTaskInput(e.target.value)}
-                            onKeyPress={(e) => e.key === 'Enter' && handleAddCustomTask()}
-                        />
-                        <button id="addCustomTaskButton" className="add-button" onClick={handleAddCustomTask}>ADD QUEST</button>
-                    </div>
-                    <ul id="customTaskList">
-                        {customQuests.map(task => (
-                            <li className="checkbox-item" key={task.id}>
-                                <input
-                                    type="checkbox"
-                                    id={`custom-${task.id}`}
-                                    checked={task.checked}
-                                    onChange={() => handleCustomTaskChange(task.id)}
-                                />
-                                <label htmlFor={`custom-${task.id}`}>{task.text}</label>
-                                <input
-                                    type="text"
-                                    className="custom-time-input"
-                                    placeholder="e.g., 15min"
-                                    value={task.timeNote}
-                                    onChange={(e) => handleCustomTimeNoteChange(task.id, e.target.value)}
-                                />
-                                <button className="delete-button" onClick={() => handleDeleteCustomTask(task.id)}>DELETE</button>
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="note-text mt-4">Your custom quests will save automatically!</p>
+            <!-- Daily Chore Checklist -->
+            <div class="game-panel">
+                <h2 class="panel-title">Daily Quests <span class="text-xs text-gray-400 block mt-1">(Split tasks based on days off)</span></h2>
+                <p class="text-sm text-gray-300 mb-4">
+                    **Monkey's Days Off:** Monday, Tuesday, Wednesday<br>
+                    **Bonobo's Days Off:** Saturday, Sunday<br>
+                    **Friday:** Bonobo usually takes lead on evening tasks.
+                </p>
+                <ul>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="feedDogDaily">
+                        <label for="feedDogDaily">Feed the dog breakfast</label>
+                        <span class="time-estimate">~3 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="letDogOutDaily">
+                        <label for="letDogOutDaily">Get the dog up and let him out</label>
+                        <span class="time-estimate">~5 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="closeWindowsAC">
+                        <label for="closeWindowsAC">Close all windows if hot & turn on fan/AC</label>
+                        <span class="time-estimate">~3 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="upstairsAC">
+                        <label for="upstairsAC">Ensure upstairs AC is on & windows by AC are shut (daytime)</label>
+                        <span class="time-estimate">~5 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="kitchenMorning">
+                        <label for="kitchenMorning">**Kitchen Cleanup (By Morning):** Dishes done/put away, counters & stove wiped</label>
+                        <span class="time-estimate">~10 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="clearFloorsMorning">
+                        <label for="clearFloorsMorning">**Clear Surfaces (By Morning):** Pick clothes off floor, clear counters, wipe counters, ensure no clothes on chairs/bed/couch</label>
+                        <span class="time-estimate">~10 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="sweepMorning">
+                        <label for="sweepMorning">**Sweep (By Morning):** Main living area floor swept</label>
+                        <span class="time-estimate">~5 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="coffeePrepCheck">
+                        <label for="coffeePrepCheck">Coffee prepared the night before</label>
+                        <span class="time-estimate">~5 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="dogDinner">
+                        <label for="dogDinner">Feed the dog dinner around 6-7pm</label>
+                        <span class="time-estimate">~3 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="sayHello">
+                        <label for="sayHello">**Evening Connection:** Say hello & hang out (10-11 PM for Bonobo)</label>
+                        <span class="time-estimate">30-60 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="aloneTime">
+                        <label for="aloneTime">**Alone Time:** Bonobo gets 1-2 hours for tasks/decompression (11 PM - 12/1 AM)</label>
+                        <span class="time-estimate">60-120 min</span>
+                    </li>
+                      <li class="checkbox-item">
+                        <input type="checkbox" id="dogBed">
+                        <label for="dogBed">Dog goes to sleep</label>
+                        <span class="time-estimate">5 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="monkeyAloneTimeTasks">
+                        <label for="monkeyAloneTimeTasks">**During Bonobo's Alone Time:** Monkey works on his own stuff (e.g., planters, school stuff)</label>
+                        <span class="time-estimate">~30 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="bonoboAloneTimeTasks">
+                        <label for="bonoboAloneTimeTasks">**During Bonobo's Alone Time:** Bonobo works on work/school or exercises (bike) (Monkey generally should not talk during this)</label>
+                        <span class="time-estimate">~30 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="checkChoresLate">
+                        <label for="checkChoresLate">**Late Night Check (1 AM):** Confirm daily chores (dishes, etc.) are done</label>
+                        <span class="time-estimate">~5 min</span>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="bedtimeRoutine">
+                        <label for="bedtimeRoutine">**Bedtime Routine (By 2:30 AM):** Prepare outfits for next day, brush teeth, meds/water by bed, aim to be *in bed* by 3 AM</label>
+                        <span class="time-estimate">~30 min</span>
+                    </li>
+                </ul>
+                <div class="mt-6 text-center">
+                    <button id="resetDailyQuestsButton" class="add-button">RESET DAILY QUESTS</button>
+                    <p class="note-text mt-2">Click to uncheck all quests in this section.</p>
                 </div>
+            </div>
 
-                {/* Mission Control Panel (Timer, Next Step) */}
-                <div className="mission-control-panel">
-                    <h2 className="panel-title">Mission Control</h2>
-                    <div className="timer-display" id="stopwatchDisplay">
-                        {formatTime(stopwatchTime.hours, stopwatchTime.minutes, stopwatchTime.seconds)}
-                    </div>
-                    <p className="text-sm text-gray-300" id="currentTaskDisplay">Current Task: {isRunning ? 'In Progress...' : 'Ready to Start'}</p>
-                    <div className="mt-4">
-                        <button className="action-button" onClick={handleStartStopwatch}>
-                            {isRunning ? '⏸️ PAUSE TIMER' : '▶️ START TIMER'}
-                        </button>
-                        <button className="action-button" onClick={handleResetStopwatch}>⏭️ RESET TIMER</button>
-                    </div>
-                    <p className="note-text" id="timerNote">{isRunning ? 'Timer is running!' : 'Click START TIMER to begin your session.'}</p>
+            <!-- Personal Daily Quests -->
+            <div class="game-panel">
+                <h2 class="panel-title">Personal Daily Quests <span class="text-xs text-gray-400 block mt-1">(Add your custom tasks!)</span></h2>
+                <div class="custom-task-input-group">
+                    <input type="text" id="newCustomTaskInput" class="custom-task-input" placeholder="Enter new custom quest...">
+                    <button id="addCustomTaskButton" class="add-button">ADD QUEST</button>
                 </div>
+                <ul id="customTaskList">
+                    <!-- Custom tasks will be loaded/added here -->
+                </ul>
+                <p class="note-text mt-4">Your custom quests will save automatically!</p>
+            </div>
 
-                {/* Kindness Tally Board */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Kindness Tally Board</h2>
-                    <p className="note-text mb-4">Track your kindness stats! (Manual tally)</p>
-                    <div className="tally-board">
-                        <div className="tally-item">
-                            <span>Kind to Monkey:</span>
-                            <span className="tally-count">{kindnessTally.kindToMonkey}</span>
-                            <button className="tally-button" onClick={() => handleTallyIncrement('kindToMonkey')}>+</button>
-                        </div>
-                        <div className="tally-item">
-                            <span>Kind to Bonobo:</span>
-                            <span className="tally-count">{kindnessTally.kindToBonobo}</span>
-                            <button className="tally-button" onClick={() => handleTallyIncrement('kindToBonobo')}>+</button>
-                        </div>
-                        <div className="tally-item">
-                            <span>Kind to Self (Bonobo):</span>
-                            <span className="tally-count">{kindnessTally.kindToSelfBonobo}</span>
-                            <button className="tally-button" onClick={() => handleTallyIncrement('kindToSelfBonobo')}>+</button>
-                        </div>
-                        <div className="tally-item">
-                            <span>Kind to Self (Monkey):</span>
-                            <span className="tally-count">{kindnessTally.kindToSelfMonkey}</span>
-                            <button className="tally-button" onClick={() => handleTallyIncrement('kindToSelfMonkey')}>+</button>
-                        </div>
-                        <div className="tally-item">
-                            <span>Kindness Level:</span>
-                            <span className="tally-count">{kindnessTally.kindnessLevel}</span>
-                            <button className="tally-button" onClick={() => handleTallyIncrement('kindnessLevel')}>+</button>
-                        </div>
-                        <p className="tally-explanation mt-4">Increase your kindness level by being intentional and thoughtful in your actions towards yourself and each other. Remember, the answer is always kindness! ✨</p>
-                        <div className="mt-4 text-center">
-                            <button className="tally-reset-button" onClick={handleResetKindnessTally}>RESET KINDNESS TALLY</button>
-                        </div>
-                    </div>
+            <!-- Mission Control Panel (Timer, Next Step) -->
+            <div class="mission-control-panel">
+                <h2 class="panel-title">Mission Control</h2>
+                <div class="timer-display" id="stopwatchDisplay">
+                    Stopwatch: 00:00:00
                 </div>
-
-                {/* Question Tally Board */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Monkey's Question Tally</h2>
-                    <p className="note-text mb-4">Tracks Monkey's question limit. (Manual tally)</p>
-                    <div className="tally-board">
-                        <div className="tally-item">
-                            <span>Questions Asked Today:</span>
-                            <span className="tally-count">{questionsAsked}</span>
-                            <button className="tally-button" onClick={handleQuestionsAskedIncrement}>+</button>
-                        </div>
-                        <p className="tally-explanation mt-4">Monkey has a maximum of **10 minutes** or **two separate instances** per day for repetitive/reassurance-seeking questions. Use the stopwatch above to help track time if needed.</p>
-                        <div className="mt-4 text-center">
-                            <button className="tally-reset-button" onClick={handleResetQuestionsTally}>RESET QUESTIONS TALLY</button>
-                        </div>
-                    </div>
+                <p class="text-sm text-gray-300" id="currentTaskDisplay">Current Task: Ready to Start</p>
+                <div class="mt-4">
+                    <a href="#" class="action-button" id="startStopButton">▶️ START TIMER</a>
+                    <a href="#" class="action-button" id="nextButton">⏭️ NEXT STEP</a>
                 </div>
+                <p class="note-text" id="timerNote">Click START TIMER to begin your session.</p>
+            </div>
 
-                {/* Recurring Chore Checklist */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Weekly & Bi-Weekly Quests</h2>
-                    <ul>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="dogPoop" checked={dailyQuests.dogPoop} onChange={() => handleDailyQuestChange('dogPoop')} />
-                            <label htmlFor="dogPoop">Pick up dog poop (daily/as needed)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="cleanBathroom" checked={dailyQuests.cleanBathroom} onChange={() => handleDailyQuestChange('cleanBathroom')} />
-                            <label htmlFor="cleanBathroom">Clean toilet & sink (weekly)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="trashManagement" checked={dailyQuests.trashManagement} onChange={() => handleDailyQuestChange('trashManagement')} />
-                            <label htmlFor="trashManagement">Ensure trash is not overflowing & take it out (as needed)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="recycling" checked={dailyQuests.recycling} onChange={() => handleDailyQuestChange('recycling')} />
-                            <label htmlFor="recycling">Recycling (weekly)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="cleanShower" checked={dailyQuests.cleanShower} onChange={() => handleDailyQuestChange('cleanShower')} />
-                            <label htmlFor="cleanShower">Clean the shower (monthly/bi-weekly)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="dogWalks" checked={dailyQuests.dogWalks} onChange={() => handleDailyQuestChange('dogWalks')} />
-                            <label htmlFor="dogWalks">Walk the dog (at least twice a week - **schedule these!**)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="midnightWalk" checked={dailyQuests.midnightWalk} onChange={() => handleDailyQuestChange('midnightWalk')} />
-                            <label htmlFor="midnightWalk">Goal: Midnight walk together (every other day, 30 min long)</label>
-                        </li>
-                    </ul>
-                </div>
-
-                {/* Health & Coordination Tasks */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Party Management & Logistics</h2>
-                    <ul>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="medsAlarm" checked={dailyQuests.medsAlarm} onChange={() => handleDailyQuestChange('medsAlarm')} />
-                            <label htmlFor="medsAlarm">**Medication Alarm (9 AM):** Take meds one hour before wake-up (or 9:30 AM initially)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="monkeyBedroomClear" checked={dailyQuests.monkeyBedroomClear} onChange={() => handleDailyQuestChange('monkeyBedroomClear')} />
-                            <label htmlFor="monkeyBedroomClear">**Monkey: Bedroom Clear by 12:20 PM** (for Bonobo's work/therapy at 12:30/1 PM)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="monkeyOutfitPrep" checked={dailyQuests.monkeyOutfitPrep} onChange={() => handleDailyQuestChange('monkeyOutfitPrep')} />
-                            <label htmlFor="monkeyOutfitPrep">**Monkey: Prepare outfits** for next day/evening outside the bedroom</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="monkeyADHDMeds" checked={dailyQuests.monkeyADHDMeds} onChange={() => handleDailyQuestChange('monkeyADHDMeds')} />
-                            <label htmlFor="monkeyADHDMeds">**Monkey: ADHD Meds:** Find prescriber & make appointment within 10-20 days (Bonobo provides 20 pills)</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="monkeyDoctorAppt" checked={dailyQuests.monkeyDoctorAppt} onChange={() => handleDailyQuestChange('monkeyDoctorAppt')} />
-                            <label htmlFor="monkeyDoctorAppt">**Monkey: Share Doctor Appointment Time** with Bonobo</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="fafsa" checked={dailyQuests.fafsa} onChange={() => handleDailyQuestChange('fafsa')} />
-                            <label htmlFor="fafsa">Collaborate on completing FAFSA</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="mealPlanning" checked={dailyQuests.mealPlanning} onChange={() => handleDailyQuestChange('mealPlanning')} />
-                            <label htmlFor="mealPlanning">Properly plan meals together</label>
-                        </li>
-                        <li className="checkbox-item">
-                            <input type="checkbox" id="sharedCalendar" checked={dailyQuests.sharedCalendar} onChange={() => handleDailyQuestChange('sharedCalendar')} />
-                            <label htmlFor="sharedCalendar">**By End of Month:** Buy tablet for shared calendar (fridge/sync)</label>
-                        </li>
-                    </ul>
-                </div>
-
-                {/* Communication Tools */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Communication Tools: Quest Diplomacy</h2>
-                    <div className="mb-4">
-                        <h3 className="text-xl font-semibold mb-2" style={{ color: '#e8e6ff' }}>Safe Words:</h3>
-                        <ul className="list-disc list-inside text-sm text-gray-300 pl-4">
-                            <li>**For OCD Reassurance Seeking (Bonobo to Monkey):** When Bonobo needs to pause a conversation that's becoming overwhelming or repetitive, use a pre-agreed safe word like "**PAUSE**," "**RED LIGHT**," or "**RETURN LATER**." This signals a need for a break and promises a revisit.</li>
-                            <li>**For Procrastination (Both):** When either person notices the other (or themselves) procrastinating on tasks, use a gentle cue like "**ADAM STEWART**" or "**BYRON**." This is a non-judgmental nudge to re-focus.</li>
-                        </ul>
+            <!-- Kindness Tally Board -->
+            <div class="game-panel">
+                <h2 class="panel-title">Kindness Tally Board</h2>
+                <p class="note-text mb-4">Track your kindness stats! (Manual tally)</p>
+                <div class="tally-board">
+                    <div class="tally-item">
+                        <span>Kind to Monkey:</span>
+                        <span class="tally-count" id="kindToMonkeyCount">0</span>
+                        <button class="tally-button" id="kindToMonkeyAdd">+</button>
                     </div>
-                    <div className="mb-4">
-                        <h3 className="text-xl font-semibold mb-2" style={{ color: '#e8e6ff' }}>Question Limit Protocol:</h3>
-                        <p className="text-sm text-gray-300 pl-4">
-                            To manage reassurance-seeking conversations and preserve time, Monkey can ask questions for a maximum of **10 minutes per day**, or in **two separate instances per day** (e.g., two 5-minute sessions). This helps ensure both of you can get your tasks done and regulate. This also applies to the use of a "tally board" if desired.
-                        </p>
+                    <div class="tally-item">
+                        <span>Kind to Bonobo:</span>
+                        <span class="tally-count" id="kindToBonoboCount">0</span>
+                        <button class="tally-button" id="kindToBonoboAdd">+</button>
                     </div>
-                </div>
-
-                {/* Groceries & Other Topics */}
-                <div className="game-panel">
-                    <h2 className="panel-title">Inventory & Party Chat</h2>
-                    <p className="note-text mb-4">You can type directly into these fields to update them! (Changes will not be saved after closing the page, as there is no backend.)</p>
-                    <div className="mb-4">
-                        <h3 className="text-xl font-semibold mb-2" style={{ color: '#e8e6ff' }}>Items for Our Cart:</h3>
-                        <div className="editable-list-area" contentEditable="true" data-placeholder="e.g., Milk, Eggs, Bread&#10;Add more items here..."></div>
+                    <div class="tally-item">
+                        <span>Kind to Self (Bonobo):</span>
+                        <span class="tally-count" id="kindToSelfBonoboCount">0</span>
+                        <button class="tally-button" id="kindToSelfBonoboAdd">+</button>
                     </div>
-                    <div className="mb-4">
-                        <h3 className="text-xl font-semibold mb-2" style={{ color: '#e8e6ff' }}>Topics for Group Discussion (When We Have XP):</h3>
-                        <div className="editable-list-area" contentEditable="true" data-placeholder="e.g., Weekend plans&#10;Monthly budget review&#10;Add more discussion topics here..."></div>
+                    <div class="tally-item">
+                        <span>Kind to Self (Monkey):</span>
+                        <span class="tally-count" id="kindToSelfMonkeyCount">0</span>
+                        <button class="tally-button" id="kindToSelfMonkeyAdd">+</button>
                     </div>
-                    <div>
-                        <h3 className="text-xl font-semibold mb-2" style={{ color: '#e8e6ff' }}>Items to Acquire (Store Run):</h3>
-                        <div className="editable-list-area" contentEditable="true" data-placeholder="e.g., Tablet for shared calendar&#10;New dog toy&#10;Add more items to buy here..."></div>
+                    <div class="tally-item">
+                        <span>Kindness Level:</span>
+                        <span class="tally-count" id="kindnessLevelCount">0</span>
+                        <button class="tally-button" id="kindnessLevelAdd">+</button>
+                    </div>
+                    <p class="tally-explanation mt-4">Increase your kindness level by being intentional and thoughtful in your actions towards yourself and each other. Remember, the answer is always kindness! ✨</p>
+                    <div class="mt-4 text-center">
+                        <button class="tally-reset-button" id="resetKindnessTally">RESET KINDNESS TALLY</button>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-};
 
-export default App;
+            <!-- Question Tally Board -->
+            <div class="game-panel">
+                <h2 class="panel-title">Monkey's Question Tally</h2>
+                <p class="note-text mb-4">Tracks Monkey's question limit. (Manual tally)</p>
+                <div class="tally-board">
+                    <div class="tally-item">
+                        <span>Questions Asked Today:</span>
+                        <span class="tally-count" id="questionsAskedCount">0</span>
+                        <button class="tally-button" id="questionsAskedAdd">+</button>
+                    </div>
+                    <p class="tally-explanation mt-4">Monkey has a maximum of **10 minutes** or **two separate instances** per day for repetitive/reassurance-seeking questions. Use the stopwatch above to help track time if needed.</p>
+                    <div class="mt-4 text-center">
+                        <button class="tally-reset-button" id="resetQuestionsTally">RESET QUESTIONS TALLY</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recurring Chore Checklist -->
+            <div class="game-panel">
+                <h2 class="panel-title">Weekly & Bi-Weekly Quests</h2>
+                <ul>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="dogPoop">
+                        <label for="dogPoop">Pick up dog poop (daily/as needed)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="cleanBathroom">
+                        <label for="cleanBathroom">Clean toilet & sink (weekly)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="trashManagement">
+                        <label for="trashManagement">Ensure trash is not overflowing & take it out (as needed)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="recycling">
+                        <label for="recycling">Recycling (weekly)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="cleanShower">
+                        <label for="cleanShower">Clean the shower (monthly/bi-weekly)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="dogWalks">
+                        <label for="dogWalks">Walk the dog (at least twice a week - **schedule these!**)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="midnightWalk">
+                        <label for="midnightWalk">Goal: Midnight walk together (every other day, 30 min long)</label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Health & Coordination Tasks -->
+            <div class="game-panel">
+                <h2 class="panel-title">Party Management & Logistics</h2>
+                <ul>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="medsAlarm">
+                        <label for="medsAlarm">**Medication Alarm (9 AM):** Take meds one hour before wake-up (or 9:30 AM initially)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="monkeyBedroomClear">
+                        <label for="monkeyBedroomClear">**Monkey: Bedroom Clear by 12:20 PM** (for Bonobo's work/therapy at 12:30/1 PM)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="monkeyOutfitPrep">
+                        <label for="monkeyOutfitPrep">**Monkey: Prepare outfits** for next day/evening outside the bedroom</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="monkeyADHDMeds">
+                        <label for="monkeyADHDMeds">**Monkey: ADHD Meds:** Find prescriber & make appointment within 10-20 days (Bonobo provides 20 pills)</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="monkeyDoctorAppt">
+                        <label for="monkeyDoctorAppt">**Monkey: Share Doctor Appointment Time** with Bonobo</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="fafsa">
+                        <label for="fafsa">Collaborate on completing FAFSA</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="mealPlanning">
+                        <label for="mealPlanning">Properly plan meals together</label>
+                    </li>
+                    <li class="checkbox-item">
+                        <input type="checkbox" id="sharedCalendar">
+                        <label for="sharedCalendar">**By End of Month:** Buy tablet for shared calendar (fridge/sync)</label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Communication Tools -->
+            <div class="game-panel">
+                <h2 class="panel-title">Communication Tools: Quest Diplomacy</h2>
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold mb-2" style="color: #e8e6ff;">Safe Words:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-300 pl-4">
+                        <li>**For OCD Reassurance Seeking (Bonobo to Monkey):** When Bonobo needs to pause a conversation that's becoming overwhelming or repetitive, use a pre-agreed safe word like "**PAUSE**," "**RED LIGHT**," or "**RETURN LATER**." This signals a need for a break and promises a revisit.</li>
+                        <li>**For Procrastination (Both):** When either person notices the other (or themselves) procrastinating on tasks, use a gentle cue like "**ADAM STEWART**" or "**BYRON**." This is a non-judgmental nudge to re-focus.</li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold mb-2" style="color: #e8e6ff;">Question Limit Protocol:</h3>
+                    <p class="text-sm text-gray-300 pl-4">
+                        To manage reassurance-seeking conversations and preserve time, Monkey can ask questions for a maximum of **10 minutes per day**, or in **two separate instances per day** (e.g., two 5-minute sessions). This helps ensure both of you can get your tasks done and regulate. This also applies to the use of a "tally board" if desired.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Groceries & Other Topics -->
+            <div class="game-panel">
+                <h2 class="panel-title">Inventory & Party Chat</h2>
+                <p class="note-text mb-4">You can type directly into these fields to update them! (Changes will not be saved after closing the page, as there is no backend.)</p>
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold mb-2" style="color: #e8e6ff;">Items for Our Cart:</h3>
+                    <div class="editable-list-area" contenteditable="true" data-placeholder="e.g., Milk, Eggs, Bread&#10;Add more items here..."></div>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold mb-2" style="color: #e8e6ff;">Topics for Group Discussion (When We Have XP):</h3>
+                    <div class="editable-list-area" contenteditable="true" data-placeholder="e.g., Weekend plans&#10;Monthly budget review&#10;Add more discussion topics here..."></div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: #e8e6ff;">Items to Acquire (Store Run):</h3>
+                    <div class="editable-list-area" contenteditable="true" data-placeholder="e.g., Tablet for shared calendar&#10;New dog toy&#10;Add more items to buy here..."></div>
+                </div>
+            </div>
+        </div>
+        <!-- Your Checklist Content Ends Here -->
+
+    </div>
+
+    <script>
+        // === Stopwatch Functionality ===
+        let timer;
+        let isRunning = false;
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+        const stopwatchDisplay = document.getElementById('stopwatchDisplay');
+        const startStopButton = document.getElementById('startStopButton');
+        const nextButton = document.getElementById('nextButton'); 
+        const currentTaskDisplay = document.getElementById('currentTaskDisplay');
+        const timerNote = document.getElementById('timerNote');
+
+        function formatTime(h, m, s) {
+            const pad = (num) => String(num).padStart(2, '0');
+            return `Stopwatch: ${pad(h)}:${pad(m)}:${pad(s)}`;
+        }
+
+        function updateStopwatch() {
+            seconds++;
+            if (seconds === 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+            stopwatchDisplay.textContent = formatTime(hours, minutes, seconds);
+        }
+
+        function startStopwatch() {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(updateStopwatch, 1000);
+                startStopButton.textContent = '⏸️ PAUSE TIMER';
+                currentTaskDisplay.textContent = 'Current Task: In Progress...'; 
+                timerNote.textContent = 'Timer is running!';
+            } else {
+                pauseStopwatch();
+            }
+        }
+
+        function pauseStopwatch() {
+            if (isRunning) {
+                clearInterval(timer);
+                isRunning = false;
+                startStopButton.textContent = '▶️ RESUME TIMER';
+                timerNote.textContent = 'Timer paused.';
+            }
+        }
+
+        function resetStopwatch() {
+            clearInterval(timer);
+            isRunning = false;
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            stopwatchDisplay.textContent = formatTime(hours, minutes, seconds);
+            startStopButton.textContent = '▶️ START TIMER';
+            currentTaskDisplay.textContent = 'Current Task: Ready to Start';
+            timerNote.textContent = 'Timer reset.';
+        }
+
+        // Event Listeners for Stopwatch Buttons
+        startStopButton.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            startStopwatch();
+        });
+
+        nextButton.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            resetStopwatch(); 
+        });
+
+        // === Progress Bar Functionality ===
+        // Re-query all checkboxes every time to include dynamically added ones
+        function updateProgressBar() {
+            const currentCheckboxes = document.querySelectorAll('.game-panel input[type="checkbox"]');
+            let checkedCount = 0;
+            currentCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkedCount++;
+                }
+            });
+
+            const totalTasks = currentCheckboxes.length; 
+            const percentage = totalTasks > 0 ? (checkedCount / totalTasks) * 100 : 0;
+            progressBarFill.style.width = `${percentage}%`;
+            progressBarPercentage.textContent = `${Math.round(percentage)}% Complete`;
+        }
+        
+        // === Daily Quests Persistence & Reset Functionality ===
+        // Moved inside DOMContentLoaded to ensure elements are available
+        let dailyQuestCheckboxes; // Declare globally, assign in DOMContentLoaded
+        const resetDailyQuestsButton = document.getElementById('resetDailyQuestsButton');
+
+        function saveDailyQuestsState() {
+            const state = {};
+            dailyQuestCheckboxes.forEach(checkbox => {
+                state[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem('dailyQuestsState', JSON.stringify(state));
+        }
+
+        function loadDailyQuestsState() {
+            const storedState = localStorage.getItem('dailyQuestsState');
+            if (storedState) {
+                const state = JSON.parse(storedState);
+                dailyQuestCheckboxes.forEach(checkbox => {
+                    if (state[checkbox.id] !== undefined) {
+                        checkbox.checked = state[checkbox.id];
+                    }
+                });
+            }
+        }
+
+        // Reset Daily Quests Button Functionality
+        resetDailyQuestsButton.addEventListener('click', () => {
+            dailyQuestCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            saveDailyQuestsState(); // Save the unchecked state
+            updateProgressBar(); // Update progress bar after resetting
+        });
+
+        // === Custom Task List Functionality ===
+        const newCustomTaskInput = document.getElementById('newCustomTaskInput');
+        const addCustomTaskButton = document.getElementById('addCustomTaskButton');
+        const customTaskList = document.getElementById('customTaskList');
+
+        // Function to save custom tasks to localStorage
+        function saveCustomTasks() {
+            const tasks = [];
+            customTaskList.querySelectorAll('.checkbox-item').forEach(item => {
+                const text = item.querySelector('label').textContent;
+                const checked = item.querySelector('input[type="checkbox"]').checked;
+                const time = item.querySelector('.custom-time-input').value;
+                tasks.push({ text, checked, time });
+            });
+            localStorage.setItem('customQuests', JSON.stringify(tasks));
+        }
+
+        // Function to load custom tasks from localStorage
+        function loadCustomTasks() {
+            const storedTasks = localStorage.getItem('customQuests');
+            if (storedTasks) {
+                const tasks = JSON.parse(storedTasks);
+                tasks.forEach(task => addCustomTask(task.text, task.checked, task.time));
+            }
+        }
+
+        // Function to add a custom task to the DOM
+        function addCustomTask(taskText, isChecked = false, timeNote = '') {
+            if (!taskText.trim()) return; // Don't add empty tasks
+
+            const listItem = document.createElement('li');
+            listItem.className = 'checkbox-item';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = isChecked;
+            // Add listener directly here for dynamically created checkboxes
+            checkbox.addEventListener('change', () => {
+                updateProgressBar();
+                saveCustomTasks(); // Save state on change
+            });
+
+            const label = document.createElement('label');
+            label.textContent = taskText;
+
+            const timeInput = document.createElement('input');
+            timeInput.type = 'text';
+            timeInput.className = 'custom-time-input';
+            timeInput.placeholder = 'e.g., 15min';
+            timeInput.value = timeNote;
+            timeInput.addEventListener('input', saveCustomTasks); // Save time note on input
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'DELETE';
+            deleteButton.className = 'delete-button';
+            deleteButton.addEventListener('click', () => {
+                listItem.remove();
+                updateProgressBar(); // Update progress after deleting
+                saveCustomTasks(); // Save state after deleting
+            });
+
+            listItem.appendChild(checkbox);
+            listItem.appendChild(label);
+            listItem.appendChild(timeInput);
+            listItem.appendChild(deleteButton);
+            customTaskList.appendChild(listItem);
+
+            // Update the total number of checkboxes for the progress bar
+            updateProgressBar();
+        }
+
+        // Event listener for adding new custom tasks
+        addCustomTaskButton.addEventListener('click', () => {
+            const task = newCustomTaskInput.value;
+            addCustomTask(task);
+            newCustomTaskInput.value = ''; // Clear input field
+            saveCustomTasks(); // Save new task
+        });
+
+        // Allow adding task by pressing Enter key
+        newCustomTaskInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addCustomTaskButton.click();
+            }
+        });
+
+        // === Tally Board Functionality ===
+
+        // Kindness Tally Elements
+        const kindnessLevelCount = document.getElementById('kindnessLevelCount');
+        const kindToSelfBonoboCount = document.getElementById('kindToSelfBonoboCount'); // New ID
+        const kindToSelfMonkeyCount = document.getElementById('kindToSelfMonkeyCount'); // New ID
+        const kindToMonkeyCount = document.getElementById('kindToMonkeyCount');
+        const kindToBonoboCount = document.getElementById('kindToBonoboCount');
+
+        const kindnessLevelAdd = document.getElementById('kindnessLevelAdd');
+        const kindToSelfBonoboAdd = document.getElementById('kindToSelfBonoboAdd'); // New ID
+        const kindToSelfMonkeyAdd = document.getElementById('kindToSelfMonkeyAdd'); // New ID
+        const kindToMonkeyAdd = document.getElementById('kindToMonkeyAdd');
+        const kindToBonoboAdd = document.getElementById('kindToBonoboAdd');
+        const resetKindnessTallyButton = document.getElementById('resetKindnessTally');
+
+        // Monkey's Question Tally Elements
+        const questionsAskedCount = document.getElementById('questionsAskedCount');
+        const questionsAskedAdd = document.getElementById('questionsAskedAdd');
+        const resetQuestionsTallyButton = document.getElementById('resetQuestionsTally');
+
+        function saveTallyState() {
+            const tallyState = {
+                kindnessLevel: parseInt(kindnessLevelCount.textContent),
+                kindToSelfBonobo: parseInt(kindToSelfBonoboCount.textContent), // Save new ID
+                kindToSelfMonkey: parseInt(kindToSelfMonkeyCount.textContent), // Save new ID
+                kindToMonkey: parseInt(kindToMonkeyCount.textContent),
+                kindToBonobo: parseInt(kindToBonoboCount.textContent),
+                questionsAsked: parseInt(questionsAskedCount.textContent)
+            };
+            localStorage.setItem('tallyBoardState', JSON.stringify(tallyState));
+        }
+
+        function loadTallyState() {
+            const storedState = localStorage.getItem('tallyBoardState');
+            if (storedState) {
+                const state = JSON.parse(storedState);
+                kindnessLevelCount.textContent = state.kindnessLevel || 0; // Default to 0 if undefined
+                kindToSelfBonoboCount.textContent = state.kindToSelfBonobo || 0; // Load new ID
+                kindToSelfMonkeyCount.textContent = state.kindToSelfMonkey || 0; // Load new ID
+                kindToMonkeyCount.textContent = state.kindToMonkey || 0;
+                kindToBonoboCount.textContent = state.kindToBonobo || 0;
+                questionsAskedCount.textContent = state.questionsAsked || 0;
+            }
+        }
+
+        // Kindness Tally Incrementers
+        kindnessLevelAdd.addEventListener('click', () => {
+            kindnessLevelCount.textContent = parseInt(kindnessLevelCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToSelfBonoboAdd.addEventListener('click', () => { // New Listener
+            kindToSelfBonoboCount.textContent = parseInt(kindToSelfBonoboCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToSelfMonkeyAdd.addEventListener('click', () => { // New Listener
+            kindToSelfMonkeyCount.textContent = parseInt(kindToSelfMonkeyCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToMonkeyAdd.addEventListener('click', () => {
+            kindToMonkeyCount.textContent = parseInt(kindToMonkeyCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToBonoboAdd.addEventListener('click', () => {
+            kindToBonoboCount.textContent = parseInt(kindToBonoboCount.textContent) + 1;
+            saveTallyState();
+        });
+
+        // Kindness Tally Reset
+        resetKindnessTallyButton.addEventListener('click', () => {
+            kindnessLevelCount.textContent = 0;
+            kindToSelfBonoboCount.textContent = 0; // Reset new ID
+            kindToSelfMonkeyCount.textContent = 0; // Reset new ID
+            kindToMonkeyCount.textContent = 0;
+            kindToBonoboCount.textContent = 0;
+            saveTallyState();
+        });
+
+        // Monkey's Question Tally Incrementer
+        questionsAskedAdd.addEventListener('click', () => {
+            questionsAskedCount.textContent = parseInt(questionsAskedCount.textContent) + 1;
+            saveTallyState();
+        });
+
+        // Monkey's Question Tally Reset
+        resetQuestionsTallyButton.addEventListener('click', () => {
+            questionsAskedCount.textContent = 0;
+            saveTallyState();
+        });
+
+
+        // Initial setup when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Assign dailyQuestCheckboxes here to ensure all elements are in the DOM
+            dailyQuestCheckboxes = document.querySelectorAll('.game-panel:nth-of-type(2) .checkbox-item input[type="checkbox"]');
+            
+            loadDailyQuestsState(); // Load daily quests state
+            loadCustomTasks(); // Load custom tasks
+            loadTallyState(); // Load tally board states
+            updateProgressBar(); // Then update progress bar to include all of them
+
+            // Attach event listeners for pre-defined daily quest checkboxes here
+            // This loop was previously outside DOMContentLoaded, now it's inside to ensure elements are present.
+            dailyQuestCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    saveDailyQuestsState();
+                    updateProgressBar();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
