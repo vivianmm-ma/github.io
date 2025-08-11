@@ -475,6 +475,23 @@
         .custom-time-input::placeholder {
             color: #bebebe;
         }
+
+        /* Styling for the embedded Google Sheet container */
+        .embedded-sheet-container {
+            width: 100%;
+            max-width: 960px;
+            margin: 2rem auto;
+            background-color: #1a1a2e; /* Darker background for game area */
+            border-radius: 1rem;
+            box-shadow: 10px 10px 0px #0f0f1c; /* Deep shadow for 3D effect */
+            border: 4px solid #6366f1; /* Game-like border */
+            overflow: hidden; /* Ensures iframe respects border-radius */
+        }
+        .embedded-sheet-container iframe {
+            width: 100%;
+            height: 800px; /* Adjust height as needed */
+            border: none; /* Remove iframe default border */
+        }
     </style>
 </head>
 <body>
@@ -502,127 +519,7 @@
             <h1 class="game-title">QUEST LOG</h1>
             <p class="game-subtitle">Track your progress, brave adventurers!</p>
 
-            <!-- Progress Bar -->
-            <div class="progress-bar-area">
-                <div class="progress-bar-label">Overall Progress</div>
-                <div class="progress-bar-container">
-                    <div class="progress-bar-fill">
-                        <span class="progress-bar-percentage">0% Complete</span>
-                    </div>
-                </div>
-                <p class="note-text">Check off tasks to see your progress update!</p>
-            </div>
-
-            <!-- Daily Chore Checklist -->
-            <div class="game-panel">
-                <h2 class="panel-title">Daily Quests <span class="text-xs text-gray-400 block mt-1">(Split tasks based on days off)</span></h2>
-                <p class="text-sm text-gray-300 mb-4">
-                    **Monkey's Days Off:** Monday, Tuesday, Wednesday<br>
-                    **Bonobo's Days Off:** Saturday, Sunday<br>
-                    **Friday:** Bonobo usually takes lead on evening tasks.
-                </p>
-                <ul>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="feedDogDaily">
-                        <label for="feedDogDaily">Feed the dog breakfast</label>
-                        <span class="time-estimate">~3 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="letDogOutDaily">
-                        <label for="letDogOutDaily">Get the dog up and let him out</label>
-                        <span class="time-estimate">~5 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="closeWindowsAC">
-                        <label for="closeWindowsAC">Close all windows if hot & turn on fan/AC</label>
-                        <span class="time-estimate">~3 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="upstairsAC">
-                        <label for="upstairsAC">Ensure upstairs AC is on & windows by AC are shut (daytime)</label>
-                        <span class="time-estimate">~5 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="kitchenMorning">
-                        <label for="kitchenMorning">**Kitchen Cleanup (By Morning):** Dishes done/put away, counters & stove wiped</label>
-                        <span class="time-estimate">~10 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="clearFloorsMorning">
-                        <label for="clearFloorsMorning">**Clear Surfaces (By Morning):** Pick clothes off floor, clear counters, wipe counters, ensure no clothes on chairs/bed/couch</label>
-                        <span class="time-estimate">~10 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="sweepMorning">
-                        <label for="sweepMorning">**Sweep (By Morning):** Main living area floor swept</label>
-                        <span class="time-estimate">~5 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="coffeePrepCheck">
-                        <label for="coffeePrepCheck">Coffee prepared the night before</label>
-                        <span class="time-estimate">~5 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="dogDinner">
-                        <label for="dogDinner">Feed the dog dinner around 6-7pm</label>
-                        <span class="time-estimate">~3 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="sayHello">
-                        <label for="sayHello">**Evening Connection:** Say hello & hang out (10-11 PM for Bonobo)</label>
-                        <span class="time-estimate">30-60 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="aloneTime">
-                        <label for="aloneTime">**Alone Time:** Bonobo gets 1-2 hours for tasks/decompression (11 PM - 12/1 AM)</label>
-                        <span class="time-estimate">60-120 min</span>
-                    </li>
-                      <li class="checkbox-item">
-                        <input type="checkbox" id="dogBed">
-                        <label for="dogBed">Dog goes to sleep</label>
-                        <span class="time-estimate">5 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="monkeyAloneTimeTasks">
-                        <label for="monkeyAloneTimeTasks">**During Bonobo's Alone Time:** Monkey works on his own stuff (e.g., planters, school stuff)</label>
-                        <span class="time-estimate">~30 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="bonoboAloneTimeTasks">
-                        <label for="bonoboAloneTimeTasks">**During Bonobo's Alone Time:** Bonobo works on work/school or exercises (bike) (Monkey generally should not talk during this)</label>
-                        <span class="time-estimate">~30 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="checkChoresLate">
-                        <label for="checkChoresLate">**Late Night Check (1 AM):** Confirm daily chores (dishes, etc.) are done</label>
-                        <span class="time-estimate">~5 min</span>
-                    </li>
-                    <li class="checkbox-item">
-                        <input type="checkbox" id="bedtimeRoutine">
-                        <label for="bedtimeRoutine">**Bedtime Routine (By 2:30 AM):** Prepare outfits for next day, brush teeth, meds/water by bed, aim to be *in bed* by 3 AM</label>
-                        <span class="time-estimate">~30 min</span>
-                    </li>
-                </ul>
-                <div class="mt-6 text-center">
-                    <button id="resetDailyQuestsButton" class="add-button">RESET DAILY QUESTS</button>
-                    <p class="note-text mt-2">Click to uncheck all quests in this section.</p>
-                </div>
-            </div>
-
-            <!-- Personal Daily Quests -->
-            <div class="game-panel">
-                <h2 class="panel-title">Personal Daily Quests <span class="text-xs text-gray-400 block mt-1">(Add your custom tasks!)</span></h2>
-                <div class="custom-task-input-group">
-                    <input type="text" id="newCustomTaskInput" class="custom-task-input" placeholder="Enter new custom quest...">
-                    <button id="addCustomTaskButton" class="add-button">ADD QUEST</button>
-                </div>
-                <ul id="customTaskList">
-                    <!-- Custom tasks will be loaded/added here -->
-                </ul>
-                <p class="note-text mt-4">Your custom quests will save automatically!</p>
-            </div>
-
-            <!-- Mission Control Panel (Timer, Next Step) -->
+            <!-- Mission Control Panel (Timer, Next Step) - MOVED TO TOP -->
             <div class="mission-control-panel">
                 <h2 class="panel-title">Mission Control</h2>
                 <div class="timer-display" id="stopwatchDisplay">
@@ -631,15 +528,55 @@
                 <p class="text-sm text-gray-300" id="currentTaskDisplay">Current Task: Ready to Start</p>
                 <div class="mt-4">
                     <a href="#" class="action-button" id="startStopButton">▶️ START TIMER</a>
-                    <a href="#" class="action-button" id="nextButton">⏭️ NEXT STEP</a>
+                    <a href="#" class="action-button" id="nextButton">⏭️ RESET TIMER</a>
                 </div>
                 <p class="note-text" id="timerNote">Click START TIMER to begin your session.</p>
             </div>
 
-            <!-- Kindness Tally Board -->
+            <!-- Progress Bar (still based on local interactive elements) -->
+            <div class="progress-bar-area">
+                <div class="progress-bar-label">Overall Progress (Local)</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill">
+                        <span class="progress-bar-percentage">0% Complete</span>
+                    </div>
+                </div>
+                <p class="note-text">This progress bar tracks your Personal Daily Quests and Tally Boards.</p>
+            </div>
+
+            <!-- Daily Quests - EMBEDDED GOOGLE SHEET -->
+            <div class="game-panel">
+                <h2 class="panel-title">Daily Quests (Shared via Google Sheet)</h2>
+                <p class="text-sm text-gray-300 mb-4">
+                    This is your main shared daily checklist.
+                    **Monkey's Days Off:** Monday, Tuesday, Wednesday<br>
+                    **Bonobo's Days Off:** Saturday, Sunday<br>
+                    **Friday:** Bonobo usually takes lead on evening tasks.
+                </p>
+                <div class="embedded-sheet-container">
+                    <!-- GOOGLE SHEETS EMBED CODE -->
+                    <iframe src="https://docs.google.com/spreadsheets/d/1hD7eBIcoGugcWm6kzptmcT98_qUvjKyDZqehTIxBi20/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="800"></iframe>
+                </div>
+                <p class="note-text mt-4">Changes in this section are saved automatically by Google Sheets and sync across devices.</p>
+            </div>
+
+            <!-- Personal Daily Quests (Local Persistence) -->
+            <div class="game-panel">
+                <h2 class="panel-title">Personal Daily Quests <span class="text-xs text-gray-400 block mt-1">(Your custom tasks, saved on this device!)</span></h2>
+                <div class="custom-task-input-group">
+                    <input type="text" id="newCustomTaskInput" class="custom-task-input" placeholder="Enter new custom quest...">
+                    <button id="addCustomTaskButton" class="add-button">ADD QUEST</button>
+                </div>
+                <ul id="customTaskList">
+                    <!-- Custom tasks will be loaded/added here -->
+                </ul>
+                <p class="note-text mt-4">Your custom quests will save automatically on this device!</p>
+            </div>
+
+            <!-- Kindness Tally Board (Local Persistence) -->
             <div class="game-panel">
                 <h2 class="panel-title">Kindness Tally Board</h2>
-                <p class="note-text mb-4">Track your kindness stats! (Manual tally)</p>
+                <p class="note-text mb-4">Track your kindness stats! (Saved on this device)</p>
                 <div class="tally-board">
                     <div class="tally-item">
                         <span>Kind to Monkey:</span>
@@ -673,10 +610,10 @@
                 </div>
             </div>
 
-            <!-- Question Tally Board -->
+            <!-- Question Tally Board (Local Persistence) -->
             <div class="game-panel">
                 <h2 class="panel-title">Monkey's Question Tally</h2>
-                <p class="note-text mb-4">Tracks Monkey's question limit. (Manual tally)</p>
+                <p class="note-text mb-4">Tracks Monkey's question limit. (Saved on this device)</p>
                 <div class="tally-board">
                     <div class="tally-item">
                         <span>Questions Asked Today:</span>
@@ -690,81 +627,66 @@
                 </div>
             </div>
 
-            <!-- Recurring Chore Checklist -->
+            {/* Recurring Chore Checklist - Static HTML */}
             <div class="game-panel">
                 <h2 class="panel-title">Weekly & Bi-Weekly Quests</h2>
                 <ul>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="dogPoop">
-                        <label for="dogPoop">Pick up dog poop (daily/as needed)</label>
+                        <label>Pick up dog poop (daily/as needed)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="cleanBathroom">
-                        <label for="cleanBathroom">Clean toilet & sink (weekly)</label>
+                        <label>Clean toilet & sink (weekly)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="trashManagement">
-                        <label for="trashManagement">Ensure trash is not overflowing & take it out (as needed)</label>
+                        <label>Ensure trash is not overflowing & take it out (as needed)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="recycling">
-                        <label for="recycling">Recycling (weekly)</label>
+                        <label>Recycling (weekly)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="cleanShower">
-                        <label for="cleanShower">Clean the shower (monthly/bi-weekly)</label>
+                        <label>Clean the shower (monthly/bi-weekly)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="dogWalks">
-                        <label for="dogWalks">Walk the dog (at least twice a week - **schedule these!**)</label>
+                        <label>Walk the dog (at least twice a week - **schedule these!**)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="midnightWalk">
-                        <label for="midnightWalk">Goal: Midnight walk together (every other day, 30 min long)</label>
+                        <label>Goal: Midnight walk together (every other day, 30 min long)</label>
                     </li>
                 </ul>
             </div>
 
-            <!-- Health & Coordination Tasks -->
+            {/* Health & Coordination Tasks - Static HTML */}
             <div class="game-panel">
                 <h2 class="panel-title">Party Management & Logistics</h2>
                 <ul>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="medsAlarm">
-                        <label for="medsAlarm">**Medication Alarm (9 AM):** Take meds one hour before wake-up (or 9:30 AM initially)</label>
+                        <label>**Medication Alarm (9 AM):** Take meds one hour before wake-up (or 9:30 AM initially)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="monkeyBedroomClear">
-                        <label for="monkeyBedroomClear">**Monkey: Bedroom Clear by 12:20 PM** (for Bonobo's work/therapy at 12:30/1 PM)</label>
+                        <label>**Monkey: Bedroom Clear by 12:20 PM** (for Bonobo's work/therapy at 12:30/1 PM)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="monkeyOutfitPrep">
-                        <label for="monkeyOutfitPrep">**Monkey: Prepare outfits** for next day/evening outside the bedroom</label>
+                        <label>**Monkey: Prepare outfits** for next day/evening outside the bedroom</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="monkeyADHDMeds">
-                        <label for="monkeyADHDMeds">**Monkey: ADHD Meds:** Find prescriber & make appointment within 10-20 days (Bonobo provides 20 pills)</label>
+                        <label>**Monkey: ADHD Meds:** Find prescriber & make appointment within 10-20 days (Bonobo provides 20 pills)</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="monkeyDoctorAppt">
-                        <label for="monkeyDoctorAppt">**Monkey: Share Doctor Appointment Time** with Bonobo</label>
+                        <label>**Monkey: Share Doctor Appointment Time** with Bonobo</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="fafsa">
-                        <label for="fafsa">Collaborate on completing FAFSA</label>
+                        <label>Collaborate on completing FAFSA</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="mealPlanning">
-                        <label for="mealPlanning">Properly plan meals together</label>
+                        <label>Properly plan meals together</label>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="sharedCalendar">
-                        <label for="sharedCalendar">**By End of Month:** Buy tablet for shared calendar (fridge/sync)</label>
+                        <label>**By End of Month:** Buy tablet for shared calendar (fridge/sync)</label>
                     </li>
                 </ul>
             </div>
 
-            <!-- Communication Tools -->
+            {/* Communication Tools - Static HTML */}
             <div class="game-panel">
                 <h2 class="panel-title">Communication Tools: Quest Diplomacy</h2>
                 <div class="mb-4">
@@ -782,10 +704,10 @@
                 </div>
             </div>
 
-            <!-- Groceries & Other Topics -->
+            <!-- Groceries & Other Topics - Content Editable (No Persistence) -->
             <div class="game-panel">
                 <h2 class="panel-title">Inventory & Party Chat</h2>
-                <p class="note-text mb-4">You can type directly into these fields to update them! (Changes will not be saved after closing the page, as there is no backend.)</p>
+                <p class="note-text mb-4">You can type directly into these fields to update them! (Changes will NOT be saved after closing the page, as there is no backend.)</p>
                 <div class="mb-4">
                     <h3 class="text-xl font-semibold mb-2" style="color: #e8e6ff;">Items for Our Cart:</h3>
                     <div class="editable-list-area" contenteditable="true" data-placeholder="e.g., Milk, Eggs, Bread&#10;Add more items here..."></div>
@@ -805,7 +727,7 @@
     </div>
 
     <script>
-        // === Stopwatch Functionality ===
+        // === Stopwatch Functionality (Local Persistence) ===
         let timer;
         let isRunning = false;
         let seconds = 0;
@@ -823,23 +745,26 @@
             return `Stopwatch: ${pad(h)}:${pad(m)}:${pad(s)}`;
         }
 
-        function updateStopwatch() {
-            seconds++;
-            if (seconds === 60) {
-                seconds = 0;
-                minutes++;
-                if (minutes === 60) {
-                    minutes = 0;
-                    hours++;
-                }
-            }
+        function updateStopwatchDisplay() {
             stopwatchDisplay.textContent = formatTime(hours, minutes, seconds);
         }
 
         function startStopwatch() {
             if (!isRunning) {
                 isRunning = true;
-                timer = setInterval(updateStopwatch, 1000);
+                timer = setInterval(() => {
+                    seconds++;
+                    if (seconds === 60) {
+                        seconds = 0;
+                        minutes++;
+                        if (minutes === 60) {
+                            minutes = 0;
+                            hours++;
+                        }
+                    }
+                    updateStopwatchDisplay();
+                    saveStopwatchState(); // Save state every second
+                }, 1000);
                 startStopButton.textContent = '⏸️ PAUSE TIMER';
                 currentTaskDisplay.textContent = 'Current Task: In Progress...'; 
                 timerNote.textContent = 'Timer is running!';
@@ -863,10 +788,34 @@
             seconds = 0;
             minutes = 0;
             hours = 0;
-            stopwatchDisplay.textContent = formatTime(hours, minutes, seconds);
+            updateStopwatchDisplay();
             startStopButton.textContent = '▶️ START TIMER';
             currentTaskDisplay.textContent = 'Current Task: Ready to Start';
             timerNote.textContent = 'Timer reset.';
+            saveStopwatchState(); // Save reset state
+        }
+
+        function saveStopwatchState() {
+            localStorage.setItem('stopwatchState', JSON.stringify({ hours, minutes, seconds, isRunning }));
+        }
+
+        function loadStopwatchState() {
+            const storedState = localStorage.getItem('stopwatchState');
+            if (storedState) {
+                const state = JSON.parse(storedState);
+                hours = state.hours;
+                minutes = state.minutes;
+                seconds = state.seconds;
+                isRunning = state.isRunning; // Load isRunning state
+                updateStopwatchDisplay();
+                if (isRunning) {
+                    startStopwatch(); // Resume if it was running
+                } else {
+                    startStopButton.textContent = '▶️ START TIMER'; // Ensure button text is correct if paused
+                    currentTaskDisplay.textContent = 'Current Task: Ready to Start';
+                    timerNote.textContent = 'Click START TIMER to begin your session.';
+                }
+            }
         }
 
         // Event Listeners for Stopwatch Buttons
@@ -880,63 +829,42 @@
             resetStopwatch(); 
         });
 
-        // === Progress Bar Functionality ===
-        // Re-query all checkboxes every time to include dynamically added ones
+        // === Progress Bar Functionality (Local) ===
+        // This progress bar now only tracks custom tasks and tally boards.
         function updateProgressBar() {
-            const currentCheckboxes = document.querySelectorAll('.game-panel input[type="checkbox"]');
-            let checkedCount = 0;
-            currentCheckboxes.forEach(checkbox => {
+            const customTaskCheckboxes = document.querySelectorAll('#customTaskList input[type="checkbox"]');
+            const tallyElements = document.querySelectorAll('.tally-count');
+
+            let checkedCustomTasks = 0;
+            customTaskCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) {
-                    checkedCount++;
+                    checkedCustomTasks++;
                 }
             });
 
-            const totalTasks = currentCheckboxes.length; 
-            const percentage = totalTasks > 0 ? (checkedCount / totalTasks) * 100 : 0;
-            progressBarFill.style.width = `${percentage}%`;
-            progressBarPercentage.textContent = `${Math.round(percentage)}% Complete`;
-        }
-        
-        // === Daily Quests Persistence & Reset Functionality ===
-        // Moved inside DOMContentLoaded to ensure elements are available
-        let dailyQuestCheckboxes; // Declare globally, assign in DOMContentLoaded
-        const resetDailyQuestsButton = document.getElementById('resetDailyQuestsButton');
+            // For simplicity, progress bar will track custom tasks + a fixed number for tallies
+            // as tallies don't have a 'checked' state. We can adjust this logic if needed.
+            const totalTrackedItems = customTaskCheckboxes.length + tallyElements.length;
+            const completedTrackedItems = checkedCustomTasks; // Only custom tasks contribute to 'completed' directly
 
-        function saveDailyQuestsState() {
-            const state = {};
-            dailyQuestCheckboxes.forEach(checkbox => {
-                state[checkbox.id] = checkbox.checked;
-            });
-            localStorage.setItem('dailyQuestsState', JSON.stringify(state));
-        }
+            // A more meaningful progress bar might require defining "completion" for tallies
+            // For now, it's primarily a visual for custom tasks.
+            const percentage = totalTrackedItems > 0 ? (completedTrackedItems / totalTrackedItems) * 100 : 0;
+            
+            const progressBarFill = document.querySelector('.progress-bar-fill');
+            const progressBarPercentageSpan = document.querySelector('.progress-bar-percentage');
 
-        function loadDailyQuestsState() {
-            const storedState = localStorage.getItem('dailyQuestsState');
-            if (storedState) {
-                const state = JSON.parse(storedState);
-                dailyQuestCheckboxes.forEach(checkbox => {
-                    if (state[checkbox.id] !== undefined) {
-                        checkbox.checked = state[checkbox.id];
-                    }
-                });
+            if (progressBarFill && progressBarPercentageSpan) {
+                progressBarFill.style.width = `${percentage}%`;
+                progressBarPercentageSpan.textContent = `${Math.round(percentage)}% Complete`;
             }
         }
-
-        // Reset Daily Quests Button Functionality
-        resetDailyQuestsButton.addEventListener('click', () => {
-            dailyQuestCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            saveDailyQuestsState(); // Save the unchecked state
-            updateProgressBar(); // Update progress bar after resetting
-        });
-
-        // === Custom Task List Functionality ===
+        
+        // === Custom Task List Functionality (Local Persistence) ===
         const newCustomTaskInput = document.getElementById('newCustomTaskInput');
         const addCustomTaskButton = document.getElementById('addCustomTaskButton');
         const customTaskList = document.getElementById('customTaskList');
 
-        // Function to save custom tasks to localStorage
         function saveCustomTasks() {
             const tasks = [];
             customTaskList.querySelectorAll('.checkbox-item').forEach(item => {
@@ -948,7 +876,6 @@
             localStorage.setItem('customQuests', JSON.stringify(tasks));
         }
 
-        // Function to load custom tasks from localStorage
         function loadCustomTasks() {
             const storedTasks = localStorage.getItem('customQuests');
             if (storedTasks) {
@@ -957,9 +884,8 @@
             }
         }
 
-        // Function to add a custom task to the DOM
         function addCustomTask(taskText, isChecked = false, timeNote = '') {
-            if (!taskText.trim()) return; // Don't add empty tasks
+            if (!taskText.trim()) return;
 
             const listItem = document.createElement('li');
             listItem.className = 'checkbox-item';
@@ -967,10 +893,9 @@
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.checked = isChecked;
-            // Add listener directly here for dynamically created checkboxes
             checkbox.addEventListener('change', () => {
                 updateProgressBar();
-                saveCustomTasks(); // Save state on change
+                saveCustomTasks();
             });
 
             const label = document.createElement('label');
@@ -981,15 +906,15 @@
             timeInput.className = 'custom-time-input';
             timeInput.placeholder = 'e.g., 15min';
             timeInput.value = timeNote;
-            timeInput.addEventListener('input', saveCustomTasks); // Save time note on input
+            timeInput.addEventListener('input', saveCustomTasks);
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'DELETE';
             deleteButton.className = 'delete-button';
             deleteButton.addEventListener('click', () => {
                 listItem.remove();
-                updateProgressBar(); // Update progress after deleting
-                saveCustomTasks(); // Save state after deleting
+                updateProgressBar();
+                saveCustomTasks();
             });
 
             listItem.appendChild(checkbox);
@@ -998,37 +923,34 @@
             listItem.appendChild(deleteButton);
             customTaskList.appendChild(listItem);
 
-            // Update the total number of checkboxes for the progress bar
             updateProgressBar();
         }
 
-        // Event listener for adding new custom tasks
         addCustomTaskButton.addEventListener('click', () => {
             const task = newCustomTaskInput.value;
             addCustomTask(task);
-            newCustomTaskInput.value = ''; // Clear input field
-            saveCustomTasks(); // Save new task
+            newCustomTaskInput.value = '';
+            saveCustomTasks();
         });
 
-        // Allow adding task by pressing Enter key
         newCustomTaskInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 addCustomTaskButton.click();
             }
         });
 
-        // === Tally Board Functionality ===
+        // === Tally Board Functionality (Local Persistence) ===
 
         // Kindness Tally Elements
         const kindnessLevelCount = document.getElementById('kindnessLevelCount');
-        const kindToSelfBonoboCount = document.getElementById('kindToSelfBonoboCount'); // New ID
-        const kindToSelfMonkeyCount = document.getElementById('kindToSelfMonkeyCount'); // New ID
+        const kindToSelfBonoboCount = document.getElementById('kindToSelfBonoboCount');
+        const kindToSelfMonkeyCount = document.getElementById('kindToSelfMonkeyCount');
         const kindToMonkeyCount = document.getElementById('kindToMonkeyCount');
         const kindToBonoboCount = document.getElementById('kindToBonoboCount');
 
         const kindnessLevelAdd = document.getElementById('kindnessLevelAdd');
-        const kindToSelfBonoboAdd = document.getElementById('kindToSelfBonoboAdd'); // New ID
-        const kindToSelfMonkeyAdd = document.getElementById('kindToSelfMonkeyAdd'); // New ID
+        const kindToSelfBonoboAdd = document.getElementById('kindToSelfBonoboAdd');
+        const kindToSelfMonkeyAdd = document.getElementById('kindToSelfMonkeyAdd');
         const kindToMonkeyAdd = document.getElementById('kindToMonkeyAdd');
         const kindToBonoboAdd = document.getElementById('kindToBonoboAdd');
         const resetKindnessTallyButton = document.getElementById('resetKindnessTally');
@@ -1041,22 +963,23 @@
         function saveTallyState() {
             const tallyState = {
                 kindnessLevel: parseInt(kindnessLevelCount.textContent),
-                kindToSelfBonobo: parseInt(kindToSelfBonoboCount.textContent), // Save new ID
-                kindToSelfMonkey: parseInt(kindToSelfMonkeyCount.textContent), // Save new ID
+                kindToSelfBonobo: parseInt(kindToSelfBonoboCount.textContent),
+                kindToSelfMonkey: parseInt(kindToSelfMonkeyCount.textContent),
                 kindToMonkey: parseInt(kindToMonkeyCount.textContent),
                 kindToBonobo: parseInt(kindToBonoboCount.textContent),
                 questionsAsked: parseInt(questionsAskedCount.textContent)
             };
             localStorage.setItem('tallyBoardState', JSON.stringify(tallyState));
+            updateProgressBar(); // Update progress bar after tally change
         }
 
         function loadTallyState() {
             const storedState = localStorage.getItem('tallyBoardState');
             if (storedState) {
                 const state = JSON.parse(storedState);
-                kindnessLevelCount.textContent = state.kindnessLevel || 0; // Default to 0 if undefined
-                kindToSelfBonoboCount.textContent = state.kindToSelfBonobo || 0; // Load new ID
-                kindToSelfMonkeyCount.textContent = state.kindToSelfMonkey || 0; // Load new ID
+                kindnessLevelCount.textContent = state.kindnessLevel || 0;
+                kindToSelfBonoboCount.textContent = state.kindToSelfBonobo || 0;
+                kindToSelfMonkeyCount.textContent = state.kindToSelfMonkey || 0;
                 kindToMonkeyCount.textContent = state.kindToMonkey || 0;
                 kindToBonoboCount.textContent = state.kindToBonobo || 0;
                 questionsAskedCount.textContent = state.questionsAsked || 0;
@@ -1068,11 +991,11 @@
             kindnessLevelCount.textContent = parseInt(kindnessLevelCount.textContent) + 1;
             saveTallyState();
         });
-        kindToSelfBonoboAdd.addEventListener('click', () => { // New Listener
+        kindToSelfBonoboAdd.addEventListener('click', () => {
             kindToSelfBonoboCount.textContent = parseInt(kindToSelfBonoboCount.textContent) + 1;
             saveTallyState();
         });
-        kindToSelfMonkeyAdd.addEventListener('click', () => { // New Listener
+        kindToSelfMonkeyAdd.addEventListener('click', () => {
             kindToSelfMonkeyCount.textContent = parseInt(kindToSelfMonkeyCount.textContent) + 1;
             saveTallyState();
         });
@@ -1088,8 +1011,8 @@
         // Kindness Tally Reset
         resetKindnessTallyButton.addEventListener('click', () => {
             kindnessLevelCount.textContent = 0;
-            kindToSelfBonoboCount.textContent = 0; // Reset new ID
-            kindToSelfMonkeyCount.textContent = 0; // Reset new ID
+            kindToSelfBonoboCount.textContent = 0;
+            kindToSelfMonkeyCount.textContent = 0;
             kindToMonkeyCount.textContent = 0;
             kindToBonoboCount.textContent = 0;
             saveTallyState();
@@ -1107,25 +1030,12 @@
             saveTallyState();
         });
 
-
-        // Initial setup when the DOM is fully loaded
+        // === Initial setup when the DOM is fully loaded ===
         document.addEventListener('DOMContentLoaded', () => {
-            // Assign dailyQuestCheckboxes here to ensure all elements are in the DOM
-            dailyQuestCheckboxes = document.querySelectorAll('.game-panel:nth-of-type(2) .checkbox-item input[type="checkbox"]');
-            
-            loadDailyQuestsState(); // Load daily quests state
+            loadStopwatchState(); // Load stopwatch state
             loadCustomTasks(); // Load custom tasks
             loadTallyState(); // Load tally board states
-            updateProgressBar(); // Then update progress bar to include all of them
-
-            // Attach event listeners for pre-defined daily quest checkboxes here
-            // This loop was previously outside DOMContentLoaded, now it's inside to ensure elements are present.
-            dailyQuestCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                    saveDailyQuestsState();
-                    updateProgressBar();
-                });
-            });
+            updateProgressBar(); // Update progress bar based on loaded states
         });
     </script>
 </body>
