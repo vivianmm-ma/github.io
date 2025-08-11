@@ -374,6 +374,37 @@
             margin-top: 0.5rem;
             line-height: 1.4;
         }
+        .tally-button {
+            background-color: #556fc8;
+            color: #e8e6ff;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.2rem;
+            border: 1px solid #e8e6ff;
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            box-shadow: 1px 1px 0px #304694;
+            transition: background-color 0.1s ease, box-shadow 0.1s ease;
+        }
+        .tally-button:hover {
+            background-color: #483d8b;
+            box-shadow: 0.5px 0.5px 0px #223a6b;
+        }
+        .tally-reset-button {
+            background-color: #e74c3c; /* Red for reset */
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            border: 2px solid #c0392b;
+            box-shadow: 4px 4px 0px #8f2d22;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+        .tally-reset-button:hover {
+            background-color: #c0392b;
+            box-shadow: 2px 2px 0px #6d1e18;
+        }
 
         /* Custom Task Input Area */
         .custom-task-input-group {
@@ -612,21 +643,28 @@
                 <div class="tally-board">
                     <div class="tally-item">
                         <span>Kindness Level:</span>
-                        <span class="tally-count">0</span>
+                        <span class="tally-count" id="kindnessLevelCount">0</span>
+                        <button class="tally-button" id="kindnessLevelAdd">+</button>
                     </div>
                     <div class="tally-item">
                         <span>Kind to Self:</span>
-                        <span class="tally-count">0</span>
+                        <span class="tally-count" id="kindToSelfCount">0</span>
+                        <button class="tally-button" id="kindToSelfAdd">+</button>
                     </div>
                     <div class="tally-item">
                         <span>Kind to Monkey:</span>
-                        <span class="tally-count">0</span>
+                        <span class="tally-count" id="kindToMonkeyCount">0</span>
+                        <button class="tally-button" id="kindToMonkeyAdd">+</button>
                     </div>
                     <div class="tally-item">
                         <span>Kind to Bonobo:</span>
-                        <span class="tally-count">0</span>
+                        <span class="tally-count" id="kindToBonoboCount">0</span>
+                        <button class="tally-button" id="kindToBonoboAdd">+</button>
                     </div>
                     <p class="tally-explanation mt-4">Increase your kindness level by being intentional and thoughtful in your actions towards yourself and each other. Remember, the answer is always kindness! ✨</p>
+                    <div class="mt-4 text-center">
+                        <button class="tally-reset-button" id="resetKindnessTally">RESET KINDNESS TALLY</button>
+                    </div>
                 </div>
             </div>
 
@@ -637,9 +675,13 @@
                 <div class="tally-board">
                     <div class="tally-item">
                         <span>Questions Asked Today:</span>
-                        <span class="tally-count">0</span>
+                        <span class="tally-count" id="questionsAskedCount">0</span>
+                        <button class="tally-button" id="questionsAskedAdd">+</button>
                     </div>
                     <p class="tally-explanation mt-4">Monkey has a maximum of **10 minutes** or **two separate instances** per day for repetitive/reassurance-seeking questions. Use the stopwatch above to help track time if needed.</p>
+                    <div class="mt-4 text-center">
+                        <button class="tally-reset-button" id="resetQuestionsTally">RESET QUESTIONS TALLY</button>
+                    </div>
                 </div>
             </div>
 
@@ -970,6 +1012,88 @@
             }
         });
 
+        // === Tally Board Functionality ===
+
+        // Kindness Tally Elements
+        const kindnessLevelCount = document.getElementById('kindnessLevelCount');
+        const kindToSelfCount = document.getElementById('kindToSelfCount');
+        const kindToMonkeyCount = document.getElementById('kindToMonkeyCount');
+        const kindToBonoboCount = document.getElementById('kindToBonoboCount');
+
+        const kindnessLevelAdd = document.getElementById('kindnessLevelAdd');
+        const kindToSelfAdd = document.getElementById('kindToSelfAdd');
+        const kindToMonkeyAdd = document.getElementById('kindToMonkeyAdd');
+        const kindToBonoboAdd = document.getElementById('kindToBonoboAdd');
+        const resetKindnessTallyButton = document.getElementById('resetKindnessTally');
+
+        // Monkey's Question Tally Elements
+        const questionsAskedCount = document.getElementById('questionsAskedCount');
+        const questionsAskedAdd = document.getElementById('questionsAskedAdd');
+        const resetQuestionsTallyButton = document.getElementById('resetQuestionsTally');
+
+        function saveTallyState() {
+            const tallyState = {
+                kindnessLevel: parseInt(kindnessLevelCount.textContent),
+                kindToSelf: parseInt(kindToSelfCount.textContent),
+                kindToMonkey: parseInt(kindToMonkeyCount.textContent),
+                kindToBonobo: parseInt(kindToBonoboCount.textContent),
+                questionsAsked: parseInt(questionsAskedCount.textContent)
+            };
+            localStorage.setItem('tallyBoardState', JSON.stringify(tallyState));
+        }
+
+        function loadTallyState() {
+            const storedState = localStorage.getItem('tallyBoardState');
+            if (storedState) {
+                const state = JSON.parse(storedState);
+                kindnessLevelCount.textContent = state.kindnessLevel;
+                kindToSelfCount.textContent = state.kindToSelf;
+                kindToMonkeyCount.textContent = state.kindToMonkey;
+                kindToBonoboCount.textContent = state.kindToBonobo;
+                questionsAskedCount.textContent = state.questionsAsked;
+            }
+        }
+
+        // Kindness Tally Incrementers
+        kindnessLevelAdd.addEventListener('click', () => {
+            kindnessLevelCount.textContent = parseInt(kindnessLevelCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToSelfAdd.addEventListener('click', () => {
+            kindToSelfCount.textContent = parseInt(kindToSelfCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToMonkeyAdd.addEventListener('click', () => {
+            kindToMonkeyCount.textContent = parseInt(kindToMonkeyCount.textContent) + 1;
+            saveTallyState();
+        });
+        kindToBonoboAdd.addEventListener('click', () => {
+            kindToBonoboCount.textContent = parseInt(kindToBonoboCount.textContent) + 1;
+            saveTallyState();
+        });
+
+        // Kindness Tally Reset
+        resetKindnessTallyButton.addEventListener('click', () => {
+            kindnessLevelCount.textContent = 0;
+            kindToSelfCount.textContent = 0;
+            kindToMonkeyCount.textContent = 0;
+            kindToBonoboCount.textContent = 0;
+            saveTallyState();
+        });
+
+        // Monkey's Question Tally Incrementer
+        questionsAskedAdd.addEventListener('click', () => {
+            questionsAskedCount.textContent = parseInt(questionsAskedCount.textContent) + 1;
+            saveTallyState();
+        });
+
+        // Monkey's Question Tally Reset
+        resetQuestionsTallyButton.addEventListener('click', () => {
+            questionsAskedCount.textContent = 0;
+            saveTallyState();
+        });
+
+
         // Initial setup when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             // Assign dailyQuestCheckboxes here to ensure all elements are in the DOM
@@ -977,6 +1101,7 @@
             
             loadDailyQuestsState(); // Load daily quests state
             loadCustomTasks(); // Load custom tasks
+            loadTallyState(); // Load tally board states
             updateProgressBar(); // Then update progress bar to include all of them
 
             // Attach event listeners for pre-defined daily quest checkboxes here
