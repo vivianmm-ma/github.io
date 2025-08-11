@@ -7,7 +7,7 @@
     <title>Quest Log: Our Flow & Teamwork - CindnessKult</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start 2P&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -820,26 +820,25 @@
         });
 
         // === Progress Bar Functionality ===
-        const allCheckboxes = document.querySelectorAll('.game-panel input[type="checkbox"]'); // Select all checkboxes in game panels
-        const progressBarFill = document.querySelector('.progress-bar-fill');
-        const progressBarPercentage = document.querySelector('.progress-bar-percentage');
-
+        // Re-query all checkboxes every time to include dynamically added ones
         function updateProgressBar() {
+            const currentCheckboxes = document.querySelectorAll('.game-panel input[type="checkbox"]');
             let checkedCount = 0;
-            allCheckboxes.forEach(checkbox => {
+            currentCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) {
                     checkedCount++;
                 }
             });
 
-            const totalTasks = allCheckboxes.length;
+            const totalTasks = currentCheckboxes.length; 
             const percentage = totalTasks > 0 ? (checkedCount / totalTasks) * 100 : 0;
             progressBarFill.style.width = `${percentage}%`;
             progressBarPercentage.textContent = `${Math.round(percentage)}% Complete`;
         }
 
-        // Add event listeners to all checkboxes
-        allCheckboxes.forEach(checkbox => {
+        // Add event listeners to all checkboxes (initial load)
+        // Checkboxes loaded from local storage will have their listeners added in addCustomTask
+        document.querySelectorAll('.game-panel:not(#customTaskList) input[type="checkbox"]').forEach(checkbox => {
             checkbox.addEventListener('change', updateProgressBar);
         });
 
@@ -879,6 +878,7 @@
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.checked = isChecked;
+            // Add listener directly here for dynamically created checkboxes
             checkbox.addEventListener('change', () => {
                 updateProgressBar();
                 saveCustomTasks(); // Save state on change
@@ -930,8 +930,8 @@
 
         // Initial update of the progress bar and load custom tasks when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            loadCustomTasks();
-            updateProgressBar();
+            loadCustomTasks(); // Load custom tasks first
+            updateProgressBar(); // Then update progress bar to include them
         });
     </script>
 </body>
