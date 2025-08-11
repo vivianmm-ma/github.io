@@ -486,15 +486,15 @@
             <div class="game-panel">
                 <h2 class="panel-title">Daily Quests <span class="text-xs text-gray-400 block mt-1">(Split tasks based on days off)</span></h2>
                 <p class="text-sm text-gray-300 mb-4">
-                    **Monkey's Days Off:** Monday, Tuesday, Wednesday<br>
-                    **Bonobo's Days Off:** Saturday, Sunday<br>
+                    Monkey's Days Off: Monday, Tuesday, Wednesday<br>
+                    Bonobo's Days Off: Saturday, Sunday<br>
                     **Friday:** Bonobo usually takes lead on evening tasks.
                 </p>
                 <ul>
                     <li class="checkbox-item">
                         <input type="checkbox" id="feedDogDaily">
-                        <label for="feedDogDaily">Feed the dog</label>
-                        <span class="time-estimate">~5 min</span>
+                        <label for="feedDogDaily">Feed the dog breakfast</label>
+                        <span class="time-estimate">~3 min</span>
                     </li>
                     <li class="checkbox-item">
                         <input type="checkbox" id="letDogOutDaily">
@@ -504,7 +504,7 @@
                     <li class="checkbox-item">
                         <input type="checkbox" id="closeWindowsAC">
                         <label for="closeWindowsAC">Close all windows if hot & turn on fan/AC</label>
-                        <span class="time-estimate">~5 min</span>
+                        <span class="time-estimate">~3 min</span>
                     </li>
                     <li class="checkbox-item">
                         <input type="checkbox" id="upstairsAC">
@@ -532,6 +532,11 @@
                         <span class="time-estimate">~5 min</span>
                     </li>
                     <li class="checkbox-item">
+                        <input type="checkbox" id="coffeePrepCheck">
+                        <label for="dogDinner">Feed the dog dinner around 6-7pm</label>
+                        <span class="time-estimate">~3 min</span>
+                    </li>
+                    <li class="checkbox-item">
                         <input type="checkbox" id="sayHello">
                         <label for="sayHello">**Evening Connection:** Say hello & hang out (10-11 PM for Bonobo)</label>
                         <span class="time-estimate">30-60 min</span>
@@ -540,6 +545,11 @@
                         <input type="checkbox" id="aloneTime">
                         <label for="aloneTime">**Alone Time:** Bonobo gets 1-2 hours for tasks/decompression (11 PM - 12/1 AM)</label>
                         <span class="time-estimate">60-120 min</span>
+                    </li>
+                      <li class="checkbox-item">
+                        <input type="checkbox" id="aloneTime">
+                        <label for="dogBed">Dog goes to sleep</label>
+                        <span class="time-estimate">5 min</span>
                     </li>
                     <li class="checkbox-item">
                         <input type="checkbox" id="monkeyAloneTimeTasks">
@@ -562,6 +572,10 @@
                         <span class="time-estimate">~30 min</span>
                     </li>
                 </ul>
+                <div class="mt-6 text-center">
+                    <button id="resetDailyQuestsButton" class="add-button">RESET DAILY QUESTS</button>
+                    <p class="note-text mt-2">Click to uncheck all quests in this section.</p>
+                </div>
             </div>
 
             <!-- Personal Daily Quests -->
@@ -579,7 +593,7 @@
 
             <!-- Mission Control Panel (Timer, Next Step) -->
             <div class="mission-control-panel">
-                <h2 class="mission-control-title">Mission Control</h2>
+                <h2 class="panel-title">Mission Control</h2>
                 <div class="timer-display" id="stopwatchDisplay">
                     Stopwatch: 00:00:00
                 </div>
@@ -927,6 +941,17 @@
                 addCustomTaskButton.click();
             }
         });
+
+        // === Reset Daily Quests Button Functionality ===
+        const resetDailyQuestsButton = document.getElementById('resetDailyQuestsButton');
+        resetDailyQuestsButton.addEventListener('click', () => {
+            const dailyQuestCheckboxes = document.querySelectorAll('.game-panel:nth-of-type(2) .checkbox-item input[type="checkbox"]');
+            dailyQuestCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateProgressBar(); // Update progress bar after resetting
+        });
+
 
         // Initial update of the progress bar and load custom tasks when the page loads
         document.addEventListener('DOMContentLoaded', () => {
