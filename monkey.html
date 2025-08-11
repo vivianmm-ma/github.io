@@ -486,8 +486,8 @@
             <div class="game-panel">
                 <h2 class="panel-title">Daily Quests <span class="text-xs text-gray-400 block mt-1">(Split tasks based on days off)</span></h2>
                 <p class="text-sm text-gray-300 mb-4">
-                    Monkey's Days Off: Monday, Tuesday, Wednesday<br>
-                    Bonobo's Days Off: Saturday, Sunday<br>
+                    **Monkey's Days Off:** Monday, Tuesday, Wednesday<br>
+                    **Bonobo's Days Off:** Saturday, Sunday<br>
                     **Friday:** Bonobo usually takes lead on evening tasks.
                 </p>
                 <ul>
@@ -532,7 +532,7 @@
                         <span class="time-estimate">~5 min</span>
                     </li>
                     <li class="checkbox-item">
-                        <input type="checkbox" id="coffeePrepCheck">
+                        <input type="checkbox" id="dogDinner">
                         <label for="dogDinner">Feed the dog dinner around 6-7pm</label>
                         <span class="time-estimate">~3 min</span>
                     </li>
@@ -547,7 +547,7 @@
                         <span class="time-estimate">60-120 min</span>
                     </li>
                       <li class="checkbox-item">
-                        <input type="checkbox" id="aloneTime">
+                        <input type="checkbox" id="dogBed">
                         <label for="dogBed">Dog goes to sleep</label>
                         <span class="time-estimate">5 min</span>
                     </li>
@@ -849,11 +849,46 @@
             progressBarFill.style.width = `${percentage}%`;
             progressBarPercentage.textContent = `${Math.round(percentage)}% Complete`;
         }
+        
+        // === Daily Quests Persistence & Reset Functionality ===
+        const dailyQuestCheckboxes = document.querySelectorAll('.game-panel:nth-of-type(2) .checkbox-item input[type="checkbox"]');
+        const resetDailyQuestsButton = document.getElementById('resetDailyQuestsButton');
 
-        // Add event listeners to all checkboxes (initial load)
-        // Checkboxes loaded from local storage will have their listeners added in addCustomTask
-        document.querySelectorAll('.game-panel:not(#customTaskList) input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', updateProgressBar);
+        function saveDailyQuestsState() {
+            const state = {};
+            dailyQuestCheckboxes.forEach(checkbox => {
+                state[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem('dailyQuestsState', JSON.stringify(state));
+        }
+
+        function loadDailyQuestsState() {
+            const storedState = localStorage.getItem('dailyQuestsState');
+            if (storedState) {
+                const state = JSON.parse(storedState);
+                dailyQuestCheckboxes.forEach(checkbox => {
+                    if (state[checkbox.id] !== undefined) {
+                        checkbox.checked = state[checkbox.id];
+                    }
+                });
+            }
+        }
+
+        // Add event listeners for changes on daily quest checkboxes to save their state
+        dailyQuestCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                saveDailyQuestsState();
+                updateProgressBar();
+            });
+        });
+
+        // Reset Daily Quests Button Functionality
+        resetDailyQuestsButton.addEventListener('click', () => {
+            dailyQuestCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            saveDailyQuestsState(); // Save the unchecked state
+            updateProgressBar(); // Update progress bar after resetting
         });
 
         // === Custom Task List Functionality ===
@@ -942,21 +977,11 @@
             }
         });
 
-        // === Reset Daily Quests Button Functionality ===
-        const resetDailyQuestsButton = document.getElementById('resetDailyQuestsButton');
-        resetDailyQuestsButton.addEventListener('click', () => {
-            const dailyQuestCheckboxes = document.querySelectorAll('.game-panel:nth-of-type(2) .checkbox-item input[type="checkbox"]');
-            dailyQuestCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            updateProgressBar(); // Update progress bar after resetting
-        });
-
-
         // Initial update of the progress bar and load custom tasks when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            loadCustomTasks(); // Load custom tasks first
-            updateProgressBar(); // Then update progress bar to include them
+            loadDailyQuestsState(); // Load daily quests state first
+            loadCustomTasks(); // Load custom tasks
+            updateProgressBar(); // Then update progress bar to include all of them
         });
     </script>
 </body>
