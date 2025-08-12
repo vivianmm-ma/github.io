@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+ <!-- Make sure to change the title for each page -->
+    <title>Page Title - CindnessKult</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* This CSS provides the styling for your header and the sticker button. */
+        /* It can be used on any page. */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e6e6fa; /* Light lavender background */
+            color: #2c2c44; /* Dark blue/purple text */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .site-header {
+            border: 4px solid #9370db; /* Medium purple border */
+            background-color: #f0f0ff;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: 4px 4px 0px #9370db;
+        }
+
+        .site-header h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #483d8b;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .site-header p {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.75rem;
+            color: #483d8b;
+            margin-top: 0.5rem;
+        }
+        
+        .sticker-link {
+            display: block;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem auto;
+            text-decoration: none;
+        }
+        .sticker-container {
+            width: 100%;
+            height: 100%;
+            background-color: #e8e6ff;
+            border: 4px solid #98c379; /* Green border */
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2), 0 0 0 5px #fff;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        .sticker-link:hover .sticker-container {
+            transform: scale(1.05);
+        }
+        .yin-yang {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-color: #304694;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #556fc8 50%, #e8e6ff 50%);
+            flex-shrink: 0;
+            margin-top: -20px;
+        }
+        .yin-yang::before,
+        .yin-yang::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid #304694;
+        }
+        .yin-yang::before {
+            top: 7.5px;
+            background-color: #e8e6ff;
+        }
+        .yin-yang::after {
+            bottom: 7.5px;
+            background-color: #556fc8;
+        }
+        .curved-text-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .char {
+            position: absolute;
+            height: 100px;
+            transform-origin: bottom center;
+            left: 50%;
+            top: 0;
+            color: #304694;
+            font-size: 0.8rem;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: -1px 1px 0 #98c379;
+        }
+        .bottom-text {
+            color: #322277;
+            font-size: 0.75rem;
+            font-family: 'Press Start 2P', cursive;
+            margin-top: 0.5rem;
+            transform: rotate(-5deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <!-- ===== START OF REUSABLE HEADER CODE ===== -->
+        <a href="https://www.cindnesskult.com" class="sticker-link">
+            <div class="sticker-container">
+                <div class="curved-text-container">
+                    <!-- JS will populate this -->
+                </div>
+                <div class="yin-yang"></div>
+                <p class="bottom-text">not just right</p>
+            </div>
+        </a>
+        
+        <header class="site-header">
+            <h1>Cindness KULT</h1>
+            <p>*✧The answer is always kindness. (not a cult btw)✧*</p>
+        </header>
+        <!-- ===== END OF REUSABLE HEADER CODE ===== -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vagus Nerve: An Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Times+New+Roman:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #ffffff; /* White - new main background */
+            color: #333; /* Dark gray for body text on white background */
+        }
+        h1, h2, h3 {
+            font-family: 'Times New Roman', serif;
+        }
+        .card-bg-dark {
+            background-color: #5d3f6a; /* Deep Indigo Purple - new card background */
+            color: #ffffff; /* White text on dark cards */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+            background-color: #ffffff; /* White - chart background within dark cards */
+            border-radius: 0.75rem; /* rounded-xl equivalent */
+            padding: 1rem; /* p-4 equivalent */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flow-line {
+            width: 2px;
+            background-color: #ffffff; /* White - stands out on dark cards */
+            flex-grow: 1;
+        }
+        .flow-arrow {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #ffffff; /* White - stands out on dark cards */
+        }
+        .icon-bg {
+            background-color: #ffffff; /* White - new card/icon background */
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#4b0082] mb-4">The Vagus Nerve: Your Body's Superhighway to Calm</h1>
+            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">An exploration of how stress impacts our physical well-being and how we can reclaim our body's natural state of balance.</p>
+        </header>
+
+        <section id="what-is-it" class="mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="card-bg-dark p-8 rounded-xl shadow-lg">
+                    <h2 class="text-3xl font-bold text-[#e6e6fa] mb-4">The "Rest & Digest" System</h2>
+                    <p class="text-white mb-6">The vagus nerve is the main component of the parasympathetic nervous system, our body's primary calming mechanism. It acts as a brake on our stress response, helping us relax, recover, and regulate emotions. A healthy vagus nerve has a strong "vagal tone."</p>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="stressResponseChart"></canvas>
+                    </div>
+                </div>
+                <div class="card-bg-dark p-8 rounded-xl shadow-lg flex flex-col items-center">
+                    <h2 class="text-3xl font-bold text-[#e6e6fa] mb-4 text-center">A Brain-Body Superhighway</h2>
+                     <p class="text-white mb-6 text-center">As the longest cranial nerve, it wanders from the brain down through the neck and chest to the abdomen, connecting to and influencing nearly every major organ system along the way.</p>
+                    <div class="w-full max-w-xs text-center">
+                        <div class="flex flex-col items-center">
+                            <div class="p-4 rounded-full icon-bg text-3xl mb-2 text-[#5d3f6a]">🧠</div>
+                            <p class="font-semibold text-[#e6e6fa]">Brain</p>
+                            <div class="w-1 h-8 bg-white"></div>
+                            <div class="p-4 rounded-full icon-bg text-3xl mb-2 text-[#5d3f6a]">🗣️</div>
+                            <p class="font-semibold text-[#e6e6fa]">Larynx/Pharynx</p>
+                            <div class="w-1 h-8 bg-white"></div>
+                            <div class="p-4 rounded-full icon-bg text-3xl mb-2 text-[#5d3f6a]">❤️</div>
+                            <p class="font-semibold text-[#e6e6fa]">Heart & Lungs</p>
+                            <div class="w-1 h-8 bg-white"></div>
+                            <div class="p-4 rounded-full icon-bg text-3xl mb-2 text-[#5d3f6a]">🌿</div>
+                            <p class="font-semibold text-[#e6e6fa]">Stomach & Intestines</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trauma-impact" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#4b0082]">How Stress & Trauma Manifest Physically</h2>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto mt-4">When the nervous system gets stuck in "high alert" from chronic stress or trauma, it weakens vagal tone, leading to real, physiological symptoms.</p>
+            </div>
+
+            <div class="card-bg-dark p-8 rounded-xl shadow-lg mb-12 flex flex-col items-center">
+                <h3 class="text-2xl font-bold text-center mb-6 text-[#e6e6fa]">The Vicious Cycle of Low Vagal Tone</h3>
+                <div class="w-full max-w-4xl flex flex-col md:flex-row justify-around items-center text-center">
+                    <div class="p-4 m-2">
+                        <p class="text-xl font-semibold mb-2 text-white">Chronic Stress or Trauma</p>
+                        <p class="text-white">Primes the body for danger.</p>
+                    </div>
+                    <div class="hidden md:flex flex-col items-center mx-4"><div class="flow-arrow rotate-90 md:rotate-0"></div></div>
+                    <div class="md:hidden flex flex-col items-center my-4"><div class="flow-arrow"></div></div>
+                    <div class="p-4 m-2">
+                        <p class="text-xl font-semibold mb-2 text-white">Low Vagal Tone</p>
+                        <p class="text-white">The "vagal brake" weakens.</p>
+                    </div>
+                     <div class="hidden md:flex flex-col items-center mx-4"><div class="flow-arrow rotate-90 md:rotate-0"></div></div>
+                    <div class="md:hidden flex flex-col items-center my-4"><div class="flow-arrow"></div></div>
+                    <div class="p-4 m-2">
+                        <p class="text-xl font-semibold mb-2 text-white">Overactive Stress Response</p>
+                        <p class="text-white">Leads to anxiety & depression.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4 text-white">🧍</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Protective Posture</h3>
+                    <p class="text-white">Hunched shoulders and a tight core constrict the vagus nerve's path, inhibiting its calming signals.</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4 text-white">🗣️</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Globus Sensation</h3>
+                    <p class="text-white">A feeling of a lump in the throat caused by chronic, unconscious muscle tension from anxiety.</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg">
+                     <div class="text-4xl mb-4 text-white">🧠</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Dissociation & Numbness</h3>
+                    <p class="text-white">The "freeze" response floods the body with numbing chemicals, disrupting repair and regulation.</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4 text-white">🛡️</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Autoimmune Conditions</h3>
+                    <p class="text-white">Low vagal tone leads to chronic inflammation, which can cause the immune system to attack itself.</p>
+                </div>
+                 <div class="card-bg-dark p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4 text-white">🎭</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Neurodivergent Masking</h3>
+                    <p class="text-white">The chronic stress of suppressing one's authentic self keeps the body in a low-grade "fight-or-flight" state.</p>
+                </div>
+                 <div class="card-bg-dark p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4 text-white">🔗</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Compounding Conditions</h3>
+                    <p class="text-white">Dysregulation can fuel other issues like OCD or exacerbate symptoms of hEDS, POTS, and MCAS.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="aces" class="mb-20">
+             <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#4b0082]">The Lifelong Impact of Childhood Stress</h2>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto mt-4">Adverse Childhood Experiences (ACEs) can program the nervous system for a lifetime of hypervigilance, with profound consequences for adult health.</p>
+            </div>
+            <div class="card-bg-dark p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-center mb-6 text-[#e6e6fa]">ACEs & Autoimmune Disease Risk</h3>
+                <p class="text-white mb-6 text-center">Research shows a strong correlation between the number of ACEs and the likelihood of developing an autoimmune condition in adulthood. High cumulative stress dysregulates the immune system.</p>
+                <div class="chart-container">
+                    <canvas id="aceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="strengthen" class="mb-12">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#4b0082]">How to Strengthen Your Vagus Nerve</h2>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto mt-4">You can actively improve your vagal tone. Like a muscle, the vagus nerve's response can be strengthened with practice.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="text-5xl mb-4 text-white">🌬️</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Deep, Slow Breathing</h3>
+                    <p class="text-white">Inhale for 4, exhale for 8. Long exhales activate the "vagal brake."</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="text-5xl mb-4 text-white">❄️</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Cold Exposure</h3>
+                    <p class="text-white">Splash your face with cold water or take a 30-second cold shower.</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="text-5xl mb-4 text-white">🎶</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Hum, Sing, Gargle</h3>
+                    <p class="text-white">Vibrations from activating throat muscles stimulate the nerve.</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="text-5xl mb-4 text-white">🧘</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Mindfulness</h3>
+                    <p class="text-white">Train your brain to be less reactive to stressful thoughts.</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="text-5xl mb-4 text-white">🥗</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Gut Health</h3>
+                    <p class="text-white">A healthy gut microbiome sends calming signals to the brain.</p>
+                </div>
+                 <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="text-5xl mb-4 text-white">🤸</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Gentle Movement</h3>
+                    <p class="text-white">Yoga and tai chi combine mindful movement with breathing.</p>
+                </div>
+                <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="text-5xl mb-4 text-white">😂</div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mb-2">Social Connection</h3>
+                    <p class="text-white">Laughter and positive social bonds are powerful signals of safety.</p>
+                </div>
+                 <div class="card-bg-dark p-6 rounded-xl shadow-lg text-center flex flex-col items-center">
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="wellnessChart"></canvas>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#e6e6fa] mt-4 mb-2">Holistic Wellness</h3>
+                    <p class="text-white">Combining techniques creates a powerful, holistic approach to nervous system regulation.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center p-8 mt-12 bg-[#5d3f6a] text-white">
+        <p>This infographic is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+        <p class="mt-2 text-sm text-gray-400">Content based on the work of Porges, Levine, and others, synthesizing research on polyvagal theory, trauma, and somatic healing.</p>
+    </footer>
+
+    <script>
+        function wrapLabel(str, max_width) {
+            if (str.length <= max_width) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let current_line = '';
+            for (const word of words) {
+                if ((current_line + ' ' + word).length > max_width) {
+                    lines.push(current_line);
+                    current_line = word;
+                } else {
+                    current_line += (current_line.length > 0 ? ' ' : '') + word;
+                }
+            }
+            lines.push(current_line);
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#4a5568', /* Default text color for chart legends */
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: '#4a5568', font: { size: 12 } },
+                    grid: { color: '#e2e8f0' }
+                },
+                x: {
+                    ticks: { color: '#4a5568', font: { size: 12 } },
+                    grid: { display: false }
+                }
+            }
+        };
+
+        const stressResponseCtx = document.getElementById('stressResponseChart').getContext('2d');
+        new Chart(stressResponseCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Parasympathetic (Rest)', 'Sympathetic (Stress)'],
+                datasets: [{
+                    label: 'System Activation Level',
+                    data: [65, 90],
+                    backgroundColor: ['#7a529a', '#c8a2c8'], /* Indigo Purple, Medium Lavender */
+                    borderColor: ['#7a529a', '#c8a2c8'],
+                    borderWidth: 1
+                }]
+            },
+            options: { ...defaultChartOptions, indexAxis: 'y' }
+        });
+
+        const aceCtx = document.getElementById('aceChart').getContext('2d');
+        new Chart(aceCtx, {
+            type: 'line',
+            data: {
+                labels: ['0 ACEs', '1 ACE', '2 ACEs', '3 ACEs', '4+ ACEs'],
+                datasets: [{
+                    label: 'Relative Risk Increase for Autoimmune Disease',
+                    data: [5, 15, 30, 55, 80],
+                    fill: true,
+                    borderColor: '#5d3f6a', /* Deep Indigo Purple */
+                    backgroundColor: 'rgba(93, 63, 106, 0.2)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                scales: {
+                     y: { ...defaultChartOptions.scales.y, suggestedMax: 100, ticks: { callback: value => value + '%' } },
+                     x: { ...defaultChartOptions.scales.x }
+                }
+            }
+        });
+
+        const wellnessCtx = document.getElementById('wellnessChart').getContext('2d');
+        new Chart(wellnessCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Breathing', 'Socializing', 'Movement', 'Mindfulness', 'Gut Health', 'Cold Exposure'],
+                datasets: [{
+                    label: 'Contribution to Vagal Tone',
+                    data: [9, 8, 7, 8, 6, 7],
+                    fill: true,
+                    backgroundColor: 'rgba(122, 82, 154, 0.2)', /* Indigo Purple transparent */
+                    borderColor: '#7a529a', /* Indigo Purple */
+                    pointBackgroundColor: '#4b0082', /* Darker Indigo */
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#4b0082' /* Darker Indigo */
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#e2e8f0' }, /* Light grid lines on chart */
+                        grid: { color: '#e2e8f0' }, /* Light grid lines on chart */
+                        pointLabels: { font: { size: 12 }, color: '#4a5568' }, /* Chart label text */
+                        ticks: { backdropColor: '#e6e6fa', color: '#4a5568' }, /* Light Lavender background for ticks */
+                        suggestedMin: 0,
+                        suggestedMax: 10
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
