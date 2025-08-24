@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentalization Scale (MentS)</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .instructions, .results {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-left: 5px solid #3498db;
+            border-radius: 4px;
+        }
+        .question-group {
+            margin-bottom: 15px;
+        }
+        .question-statement {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-around;
+            padding: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .options label {
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .options input[type="radio"] {
+            display: none;
+        }
+        .options input[type="radio"]:checked + label {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-group button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        #calculate-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        #reset-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        #score-display {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Mentalization Scale (MentS)</h1>
+    <div class="instructions">
+        <p>Instructions: For each statement, please rate how much it applies to you using the following scale:</p>
+        <p>1 = Not at all/Rarely<br>
+           2 = Sometimes/Occasionally<br>
+           3 = Moderately/Sometimes<br>
+           4 = A lot/Often<br>
+           5 = All of the time/Always</p>
+    </div>
+    
+    <form id="ments-form">
+        <h2>Self-Related Mentalization</h2>
+        <div class="question-group">
+            <div class="question-statement">1. I find it important to understand reasons for my behavior.</div>
+            <div class="options">
+                <input type="radio" id="q1_1" name="q1" value="1" required><label for="q1_1">1</label>
+                <input type="radio" id="q1_2" name="q1" value="2"><label for="q1_2">2</label>
+                <input type="radio" id="q1_3" name="q1" value="3"><label for="q1_3">3</label>
+                <input type="radio" id="q1_4" name="q1" value="4"><label for="q1_4">4</label>
+                <input type="radio" id="q1_5" name="q1" value="5"><label for="q1_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">2. When I get upset I am not sure whether I am sad, afraid, or angry.</div>
+            <div class="options">
+                <input type="radio" id="q2_1" name="q2" value="1" required><label for="q2_1">1</label>
+                <input type="radio" id="q2_2" name="q2" value="2"><label for="q2_2">2</label>
+                <input type="radio" id="q2_3" name="q2" value="3"><label for="q2_3">3</label>
+                <input type="radio" id="q2_4" name="q2" value="4"><label for="q2_4">4</label>
+                <input type="radio" id="q2_5" name="q2" value="5"><label for="q2_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">3. I am often confused about my exact feelings.</div>
+            <div class="options">
+                <input type="radio" id="q3_1" name="q3" value="1" required><label for="q3_1">1</label>
+                <input type="radio" id="q3_2" name="q3" value="2"><label for="q3_2">2</label>
+                <input type="radio" id="q3_3" name="q3" value="3"><label for="q3_3">3</label>
+                <input type="radio" id="q3_4" name="q3" value="4"><label for="q3_4">4</label>
+                <input type="radio" id="q3_5" name="q3" value="5"><label for="q3_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">4. I find it difficult to admit to myself that I am sad, hurt, or afraid.</div>
+            <div class="options">
+                <input type="radio" id="q4_1" name="q4" value="1" required><label for="q4_1">1</label>
+                <input type="radio" id="q4_2" name="q4" value="2"><label for="q4_2">2</label>
+                <input type="radio" id="q4_3" name="q4" value="3"><label for="q4_3">3</label>
+                <input type="radio" id="q4_4" name="q4" value="4"><label for="q4_4">4</label>
+                <input type="radio" id="q4_5" name="q4" value="5"><label for="q4_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">5. I can easily describe what I feel.</div>
+            <div class="options">
+                <input type="radio" id="q5_1" name="q5" value="1" required><label for="q5_1">1</label>
+                <input type="radio" id="q5_2" name="q5" value="2"><label for="q5_2">2</label>
+                <input type="radio" id="q5_3" name="q5" value="3"><label for="q5_3">3</label>
+                <input type="radio" id="q5_4" name="q5" value="4"><label for="q5_4">4</label>
+                <input type="radio" id="q5_5" name="q5" value="5"><label for="q5_5">5</label>
+            </div>
+        </div>
+
+        <h2>Other-Related Mentalization</h2>
+        <div class="question-group">
+            <div class="question-statement">6. I can empathize with other people's feelings.</div>
+            <div class="options">
+                <input type="radio" id="q6_1" name="q6" value="1" required><label for="q6_1">1</label>
+                <input type="radio" id="q6_2" name="q6" value="2"><label for="q6_2">2</label>
+                <input type="radio" id="q6_3" name="q6" value="3"><label for="q6_3">3</label>
+                <input type="radio" id="q6_4" name="q6" value="4"><label for="q6_4">4</label>
+                <input type="radio" id="q6_5" name="q6" value="5"><label for="q6_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">7. When someone annoys me I try to understand why I react in that way.</div>
+            <div class="options">
+                <input type="radio" id="q7_1" name="q7" value="1" required><label for="q7_1">1</label>
+                <input type="radio" id="q7_2" name="q7" value="2"><label for="q7_2">2</label>
+                <input type="radio" id="q7_3" name="q7" value="3"><label for="q7_3">3</label>
+                <input type="radio" id="q7_4" name="q7" value="4"><label for="q7_4">4</label>
+                <input type="radio" id="q7_5" name="q7" value="5"><label for="q7_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">8. I can make good predictions of other people's behavior when I know their beliefs and feelings.</div>
+            <div class="options">
+                <input type="radio" id="q8_1" name="q8" value="1" required><label for="q8_1">1</label>
+                <input type="radio" id="q8_2" name="q8" value="2"><label for="q8_2">2</label>
+                <input type="radio" id="q8_3" name="q8" value="3"><label for="q8_3">3</label>
+                <input type="radio" id="q8_4" name="q8" value="4"><label for="q8_4">4</label>
+                <input type="radio" id="q8_5" name="q8" value="5"><label for="q8_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">9. I find it difficult to understand someone's reasons before s/he tells me something.</div>
+            <div class="options">
+                <input type="radio" id="q9_1" name="q9" value="1" required><label for="q9_1">1</label>
+                <input type="radio" id="q9_2" name="q9" value="2"><label for="q9_2">2</label>
+                <input type="radio" id="q9_3" name="q9" value="3"><label for="q9_3">3</label>
+                <input type="radio" id="q9_4" name="q9" value="4"><label for="q9_4">4</label>
+                <input type="radio" id="q9_5" name="q9" value="5"><label for="q9_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">10. I often talk about other people and their behavior.</div>
+            <div class="options">
+                <input type="radio" id="q10_1" name="q10" value="1" required><label for="q10_1">1</label>
+                <input type="radio" id="q10_2" name="q10" value="2"><label for="q10_2">2</label>
+                <input type="radio" id="q10_3" name="q10" value="3"><label for="q10_3">3</label>
+                <input type="radio" id="q10_4" name="q10" value="4"><label for="q10_4">4</label>
+                <input type="radio" id="q10_5" name="q10" value="5"><label for="q10_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">11. I can describe the significant traits of people who are close to me with precision and in detail.</div>
+            <div class="options">
+                <input type="radio" id="q11_1" name="q11" value="1" required><label for="q11_1">1</label>
+                <input type="radio" id="q11_2" name="q11" value="2"><label for="q11_2">2</label>
+                <input type="radio" id="q11_3" name="q11" value="3"><label for="q11_3">3</label>
+                <input type="radio" id="q11_4" name="q11" value="4"><label for="q11_4">4</label>
+                <input type="radio" id="q11_5" name="q11" value="5"><label for="q11_5">5</label>
+            </div>
+        </div>
+
+        <h2>Motivation to Mentalize</h2>
+        <div class="question-group">
+            <div class="question-statement">12. I find it important to understand what happens in my relationships with people close to me.</div>
+            <div class="options">
+                <input type="radio" id="q12_1" name="q12" value="1" required><label for="q12_1">1</label>
+                <input type="radio" id="q12_2" name="q12" value="2"><label for="q12_2">2</label>
+                <input type="radio" id="q12_3" name="q12" value="3"><label for="q12_3">3</label>
+                <input type="radio" id="q12_4" name="q12" value="4"><label for="q12_4">4</label>
+                <input type="radio" id="q12_5" name="q12" value="5"><label for="q12_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">13. I do not like to waste time trying to understand in detail other people's behavior.</div>
+            <div class="options">
+                <input type="radio" id="q13_1" name="q13" value="1" required><label for="q13_1">1</label>
+                <input type="radio" id="q13_2" name="q13" value="2"><label for="q13_2">2</label>
+                <input type="radio" id="q13_3" name="q13" value="3"><label for="q13_3">3</label>
+                <input type="radio" id="q13_4" name="q13" value="4"><label for="q13_4">4</label>
+                <input type="radio" id="q13_5" name="q13" value="5"><label for="q13_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">14. Since we all depend on life circumstances, it is meaningless to think of other people's intentions or motives.</div>
+            <div class="options">
+                <input type="radio" id="q14_1" name="q14" value="1" required><label for="q14_1">1</label>
+                <input type="radio" id="q14_2" name="q14" value="2"><label for="q14_2">2</label>
+                <input type="radio" id="q14_3" name="q14" value="3"><label for="q14_3">3</label>
+                <input type="radio" id="q14_4" name="q14" value="4"><label for="q14_4">4</label>
+                <input type="radio" id="q14_5" name="q14" value="5"><label for="q14_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">15. I do not want to find out something about myself that I will not like.</div>
+            <div class="options">
+                <input type="radio" id="q15_1" name="q15" value="1" required><label for="q15_1">1</label>
+                <input type="radio" id="q15_2" name="q15" value="2"><label for="q15_2">2</label>
+                <input type="radio" id="q15_3" name="q15" value="3"><label for="q15_3">3</label>
+                <input type="radio" id="q15_4" name="q15" value="4"><label for="q15_4">4</label>
+                <input type="radio" id="q15_5" name="q15" value="5"><label for="q15_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">16. To understand someone's behavior, I need to know their thoughts, desires, and feelings.</div>
+            <div class="options">
+                <input type="radio" id="q16_1" name="q16" value="1" required><label for="q16_1">1</label>
+                <input type="radio" id="q16_2" name="q16" value="2"><label for="q16_2">2</label>
+                <input type="radio" id="q16_3" name="q16" value="3"><label for="q16_3">3</label>
+                <input type="radio" id="q16_4" name="q16" value="4"><label for="q16_4">4</label>
+                <input type="radio" id="q16_5" name="q16" value="5"><label for="q16_5">5</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <div class="question-statement">17. I do not like to think about my problems.</div>
+            <div class="options">
+                <input type="radio" id="q17_1" name="q17" value="1" required><label for="q17_1">1</label>
+                <input type="radio" id="q17_2" name="q17" value="2"><label for="q17_2">2</label>
+                <input type="radio" id="q17_3" name="q17" value="3"><label for="q17_3">3</label>
+                <input type="radio" id="q17_4" name="q17" value="4"><label for="q17_4">4</label>
+                <input type="radio" id="q17_5" name="q17" value="5"><label for="q17_5">5</label>
+            </div>
+        </div>
+        </form>
+    
+    <div class="button-group">
+        <button id="calculate-btn">Calculate Score</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+    
+    <div class="results" style="display: none;">
+        <h2>Your Results</h2>
+        <div id="score-display"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('calculate-btn').addEventListener('click', function() {
+        const form = document.getElementById('ments-form');
+        const resultsDiv = document.querySelector('.results');
+        const scoreDisplay = document.getElementById('score-display');
+        let selfScore = 0;
+        let otherScore = 0;
+        let motivationScore = 0;
+        
+        // Items for each subscale
+        const selfItems = ['q1', 'q2', 'q3', 'q4', 'q5'];
+        const otherItems = ['q6', 'q7', 'q8', 'q9', 'q10', 'q11'];
+        const motivationItems = ['q12', 'q13', 'q14', 'q15', 'q16', 'q17'];
+
+        // Reverse-scored items
+        const reverseScored = ['q2', 'q3', 'q4', 'q9', 'q13', 'q14', 'q15', 'q17'];
+
+        function getScore(qName) {
+            const selected = form.querySelector(`input[name="${qName}"]:checked`);
+            if (!selected) {
+                return null;
+            }
+            let value = parseInt(selected.value);
+            if (reverseScored.includes(qName)) {
+                value = 6 - value; // Reverses 1->5, 2->4, 3->3, etc.
+            }
+            return value;
+        }
+
+        let allAnswered = true;
+        
+        // Calculate scores for each subscale
+        selfItems.forEach(q => {
+            const score = getScore(q);
+            if (score === null) allAnswered = false;
+            selfScore += score;
+        });
+        otherItems.forEach(q => {
+            const score = getScore(q);
+            if (score === null) allAnswered = false;
+            otherScore += score;
+        });
+        motivationItems.forEach(q => {
+            const score = getScore(q);
+            if (score === null) allAnswered = false;
+            motivationScore += score;
+        });
+        
+        if (!allAnswered) {
+            scoreDisplay.innerHTML = 'Please answer all questions before calculating your score.';
+            resultsDiv.style.display = 'block';
+            return;
+        }
+
+        const totalScore = selfScore + otherScore + motivationScore;
+        
+        scoreDisplay.innerHTML = `
+            <p><strong>Self-Related Mentalization Score:</strong> ${selfScore}</p>
+            <p><strong>Other-Related Mentalization Score:</strong> ${otherScore}</p>
+            <p><strong>Motivation to Mentalize Score:</strong> ${motivationScore}</p>
+            <p><strong>Total Mentalization Score:</strong> ${totalScore}</p>
+        `;
+        
+        resultsDiv.style.display = 'block';
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', function() {
+        document.getElementById('ments-form').reset();
+        document.querySelector('.results').style.display = 'none';
+        document.getElementById('score-display').innerHTML = '';
+    });
+</script>
+
+</body>
+</html>
