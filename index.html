@@ -11,6 +11,51 @@
     <style>
         /* This CSS provides the styling for your header and the sticker button. */
         /* It can be used on any page. */
+        <style>
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+  }
+
+  .glitch-button {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #000000;
+    color: #00ff00;
+    font-family: "Courier New", monospace;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 3px solid #00ff00;
+    box-shadow: 4px 4px #ff00ff;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+
+  .glitch-button:hover {
+    background-color: #333333;
+    box-shadow: 6px 6px #ff00ff;
+  }
+
+  .glitch-button:hover .glitch-text {
+    animation: glitch 0.5s infinite linear;
+  }
+
+  .glitch-text {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+  }
+</style>
+
+<a href="my-way-forward-retro.html" class="glitch-button">
+  <span class="glitch-text">Read My Way Forward</span>
+</a> **end**
         body {
             font-family: 'Inter', sans-serif;
             background-color: #e6e6fa; /* Light lavender background */
