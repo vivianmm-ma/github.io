@@ -12,8 +12,8 @@
         /* It can be used on any page. */
         body {
             font-family: 'Source Serif 4', serif;
-            background-color: #e6e6fa; /* Light lavender background */
-            color: #2c2c44; /* Dark blue/purple text */
+            background-color: #000000; /* Dark black background */
+            color: #00ff00; /* Neon green text */
             margin: 0;
             padding: 20px;
         }
@@ -25,17 +25,17 @@
         }
         
         .site-header {
-            border: 4px solid #9370db; /* Medium purple border */
-            background-color: #f0f0ff;
+            border: 4px solid #00ff00; /* Neon green border */
+            background-color: #1a1a1a;
             padding: 1rem;
             text-align: center;
             margin-bottom: 2.5rem;
-            box-shadow: 4px 4px 0px #9370db;
+            box-shadow: 4px 4px 0px #00ffff; /* Cyan shadow for glitch effect */
         }
 
         .site-header h1 {
             font-family: 'Press Start 2P', cursive;
-            color: #483d8b;
+            color: #ffff00;
             font-size: 2.5rem;
             margin: 0;
         }
@@ -43,7 +43,7 @@
         .site-header p {
             font-family: 'Press Start 2P', cursive;
             font-size: 0.75rem;
-            color: #483d8b;
+            color: #ff00ff;
             margin-top: 0.5rem;
         }
         
@@ -57,15 +57,15 @@
         .sticker-container {
             width: 100%;
             height: 100%;
-            background-color: #e8e6ff;
-            border: 4px solid #98c379; /* Green border */
+            background-color: #2c2c44;
+            border: 4px solid #00ff00; /* Neon green border */
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2), 0 0 0 5px #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.5), 0 0 0 5px #ff00ff;
             position: relative;
             transition: transform 0.2s ease;
         }
@@ -76,11 +76,11 @@
             position: relative;
             width: 60px;
             height: 60px;
-            border-color: #304694;
+            border-color: #00ffff;
             border-style: solid;
             border-width: 2px;
             border-radius: 50%;
-            background: linear-gradient(to bottom, #556fc8 50%, #e8e6ff 50%);
+            background: linear-gradient(to bottom, #ffff00 50%, #00ffff 50%);
             flex-shrink: 0;
             margin-top: -20px;
         }
@@ -93,15 +93,15 @@
             width: 15px;
             height: 15px;
             border-radius: 50%;
-            border: 1px solid #304694;
+            border: 1px solid #00ffff;
         }
         .yin-yang::before {
             top: 7.5px;
-            background-color: #e8e6ff;
+            background-color: #00ffff;
         }
         .yin-yang::after {
             bottom: 7.5px;
-            background-color: #556fc8;
+            background-color: #ffff00;
         }
         .curved-text-container {
             position: absolute;
@@ -116,13 +116,13 @@
             transform-origin: bottom center;
             left: 50%;
             top: 0;
-            color: #304694;
+            color: #00ffff;
             font-size: 0.8rem;
             font-family: 'Press Start 2P', cursive;
-            text-shadow: -1px 1px 0 #98c379;
+            text-shadow: -1px 1px 0 #00ff00;
         }
         .bottom-text {
-            color: #322277;
+            color: #00ff00;
             font-size: 0.75rem;
             font-family: 'Press Start 2P', cursive;
             margin-top: 0.5rem;
@@ -132,8 +132,8 @@
         /* NEW CONTENT STYLES */
         body {
             font-family: 'Source Serif 4', serif;
-            background-color: #e6e6fa; /* Light lavender background */
-            color: #2c2c44; /* Dark blue/purple text */
+            background-color: #000000; /* Dark black background */
+            color: #00ff00; /* Neon green text */
             line-height: 1.6;
             margin: 0 auto;
             max-width: 800px;
@@ -144,27 +144,27 @@
             font-family: 'Press Start 2P', cursive;
             font-size: 2.5em;
             text-align: center;
-            color: #483d8b; /* Dark purple */
+            color: #ffff00; /* Bright yellow */
             margin-bottom: 0.2em;
         }
 
         h2 {
             font-family: 'Press Start 2P', cursive;
-            color: #9370db; /* Medium purple */
-            border-bottom: 2px dashed #9370db;
+            color: #00ffff; /* Cyan */
+            border-bottom: 2px dashed #00ff00;
             padding-bottom: 5px;
             margin-top: 2em;
         }
 
         h3 {
             font-family: 'Press Start 2P', cursive;
-            color: #483d8b;
+            color: #ffff00; /* Bright yellow */
             margin-top: 1.5em;
         }
 
         h4 {
             font-family: 'Source Serif 4', serif;
-            color: #2c2c44;
+            color: #00ff00; /* Neon green */
             margin-top: 1em;
             font-size: 1.2em;
         }
@@ -173,30 +173,31 @@
             font-family: 'Source Serif 4', serif;
             text-align: center;
             font-style: italic;
-            color: #6a5acd; /* Slate blue */
+            color: #c0c0c0; /* Gray */
             margin-bottom: 2em;
         }
         .not-advice {
             font-size: 0.9em;
             margin-top: -1em;
+            color: #ff00ff; /* Pink */
         }
         .concept-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1em;
-            border: 1px solid #9370db;
+            border: 1px dashed #00ff00;
         }
         .concept-table th, .concept-table td {
-            border: 1px solid #9370db;
+            border: 1px dashed #00ff00;
             padding: 8px;
             text-align: left;
         }
         .concept-table th {
-            background-color: #e8e6ff;
-            color: #483d8b;
+            background-color: #000000;
+            color: #ffff00;
         }
         .concept-table tr:nth-child(even) {
-            background-color: #f0f0ff;
+            background-color: #1a1a1a;
         }
         p, ul, li {
             font-family: 'Source Serif 4', serif;
@@ -207,12 +208,12 @@
             list-style-type: none;
             padding: 0;
             margin-top: 2em;
-            border: 1px dashed #9370db;
+            border: 1px dashed #00ff00;
             padding: 15px;
-            background-color: #f0f0ff;
+            background-color: #1a1a1a;
         }
         .toc li a {
-            color: #6a5acd;
+            color: #00ffff;
             text-decoration: none;
             font-family: 'Source Serif 4', serif;
             font-weight: 600;
