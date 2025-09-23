@@ -1,19 +1,4 @@
-  <!-- ===== START OF REUSABLE HEADER CODE ===== -->
-        <a href="https://www.cindnesskult.com" class="sticker-link">
-            <div class="sticker-container">
-                <div class="curved-text-container">
-                    <!-- JS will populate this -->
-                </div>
-                <div class="yin-yang"></div>
-                <p class="bottom-text">not just right</p>
-            </div>
-        </a>
-        
-        <header class="site-header">
-            <h1>Cindness KULT</h1>
-            <p>*✧The answer is always kindness. (not a cult btw)✧*</p>
-        </header>
-        <!-- ===== END OF REUSABLE HEADER CODE ===== --><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,6 +12,10 @@
             --secondary-color: #ff6b6b;
             --container-bg: #242424;
             --border-color: #444;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -53,14 +42,14 @@
             letter-spacing: 2px;
         }
 
-        header h1 {
+        .site-header h1 {
             font-size: 3rem;
             color: var(--primary-color);
             text-shadow: 0 0 10px rgba(0, 194, 168, 0.5);
             margin: 0;
         }
 
-        header p {
+        .site-header p {
             font-size: 1.2rem;
             color: #aaa;
             margin-top: 0.5rem;
@@ -71,12 +60,108 @@
             font-weight: 600;
         }
 
-        /* --- LAYOUT & STRUCTURE --- */
-        header {
+        /* --- HEADER & NAVIGATION --- */
+        .sticker-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            text-decoration: none;
+        }
+        .sticker-container {
+            width: 120px;
+            height: 120px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            margin-bottom: 5rem;
+            color: #000;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .sticker-container:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .yin-yang {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(to bottom, #000 50%, #fff 50%);
+            border-radius: 50%;
+            border: 2px solid #000;
+            position: relative;
+        }
+        .yin-yang::before, .yin-yang::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .yin-yang::before {
+            background: #fff;
+            top: 5px;
+        }
+        .yin-yang::after {
+            background: #000;
+            bottom: 5px;
+        }
+        .bottom-text {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .curved-text-container {
+             /* Static placeholder for "Cindness Kult" as JS is not used */
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .curved-text-container::before {
+            content: "CINDNESS KULT";
         }
 
+
+        .site-header {
+            text-align: center;
+            padding-top: 60px; /* Make space for sticker on mobile */
+            margin-bottom: 2rem;
+        }
+
+        .main-nav {
+            background-color: var(--container-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 5rem;
+        }
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .main-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .main-nav a:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        /* --- LAYOUT & STRUCTURE --- */
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -88,6 +173,9 @@
             .comparison-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 2rem;
+            }
+            .site-header {
+                padding-top: 0;
             }
         }
 
@@ -179,11 +267,32 @@
 </head>
 <body>
 
+    <!-- ===== START OF REUSABLE HEADER CODE ===== -->
+    <a href="https://www.cindnesskult.com" class="sticker-link">
+        <div class="sticker-container">
+            <div class="curved-text-container">
+                <!-- JS will populate this -->
+            </div>
+            <div class="yin-yang"></div>
+            <p class="bottom-text">not just right</p>
+        </div>
+    </a>
+    
     <div class="container">
-        <header>
-            <h1>Autism: The Narrative & The Reality</h1>
-            <p>Deconstructing a societal misunderstanding.</p>
+        <header class="site-header">
+            <h1>Cindness KULT</h1>
+            <p>*✧The answer is always kindness. (not a cult btw)✧*</p>
         </header>
+        <!-- ===== END OF REUSABLE HEADER CODE ===== -->
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#processing">Processing Clash</a></li>
+                <li><a href="#biology">Biology</a></li>
+                <li><a href="#trauma">Trauma</a></li>
+                <li><a href="#solutions">Path Forward</a></li>
+            </ul>
+        </nav>
 
         <main>
             <div class="comparison-grid">
@@ -207,7 +316,7 @@
                 </div>
             </div>
 
-            <div class="explanation-section">
+            <div class="explanation-section" id="processing">
                 <h3>The Root of the Misunderstanding: A Clash of Processing</h3>
                 <p>
                     The social differences are not a deficit; they are the result of a collision between two different ways of thinking.
@@ -223,7 +332,7 @@
                 </p>
             </div>
 
-            <div class="explanation-section">
+            <div class="explanation-section" id="biology">
                 <h3>Deconstructing the Biological Narrative</h3>
                 <p>
                     For decades, research has been filtered through a top-down bias: the presumption that autism is inherently "bad." This flawed premise has corrupted our understanding of its biological basis.
@@ -236,7 +345,7 @@
                 </p>
             </div>
 
-            <div class="explanation-section">
+            <div class="explanation-section" id="trauma">
                 <h3>The Trauma of Invalidation: A Learned Distrust</h3>
                 <p>
                     A critical and often overlooked trauma is the constant invalidation neurodivergent individuals face. When a person who processes information deeply and sees non-obvious connections communicates their insight, they are often told they are "wrong" by neurotypical people relying on faster, in-the-moment intuition.
@@ -262,7 +371,7 @@
                 </p>
             </div>
 
-            <div class="explanation-section">
+            <div class="explanation-section" id="solutions">
                 <h3>A Path Forward: Down-Regulating the Nervous System</h3>
                 <p>
                     Because the core issue is a physiological stress response, effective intervention must target the body, the nervous system, and the environment. The goal is to down-regulate the chronic stress state, creating the safety needed for the brain to develop and thrive without being in a constant state of alarm.
