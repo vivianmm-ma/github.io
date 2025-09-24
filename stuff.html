@@ -36,7 +36,7 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -137,6 +137,9 @@
             border-radius: 8px;
             padding: 1rem;
             margin-bottom: 5rem;
+            position: sticky;
+            top: 20px;
+            z-index: 999;
         }
         .main-nav ul {
             list-style: none;
@@ -204,49 +207,12 @@
             border-color: var(--primary-color);
         }
 
-        .narrative-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .narrative-card li {
-            padding-left: 1.75rem;
-            position: relative;
-            margin-bottom: 1rem;
-        }
-
-        .narrative-card li::before {
-            position: absolute;
-            left: 0;
-            font-size: 1.5em;
-            line-height: 1;
-        }
-
-        .mainstream li::before {
-            content: '×';
-            color: var(--secondary-color);
-        }
-
-        .reality li::before {
-            content: '✓';
-            color: var(--primary-color);
-        }
+        .narrative-card ul { list-style: none; padding: 0; }
+        .narrative-card li { padding-left: 1.75rem; position: relative; margin-bottom: 1rem; }
+        .narrative-card li::before { position: absolute; left: 0; font-size: 1.5em; line-height: 1; }
+        .mainstream li::before { content: '×'; color: var(--secondary-color); }
+        .reality li::before { content: '✓'; color: var(--primary-color); }
         
-        .explanation-section {
-            background-color: var(--container-bg);
-            border-radius: 8px;
-            padding: 2.5rem;
-            margin-bottom: 5rem;
-        }
-        
-        .explanation-section h3 {
-            font-size: 1.8rem;
-            color: #fff;
-            margin-top: 0;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
         .highlight {
             color: #fff;
             background-color: rgba(0, 194, 168, 0.1);
@@ -263,6 +229,89 @@
             color: #ccc;
         }
 
+        /* --- INFOGRAPHICS --- */
+        .infographic-section {
+            background-color: var(--container-bg);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .infographic-section h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        /* Generic Infographic Grid */
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            .infographic-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .infographic-item { text-align: center; }
+        .infographic-item h4 { font-size: 1.2rem; margin-bottom: 1rem; }
+        .infographic-item .neurotypical { color: var(--secondary-color); }
+        .infographic-item .neurodivergent { color: var(--primary-color); }
+        .infographic-visual { height: 120px; margin-bottom: 1.5rem; display: flex; justify-content: center; align-items: center; }
+        .infographic-visual svg { width: 100px; height: auto; }
+
+
+        /* Causal Chain Infographic */
+        .causal-chain {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chain-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 600px;
+        }
+        .chain-icon { width: 50px; height: 50px; color: var(--primary-color); margin-bottom: 1rem; }
+        .chain-arrow {
+            width: 4px; height: 60px; background: var(--border-color); position: relative; margin: 1.5rem 0;
+        }
+        .chain-arrow::after {
+            content: ''; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent;
+            border-top: 15px solid var(--border-color);
+        }
+        .chain-step p { margin: 0; }
+
+        /* Solutions Infographic */
+        .solutions-infographic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 600px;
+        }
+         @media (max-width: 600px) {
+            .solutions-grid {
+                 grid-template-columns: 1fr;
+            }
+        }
+        .solution-item {
+            text-align: center;
+        }
+        .solution-icon {
+            width: 50px; height: 50px; margin: 0 auto 1rem auto; color: var(--primary-color);
+        }
+
     </style>
 </head>
 <body>
@@ -270,9 +319,7 @@
     <!-- ===== START OF REUSABLE HEADER CODE ===== -->
     <a href="https://www.cindnesskult.com" class="sticker-link">
         <div class="sticker-container">
-            <div class="curved-text-container">
-                <!-- JS will populate this -->
-            </div>
+            <div class="curved-text-container"></div>
             <div class="yin-yang"></div>
             <p class="bottom-text">not just right</p>
         </div>
@@ -287,15 +334,17 @@
 
         <nav class="main-nav">
             <ul>
-                <li><a href="#processing">Processing Clash</a></li>
+                <li><a href="#narrative">Narrative</a></li>
                 <li><a href="#biology">Biology</a></li>
-                <li><a href="#trauma">Trauma</a></li>
-                <li><a href="#solutions">Path Forward</a></li>
+                <li><a href="#pharmacology">Meds</a></li>
+                <li><a href="#stigma">Stigma</a></li>
+                <li><a href="#processing">Processing</a></li>
+                <li><a href="#solutions">Solutions</a></li>
             </ul>
         </nav>
 
         <main>
-            <div class="comparison-grid">
+            <section id="narrative" class="comparison-grid">
                 <div class="narrative-card mainstream">
                     <h2>What Society Thinks Autism Is</h2>
                     <ul>
@@ -314,89 +363,202 @@
                         <li>A state of being, whose challenges are primarily caused by an incompatible environment.</li>
                     </ul>
                 </div>
-            </div>
+            </section>
 
-            <div class="explanation-section" id="processing">
-                <h3>The Root of the Misunderstanding: A Clash of Processing</h3>
-                <p>
-                    The social differences are not a deficit; they are the result of a collision between two different ways of thinking.
+            <section id="biology" class="infographic-section">
+                <h3>First, The Basics: What Are Synapses?</h3>
+                <p style="text-align: center; max-width: 700px; margin: 0 auto 2.5rem auto;">
+                    Synapses are the tiny connections between brain cells (neurons) that allow them to communicate. Think of them as the brain's internal wiring. The number of these connections is critical for healthy function.
                 </p>
-                <p>
-                    <strong>Top-Down Processing (Neurotypical):</strong> Starts with a conclusion or social rule and fits details into that existing framework. It's fast, intuitive, but can miss nuance and be rigid.
-                </p>
-                <p>
-                    <strong>Bottom-Up Processing (Neurodivergent):</strong> Starts with sensory details and builds a conclusion from the ground up. It's thorough, analytical, and sees patterns others miss, but can be slower and lead to sensory overload.
-                </p>
-                <p>
-                    What mainstream society labels a "social deficit" is simply a bottom-up processor being forced to operate in a world built exclusively for top-down communication. It’s like blaming a meticulous data analyst for not making snap judgments.
-                </p>
-            </div>
+                <div class="infographic-grid" style="margin-bottom: 3rem; align-items: start;">
+                    <div class="infographic-item">
+                        <h4 class="neurotypical">Danger: Too Few Connections</h4>
+                        <div class="infographic-visual">
+                             <svg viewBox="0 0 100 100" fill="none" stroke="var(--secondary-color)" stroke-width="2">
+                                <circle cx="50" cy="50" r="40" stroke-dasharray="8 4"/>
+                                <line x1="30" y1="30" x2="70" y2="70" stroke-dasharray="4 2"/>
+                                <line x1="30" y1="70" x2="70" y2="30" stroke-dasharray="4 2"/>
+                                <path d="M40 60 L60 40 M40 40 L60 60" stroke-width="4"/>
+                            </svg>
+                        </div>
+                        <p><strong>Over-pruning</strong> is linked to conditions like Schizophrenia, OCD, and neurodegenerative diseases such as Alzheimer's and Parkinson's.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <h4 class="neurodivergent">Difference: Too Many Connections</h4>
+                        <div class="infographic-visual">
+                           <svg viewBox="0 0 100 100" fill="var(--primary-color)">
+                               <circle cx="20" cy="20" r="5" /> <circle cx="50" cy="20" r="5" /> <circle cx="80" cy="20" r="5" />
+                               <circle cx="20" cy="50" r="5" /> <circle cx="50" cy="50" r="5" /> <circle cx="80" cy="50" r="5" />
+                               <circle cx="20" cy="80" r="5" /> <circle cx="50" cy="80" r="5" /> <circle cx="80" cy="80" r="5" />
+                           </svg>
+                        </div>
+                        <p><strong>Under-pruning</strong> can lead to overstimulation, anxiety, and challenges with flexibility, but is also the foundation for creativity and pattern-recognition.</p>
+                    </div>
+                </div>
 
-            <div class="explanation-section" id="biology">
-                <h3>Deconstructing the Biological Narrative</h3>
-                <p>
-                    For decades, research has been filtered through a top-down bias: the presumption that autism is inherently "bad." This flawed premise has corrupted our understanding of its biological basis.
+                <div class="infographic-grid" style="align-items: center;">
+                     <div class="infographic-item">
+                        <h4 style="margin-bottom: 2rem;">The Yin-Yang of Cognition</h4>
+                        <div class="infographic-visual" style="height: 150px;">
+                            <svg viewBox="-5 -5 110 110" style="width: 150px; height: 150px;">
+                                <path d="M50,0 A50,50 0 0,1 50,100" fill="var(--secondary-color)"/>
+                                <path d="M50,0 A50,50 0 0,0 50,100" fill="var(--primary-color)"/>
+                                <path d="M50,0 A25,25 0 0,1 50,50" fill="var(--primary-color)"/>
+                                <path d="M50,50 A25,25 0 0,1 50,100" fill="var(--secondary-color)"/>
+                                <circle cx="50" cy="25" r="8" fill="var(--secondary-color)"/>
+                                <circle cx="50" cy="75" r="8" fill="var(--primary-color)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="infographic-item" style="text-align: left;">
+                        <p><strong style="color:var(--secondary-color)">Prioritizing Convention:</strong> The neurotypical path relies on pre-existing social rules for rapid processing. While faster in the moment, this risks overlooking critical details, leading to significant problems when nuance is required.</p>
+                        <p><strong style="color:var(--primary-color)">Creativity (Connectivity):</strong> The autistic path prioritizes data and connections, creating a brain optimized for seeing novel patterns, analysis, and creativity.</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 4rem;">Synaptic Pruning: Two Developmental Paths</h3>
+                 <div class="infographic-grid">
+                    <div class="infographic-item">
+                        <h4 class="neurotypical">Typical Synaptic Pruning</h4>
+                         <div class="infographic-visual">
+                            <svg viewBox="0 0 100 100" fill="none" stroke="var(--secondary-color)" stroke-width="2">
+                                <circle cx="50" cy="50" r="40" />
+                                <circle cx="50" cy="50" r="3" fill="var(--secondary-color)" />
+                                <path d="M50 50 L 20 30 M50 50 L 80 30 M50 50 L 25 70 M50 50 L 75 70 M50 50 L 50 15 M50 50 L 50 85" />
+                            </svg>
+                        </div>
+                        <p>During development, the brain strategically removes "weaker" neural connections to become more efficient at common tasks.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <h4 class="neurodivergent">Autistic Hyper-Connectivity</h4>
+                        <div class="infographic-visual">
+                           <svg viewBox="0 0 100 100" fill="none" stroke="var(--primary-color)" stroke-width="1">
+                                <circle cx="50" cy="50" r="40" />
+                                <circle cx="50" cy="50" r="3" fill="var(--primary-color)" />
+                                <path d="M50 50 L 10 50 M50 50 L 90 50 M50 50 L 50 10 M50 50 L 50 90 M50 50 L 20 20 M50 50 L 80 80 M50 50 L 20 80 M50 50 L 80 20 M50 50 L 30 15 M50 50 L 70 85 M50 50 L 15 30 M50 50 L 85 70"/>
+                           </svg>
+                        </div>
+                        <p>The autistic brain undergoes less synaptic pruning, resulting in a higher density of connections. This is not a flaw; it's a different operating system.</p>
+                    </div>
+                </div>
+                <blockquote style="margin-top: 2.5rem;">
+                    The conclusion that less synaptic pruning is "bad" could only come from the pre-existing belief that autism is "bad." When we remove that bias... the worst outcome of having too many neural connections is autism. The worst outcome of pruning too many is death.
+                </blockquote>
+            </section>
+
+            <section id="pharmacology" class="infographic-section">
+                <h3>Pharmacology & The Synaptic Landscape</h3>
+                 <div class="infographic-grid">
+                    <div class="infographic-item">
+                        <h4 class="neurotypical">Decrease Connectivity</h4>
+                         <div class="infographic-visual">
+                             <svg viewBox="0 0 100 100" fill="none" stroke="var(--secondary-color)" stroke-width="2">
+                                <circle cx="50" cy="50" r="40" />
+                                <path d="M30 50 H 70 M50 30 V 70" stroke-width="4" stroke-dasharray="5 5" />
+                            </svg>
+                        </div>
+                        <p><strong>Antipsychotics</strong> are designed to reduce neural activity and, as a result, can decrease synaptic connections, effectively "pruning" the brain through medication.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <h4 class="neurodivergent">Increase Connectivity</h4>
+                        <div class="infographic-visual">
+                           <svg viewBox="0 0 100 100" fill="none" stroke="var(--primary-color)" stroke-width="1.5">
+                                <circle cx="50" cy="50" r="40" />
+                                <path d="M50 50 L 20 20 M50 50 L 80 80 M50 50 L 20 80 M50 50 L 80 20"/>
+                                <path d="M50 50 L 50 10 M50 50 L 50 90 M50 50 L 10 50 M50 50 L 90 50"/>
+                           </svg>
+                        </div>
+                        <p>Conversely, substances like <strong>psychedelics</strong> (e.g., psilocybin) have been shown to promote neurogenesis, increasing synaptic connections and fostering new neural pathways.</p>
+                    </div>
+                </div>
+                <blockquote style="margin-top: 2.5rem;">
+                    <strong>A Painful History: Misdiagnosis as "Childhood Schizophrenia"</strong><br>
+                    For decades, the observable traits of autism in children—intense inner worlds and unique social expressions—were tragically mislabeled as "childhood schizophrenia." This led to the widespread prescription of antipsychotics, a medical intervention that actively worked against autistic neurology by reducing the very synaptic connections that define it. This historical error highlights a critical truth: when we pathologize a neurotype we don't understand, our "treatments" can cause profound, lasting harm.
+                </blockquote>
+            </section>
+            
+            <section id="stigma" class="infographic-section">
+                <h3>The Modern Stigma: A Fear of Misperception</h3>
+                 <p style="text-align: center; max-width: 700px; margin: 0 auto 2.5rem auto;">
+                    This history of misinterpretation has severe, present-day consequences. The way a sober autistic person moves, speaks, and interacts is often misinterpreted by a neurotypical world as intoxication.
                 </p>
                 <blockquote>
-                    The conclusion that less synaptic pruning is "bad" could only come from the pre-existing belief that autism is "bad." When we remove that bias, the data tells a different story. The worst outcome of having too many neural connections is autism. The worst outcome of pruning too many is death. One is a difference in being; the other is a catastrophic failure.
+                    <strong>This is not a social inconvenience—it is a direct threat to safety and autonomy.</strong><br>
+                    The fear of being mislabeled as "high" or a "drug addict" leads to a constant need to mask one's authentic self. For many sober autistic adults, a simple interaction can become a high-stakes performance. A failure to perform neurotypical sobriety "correctly" can lead to devastating outcomes: being dismissed by medical professionals, losing housing, or even being <span class="highlight" style="background-color: rgba(255, 107, 107, 0.2); color: #ff6b6b;">wrongfully jailed or involuntarily hospitalized</span>. Masking, therefore, is not a choice; it's a survival strategy rooted in a justifiable fear of a system that has a history of harming what it does not understand.
                 </blockquote>
-                <p>
-                    This hyper-connectivity isn't a flaw; it is the source of the bottom-up, detail-oriented processing that defines the neurotype.
-                </p>
-            </div>
+            </section>
 
-            <div class="explanation-section" id="trauma">
-                <h3>The Trauma of Invalidation: A Learned Distrust</h3>
-                <p>
-                    A critical and often overlooked trauma is the constant invalidation neurodivergent individuals face. When a person who processes information deeply and sees non-obvious connections communicates their insight, they are often told they are "wrong" by neurotypical people relying on faster, in-the-moment intuition.
-                </p>
-                <p>
-                    This is not a simple disagreement; it is a severe developmental harm. This constant invalidation teaches the autistic person to fundamentally distrust their own perception and intuition. This can lead to a lifetime of second-guessing and learned coping mechanisms like "just right" OCD, where an individual becomes trapped in debilitating cycles of rule-following because they no longer trust their own judgment.
-                </p>
-            </div>
+            <section id="processing" class="infographic-section">
+                <h3>The Result: A Clash of Processing Styles</h3>
+                <div class="infographic-grid">
+                    <div class="infographic-item">
+                        <h4 class="neurotypical">Top-Down (Neurotypical)</h4>
+                         <div class="infographic-visual" style="align-items: flex-end;">
+                            <svg viewBox="0 0 100 100" fill="var(--secondary-color)"><polygon points="0,0 100,0 60,100 40,100"/></svg>
+                        </div>
+                        <p>Starts with a conclusion and fits details into that framework. It's fast and intuitive, but can miss nuance.</p>
+                    </div>
+                    <div class="infographic-item">
+                        <h4 class="neurodivergent">Bottom-Up (Neurodivergent)</h4>
+                        <div class="infographic-visual" style="align-items: flex-end;">
+                           <svg viewBox="0 0 100 100" fill="var(--primary-color)"><rect x="20" y="75" width="60" height="25"/><rect x="30" y="50" width="40" height="25"/><rect x="40" y="25" width="20" height="25"/></svg>
+                        </div>
+                        <p>Starts with sensory details and builds a conclusion from the ground up. It's thorough and analytical, but can be slower.</p>
+                    </div>
+                </div>
+            </section>
 
-            <div class="explanation-section">
-                <h3>The Causal Chain: How Society Creates "Deficits"</h3>
-                <p>
-                    The challenges associated with autism are not inherent. They are the predictable outcome of a nervous system under relentless siege. Here is the chain of cause and effect:
-                </p>
-                <ol>
-                    <li>A <span class="highlight">Hyper-Connected Brain</span> takes in vastly more sensory data.</li>
-                    <li>Living in a world not designed for this input creates constant <span class="highlight">Sensory Overload</span>.</li>
-                    <li>This overload forces the nervous system into a chronic state of <span class="highlight">Fight-or-Flight</span>. <strong>This physiological state is what is observed and mislabeled as an inherent social deficit.</strong></li>
-                    <li>Prolonged trauma and stress during key developmental periods physically alter the brain. The brain weakens at its most stressed points, which can manifest as a regression of skills or developmental differences.</li>
-                </ol>
-                <p>
-                    This is where the concept of "levels" (Level 1, 2, 3) originates. These are not fixed states of being, but rather observable outcomes of the immense physiological toll of chronic stress. High cortisol from masking and overload weakens neural connections. This is neuroplasticity working in a toxic environment. The observable struggles are not the autism; they are the scar tissue from an incompatible environment.
-                </p>
+            <div class="infographic-section">
+                <h3>The Causal Chain: From Biology to Burnout</h3>
+                <div class="causal-chain">
+                    <div class="chain-step">
+                        <svg class="chain-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
+                        <h4>1. Sensory Overload</h4>
+                        <p>The hyper-connected brain takes in vastly more data, leading to overload in a world not designed for it.</p>
+                    </div>
+                    <div class="chain-arrow"></div>
+                    <div class="chain-step">
+                        <svg class="chain-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                        <h4>2. Chronic Fight-or-Flight</h4>
+                        <p>The nervous system enters a constant state of survival, which is then observed and mislabeled as a "social deficit."</p>
+                    </div>
+                    <div class="chain-arrow"></div>
+                    <div class="chain-step">
+                        <svg class="chain-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                        <h4>3. Trauma & "Deficits"</h4>
+                        <p>Prolonged stress and invalidation create observable struggles that are the <span class="highlight">scar tissue</span> of a hostile environment, not the autism itself.</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="explanation-section" id="solutions">
+            
+            <section id="solutions" class="infographic-section">
                 <h3>A Path Forward: Down-Regulating the Nervous System</h3>
-                <p>
-                    Because the core issue is a physiological stress response, effective intervention must target the body, the nervous system, and the environment. The goal is to down-regulate the chronic stress state, creating the safety needed for the brain to develop and thrive without being in a constant state of alarm.
-                </p>
-                <ul class="solutions-list">
-                    <li><strong>Somatic Therapies:</strong> Directly addresses and helps release the body's stored trauma responses.</li>
-                    <li><strong>Breathing Exercises:</strong> Manually activates the parasympathetic nervous system (the "rest and digest" state) to counteract fight-or-flight.</li>
-                    <li><strong>Environmental Control:</strong> Consciously reducing sensory triggers causing the overload, such as managing blue light exposure and curating sensory input.</li>
-                    <li><strong>Exercise & Mindfulness:</strong> Helps to regulate cortisol levels and improve interoception—the sense of the internal state of the body.</li>
-                </ul>
-            </div>
-
-            <div class="explanation-section">
-                <h3>The Biopsychosocial Model: A Unified Approach</h3>
-                <p>
-                    A unified theory is required. We must integrate the <strong>Biological</strong> reality of the neurodivergent brain, the <strong>Psychological</strong> impact of living in a stressful environment, and the <strong>Social</strong> factors themselves. Only then can we move beyond misdiagnosis and create a world where all neurotypes have the opportunity to build resilience and thrive.
-                </p>
-            </div>
-
-            <div class="explanation-section">
-                <h3>The Real Issue: A Cultural & Societal Failure</h3>
-                <p>
-                    The core problem is not autism itself, but a society that pathologizes difference and is not built for neurodivergent people. The world's response, from misdiagnosis to the forced conformity of masking, kills creativity and resilience. True support means creating environments that allow for the unique sensory learning and critical thinking neurodivergent people need to thrive.
-                </p>
-            </div>
+                 <p style="text-align: center; max-width: 700px; margin: 0 auto 2.5rem auto;">Because the core issue is a physiological stress response, effective intervention must target the body and the environment to create a state of safety.</p>
+                <div class="solutions-infographic">
+                    <div class="solutions-grid">
+                        <div class="solution-item">
+                             <svg class="solution-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.75 4.5h.008v.008H9v-.008zm4.5-4.5c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.75 4.5h.008v.008h-.008v-.008z" /></svg>
+                            <h4>Somatic Therapies</h4>
+                            <p>Release the body's stored trauma responses.</p>
+                        </div>
+                         <div class="solution-item">
+                            <svg class="solution-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a5.25 5.25 0 016.38-2.186a5.25 5.25 0 014.24 6.382A5.25 5.25 0 0118 17.25H6a5.25 5.25 0 01-4.24-8.254A5.25 5.25 0 016.38 4.57z" /></svg>
+                            <h4>Breathing Exercises</h4>
+                            <p>Activate the parasympathetic ("rest and digest") nervous system.</p>
+                        </div>
+                         <div class="solution-item">
+                            <svg class="solution-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 S0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243l-4.243-4.243" /></svg>
+                            <h4>Environmental Control</h4>
+                            <p>Consciously reduce sensory triggers like blue light and noise.</p>
+                        </div>
+                         <div class="solution-item">
+                             <svg class="solution-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+                            <h4>Exercise & Mindfulness</h4>
+                            <p>Regulate cortisol and improve the sense of the body's internal state.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>
@@ -413,73 +575,11 @@
     </div>
 
     <style>
-        /* ... existing css ... */
-        .solutions-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 2rem;
-        }
-        .solutions-list li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1rem;
-        }
-        .solutions-list li::before {
-            content: '›';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 1.5em;
-            line-height: 1;
-        }
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: #888;
-            font-size: 0.9rem;
-        }
-        footer h3 {
-            color: #aaa;
-        }
-        footer ul {
-            list-style: none;
-            padding: 0;
-        }
-        footer li {
-            margin-bottom: 0.5rem;
-        }
-        
-        ol {
-            list-style: none;
-            counter-reset: item;
-            padding-left: 2rem;
-        }
-        ol li {
-            counter-increment: item;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        ol li:before {
-            content: counter(item);
-            background: var(--primary-color);
-            color: var(--bg-color);
-            width: 1.5em;
-            height: 1.5em;
-            border-radius: 50%;
-            display: inline-block;
-            line-height: 1.5em;
-            text-align: center;
-            margin-right: 0.75rem;
-            font-weight: bold;
-            position: absolute;
-            left: -2.5rem;
-            top: 0.2rem;
-        }
+        footer { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); color: #888; font-size: 0.9rem; }
+        footer h3 { color: #aaa; }
+        footer ul { list-style: none; padding: 0; }
+        footer li { margin-bottom: 0.5rem; }
     </style>
-
 </body>
 </html>
 
