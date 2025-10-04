@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nervous System State Inventory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121829;
+            --card-bg: #1a223d;
+            --text-color: #d8dbe5;
+            --heading-color: #ffffff;
+            --accent-color: #55a6a1;
+            --accent-hover: #6bc4be;
+            --border-color: #2a3661;
+            --danger-color: #e57373;
+            --calm-color: #81c784;
+            --font-serif: 'Source Serif Pro', serif;
+            --font-sans: 'Lato', sans-serif;
+        }
+
+        /* General Styles */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-sans);
+            color: var(--heading-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Disclaimer Section */
+        .disclaimer {
+            background-color: rgba(229, 115, 115, 0.1);
+            border-left: 5px solid var(--danger-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        .disclaimer h3 {
+            color: var(--danger-color);
+            margin-top: 0;
+        }
+
+        /* Form & Questions */
+        .question-group h3 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-item, .checkbox-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-item label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 1rem;
+            width: 1.3em;
+            height: 1.3em;
+            accent-color: var(--accent-color);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-serif);
+        }
+
+        .radio-group label {
+            font-weight: normal;
+        }
+        
+        .note {
+            font-size: 0.9rem;
+            color: #9fa8da;
+            font-style: italic;
+        }
+
+        /* Button */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            color: #fff;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(85, 166, 161, 0.3);
+        }
+
+        /* Results Section */
+        #results-section {
+            display: none; /* Initially hidden */
+            margin-top: 3rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-card {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .score-card .score-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+        }
+        
+        #somatic-score-card .score-value {
+            grid-column: 1 / -1;
+        }
+
+        #profile-title {
+            color: var(--accent-color);
+        }
+
+        .copy-results {
+            margin-top: 2rem;
+        }
+
+        #results-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: monospace;
+            resize: vertical;
+        }
+
+        .copy-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>The Nervous System State Inventory</h1>
+            <p class="subtitle">A Somatic & Autonomic Baseline Assessment</p>
+        </header>
+
+        <div class="card disclaimer">
+            <h3>Important Disclaimer</h3>
+            <p>This tool is for educational and informational purposes only and is not a substitute for professional medical or psychological advice, diagnosis, or treatment. It was designed by Vivian Mitchell, a researcher with a Master's degree in Applied Clinical Psychology. The results are intended to provide a personal baseline and a map for self-discovery, not to diagnose any condition.</p>
+        </div>
+
+        <form id="assessment-form">
+            <!-- PART 1 -->
+            <div class="card">
+                <h2>Part 1: Your Nervous System's "Home State"</h2>
+                <p>Read the following statements and check all that apply to your general experience over the last week or two.</p>
+                
+                <div class="question-group" id="part1-a">
+                    <h3>The "Safe and Social" System (Ventral Vagal)</h3>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I have felt calm and at ease.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt connected to friends, family, or pets.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I was able to handle challenges without feeling overwhelmed.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My breathing felt deep and relaxed.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt curious and open to new ideas.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I was able to listen to others and feel heard.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt a sense of hopefulness about the future.</label></div>
+                </div>
+
+                <div class="question-group" id="part1-b">
+                    <h3>The "Mobilized" System (Sympathetic / Fight-or-Flight)</h3>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt anxious, worried, or on edge.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My heart was racing, pounding, or fluttering.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My muscles (jaw, neck, shoulders, back) felt tight and tense.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt irritable, angry, or easily annoyed.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I had a sense of urgency, restlessness, or needing to escape.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I had trouble settling down or sleeping.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt a need to control my environment or situations.</label></div>
+                </div>
+
+                <div class="question-group" id="part1-c">
+                    <h3>The "Shutdown" System (Dorsal Vagal / Freeze)</h3>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt numb or disconnected from my feelings.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt foggy, spaced out, or disconnected from my body.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt heavy, lethargic, or exhausted, even after sleeping.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt hopeless or like there was no point.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I wanted to isolate myself and be alone.</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My vision felt narrowed, like I had "tunnel vision."</label></div>
+                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt a sense of shame or "being wrong."</label></div>
+                </div>
+            </div>
+
+            <!-- PART 2 -->
+            <div class="card">
+                <h2>Part 2: Somatic & Autonomic Baseline</h2>
+                <p>Find a quiet moment to sit comfortably and answer the following questions about the direct physical signals your body is sending right now.</p>
+
+                <div class="question-group">
+                    <h3>Subsection A: Posture & Core Tension</h3>
+                    <div class="question-item">
+                        <label for="q1-posture">1. Protective Posture Check: (Stand sideways to a mirror)</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q1-posture" value="a" required> a) My earlobe is roughly aligned over the middle of my shoulder.</label>
+                            <label><input type="radio" name="q1-posture" value="b"> b) My head and chin are pushed forward, placing my ear in front of my shoulder.</label>
+                            <label><input type="radio" name="q1-posture" value="c"> c) I'm not sure, it's hard to tell.</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label for="q2-uprightness">2. Effort of Uprightness: (Sit up straight for 30s; 1 = effortless, 10 = very painful)</label>
+                        <input type="number" id="q2-uprightness" min="1" max="10" required>
+                    </div>
+                    <div class="question-item">
+                        <label for="q3-breath">3. Diaphragmatic Breath Depth: (Place one hand on chest, one on belly)</label>
+                        <div class="radio-group">
+                             <label><input type="radio" name="q3-breath" value="a" required> a) My chest and/or shoulders rise and fall.</label>
+                             <label><input type="radio" name="q3-breath" value="b"> b) My rib cage expands outwards to the sides.</label>
+                             <label><input type="radio" name="q3-breath" value="c"> c) My belly expands gently into my hand as I inhale.</label>
+                             <label><input type="radio" name="q3-breath" value="d"> d) It's very shallow; I can barely feel any movement.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <h3>Subsection B: Direct Indicators of Vagal Tone</h3>
+                     <div class="question-item">
+                        <label for="q4-swallowing">4. Swallowing Test: (Difficulty swallowing 3x quickly; 1 = easy, 10 = impossible)</label>
+                        <input type="number" id="q4-swallowing" min="1" max="10" required>
+                    </div>
+                    <div class="question-item">
+                        <label for="q5-ocular">5. Oculocardiac Reflex Check: (Gently rest palms on closed eyes for 30s)</label>
+                         <p class="note"><b>Safety:</b> Do not attempt if you have glaucoma, a detached retina, eye injury, or a known cardiac condition. Stop if you feel pain or significant dizziness.</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q5-ocular" value="a" required> a) A subtle sense of calm or a slowing down in my body.</label>
+                            <label><input type="radio" name="q5-ocular" value="b"> b) No noticeable change.</label>
+                            <label><input type="radio" name="q5-ocular" value="c"> c) I felt dizzy, nauseous, anxious, or got a headache.</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label for="q6-vocal">6. Vocal Resonance Test: (Hum "vvvvvv" or "mmmm" on a long exhale)</label>
+                        <div class="radio-group">
+                             <label><input type="radio" name="q6-vocal" value="a" required> a) The sound is steady and I can feel a clear vibration.</label>
+                             <label><input type="radio" name="q6-vocal" value="b"> b) The sound is shaky, weak, or waivers in pitch.</label>
+                             <label><input type="radio" name="q6-vocal" value="c"> c) I run out of breath very quickly.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <h3>Subsection C: Proprioceptive & Interoceptive Awareness</h3>
+                    <div class="question-item">
+                        <label for="q7-circulation">7. Peripheral Circulation Check: (Notice your hands and feet)</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q7-circulation" value="a" required> a) They are typically warm and a normal color.</label>
+                            <label><input type="radio" name="q7-circulation" value="b"> b) They are typically cold, clammy, or bluish.</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>8. Body in Space (Proprioception):</label>
+                        <div class="checkbox-item"><label><input type="checkbox" id="q8-bump"> Do you often bump into doorframes, furniture, or people?</label></div>
+                        <div class="checkbox-item"><label><input type="checkbox" id="q8-trip"> Do you frequently trip on uneven surfaces or miss a step?</label></div>
+                        <div class="checkbox-item"><label><input type="checkbox" id="q8-choke"> Do you often choke on food or "swallow the wrong way"?</label></div>
+                    </div>
+                     <div class="question-item">
+                        <label>9. Internal Sensing (Interoception): (Rate your ability 1-10; 1=cannot sense, 10=can sense clearly)</label>
+                        <div class="question-item">
+                             <label for="q9-heartbeat">My heartbeat without taking my pulse:</label>
+                             <input type="number" id="q9-heartbeat" min="1" max="10" required>
+                        </div>
+                        <div class="question-item">
+                             <label for="q9-hunger">The subtle sensations of hunger:</label>
+                             <input type="number" id="q9-hunger" min="1" max="10" required>
+                        </div>
+                         <div class="question-item">
+                             <label for="q9-thirst">The subtle sensations of thirst:</label>
+                             <input type="number" id="q9-thirst" min="1" max="10" required>
+                        </div>
+                         <div class="question-item">
+                             <label for="q9-restroom">The need to use the restroom:</label>
+                             <input type="number" id="q9-restroom" min="1" max="10" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Calculate My Baseline</button>
+        </form>
+
+        <section id="results-section">
+            <div class="card">
+                <h2>Your Quantitative Analysis</h2>
+                <div class="results-grid">
+                    <div class="score-card">
+                        <div class="score-label">Ventral Vagal</div>
+                        <div class="score-value" id="vv-score">0%</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-label">Sympathetic</div>
+                        <div class="score-value" id="symp-score">0%</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-label">Dorsal Vagal</div>
+                        <div class="score-value" id="dv-score">0%</div>
+                    </div>
+                </div>
+                 <div class="results-grid">
+                    <div class="score-card" id="somatic-score-card">
+                        <div class="score-label">Total Somatic Dysregulation Score</div>
+                        <div class="score-value" id="somatic-score">0</div>
+                    </div>
+                </div>
+
+                <div id="profile-results">
+                    <h3 id="profile-title">Your Profile Will Appear Here</h3>
+                    <p id="profile-description">Complete the assessment and click the button above to see your results and interpretation.</p>
+                </div>
+
+                <div class="copy-results">
+                    <h3>Copy Your Results</h3>
+                    <p>You can copy the summary below to save for your records or bring to a session.</p>
+                    <textarea id="results-textarea" readonly></textarea>
+                    <button type="button" class="copy-btn" id="copy-btn">Copy to Clipboard</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const form = document.getElementById('assessment-form');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // --- Part 1 Scoring ---
+            const scoreA = document.querySelectorAll('#part1-a input[type="checkbox"]:checked').length;
+            const scoreB = document.querySelectorAll('#part1-b input[type="checkbox"]:checked').length;
+            const scoreC = document.querySelectorAll('#part1-c input[type="checkbox"]:checked').length;
+            
+            const percentA = Math.round((scoreA / 7) * 100);
+            const percentB = Math.round((scoreB / 7) * 100);
+            const percentC = Math.round((scoreC / 7) * 100);
+
+            // --- Part 2 Scoring ---
+            let somaticScore = 0;
+
+            // Q1 Posture
+            const q1Value = document.querySelector('input[name="q1-posture"]:checked').value;
+            if (q1Value === 'b') somaticScore += 2;
+            if (q1Value === 'c') somaticScore += 1;
+
+            // Q2 Uprightness
+            somaticScore += parseInt(document.getElementById('q2-uprightness').value, 10);
+
+            // Q3 Breath
+            const q3Value = document.querySelector('input[name="q3-breath"]:checked').value;
+            if (q3Value === 'a') somaticScore += 2;
+            if (q3Value === 'b') somaticScore += 1;
+            if (q3Value === 'd') somaticScore += 3;
+
+            // Q4 Swallowing
+            somaticScore += parseInt(document.getElementById('q4-swallowing').value, 10);
+
+            // Q5 Ocular
+            const q5Value = document.querySelector('input[name="q5-ocular"]:checked').value;
+            if (q5Value === 'b') somaticScore += 1;
+            if (q5Value === 'c') somaticScore += 3;
+            
+            // Q6 Vocal
+            const q6Value = document.querySelector('input[name="q6-vocal"]:checked').value;
+            if (q6Value === 'b' || q6Value === 'c') somaticScore += 2;
+
+            // Q7 Circulation
+            const q7Value = document.querySelector('input[name="q7-circulation"]:checked').value;
+            if (q7Value === 'b') somaticScore += 2;
+            
+            // Q8 Proprioception
+            if (document.getElementById('q8-bump').checked) somaticScore += 1;
+            if (document.getElementById('q8-trip').checked) somaticScore += 1;
+            if (document.getElementById('q8-choke').checked) somaticScore += 1;
+
+            // Q9 Interoception
+            const q9_heart = parseInt(document.getElementById('q9-heartbeat').value, 10);
+            const q9_hunger = parseInt(document.getElementById('q9-hunger').value, 10);
+            const q9_thirst = parseInt(document.getElementById('q9-thirst').value, 10);
+            const q9_restroom = parseInt(document.getElementById('q9-restroom').value, 10);
+            const interoceptionTotal = q9_heart + q9_hunger + q9_thirst + q9_restroom;
+            somaticScore += (40 - interoceptionTotal);
+
+            // --- Determine Profile ---
+            let profileTitle = '';
+            let profileDescription = '';
+
+            // This logic favors the dysregulated states if percentages are high
+            if (percentB >= 50 && percentC >= 50) {
+                profileTitle = 'The Frozen Driver';
+                profileDescription = 'This is a quantitative look at burnout. Your system is simultaneously activated and shut down. This conflict creates significant internal distress, reflected in a high somatic score that likely includes a mix of tension-based and low-vagal-tone indicators.';
+            } else if (percentB > percentA && percentB > percentC) {
+                profileTitle = 'The Mobilized Protector';
+                profileDescription = 'Your self-reported feelings of anxiety and urgency are matched by physical evidence of high muscle tension, chest breathing, and other signs of a body braced for a threat.';
+            } else if (percentC > percentA && percentC > percentB) {
+                profileTitle = 'The Conserving Collapser';
+                profileDescription = 'Your feelings of shutdown and numbness are reflected in your body through indicators of low vagal tone (e.g., poor vocal resonance, difficult swallowing) and a disconnect from internal cues (low interoception).';
+            } else {
+                 profileTitle = 'The Resilient Regulator';
+                 profileDescription = 'Your primary state is one of safety, and your body reflects this with ease and strong vagal tone. You have a large capacity to handle stress.';
+            }
+
+
+            // --- Display Results ---
+            document.getElementById('vv-score').textContent = `${percentA}%`;
+            document.getElementById('symp-score').textContent = `${percentB}%`;
+            document.getElementById('dv-score').textContent = `${percentC}%`;
+            document.getElementById('somatic-score').textContent = somaticScore;
+
+            document.getElementById('profile-title').textContent = profileTitle;
+            document.getElementById('profile-description').textContent = profileDescription;
+
+            const resultsText = `
+Nervous System Assessment Results
+----------------------------------
+Part 1 - State Percentages:
+Ventral Vagal (Safe/Social): ${percentA}%
+Sympathetic (Mobilized): ${percentB}%
+Dorsal Vagal (Shutdown): ${percentC}%
+
+Part 2 - Somatic Score:
+Total Somatic Dysregulation Score: ${somaticScore}
+
+Identified Profile: ${profileTitle}
+`;
+            document.getElementById('results-textarea').value = resultsText.trim();
+            
+            const resultsSection = document.getElementById('results-section');
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Copy button functionality
+        const copyBtn = document.getElementById('copy-btn');
+        const resultsTextarea = document.getElementById('results-textarea');
+        copyBtn.addEventListener('click', () => {
+            resultsTextarea.select();
+            document.execCommand('copy');
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = 'Copy to Clipboard';
+            }, 2000);
+        });
+
+    </script>
+</body>
+</html>
