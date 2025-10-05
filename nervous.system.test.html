@@ -90,42 +90,54 @@
             margin-bottom: 1.5rem;
         }
 
-        .question-item, .checkbox-item {
-            margin-bottom: 1.5rem;
+        .question-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
-
-        .checkbox-item label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        input[type="checkbox"], input[type="radio"] {
-            margin-right: 1rem;
-            width: 1.3em;
-            height: 1.3em;
-            accent-color: var(--accent-color);
+        .question-item:last-child {
+            border-bottom: none;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             font-weight: 600;
         }
 
-        input[type="number"] {
-            width: 100%;
-            padding: 0.8rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
+        input[type="radio"] {
+            margin-right: 0.5rem;
+            width: 1.1em;
+            height: 1.1em;
+            accent-color: var(--accent-color);
+        }
+        
+        .likert-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0.5rem 0;
+        }
+        .likert-scale label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: normal;
             color: var(--text-color);
-            font-size: 1rem;
-            font-family: var(--font-serif);
+            cursor: pointer;
+        }
+        .likert-scale span {
+            margin-top: 0.3rem;
         }
 
         .radio-group label {
+            display: flex;
+            align-items: center;
             font-weight: normal;
+            margin-bottom: 0.5rem;
         }
         
         .note {
@@ -191,8 +203,8 @@
         #somatic-score-card .score-value {
             grid-column: 1 / -1;
         }
-
-        #profile-title {
+        
+        #interpretation-section h3 {
             color: var(--accent-color);
         }
 
@@ -228,6 +240,20 @@
             background-color: var(--accent-hover);
         }
 
+        .sources-section {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .sources-section ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 0.9rem;
+        }
+        .sources-section li {
+            margin-bottom: 0.75rem;
+        }
+
     </style>
 </head>
 <body>
@@ -247,68 +273,232 @@
             <!-- PART 1 -->
             <div class="card">
                 <h2>Part 1: Your Nervous System's "Home State"</h2>
-                <p>Read the following statements and check all that apply to your general experience over the last week or two.</p>
+                <p>For each statement, rate how frequently you have felt this way over the last week or two. This section helps identify which state you tend to inhabit: the safe "Window of Tolerance," a state of hyperarousal, or a state of hypoarousal.</p>
                 
                 <div class="question-group" id="part1-a">
-                    <h3>The "Safe and Social" System (Ventral Vagal)</h3>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I have felt calm and at ease.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt connected to friends, family, or pets.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I was able to handle challenges without feeling overwhelmed.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My breathing felt deep and relaxed.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt curious and open to new ideas.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I was able to listen to others and feel heard.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt a sense of hopefulness about the future.</label></div>
+                    <h3>The Social Engagement System (Ventral Vagal / Window of Tolerance)</h3>
+                    <!-- Item 1 -->
+                    <div class="question-item">
+                        <label>1. I have felt calm and at ease.</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p1q1" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q1" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q1" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q1" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q1" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 2 -->
+                    <div class="question-item">
+                        <label>2. I felt connected to friends, family, or pets.</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p1q2" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q2" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q2" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q2" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q2" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 3 -->
+                    <div class="question-item">
+                        <label>3. I found myself looking to answer new questions or learn new things.</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p1q3" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q3" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q3" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q3" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q3" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 4 -->
+                    <div class="question-item">
+                        <label>4. I felt like my life had meaning or purpose.</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p1q4" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q4" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q4" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q4" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q4" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 5 -->
+                    <div class="question-item">
+                        <label>5. I was able to handle challenges without feeling overwhelmed.</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p1q5" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q5" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q5" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q5" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q5" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="question-group" id="part1-b">
-                    <h3>The "Mobilized" System (Sympathetic / Fight-or-Flight)</h3>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt anxious, worried, or on edge.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My heart was racing, pounding, or fluttering.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My muscles (jaw, neck, shoulders, back) felt tight and tense.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt irritable, angry, or easily annoyed.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I had a sense of urgency, restlessness, or needing to escape.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I had trouble settling down or sleeping.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt a need to control my environment or situations.</label></div>
+                    <h3>The Mobilizing System (Sympathetic / Hyperarousal)</h3>
+                    <!-- Item 6 -->
+                    <div class="question-item">
+                        <label>6. My heart felt like it was beating faster or harder than usual.</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p1q6" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q6" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q6" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q6" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q6" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 7 -->
+                    <div class="question-item">
+                        <label>7. I felt on-guard or hyper-alert, scanning my environment for potential problems.</label>
+                         <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q7" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q7" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q7" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q7" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q7" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 8 -->
+                    <div class="question-item">
+                        <label>8. I got annoyed, upset, or frustrated easily; I had less patience for people.</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q8" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q8" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q8" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q8" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q8" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                    <!-- Item 9 -->
+                    <div class="question-item">
+                        <label>9. I felt trapped or had a strong urge to escape situations.</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q9" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q9" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q9" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q9" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q9" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 10 -->
+                    <div class="question-item">
+                        <label>10. My muscles (jaw, neck, shoulders, back) felt tight and tense.</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q10" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q10" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q10" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q10" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q10" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                    <!-- Item 11 -->
+                    <div class="question-item">
+                        <label>11. I felt restless, like I always had to be "on the go."</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q11" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q11" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q11" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q11" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q11" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="question-group" id="part1-c">
-                    <h3>The "Shutdown" System (Dorsal Vagal / Freeze)</h3>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt numb or disconnected from my feelings.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt foggy, spaced out, or disconnected from my body.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt heavy, lethargic, or exhausted, even after sleeping.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt hopeless or like there was no point.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I wanted to isolate myself and be alone.</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> My vision felt narrowed, like I had "tunnel vision."</label></div>
-                    <div class="checkbox-item"><label><input type="checkbox" value="1"> I felt a sense of shame or "being wrong."</label></div>
+                    <h3>The Immobilizing System (Dorsal Vagal / Hypoarousal)</h3>
+                     <!-- Item 12 -->
+                    <div class="question-item">
+                        <label>12. I felt numb, either emotionally or physically.</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q12" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q12" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q12" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q12" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q12" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                     <!-- Item 13 -->
+                    <div class="question-item">
+                        <label>13. I felt foggy, spaced out, or disconnected from my body.</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q13" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q13" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q13" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q13" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q13" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                    <!-- Item 14 -->
+                    <div class="question-item">
+                        <label>14. I felt like life was not real, or like I was watching a movie (derealization).</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q14" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q14" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q14" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q14" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q14" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                    <!-- Item 15 -->
+                    <div class="question-item">
+                        <label>15. I felt heavy, lethargic, or exhausted, even after sleeping.</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q15" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q15" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q15" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q15" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q15" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                    <!-- Item 16 -->
+                    <div class="question-item">
+                        <label>16. I felt helpless or found it difficult to set boundaries with others.</label>
+                         <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q16" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q16" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q16" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q16" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q16" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
+                    <!-- Item 17 -->
+                    <div class="question-item">
+                        <label>17. I wanted to isolate myself and be alone.</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p1q17" value="1" required><span>Not at all</span></label>
+                            <label><span>2</span><input type="radio" name="p1q17" value="2"><span>Rarely</span></label>
+                            <label><span>3</span><input type="radio" name="p1q17" value="3"><span>Sometimes</span></label>
+                            <label><span>4</span><input type="radio" name="p1q17" value="4"><span>Often</span></label>
+                            <label><span>5</span><input type="radio" name="p1q17" value="5"><span>Almost always</span></label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- PART 2 -->
             <div class="card">
                 <h2>Part 2: Somatic & Autonomic Baseline</h2>
-                <p>Find a quiet moment to sit comfortably and answer the following questions about the direct physical signals your body is sending right now.</p>
+                <p>Find a quiet moment to sit comfortably and answer the following questions about the direct physical signals your body sends. These are the "building blocks" of your moment-to-moment experience.</p>
 
                 <div class="question-group">
                     <h3>Subsection A: Posture & Core Tension</h3>
                     <div class="question-item">
-                        <label for="q1-posture">1. Protective Posture Check: (Stand sideways to a mirror)</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q1-posture" value="a" required> a) My earlobe is roughly aligned over the middle of my shoulder.</label>
-                            <label><input type="radio" name="q1-posture" value="b"> b) My head and chin are pushed forward, placing my ear in front of my shoulder.</label>
-                            <label><input type="radio" name="q1-posture" value="c"> c) I'm not sure, it's hard to tell.</label>
+                        <label>1. Effort of Uprightness: When you sit up straight for 30 seconds, how much effort does it take?</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p2q1" value="1" required><span>Effortless</span></label>
+                            <label><span>2</span><input type="radio" name="p2q1" value="2"><span>Minimal effort</span></label>
+                            <label><span>3</span><input type="radio" name="p2q1" value="3"><span>Moderate effort</span></label>
+                            <label><span>4</span><input type="radio" name="p2q1" value="4"><span>Significant effort</span></label>
+                            <label><span>5</span><input type="radio" name="p2q1" value="5"><span>Painful/Exhausting</span></label>
                         </div>
                     </div>
-                    <div class="question-item">
-                        <label for="q2-uprightness">2. Effort of Uprightness: (Sit up straight for 30s; 1 = effortless, 10 = very painful)</label>
-                        <input type="number" id="q2-uprightness" min="1" max="10" required>
-                    </div>
-                    <div class="question-item">
-                        <label for="q3-breath">3. Diaphragmatic Breath Depth: (Place one hand on chest, one on belly)</label>
+                     <div class="question-item">
+                        <label>2. Breath Pattern: When you pay attention to your natural breath, what is the predominant pattern?</label>
                         <div class="radio-group">
-                             <label><input type="radio" name="q3-breath" value="a" required> a) My chest and/or shoulders rise and fall.</label>
-                             <label><input type="radio" name="q3-breath" value="b"> b) My rib cage expands outwards to the sides.</label>
-                             <label><input type="radio" name="q3-breath" value="c"> c) My belly expands gently into my hand as I inhale.</label>
-                             <label><input type="radio" name="q3-breath" value="d"> d) It's very shallow; I can barely feel any movement.</label>
+                             <label><input type="radio" name="p2q2" value="0" required> Deep and easy into the belly.</label>
+                             <label><input type="radio" name="p2q2" value="1"> Mostly in the rib cage, expands to the sides.</label>
+                             <label><input type="radio" name="p2q2" value="2"> Shallow, mostly in the upper chest and shoulders.</label>
+                             <label><input type="radio" name="p2q2" value="3"> Very shallow, barely perceptible, or I often hold my breath.</label>
                         </div>
                     </div>
                 </div>
@@ -316,24 +506,32 @@
                 <div class="question-group">
                     <h3>Subsection B: Direct Indicators of Vagal Tone</h3>
                      <div class="question-item">
-                        <label for="q4-swallowing">4. Swallowing Test: (Difficulty swallowing 3x quickly; 1 = easy, 10 = impossible)</label>
-                        <input type="number" id="q4-swallowing" min="1" max="10" required>
-                    </div>
-                    <div class="question-item">
-                        <label for="q5-ocular">5. Oculocardiac Reflex Check: (Gently rest palms on closed eyes for 30s)</label>
-                         <p class="note"><b>Safety:</b> Do not attempt if you have glaucoma, a detached retina, eye injury, or a known cardiac condition. Stop if you feel pain or significant dizziness.</p>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q5-ocular" value="a" required> a) A subtle sense of calm or a slowing down in my body.</label>
-                            <label><input type="radio" name="q5-ocular" value="b"> b) No noticeable change.</label>
-                            <label><input type="radio" name="q5-ocular" value="c"> c) I felt dizzy, nauseous, anxious, or got a headache.</label>
+                        <label>3. Swallowing Test: How difficult is it to swallow three times quickly in a row?</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p2q3" value="1" required><span>Very easy</span></label>
+                            <label><span>2</span><input type="radio" name="p2q3" value="2"><span>Slight difficulty</span></label>
+                            <label><span>3</span><input type="radio" name="p2q3" value="3"><span>Moderately difficult</span></label>
+                            <label><span>4</span><input type="radio" name="p2q3" value="4"><span>Very difficult</span></label>
+                            <label><span>5</span><input type="radio" name="p2q3" value="5"><span>Nearly impossible</span></label>
                         </div>
                     </div>
                     <div class="question-item">
-                        <label for="q6-vocal">6. Vocal Resonance Test: (Hum "vvvvvv" or "mmmm" on a long exhale)</label>
+                        <label>4. Oculocardiac Reflex Check: After gently resting palms on closed eyes for 30s, how do you feel?</label>
+                         <p class="note"><b>Safety:</b> Do not attempt if you have glaucoma, a detached retina, eye injury, or a known cardiac condition. Stop if you feel pain or significant dizziness.</p>
                         <div class="radio-group">
-                             <label><input type="radio" name="q6-vocal" value="a" required> a) The sound is steady and I can feel a clear vibration.</label>
-                             <label><input type="radio" name="q6-vocal" value="b"> b) The sound is shaky, weak, or waivers in pitch.</label>
-                             <label><input type="radio" name="q6-vocal" value="c"> c) I run out of breath very quickly.</label>
+                            <label><input type="radio" name="p2q4" value="0" required> Calmer, more relaxed.</label>
+                            <label><input type="radio" name="p2q4" value="1"> Neutral, no noticeable change.</label>
+                            <label><input type="radio" name="p2q4" value="3"> Anxious, dizzy, or nauseous.</label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>5. Vocal Resonance Test: When you hum a long, steady note, what is the quality of the sound?</label>
+                         <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p2q5" value="0" required><span>Strong & Resonant</span></label>
+                            <label><span>2</span><input type="radio" name="p2q5" value="1"><span>Mostly steady</span></label>
+                            <label><span>3</span><input type="radio" name="p2q5" value="2"><span>Somewhat shaky</span></label>
+                            <label><span>4</span><input type="radio" name="p2q5" value="3"><span>Weak / Wavering</span></label>
+                            <label><span>5</span><input type="radio" name="p2q5" value="4"><span>Run out of breath</span></label>
                         </div>
                     </div>
                 </div>
@@ -341,35 +539,41 @@
                 <div class="question-group">
                     <h3>Subsection C: Proprioceptive & Interoceptive Awareness</h3>
                     <div class="question-item">
-                        <label for="q7-circulation">7. Peripheral Circulation Check: (Notice your hands and feet)</label>
+                        <label>6. Peripheral Circulation: My hands and feet are typically...</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="q7-circulation" value="a" required> a) They are typically warm and a normal color.</label>
-                            <label><input type="radio" name="q7-circulation" value="b"> b) They are typically cold, clammy, or bluish.</label>
+                            <label><input type="radio" name="p2q6" value="0" required> Comfortably warm and well-regulated.</label>
+                            <label><input type="radio" name="p2q6" value="2"> Cold, clammy, or bluish.</label>
+                            <label><input type="radio" name="p2q6" value="2"> Overly hot or sweaty.</label>
                         </div>
                     </div>
                     <div class="question-item">
-                        <label>8. Body in Space (Proprioception):</label>
-                        <div class="checkbox-item"><label><input type="checkbox" id="q8-bump"> Do you often bump into doorframes, furniture, or people?</label></div>
-                        <div class="checkbox-item"><label><input type="checkbox" id="q8-trip"> Do you frequently trip on uneven surfaces or miss a step?</label></div>
-                        <div class="checkbox-item"><label><input type="checkbox" id="q8-choke"> Do you often choke on food or "swallow the wrong way"?</label></div>
+                        <label>7. Body Coordination: How would you rate your general level of clumsiness?</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p2q7" value="1" required><span>Very coordinated</span></label>
+                            <label><span>2</span><input type="radio" name="p2q7" value="2"><span>Mostly coordinated</span></label>
+                            <label><span>3</span><input type="radio" name="p2q7" value="3"><span>Average</span></label>
+                            <label><span>4</span><input type="radio" name="p2q7" value="4"><span>Somewhat clumsy</span></label>
+                            <label><span>5</span><input type="radio" name="p2q7" value="5"><span>Very clumsy</span></label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>8. Interoception - Hunger Cues: My connection to my body's hunger signals is...</label>
+                         <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p2q8" value="2" required><span>I barely notice them</span></label>
+                            <label><span>2</span><input type="radio" name="p2q8" value="1"><span>Sometimes weak</span></label>
+                            <label><span>3</span><input type="radio" name="p2q8" value="0"><span>Balanced and clear</span></label>
+                            <label><span>4</span><input type="radio" name="p2q8" value="1"><span>Often urgent</span></label>
+                            <label><span>5</span><input type="radio" name="p2q8" value="2"><span>Constant/Overwhelming</span></label>
+                        </div>
                     </div>
                      <div class="question-item">
-                        <label>9. Internal Sensing (Interoception): (Rate your ability 1-10; 1=cannot sense, 10=can sense clearly)</label>
-                        <div class="question-item">
-                             <label for="q9-heartbeat">My heartbeat without taking my pulse:</label>
-                             <input type="number" id="q9-heartbeat" min="1" max="10" required>
-                        </div>
-                        <div class="question-item">
-                             <label for="q9-hunger">The subtle sensations of hunger:</label>
-                             <input type="number" id="q9-hunger" min="1" max="10" required>
-                        </div>
-                         <div class="question-item">
-                             <label for="q9-thirst">The subtle sensations of thirst:</label>
-                             <input type="number" id="q9-thirst" min="1" max="10" required>
-                        </div>
-                         <div class="question-item">
-                             <label for="q9-restroom">The need to use the restroom:</label>
-                             <input type="number" id="q9-restroom" min="1" max="10" required>
+                        <label>9. Interoception - Thirst Cues: My connection to my body's thirst signals is...</label>
+                         <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p2q9" value="2" required><span>I barely notice them</span></label>
+                            <label><span>2</span><input type="radio" name="p2q9" value="1"><span>Sometimes weak</span></label>
+                            <label><span>3</span><input type="radio" name="p2q9" value="0"><span>Balanced and clear</span></label>
+                            <label><span>4</span><input type="radio" name="p2q9" value="1"><span>Often urgent</span></label>
+                            <label><span>5</span><input type="radio" name="p2q9" value="2"><span>Constant/Overwhelming</span></label>
                         </div>
                     </div>
                 </div>
@@ -383,16 +587,16 @@
                 <h2>Your Quantitative Analysis</h2>
                 <div class="results-grid">
                     <div class="score-card">
-                        <div class="score-label">Ventral Vagal</div>
-                        <div class="score-value" id="vv-score">0%</div>
+                        <div class="score-label">Ventral Vagal Score</div>
+                        <div class="score-value" id="vv-score">0</div>
                     </div>
                     <div class="score-card">
-                        <div class="score-label">Sympathetic</div>
-                        <div class="score-value" id="symp-score">0%</div>
+                        <div class="score-label">Sympathetic Score</div>
+                        <div class="score-value" id="symp-score">0</div>
                     </div>
                     <div class="score-card">
-                        <div class="score-label">Dorsal Vagal</div>
-                        <div class="score-value" id="dv-score">0%</div>
+                        <div class="score-label">Dorsal Vagal Score</div>
+                        <div class="score-value" id="dv-score">0</div>
                     </div>
                 </div>
                  <div class="results-grid">
@@ -402,16 +606,31 @@
                     </div>
                 </div>
 
-                <div id="profile-results">
-                    <h3 id="profile-title">Your Profile Will Appear Here</h3>
-                    <p id="profile-description">Complete the assessment and click the button above to see your results and interpretation.</p>
+                <div id="interpretation-section">
+                    <h3>Interpretation Key</h3>
+                    <div id="interpretation-text">
+                        <p>Complete the assessment to see your results.</p>
+                    </div>
                 </div>
 
                 <div class="copy-results">
                     <h3>Copy Your Results</h3>
-                    <p>You can copy the summary below to save for your records or bring to a session.</p>
+                    <p>You can copy the summary below to save for your records.</p>
                     <textarea id="results-textarea" readonly></textarea>
                     <button type="button" class="copy-btn" id="copy-btn">Copy to Clipboard</button>
+                </div>
+
+                <div class="sources-section">
+                    <h3>Scientific Foundations and Key References</h3>
+                    <p class="note">The structure and items in this assessment are informed by several key scientific concepts. The primary sources below provide a deeper understanding of the principles at work.</p>
+                    <ul>
+                        <li>Porges, S. W. (2011). <em>The polyvagal theory: Neurophysiological foundations of emotions, attachment, communication, and self-regulation</em>. W. W. Norton & Company.</li>
+                        <li>Dana, D. (2018). <em>The polyvagal theory in therapy: Engaging the rhythm of regulation</em>. W. W. Norton & Company.</li>
+                        <li>Ogden, P., & Minton, K. (2000). Sensorimotor psychotherapy: One method for processing traumatic memory. <em>Traumatology, 6</em>(3), 53-72.</li>
+                        <li>Siegel, D. J. (1999). <em>The developing mind: Toward a neurobiology of interpersonal experience</em>. Guilford Press.</li>
+                        <li>Levine, P. A. (1997). <em>Waking the tiger: Healing trauma</em>. North Atlantic Books.</li>
+                        <li>Critchley, H. D., & Garfinkel, S. N. (2017). Interoception and emotion. <em>Current Opinion in Psychology, 17</em>, 1–7.</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -423,109 +642,93 @@
 
         form.addEventListener('submit', function(event) {
             event.preventDefault();
+            try {
+                // --- Part 1 Scoring ---
+                let scoreA = 0;
+                for (let i = 1; i <= 5; i++) {
+                    scoreA += parseInt(document.querySelector(`input[name="p1q${i}"]:checked`).value);
+                }
 
-            // --- Part 1 Scoring ---
-            const scoreA = document.querySelectorAll('#part1-a input[type="checkbox"]:checked').length;
-            const scoreB = document.querySelectorAll('#part1-b input[type="checkbox"]:checked').length;
-            const scoreC = document.querySelectorAll('#part1-c input[type="checkbox"]:checked').length;
-            
-            const percentA = Math.round((scoreA / 7) * 100);
-            const percentB = Math.round((scoreB / 7) * 100);
-            const percentC = Math.round((scoreC / 7) * 100);
+                let scoreB = 0;
+                for (let i = 6; i <= 11; i++) {
+                    scoreB += parseInt(document.querySelector(`input[name="p1q${i}"]:checked`).value);
+                }
 
-            // --- Part 2 Scoring ---
-            let somaticScore = 0;
+                let scoreC = 0;
+                for (let i = 12; i <= 17; i++) {
+                    scoreC += parseInt(document.querySelector(`input[name="p1q${i}"]:checked`).value);
+                }
 
-            // Q1 Posture
-            const q1Value = document.querySelector('input[name="q1-posture"]:checked').value;
-            if (q1Value === 'b') somaticScore += 2;
-            if (q1Value === 'c') somaticScore += 1;
+                // --- Part 2 Scoring ---
+                let somaticScore = 0;
+                somaticScore += parseInt(document.querySelector('input[name="p2q1"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q2"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q3"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q4"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q5"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q6"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q7"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q8"]:checked').value);
+                somaticScore += parseInt(document.querySelector('input[name="p2q9"]:checked').value);
+                
+                // --- Display Scores ---
+                document.getElementById('vv-score').textContent = scoreA;
+                document.getElementById('symp-score').textContent = scoreB;
+                document.getElementById('dv-score').textContent = scoreC;
+                document.getElementById('somatic-score').textContent = somaticScore;
+                
+                // --- Interpretation Logic ---
+                let interpretationHTML = `
+                    <h4>Part 1: Nervous System State Scores</h4>
+                    <ul>
+                        <li><strong>Ventral Vagal Score (Range 5-25; Your Score: ${scoreA}):</strong> A higher score indicates a greater capacity for safety, connection, and regulation within your 'Window of Tolerance.' A score of 20+ suggests this is your primary experience.</li>
+                        <li><strong>Sympathetic Score (Range 6-30; Your Score: ${scoreB}):</strong> A higher score indicates a greater tendency toward a mobilized state of hyperarousal (anxiety, anger, fight-or-flight). A score of 18+ suggests this state is significantly present.</li>
+                        <li><strong>Dorsal Vagal Score (Range 6-30; Your Score: ${scoreC}):</strong> A higher score indicates a greater tendency toward a shutdown state of hypoarousal (numbness, disconnection, freeze). A score of 18+ suggests this state is significantly present.</li>
+                    </ul>
+                    <h4>Part 2: Somatic Dysregulation Score (Your Score: ${somaticScore})</h4>
+                    <p>This score reflects how much stress and dysregulation is physically held in your body. A lower score is better.</p>
+                    <ul>
+                        <li><strong>0-8 (Low):</strong> Your body shows minimal signs of chronic dysregulation. You have good vagal tone and body awareness.</li>
+                        <li><strong>9-17 (Moderate):</strong> Your body is holding a noticeable level of stress. You may experience persistent muscle tension, challenges with vagal tone, and/or some disconnect from your body's signals.</li>
+                        <li><strong>18+ (High):</strong> Your body is showing significant signs of being stuck in a survival state, indicating a high perceived threat load.</li>
+                    </ul>
+                    <h4>Synthesis: Your Nervous System Profile</h4>
+                `;
 
-            // Q2 Uprightness
-            somaticScore += parseInt(document.getElementById('q2-uprightness').value, 10);
+                let profileTitle = '';
+                if (scoreB > 18 && scoreC > 18) {
+                    profileTitle = '<p><strong>Profile: The Frozen Driver.</strong> Your scores suggest a state of burnout, where the system is simultaneously in a state of high hyperarousal (Sympathetic) and hypoarousal (Dorsal Vagal). This internal conflict often manifests as high somatic dysregulation.</p>';
+                } else if (scoreB > scoreA && scoreB > scoreC) {
+                    profileTitle = '<p><strong>Profile: The Mobilized Protector.</strong> Your scores indicate a primary state of Sympathetic hyperarousal. Your feelings of anxiety or urgency are likely matched by physical tension and high somatic arousal.</p>';
+                } else if (scoreC > scoreA && scoreC > scoreB) {
+                    profileTitle = '<p><strong>Profile: The Conserving Collapser.</strong> Your scores point to a primary state of Dorsal Vagal hypoarousal. Your feelings of numbness or disconnection are likely reflected in your body through lower vagal tone and interoceptive awareness.</p>';
+                } else {
+                     profileTitle = '<p><strong>Profile: The Resilient Regulator.</strong> Your scores suggest your primary state is Ventral Vagal, well within your Window of Tolerance. Your body likely reflects this with ease, good vagal tone, and a strong capacity to handle stress.</p>';
+                }
 
-            // Q3 Breath
-            const q3Value = document.querySelector('input[name="q3-breath"]:checked').value;
-            if (q3Value === 'a') somaticScore += 2;
-            if (q3Value === 'b') somaticScore += 1;
-            if (q3Value === 'd') somaticScore += 3;
+                document.getElementById('interpretation-text').innerHTML = interpretationHTML + profileTitle;
 
-            // Q4 Swallowing
-            somaticScore += parseInt(document.getElementById('q4-swallowing').value, 10);
-
-            // Q5 Ocular
-            const q5Value = document.querySelector('input[name="q5-ocular"]:checked').value;
-            if (q5Value === 'b') somaticScore += 1;
-            if (q5Value === 'c') somaticScore += 3;
-            
-            // Q6 Vocal
-            const q6Value = document.querySelector('input[name="q6-vocal"]:checked').value;
-            if (q6Value === 'b' || q6Value === 'c') somaticScore += 2;
-
-            // Q7 Circulation
-            const q7Value = document.querySelector('input[name="q7-circulation"]:checked').value;
-            if (q7Value === 'b') somaticScore += 2;
-            
-            // Q8 Proprioception
-            if (document.getElementById('q8-bump').checked) somaticScore += 1;
-            if (document.getElementById('q8-trip').checked) somaticScore += 1;
-            if (document.getElementById('q8-choke').checked) somaticScore += 1;
-
-            // Q9 Interoception
-            const q9_heart = parseInt(document.getElementById('q9-heartbeat').value, 10);
-            const q9_hunger = parseInt(document.getElementById('q9-hunger').value, 10);
-            const q9_thirst = parseInt(document.getElementById('q9-thirst').value, 10);
-            const q9_restroom = parseInt(document.getElementById('q9-restroom').value, 10);
-            const interoceptionTotal = q9_heart + q9_hunger + q9_thirst + q9_restroom;
-            somaticScore += (40 - interoceptionTotal);
-
-            // --- Determine Profile ---
-            let profileTitle = '';
-            let profileDescription = '';
-
-            // This logic favors the dysregulated states if percentages are high
-            if (percentB >= 50 && percentC >= 50) {
-                profileTitle = 'The Frozen Driver';
-                profileDescription = 'This is a quantitative look at burnout. Your system is simultaneously activated and shut down. This conflict creates significant internal distress, reflected in a high somatic score that likely includes a mix of tension-based and low-vagal-tone indicators.';
-            } else if (percentB > percentA && percentB > percentC) {
-                profileTitle = 'The Mobilized Protector';
-                profileDescription = 'Your self-reported feelings of anxiety and urgency are matched by physical evidence of high muscle tension, chest breathing, and other signs of a body braced for a threat.';
-            } else if (percentC > percentA && percentC > percentB) {
-                profileTitle = 'The Conserving Collapser';
-                profileDescription = 'Your feelings of shutdown and numbness are reflected in your body through indicators of low vagal tone (e.g., poor vocal resonance, difficult swallowing) and a disconnect from internal cues (low interoception).';
-            } else {
-                 profileTitle = 'The Resilient Regulator';
-                 profileDescription = 'Your primary state is one of safety, and your body reflects this with ease and strong vagal tone. You have a large capacity to handle stress.';
-            }
-
-
-            // --- Display Results ---
-            document.getElementById('vv-score').textContent = `${percentA}%`;
-            document.getElementById('symp-score').textContent = `${percentB}%`;
-            document.getElementById('dv-score').textContent = `${percentC}%`;
-            document.getElementById('somatic-score').textContent = somaticScore;
-
-            document.getElementById('profile-title').textContent = profileTitle;
-            document.getElementById('profile-description').textContent = profileDescription;
-
-            const resultsText = `
+                // --- Update Copy Text Area ---
+                const resultsText = `
 Nervous System Assessment Results
 ----------------------------------
-Part 1 - State Percentages:
-Ventral Vagal (Safe/Social): ${percentA}%
-Sympathetic (Mobilized): ${percentB}%
-Dorsal Vagal (Shutdown): ${percentC}%
+Part 1 - State Scores:
+Ventral Vagal (Safe/Social): ${scoreA} / 25
+Sympathetic (Mobilized): ${scoreB} / 30
+Dorsal Vagal (Shutdown): ${scoreC} / 30
 
 Part 2 - Somatic Score:
 Total Somatic Dysregulation Score: ${somaticScore}
-
-Identified Profile: ${profileTitle}
 `;
-            document.getElementById('results-textarea').value = resultsText.trim();
-            
-            const resultsSection = document.getElementById('results-section');
-            resultsSection.style.display = 'block';
-            resultsSection.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('results-textarea').value = resultsText.trim();
+                
+                const resultsSection = document.getElementById('results-section');
+                resultsSection.style.display = 'block';
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error("An error occurred during scoring:", error);
+                alert("An error occurred while calculating your score. Please ensure all questions have been answered and try again.");
+            }
         });
 
         // Copy button functionality
@@ -543,3 +746,4 @@ Identified Profile: ${profileTitle}
     </script>
 </body>
 </html>
+
