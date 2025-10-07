@@ -40,7 +40,7 @@
             padding: 2rem 1.5rem;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-family: var(--font-sans);
             color: var(--heading-color);
             font-weight: 700;
@@ -174,7 +174,7 @@
 
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             text-align: center;
             margin-bottom: 2rem;
@@ -193,12 +193,15 @@
             font-family: var(--font-sans);
         }
         
-        #somatic-score-card .score-value {
-            grid-column: 1 / -1;
-        }
-        
         #interpretation-section h3 {
             color: var(--accent-color);
+            text-align: center;
+        }
+        #interpretation-section h4 {
+            color: var(--heading-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
         }
 
         .copy-results {
@@ -585,22 +588,16 @@
                 <h2>Your Quantitative Analysis</h2>
                 <div class="results-grid">
                     <div class="score-card">
-                        <div class="score-label">Ventral Vagal Score</div>
-                        <div class="score-value" id="vv-score">0</div>
+                        <div class="score-label">Net Regulation Score</div>
+                        <div class="score-value" id="net-reg-score">0</div>
                     </div>
                     <div class="score-card">
-                        <div class="score-label">Sympathetic Score</div>
-                        <div class="score-value" id="symp-score">0</div>
-                    </div>
-                    <div class="score-card">
-                        <div class="score-label">Dorsal Vagal Score</div>
-                        <div class="score-value" id="dv-score">0</div>
-                    </div>
-                </div>
-                 <div class="results-grid">
-                    <div class="score-card" id="somatic-score-card">
-                        <div class="score-label">Total Somatic Dysregulation Score</div>
+                        <div class="score-label">Somatic Dysregulation Score</div>
                         <div class="score-value" id="somatic-score">0</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-label">Brain-Body Cohesion Score</div>
+                        <div class="score-value" id="cohesion-score">0%</div>
                     </div>
                 </div>
 
@@ -642,17 +639,17 @@
             event.preventDefault();
             try {
                 // --- Part 1 Scoring ---
-                let scoreA = 0;
+                let scoreA = 0; // Ventral Vagal
                 for (let i = 1; i <= 5; i++) {
                     scoreA += parseInt(document.querySelector(`input[name="p1q${i}"]:checked`).value);
                 }
 
-                let scoreB = 0;
+                let scoreB = 0; // Sympathetic
                 for (let i = 6; i <= 11; i++) {
                     scoreB += parseInt(document.querySelector(`input[name="p1q${i}"]:checked`).value);
                 }
 
-                let scoreC = 0;
+                let scoreC = 0; // Dorsal Vagal
                 for (let i = 12; i <= 17; i++) {
                     scoreC += parseInt(document.querySelector(`input[name="p1q${i}"]:checked`).value);
                 }
@@ -663,54 +660,73 @@
                     somaticScore += parseInt(document.querySelector(`input[name="p2q${i}"]:checked`).value);
                 }
                 
+                // --- New Metric Calculations ---
+                const selfReportedDysregulation = scoreB + scoreC;
+                const netRegulationScore = scoreA - selfReportedDysregulation;
+
+                // Normalize scores to a 0-100 scale for comparison
+                const selfReportedMin = 12; // Min possible scoreB + scoreC (6+6)
+                const selfReportedMax = 60; // Max possible scoreB + scoreC (30+30)
+                const somaticMin = 9;       // Min possible somaticScore
+                const somaticMax = 45;      // Max possible somaticScore
+                
+                const selfReportedPercent = ((selfReportedDysregulation - selfReportedMin) / (selfReportedMax - selfReportedMin)) * 100;
+                const somaticPercent = ((somaticScore - somaticMin) / (somaticMax - somaticMin)) * 100;
+
+                const cohesionScore = 100 - Math.abs(selfReportedPercent - somaticPercent);
+
+
                 // --- Display Scores ---
-                document.getElementById('vv-score').textContent = scoreA;
-                document.getElementById('symp-score').textContent = scoreB;
-                document.getElementById('dv-score').textContent = scoreC;
+                document.getElementById('net-reg-score').textContent = netRegulationScore;
                 document.getElementById('somatic-score').textContent = somaticScore;
+                document.getElementById('cohesion-score').textContent = `${cohesionScore.toFixed(0)}%`;
                 
                 // --- Interpretation Logic ---
                 let interpretationHTML = `
-                    <h4>Part 1: Nervous System State Scores</h4>
-                    <ul>
-                        <li><strong>Ventral Vagal Score (Range 5-25; Your Score: ${scoreA}):</strong> A higher score indicates a greater capacity for safety, connection, and regulation within your 'Window of Tolerance.' A score of 20+ suggests this is your primary experience.</li>
-                        <li><strong>Sympathetic Score (Range 6-30; Your Score: ${scoreB}):</strong> A higher score indicates a greater tendency toward a mobilized state of hyperarousal (anxiety, anger, fight-or-flight). A score of 18+ suggests this state is significantly present.</li>
-                        <li><strong>Dorsal Vagal Score (Range 6-30; Your Score: ${scoreC}):</strong> A higher score indicates a greater tendency toward a shutdown state of hypoarousal (numbness, disconnection, freeze). A score of 18+ suggests this state is significantly present.</li>
+                    <h4>Net Regulation Score (Your Score: ${netRegulationScore})</h4>
+                    <p>This score compares your experiences of safety (Ventral Vagal) against distress (Sympathetic + Dorsal Vagal). A positive score suggests a greater capacity for regulation, while a negative score suggests distress states are more dominant.</p>
+                     <ul>
+                        <li><strong>Above 0:</strong> Indicates a surplus of regulatory capacity.</li>
+                        <li><strong>0 to -25:</strong> Indicates a mild to moderate prevalence of distress states.</li>
+                        <li><strong>Below -25:</strong> Indicates a significant prevalence of distress states.</li>
                     </ul>
-                    <h4>Part 2: Somatic Dysregulation Score (Your Score: ${somaticScore})</h4>
-                    <p>This score reflects how much stress and dysregulation is physically held in your body. A higher score indicates more dysregulation.</p>
+
+                    <h4>Somatic Dysregulation Score (Your Score: ${somaticScore} / 45)</h4>
+                    <p>This score reflects how much stress is physically held in your body. A higher score indicates more somatic dysregulation.</p>
                     <ul>
-                        <li><strong>9-21 (Low):</strong> Your body shows minimal signs of chronic dysregulation. You likely have good vagal tone and body awareness.</li>
-                        <li><strong>22-34 (Moderate):</strong> Your body is holding a noticeable level of stress. You may experience persistent muscle tension, challenges with vagal tone, and/or some disconnect from your body's signals.</li>
-                        <li><strong>35-45 (High):</strong> Your body is showing significant signs of being stuck in a survival state, indicating a high perceived threat load and somatic dysregulation.</li>
+                        <li><strong>9-21 (Low):</strong> Your body shows minimal signs of chronic dysregulation.</li>
+                        <li><strong>22-34 (Moderate):</strong> Your body is holding a noticeable level of stress.</li>
+                        <li><strong>35-45 (High):</strong> Your body shows significant signs of being stuck in a survival state.</li>
                     </ul>
-                    <h4>Synthesis: Your Nervous System Profile</h4>
+
+                    <h4>Brain-Body Cohesion Score (Your Score: ${cohesionScore.toFixed(0)}%)</h4>
+                    <p>This score reveals the level of agreement between your self-reported emotional state and your body's physical signals. 100% indicates perfect alignment.</p>
                 `;
 
-                let profileTitle = '';
-                if (scoreB > 18 && scoreC > 18) {
-                    profileTitle = '<p><strong>Profile: The Frozen Driver.</strong> Your scores suggest a state of burnout, where the system is simultaneously in a state of high hyperarousal (Sympathetic) and hypoarousal (Dorsal Vagal). This internal conflict often manifests as high somatic dysregulation.</p>';
-                } else if (scoreB > scoreA && scoreB > scoreC) {
-                    profileTitle = '<p><strong>Profile: The Mobilized Protector.</strong> Your scores indicate a primary state of Sympathetic hyperarousal. Your feelings of anxiety or urgency are likely matched by physical tension and high somatic arousal.</p>';
-                } else if (scoreC > scoreA && scoreC > scoreB) {
-                    profileTitle = '<p><strong>Profile: The Conserving Collapser.</strong> Your scores point to a primary state of Dorsal Vagal hypoarousal. Your feelings of numbness or disconnection are likely reflected in your body through lower vagal tone and interoceptive awareness.</p>';
+                let cohesionInterpretation = '';
+                if (cohesionScore >= 75) {
+                    cohesionInterpretation = '<p><strong>High Cohesion:</strong> Your self-perception is strongly aligned with your body\'s physical reality. Whether you feel calm or stressed, your mind and body are telling a similar story. This is a strong foundation for regulation.</p>';
+                } else if (cohesionScore >= 40) {
+                    cohesionInterpretation = '<p><strong>Moderate Cohesion:</strong> There is a noticeable disconnect between your self-reported feelings and your body\'s physical signals. You might be cognitively minimizing stress that your body is holding, or feeling mentally distressed while your body is in a different state.</p>';
                 } else {
-                     profileTitle = '<p><strong>Profile: The Resilient Regulator.</strong> Your scores suggest your primary state is Ventral Vagal, well within your Window of Tolerance. Your body likely reflects this with ease, good vagal tone, and a strong capacity to handle stress.</p>';
+                    cohesionInterpretation = `<p><strong>Significant Disconnect:</strong> There's a major discrepancy between your self-perception and your body's reality. This is a crucial area for exploration. It often indicates a pattern of overriding or ignoring the body's signals, a common adaptation to chronic stress or trauma.</p>`;
                 }
 
-                document.getElementById('interpretation-text').innerHTML = interpretationHTML + profileTitle;
+                document.getElementById('interpretation-text').innerHTML = interpretationHTML + cohesionInterpretation;
 
                 // --- Update Copy Text Area ---
                 const resultsText = `
 Nervous System Assessment Results
 ----------------------------------
-Part 1 - State Scores:
+CORE METRICS:
+Net Regulation Score: ${netRegulationScore}
+Somatic Dysregulation Score: ${somaticScore} / 45
+Brain-Body Cohesion: ${cohesionScore.toFixed(0)}%
+
+DETAILED SCORES (FOR REFERENCE):
 Ventral Vagal (Safe/Social): ${scoreA} / 25
 Sympathetic (Mobilized): ${scoreB} / 30
 Dorsal Vagal (Shutdown): ${scoreC} / 30
-
-Part 2 - Somatic Score:
-Total Somatic Dysregulation Score: ${somaticScore} / 45
 `;
                 document.getElementById('results-textarea').value = resultsText.trim();
                 
