@@ -3,66 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three-Part Standing Meditation for Somatic Balance</title>
+    <title>Creativity & Structure: A Somatic Practice</title>
     <style>
         :root {
-            --bg-color: #f8f9fa;
-            --text-color: #343a40;
-            --heading-color: #005f73;
-            --border-color: #dee2e6;
-            --accent-color: #0a9396;
-            --subtle-gray: #6c757d;
+            --bg-color: #fdfcf9;
+            --text-color: #4a4a4a;
+            --heading-color: #333333;
+            --accent-color: #916b80; /* A warm, dusty mauve for 'Creativity' */
+            --border-color: #e0e0e0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.8;
             margin: 0;
             padding: 2rem 1rem;
+            font-size: 1.1rem;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            padding-bottom: 2rem;
+            padding: 2rem 0;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 2.8rem;
             color: var(--heading-color);
             margin-bottom: 0.5rem;
-            font-weight: 600;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         header .subtitle {
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--subtle-gray);
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--accent-color);
         }
         
         header p {
-            max-width: 70ch;
+            max-width: 65ch;
             margin: 1.5rem auto 0;
-            text-align: left;
-            font-size: 1.1rem;
+            text-align: center;
         }
         
         .section {
             padding: 2rem 0;
+            text-align: center;
         }
 
         h2 {
-            text-align: center;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
             color: var(--heading-color);
             margin-top: 0;
             margin-bottom: 1.5rem;
@@ -72,18 +75,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
-        }
-
-        .posture {
-            background-color: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .posture:hover {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            margin-top: 2rem;
         }
         
         @media (min-width: 992px) {
@@ -92,61 +84,56 @@
             }
         }
 
-        h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-        
-        h3 .posture-aspect {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--subtle-gray);
-            margin-left: 0.5rem;
+        .posture {
+            text-align: left;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: #ffffff;
         }
 
+        h3 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+        
         .posture p {
             margin-top: 0;
             margin-bottom: 1.5rem;
         }
 
-        h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--heading-color);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-        
         ul {
             list-style: none;
             padding-left: 0;
-            margin: 0;
+            margin-top: 2rem;
         }
         
         li {
-            padding-left: 1.75em;
-            text-indent: -1.75em;
-            margin-bottom: 0.75rem;
+            padding-left: 2em;
+            text-indent: -2em;
+            margin-bottom: 1.25rem;
         }
 
         li::before {
-            content: '›';
+            content: '☯';
             color: var(--accent-color);
             margin-right: 0.75em;
-            font-weight: bold;
-            font-size: 1.5em;
+            display: inline-block;
+            font-size: 1.2em;
+            vertical-align: middle;
             line-height: 1;
         }
         
         footer {
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
+            padding: 3rem 0;
+            margin-top: 3rem;
             border-top: 1px solid var(--border-color);
         }
     </style>
@@ -155,57 +142,46 @@
 
     <main class="container">
         <header>
-            <h1>Three-Part Standing Meditation</h1>
-            <p class="subtitle">A Practice for Somatic Balance and Nervous System Regulation</p>
-            <p>This sequence is an invitation to cultivate interoceptive awareness—the ability to sense the internal state of your body. By moving through three distinct postures, we explore the balance of complementary energies (Yin and Yang): the stability of grounding, the integration of our core, and the expansiveness of reaching. This structured practice provides a safe container for your creative, moment-to-moment experience.</p>
+            <h1>Creativity & Structure</h1>
+            <p class="subtitle">A Somatic Practice for Balanced Well-Being</p>
+            <p>Effective therapeutic work often balances two essential elements: <strong>Structure</strong>, which provides the safety, clarity, and predictable framework for exploration; and <strong>Creativity</strong>, which is your unique, unfolding, and deeply personal inner experience. This practice is designed to honor both. The three postures provide the Structure. Your moment-to-moment awareness is the Creativity.</p>
         </header>
-
-        <section class="section">
-            <h2>Preparation</h2>
-            <p style="text-align: center; max-width: 65ch; margin: 0 auto;">Find a comfortable place to stand with your feet about shoulder-width apart. Allow your knees to be soft, not locked. Let your spine be long and your shoulders relaxed. Take a few gentle breaths to settle into your body and the present moment.</p>
-        </section>
 
         <div class="postures-container">
             <article class="posture">
-                <h3>Posture I: Grounding <span class="posture-aspect">(Yin Aspect)</span></h3>
-                <p><strong>The Posture (1 Minute):</strong> Allow your arms to hang comfortably by your sides. Let your elbows have a slight bend. Feel the pull of gravity on your body, connecting you to the floor and the earth beneath it. This posture emphasizes stability, reception, and physical presence.</p>
-                <h4>Somatic Inquiry</h4>
+                <h3>Part I: The Foundation <br>(Establishing Structure)</h3>
+                <p><strong>The Posture (1 Minute):</strong> Stand with your feet grounded, arms resting by your sides. This first posture is about creating a stable base. It is the foundational structure from which all creativity can safely emerge. Connect with the physical support of the ground beneath you, establishing your container.</p>
                 <ul>
-                    <li>Notice the sensations in the soles of your feet. Do you feel pressure, texture, or temperature?</li>
-                    <li>Can you sense the weight of your body settling downwards through your skeleton?</li>
-                    <li>Where do you feel the most stability in this posture? Your feet, your legs, your hips?</li>
-                    <li>What is the felt sense of "groundedness" in your body right now?</li>
+                    <li>Notice the sensation of your feet on the floor. What information does this stable contact provide to your nervous system?</li>
+                    <li>Feel the gentle pull of gravity. Can you allow your body to be supported by your skeleton without unnecessary tension?</li>
+                    <li>What does it feel like to simply *be* in your body, here and now, within this foundational shape?</li>
                 </ul>
             </article>
 
             <article class="posture">
-                <h3>Posture II: Centering <span class="posture-aspect">(Core Integration)</span></h3>
-                <p><strong>The Posture (1 Minute):</strong> Slowly bring your arms forward to about chest height. Bend your elbows and face your palms toward each other, as if holding a large, lightweight ball. This posture brings awareness to your body's center, integrating the upper and lower halves.</p>
-                <h4>Somatic Inquiry</h4>
+                <h3>Part II: The Center <br>(Holding Creativity)</h3>
+                <p><strong>The Posture (1 Minute):</strong> Gently bring your hands forward to the level of your heart or abdomen, palms facing each other as if holding a sphere. This posture brings awareness to your core. This is the center of your being, where you hold and nurture your own creative potential and felt sense.</p>
                 <ul>
-                    <li>What subtle sensations (warmth, tingling, coolness) do you notice in your hands and arms?</li>
-                    <li>Bring your awareness to your breath or heartbeat. Notice its natural rhythm without needing to change it.</li>
-                    <li>What is the quality of the space you are holding? Does it feel expansive, dense, or neutral?</li>
-                    <li>How does this posture affect your sense of being centered in your own physical space?</li>
+                    <li>Bring awareness to the space between your hands. Notice any sensations of warmth, energy, or stillness.</li>
+                    <li>What is the rhythm of your breath as you hold this posture? Let it be natural, without needing to control it.</li>
+                    <li>What is the quality of your inner experience right now? Acknowledge any feelings or thoughts as part of your creative process.</li>
                 </ul>
             </article>
 
             <article class="posture">
-                <h3>Posture III: Reaching <span class="posture-aspect">(Yang Aspect)</span></h3>
-                <p><strong>The Posture (1 Minute):</strong> Gently raise your arms overhead, continuing the upward movement by rising onto the balls of your feet. Lengthen through your spine toward the ceiling. This posture emphasizes expansion, gentle activation, and creating space in the body.</p>
-                 <h4>Somatic Inquiry</h4>
-                <ul>
-                    <li>Notice the feeling of length through your spine and the top of your head. Where do you feel expansion?</li>
-                    <li>As you balance, notice the micro-adjustments in your feet and ankles. What is this experience of active stability like?</li>
-                    <li>What is the quality of your awareness in this expansive state? Is it focused, broad, or something else?</li>
-                    <li>In this posture, what is your relationship to the physical space around and above you?</li>
+                <h3>Part III: The Expression <br>(Creative Action)</h3>
+                <p><strong>The Posture (1 Minute):</strong> From your center, extend your arms upward and rise gently onto the balls of your feet. This posture is an act of creative expression, of reaching from your grounded structure out into the world. It is a physical declaration of your presence and vitality.</p>
+                 <ul>
+                    <li>As you reach upwards, where do you feel a sense of opening or expansion in your body?</li>
+                    <li>Notice the active engagement required to balance. How can you find both effort and ease in this expressive action?</li>
+                    <li>What does it feel like to take up space in this way, extending your energy from your core into the world around you?</li>
                 </ul>
             </article>
         </div>
         
         <footer>
             <h2>Integration</h2>
-            <p>Slowly lower your heels, then let your arms float back down to your sides. Stand in stillness for a few moments, noticing any shifts in your physical or internal state. The goal is not to feel a certain way, but simply to notice what is present. Carry this awareness with you as you move into the rest of your day.</p>
+            <p>Slowly lower your heels and your arms, returning to a neutral stance. Take a moment to feel the resonance of the practice. You have just experienced the interplay of Structure and Creativity within your own body—a stable foundation supporting a dynamic, creative expression. Acknowledge this capacity for balance as a resource you can carry with you.</p>
         </footer>
         
     </main>
