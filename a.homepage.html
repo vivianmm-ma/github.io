@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creativity & Structure | The Mind-Body Dialectic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2a0f0f; /* Deep, dark maroon */
+            --card-bg: #402222;
+            --text-color: #e3dcd2; /* Soft, warm off-white */
+            --heading-color: #fffaf0;
+            --accent-color: #e0af68; /* Gentle gold/amber */
+            --accent-hover: #f0c388;
+            --border-color: #5c3d3d;
+            --danger-color: #ff8787;
+            --font-serif: 'Lora', serif;
+            --font-game: 'Press Start 2P', cursive;
+        }
+
+        /* General Styles */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            line-height: 1.8;
+            margin: 0;
+            padding: 2rem 1.5rem;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-game);
+            color: var(--heading-color);
+            font-weight: normal;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+            text-shadow: 3px 3px 0px var(--bg-color), 5px 5px 0px #000;
+        }
+         @media (min-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--heading-color);
+            margin-bottom: 2.5rem;
+            font-family: var(--font-serif);
+            font-style: italic;
+        }
+        
+        .intro-text {
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 3px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+        
+        .card h2 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        /* Dialectic Section */
+        .dialectic-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .dialectic-grid {
+                grid-template-columns: 1fr auto 1fr;
+            }
+        }
+        .dialectic-grid h3 {
+            font-size: 1.2rem;
+        }
+        .dialectic-grid p {
+            font-size: 0.9rem;
+        }
+        .dialectic-grid .imbalance-note {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        .yin-yang {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 4px solid var(--accent-color);
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--text-color) 50%, var(--card-bg) 50%);
+            margin: 1rem auto;
+        }
+        .yin-yang::before,
+        .yin-yang::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+        }
+        .yin-yang::before {
+            top: 20px;
+            background-color: var(--card-bg);
+        }
+        .yin-yang::after {
+            bottom: 20px;
+            background-color: var(--text-color);
+        }
+
+        /* Philosophy Section */
+         .imperfect-box {
+            border: 3px dashed var(--accent-color);
+            transform: rotate(-2deg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        @media (min-width: 768px) {
+            .imperfect-box {
+                margin-top: 0;
+            }
+        }
+        .imperfect-box h3 {
+             font-size: 1.2rem;
+             text-align: center;
+             color: var(--accent-hover);
+        }
+
+        /* Journey Section */
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .journey-card {
+            background: radial-gradient(ellipse at center, #5c3d3d 0%, var(--card-bg) 70%);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+        }
+        .journey-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(224, 175, 104, 0.3);
+            border-color: var(--accent-color);
+        }
+        .journey-card h3 {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin: 0;
+        }
+        .journey-card p {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: var(--border-color);
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Creativity & Structure</h1>
+            <p class="subtitle">The Mind-Body Dialectic</p>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>The Healing Dialectic</h2>
+                <div class="dialectic-grid">
+                    <div>
+                        <h3>Yin / Structure</h3>
+                        <p>Safety, Rest, Boundaries, The Body. The Foundational.</p>
+                        <p class="imbalance-note">Too much leads to: STAGNATION</p>
+                    </div>
+                    <div class="yin-yang"></div>
+                    <div>
+                        <h3>Yang / Creativity</h3>
+                        <p>Action, Growth, Adaptation, Epigenetics. The Response.</p>
+                        <p class="imbalance-note">Too much leads to: CHAOS</p>
+                    </div>
+                </div>
+                <p class="text-center mt-8 text-xl">Healing is not about winning. It's about finding the <span style="color: var(--accent-color); font-family: var(--font-game);">dynamic equilibrium</span> between the forces that shape us.</p>
+            </section>
+
+            <section class="card">
+                 <h2>Our Philosophy</h2>
+                 <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;} @media (min-width: 768px) { div { grid-template-columns: 2fr 1fr; } }">
+                    <div style="text-align: left;">
+                        <p>Many of us are taught to chase a "perfect" or "Just Right" feeling. But for those with trauma or neurodivergence, this chase is a trap. It's a core feature of OCD known as the "Not Just Right Experience" (NJRE)—a constant, nagging sense that things are wrong.</p>
+                        <p><strong style="color: var(--accent-color);">We reclaim this.</strong> We believe the "not just right" feeling isn't a flaw; it's a feature. It's a signal from a system that has creatively adapted to survive. Instead of fighting for an impossible perfection, we find the kindness and beauty in the imperfect.</p>
+                    </div>
+                    <div class="imperfect-box">
+                        <h3>Embrace the 'Not Just Right'</h3>
+                        <p class="text-center">Your authentic self isn't flawless. It's resilient. It's real. That's where kindness begins.</p>
+                    </div>
+                 </div>
+            </section>
+            
+             <section>
+                <h2 style="font-size: 2rem; text-align:center; margin-bottom: 2rem;">Start Your Journey</h2>
+                <div class="journey-grid">
+                    <a href="nervous_system_assessment.html" class="journey-card">
+                        <h3>Find Your Starting Point</h3>
+                        <p>Begin with our screening tool.</p>
+                    </a>
+                    <a href="#" class="journey-card">
+                        <h3>Nervous System Basics</h3>
+                        <p>Understand the fundamentals.</p>
+                    </a>
+                    <a href="#" class="journey-card">
+                        <h3>The Brain-Body Connection</h3>
+                        <p>Learn why somatic awareness is crucial.</p>
+                    </a>
+                     <a href="#" class="journey-card">
+                        <h3>"Ground Zero" First Steps</h3>
+                        <p>For when things feel really bad.</p>
+                    </a>
+                    <a href="#" class="journey-card">
+                        <h3>Somatic Toolkit</h3>
+                        <p>Body-based exercises for regulation.</p>
+                    </a>
+                    <a href="#" class="journey-card">
+                        <h3>The Workbook</h3>
+                        <p>Purchase the complete guide.</p>
+                    </a>
+                </div>
+             </section>
+             
+            <section class="card" style="margin-top: 3rem; text-align:center;">
+                <h3 style="font-size:1.2rem; color: var(--accent-color); margin-top:0;">A Note on Our Design</h3>
+                <p style="font-size: 1rem; max-width: 600px; margin: 0 auto;">This website uses a dark, warm color palette intentionally. The deep reds and soft ambers are low in stimulating blue light, creating a calmer visual environment that is gentler on your nervous system as you explore these topics.</p>
+            </section>
+
+        </main>
+        
+        <footer>
+             <p>Explore free resources at <a href="https://www.cindnesskult.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">CindnessKult.com</a></p>
+            <p>&copy; 2025 Creativity & Structure</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
