@@ -3,79 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creativity & Structure: A Somatic Practice</title>
+    <title>Creativity & Structure | The Mind-Body Dialectic</title>
     <style>
+        /*
+         NOTE: The special pixel font 'Press Start 2P' from the example cannot be used
+         as this file must be self-contained without external links to Google Fonts.
+         A standard monospace font has been used for headers to retain a retro feel.
+        */
         :root {
-            --bg-color: #fdfcf9;
-            --text-color: #4a4a4a;
-            --heading-color: #333333;
-            --accent-color: #916b80; /* A warm, dusty mauve for 'Creativity' */
-            --border-color: #e0e0e0;
+            --bg-color: #bbb4fe;
+            --card-bg: #e8e6ff;
+            --text-color: #2c3e50;
+            --header-color: #304694;
+            --accent-green: #98c379;
+            --shadow-purple: #322277;
+            --link-blue: #556fc8;
+            --alt-text: #306c82;
         }
 
         body {
-            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-family: Georgia, 'Times New Roman', Times, serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.8;
-            margin: 0;
-            padding: 2rem 1rem;
-            font-size: 1.1rem;
+            font-size: 18px;
+            line-height: 1.6;
+            padding: 1rem;
+        }
+
+        h1, h2, h3, h4, .game-font {
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        header {
-            text-align: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 3rem;
+        .text-shadow-green {
+            text-shadow: -2px -2px 0 var(--accent-green), 2px -2px 0 var(--accent-green), -2px 2px 0 var(--accent-green), 2px 2px 0 var(--accent-green);
         }
 
-        h1 {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 2.8rem;
-            color: var(--heading-color);
-            margin-bottom: 0.5rem;
-            font-weight: 300;
-            letter-spacing: 1px;
+        .card {
+            background-color: var(--card-bg);
+            border: 4px solid var(--accent-green);
+            box-shadow: 8px 8px 0px var(--shadow-purple);
+            border-radius: 0.5rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 4rem;
         }
 
-        header .subtitle {
-            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--accent-color);
+        /* Large Yin-Yang for Header */
+        .yin-yang-large {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-color: var(--header-color);
+            border-style: solid;
+            border-width: 4px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--link-blue) 50%, var(--card-bg) 50%);
+            margin: 1rem auto;
         }
-        
-        header p {
-            max-width: 65ch;
-            margin: 1.5rem auto 0;
-            text-align: center;
+        .yin-yang-large::before,
+        .yin-yang-large::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--header-color);
         }
-        
-        .section {
-            padding: 2rem 0;
-            text-align: center;
+        .yin-yang-large::before {
+            top: 15px;
+            background-color: var(--card-bg);
+        }
+        .yin-yang-large::after {
+            bottom: 15px;
+            background-color: var(--link-blue);
         }
 
-        h2 {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-weight: 400;
-            font-size: 1.5rem;
-            color: var(--heading-color);
-            margin-top: 0;
-            margin-bottom: 1.5rem;
+        /* Small Yin-Yang for Lists */
+        .yin-yang-small {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-color: var(--header-color);
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--link-blue) 50%, var(--card-bg) 50%);
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.75em;
         }
-        
+        .yin-yang-small::before,
+        .yin-yang-small::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+        .yin-yang-small::before {
+            top: 2px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--header-color);
+        }
+        .yin-yang-small::after {
+            bottom: 2px;
+            background-color: var(--link-blue);
+            border: 1px solid var(--header-color);
+        }
+
         .postures-container {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
-            margin-top: 2rem;
         }
         
         @media (min-width: 992px) {
@@ -83,108 +131,78 @@
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-
-        .posture {
-            text-align: left;
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background: #ffffff;
-        }
-
-        h3 {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: var(--accent-color);
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-        }
-        
-        .posture p {
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-        }
-
-        ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 2rem;
-        }
-        
-        li {
-            padding-left: 2em;
-            text-indent: -2em;
-            margin-bottom: 1.25rem;
-        }
-
-        li::before {
-            content: '☯';
-            color: var(--accent-color);
-            margin-right: 0.75em;
-            display: inline-block;
-            font-size: 1.2em;
-            vertical-align: middle;
-            line-height: 1;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 3rem;
-            border-top: 1px solid var(--border-color);
-        }
     </style>
 </head>
 <body>
 
-    <main class="container">
-        <header>
-            <h1>Creativity & Structure</h1>
-            <p class="subtitle">A Somatic Practice for Balanced Well-Being</p>
-            <p>Effective therapeutic work often balances two essential elements: <strong>Structure</strong>, which provides the safety, clarity, and predictable framework for exploration; and <strong>Creativity</strong>, which is your unique, unfolding, and deeply personal inner experience. This practice is designed to honor both. The three postures provide the Structure. Your moment-to-moment awareness is the Creativity.</p>
+    <div class="container">
+
+        <header style="text-align: center; margin: 2rem 0 4rem;">
+            <h1 class="text-shadow-green" style="font-size: 2.5rem; color: var(--header-color); margin-bottom: 0.5rem;">The Mind-Body Dialectic</h1>
+            <p class="game-font" style="font-size: 1.25rem; color: var(--alt-text);">A Creativity & Structure Guide</p>
         </header>
 
-        <div class="postures-container">
-            <article class="posture">
-                <h3>Part I: The Foundation <br>(Establishing Structure)</h3>
-                <p><strong>The Posture (1 Minute):</strong> Stand with your feet grounded, arms resting by your sides. This first posture is about creating a stable base. It is the foundational structure from which all creativity can safely emerge. Connect with the physical support of the ground beneath you, establishing your container.</p>
-                <ul>
-                    <li>Notice the sensation of your feet on the floor. What information does this stable contact provide to your nervous system?</li>
-                    <li>Feel the gentle pull of gravity. Can you allow your body to be supported by your skeleton without unnecessary tension?</li>
-                    <li>What does it feel like to simply *be* in your body, here and now, within this foundational shape?</li>
-                </ul>
-            </article>
+        <main>
+            <section class="card">
+                <h2 style="font-size: 2rem; text-align: center; margin-bottom: 2rem; color: var(--header-color);">Player 1: Start Game</h2>
+                <div style="display: grid; grid-template-columns: 1fr; md:grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: center; text-align: center;">
+                    <div style="@media (min-width: 768px){grid-column: 1;}">
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: var(--link-blue);">Yin / Structure</h3>
+                        <p class="game-font" style="font-size: 0.8rem; color: var(--alt-text);">Safety, Rest, Boundaries, The Body. The Foundational. <br> <span style="color: #e53e3e;">Too much leads to: STAGNATION</span></p>
+                    </div>
+                    <div style="@media (min-width: 768px){grid-column: 2;}">
+                        <div class="yin-yang-large"></div>
+                    </div>
+                    <div style="@media (min-width: 768px){grid-column: 3;}">
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: var(--link-blue);">Yang / Creativity</h3>
+                        <p class="game-font" style="font-size: 0.8rem; color: var(--alt-text);">Action, Growth, Adaptation, The Response. The Emergent. <br> <span style="color: #e53e3e;">Too much leads to: CHAOS</span></p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2.5rem; font-size: 1.1rem; color: var(--header-color);">Healing is not about winning. It's about finding the <span class="game-font" style="font-weight: bold; color: var(--accent-green);">dynamic equilibrium</span> between these forces.</p>
+            </section>
 
-            <article class="posture">
-                <h3>Part II: The Center <br>(Holding Creativity)</h3>
-                <p><strong>The Posture (1 Minute):</strong> Gently bring your hands forward to the level of your heart or abdomen, palms facing each other as if holding a sphere. This posture brings awareness to your core. This is the center of your being, where you hold and nurture your own creative potential and felt sense.</p>
-                <ul>
-                    <li>Bring awareness to the space between your hands. Notice any sensations of warmth, energy, or stillness.</li>
-                    <li>What is the rhythm of your breath as you hold this posture? Let it be natural, without needing to control it.</li>
-                    <li>What is the quality of your inner experience right now? Acknowledge any feelings or thoughts as part of your creative process.</li>
-                </ul>
-            </article>
+            <section>
+                <h2 style="font-size: 2rem; text-align: center; margin-bottom: 2rem; color: var(--header-color);">Level 1: The Practice</h2>
+                <div class="postures-container">
+                    <article class="card">
+                        <h3>Part I: The Foundation <br>(Establishing Structure)</h3>
+                        <p><strong>The Posture (1 Minute):</strong> Stand with your feet grounded, arms resting by your sides. This first posture is the foundational structure from which all creativity can safely emerge. Connect with the physical support of the ground beneath you.</p>
+                        <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Notice the sensation of your feet on the floor. What information does this stable contact provide?</li>
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Feel the gentle pull of gravity. Can you allow your body to be supported by your skeleton without unnecessary tension?</li>
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>What does it feel like to simply *be* in your body, here and now, within this foundational shape?</li>
+                        </ul>
+                    </article>
 
-            <article class="posture">
-                <h3>Part III: The Expression <br>(Creative Action)</h3>
-                <p><strong>The Posture (1 Minute):</strong> From your center, extend your arms upward and rise gently onto the balls of your feet. This posture is an act of creative expression, of reaching from your grounded structure out into the world. It is a physical declaration of your presence and vitality.</p>
-                 <ul>
-                    <li>As you reach upwards, where do you feel a sense of opening or expansion in your body?</li>
-                    <li>Notice the active engagement required to balance. How can you find both effort and ease in this expressive action?</li>
-                    <li>What does it feel like to take up space in this way, extending your energy from your core into the world around you?</li>
-                </ul>
-            </article>
-        </div>
-        
-        <footer>
-            <h2>Integration</h2>
-            <p>Slowly lower your heels and your arms, returning to a neutral stance. Take a moment to feel the resonance of the practice. You have just experienced the interplay of Structure and Creativity within your own body—a stable foundation supporting a dynamic, creative expression. Acknowledge this capacity for balance as a resource you can carry with you.</p>
+                    <article class="card">
+                        <h3>Part II: The Center <br>(Holding Creativity)</h3>
+                        <p><strong>The Posture (1 Minute):</strong> Gently bring your hands forward to the level of your heart, palms facing each other as if holding a sphere. This is the center of your being, where you hold and nurture your own creative potential and felt sense.</p>
+                         <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Bring awareness to the space between your hands. Notice any sensations of warmth, energy, or stillness.</li>
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>What is the rhythm of your breath as you hold this posture? Let it be natural, without needing to control it.</li>
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>What is the quality of your inner experience right now? Acknowledge any feelings as part of your creative process.</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3>Part III: The Expression <br>(Creative Action)</h3>
+                        <p><strong>The Posture (1 Minute):</strong> From your center, extend your arms upward and rise gently onto the balls of your feet. This posture is an act of creative expression, of reaching from your grounded structure out into the world.</p>
+                         <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>As you reach upwards, where do you feel a sense of opening or expansion in your body?</li>
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Notice the active engagement required to balance. How can you find both effort and ease in this expressive action?</li>
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>What does it feel like to take up space, extending your energy from your core into the world around you?</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer style="text-align: center; margin-top: 2rem; padding: 2rem 0;">
+            <p class="game-font" style="font-size: 1rem; color: var(--alt-text);">Embrace the 'Not Just Right'. Find Your Kindness.</p>
+            <p style="font-size: 0.8rem; color: var(--header-color);">This is your strategy guide, not the whole game. Consult a master-level healer for your unique quest.</p>
         </footer>
-        
-    </main>
+
+    </div>
 
 </body>
 </html>
