@@ -216,6 +216,14 @@
             border-radius: 8px;
             margin-top: 1rem;
         }
+        
+        #additional-indicators ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        #additional-indicators li {
+            margin-bottom: 1rem;
+        }
 
         .copy-results {
             margin-top: 2.5rem;
@@ -223,7 +231,7 @@
 
         #results-textarea {
             width: 100%;
-            height: 150px;
+            height: 200px;
             padding: 1rem;
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -622,6 +630,54 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- PART 3 -->
+            <div class="card">
+                <h2>Part 3: Felt Safety & Chronicity</h2>
+                <p>These final questions explore your overall sense of safety in your body and how long you've been experiencing these patterns.</p>
+                <div class="question-group">
+                    <div class="question-item">
+                        <label>1. Overall, how comfortable and safe do you feel in your body on a typical day?</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p3q1" value="1" data-text="Very Unsafe/Uncomfortable" required><span>Very Unsafe</span></label>
+                            <label><span>2</span><input type="radio" name="p3q1" value="2" data-text="Mostly Uncomfortable"><span>Uncomfortable</span></label>
+                            <label><span>3</span><input type="radio" name="p3q1" value="3" data-text="Neutral / Unsure"><span>Neutral</span></label>
+                            <label><span>4</span><input type="radio" name="p3q1" value="4" data-text="Mostly Comfortable"><span>Comfortable</span></label>
+                            <label><span>5</span><input type="radio" name="p3q1" value="5" data-text="Very Safe/Comfortable"><span>Very Safe</span></label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>2. When you are around other people, how comfortable do you feel in your own body?</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p3q2" value="1" data-text="Very Uncomfortable/Tense" required><span>Very Tense</span></label>
+                            <label><span>2</span><input type="radio" name="p3q2" value="2" data-text="Somewhat Uncomfortable"><span>Uncomfortable</span></label>
+                            <label><span>3</span><input type="radio" name="p3q2" value="3" data-text="Neutral / Depends"><span>Neutral</span></label>
+                            <label><span>4</span><input type="radio" name="p3q2" value="4" data-text="Mostly Comfortable"><span>Comfortable</span></label>
+                            <label><span>5</span><input type="radio" name="p3q2" value="5" data-text="Very Comfortable/Relaxed"><span>Very Relaxed</span></label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>3. When you intentionally take a slow, deep breath, what is your immediate internal reaction?</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p3q3" value="1" data-text="Becomes much more anxious" required><span>More Anxious</span></label>
+                            <label><span>2</span><input type="radio" name="p3q3" value="2" data-text="Becomes slightly anxious"><span>Slightly Anxious</span></label>
+                            <label><span>3</span><input type="radio" name="p3q3" value="3" data-text="No noticeable change"><span>No Change</span></label>
+                            <label><span>4</span><input type="radio" name="p3q3" value="4" data-text="Becomes slightly calmer"><span>Slightly Calmer</span></label>
+                            <label><span>5</span><input type="radio" name="p3q3" value="5" data-text="Becomes much calmer"><span>Much Calmer</span></label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>4. For how long have you been experiencing the general pattern of feelings you've reported in this assessment?</label>
+                        <div class="likert-scale">
+                            <label><span>1</span><input type="radio" name="p3q4" value="1" data-text="A few days/weeks" required><span>A few weeks</span></label>
+                            <label><span>2</span><input type="radio" name="p3q4" value="2" data-text="A few months"><span>A few months</span></label>
+                            <label><span>3</span><input type="radio" name="p3q4" value="3" data-text="About a year"><span>About a year</span></label>
+                            <label><span>4</span><input type="radio" name="p3q4" value="4" data-text="A few years"><span>A few years</span></label>
+                            <label><span>5</span><input type="radio" name="p3q4" value="5" data-text="Many years / As long as I can remember"><span>Many years</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <button type="submit" class="submit-btn">Calculate My Baseline</button>
         </form>
@@ -633,6 +689,7 @@
                 <div id="interpretation-section">
                     <div id="dominant-state-interpretation"></div>
                     <div id="mind-body-interpretation"></div>
+                    <div id="additional-indicators"></div>
                 </div>
                 
                 <div class="results-grid">
@@ -703,10 +760,16 @@
 
                 // --- Part 2 Scoring ---
                 let somaticScore = 0;
-                for (let i = 1; i <= 12; i++) { // Updated loop to 12
+                for (let i = 1; i <= 12; i++) { 
                     somaticScore += parseInt(document.querySelector(`input[name="p2q${i}"]:checked`).value);
                 }
                 
+                // --- Part 3 Data Capture ---
+                const feltSafety = document.querySelector('input[name="p3q1"]:checked').dataset.text;
+                const socialComfort = document.querySelector('input[name="p3q2"]:checked').dataset.text;
+                const breathReaction = document.querySelector('input[name="p3q3"]:checked').dataset.text;
+                const chronicity = document.querySelector('input[name="p3q4"]:checked').dataset.text;
+
                 // --- Display Raw Scores ---
                 document.getElementById('vv-score').textContent = scoreA;
                 document.getElementById('symp-score').textContent = scoreB;
@@ -728,18 +791,16 @@
                 document.getElementById('dominant-state-interpretation').innerHTML = dominantStateHTML;
                 
                 // 2. Mind-Body Connection Profile
-                // Normalize scores to a 0-100 scale for comparison
                 const selfReportedDysregulation = scoreB + scoreC;
-                const selfReportedMin = 12; // Min possible scoreB + scoreC
-                const selfReportedMax = 60; // Max possible scoreB + scoreC
-                const somaticMin = 12;       // Min possible somaticScore (12 questions)
-                const somaticMax = 60;      // Max possible somaticScore (12 questions)
+                const selfReportedMin = 12; 
+                const selfReportedMax = 60; 
+                const somaticMin = 12;       
+                const somaticMax = 60;      
                 
                 const selfReportedPercent = ((selfReportedDysregulation - selfReportedMin) / (selfReportedMax - selfReportedMin)) * 100;
                 const somaticPercent = ((somaticScore - somaticMin) / (somaticMax - somaticMin)) * 100;
                 
                 let mindBodyHTML = '<h3>Your Mind-Body Connection Profile</h3>';
-                // Define thresholds: low is < 35%, high is > 65%
                 if (selfReportedPercent < 35 && somaticPercent > 65) {
                     mindBodyHTML += `<div class="profile-card"><h4>Profile: Cognitive Override (Body-Disconnect)</h4><p>Your results show a significant disconnect: you report relatively low emotional distress, but your body is showing high signs of physical dysregulation. This is a common and intelligent adaptation to chronic stress or trauma, where the mind learns to ignore or "override" the body's distress signals to function. Research suggests this pattern, sometimes related to alexithymia, can lead to a "decoupling" between subjective feelings and physiological reality. Reconnecting with your body's subtle cues is a key step in healing.</p></div>`;
                 } else if (selfReportedPercent > 65 && somaticPercent < 35) {
@@ -748,14 +809,32 @@
                      mindBodyHTML += `<div class="profile-card"><h4>Profile: Aligned Connection</h4><p>Your self-reported emotional state and your body's physical signals are telling a consistent story. Whether you are feeling regulated or dysregulated, your mind and body are in sync. This strong connection is the foundation of interoceptive awareness and a powerful asset for building greater regulation and resilience.</p></div>`;
                 }
                 document.getElementById('mind-body-interpretation').innerHTML = mindBodyHTML;
+                
+                // 3. Additional Indicators
+                let additionalIndicatorsHTML = `
+                    <h3>Additional Indicators for Reflection</h3>
+                    <ul>
+                        <li><strong>Overall Felt Safety:</strong> You reported feeling: <strong>${feltSafety}</strong>. This is a core indicator of your nervous system's baseline. A sense of unsafety can keep the body in a constant state of low-level defense.</li>
+                        <li><strong>Comfort Around Others:</strong> You reported feeling: <strong>${socialComfort}</strong>. Difficulty feeling at ease around others can signal a hypervigilant nervous system that neurocepts (unconsciously detects) threat in social situations.</li>
+                        <li><strong>Reaction to Deep Breath:</strong> Your reaction is: <strong>${breathReaction}</strong>. For a dysregulated system, a deep breath can paradoxically feel threatening. An anxious response is valuable information that your system needs gentler ways to find regulation first.</li>
+                        <li><strong>Chronicity:</strong> You've been feeling this way for: <strong>${chronicity}</strong>. This helps distinguish between an acute stress response and a chronic, deeply embedded nervous system pattern.</li>
+                    </ul>
+                `;
+                document.getElementById('additional-indicators').innerHTML = additionalIndicatorsHTML;
 
 
                 // --- Update Copy Text Area ---
                 const resultsText = `
 Nervous System Assessment Results
 ----------------------------------
-Dominant State Profile: ${document.querySelector('#dominant-state-interpretation h4').textContent}
-Mind-Body Profile: ${document.querySelector('#mind-body-interpretation h4').textContent}
+Dominant State Profile: ${document.querySelector('#dominant-state-interpretation h4').textContent.trim()}
+Mind-Body Profile: ${document.querySelector('#mind-body-interpretation h4').textContent.trim()}
+
+--- Additional Indicators ---
+Overall Felt Safety: ${feltSafety}
+Comfort Around Others: ${socialComfort}
+Reaction to Deep Breath: ${breathReaction}
+Chronicity of Pattern: ${chronicity}
 
 --- Raw Scores for Reference ---
 Ventral Vagal (Safety): ${scoreA} / 25
