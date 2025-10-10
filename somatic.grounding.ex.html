@@ -3,122 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>An Alchemical Standing: A Somatic Journey</title>
+    <title>Three-Part Standing Meditation for Somatic Balance</title>
     <style>
         :root {
-            --bg-color: #1a181d;
-            --text-color: #d8d4c7;
-            --header-color: #c0b8a6;
-            --border-color: #5a5245;
-            --accent-color: #a98158;
+            --bg-color: #f8f9fa;
+            --text-color: #343a40;
+            --heading-color: #005f73;
+            --border-color: #dee2e6;
+            --accent-color: #0a9396;
+            --subtle-gray: #6c757d;
         }
 
         body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.7;
+            line-height: 1.6;
             margin: 0;
             padding: 2rem 1rem;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            border: 1px solid var(--border-color);
-            background-color: #242128;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         header {
             text-align: center;
-            padding: 2rem 1.5rem;
+            padding-bottom: 2rem;
             border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: var(--header-color);
+            font-size: 2.2rem;
+            color: var(--heading-color);
             margin-bottom: 0.5rem;
-            font-weight: normal;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-weight: 600;
         }
 
         header .subtitle {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--subtle-gray);
         }
         
         header p {
-            max-width: 65ch;
+            max-width: 70ch;
             margin: 1.5rem auto 0;
             text-align: left;
+            font-size: 1.1rem;
         }
         
         .section {
-            padding: 2rem 1.5rem;
+            padding: 2rem 0;
         }
 
         h2 {
             text-align: center;
-            font-weight: normal;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--header-color);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--heading-color);
             margin-top: 0;
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
         }
         
-        .realms-container {
+        .postures-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1px;
-            background-color: var(--border-color);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
+            gap: 2rem;
         }
 
-        .realm {
-            background-color: #242128;
-            padding: 1.5rem;
+        .posture {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .posture:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
         }
         
-        @media (min-width: 768px) {
-            .realms-container {
+        @media (min-width: 992px) {
+            .postures-container {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
 
         h3 {
-            font-size: 1.5rem;
-            font-weight: normal;
+            font-size: 1.3rem;
+            font-weight: 600;
             color: var(--accent-color);
             margin-top: 0;
             margin-bottom: 1rem;
         }
         
-        h3 .realm-number {
-            font-style: italic;
-            color: #888;
+        h3 .posture-aspect {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--subtle-gray);
+            margin-left: 0.5rem;
         }
 
-        .realm p {
+        .posture p {
             margin-top: 0;
             margin-bottom: 1.5rem;
         }
 
         h4 {
             font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--header-color);
+            font-weight: 600;
+            color: var(--heading-color);
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
+            margin-top: 2rem;
             margin-bottom: 1rem;
         }
         
@@ -129,22 +129,25 @@
         }
         
         li {
-            padding-left: 1.5em;
-            text-indent: -1.5em;
+            padding-left: 1.75em;
+            text-indent: -1.75em;
             margin-bottom: 0.75rem;
         }
 
         li::before {
-            content: '☩';
+            content: '›';
             color: var(--accent-color);
             margin-right: 0.75em;
-            display: inline-block;
+            font-weight: bold;
+            font-size: 1.5em;
+            line-height: 1;
         }
         
         footer {
             text-align: center;
-            padding: 2rem;
-            font-style: italic;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
@@ -152,61 +155,58 @@
 
     <main class="container">
         <header>
-            <h1>An Alchemical Standing</h1>
-            <p class="subtitle">A Somatic Journey Through Three Realms</p>
-            <p>This is not an exercise; it is an act of listening. Your body is a vessel, a resonant chamber holding the echoes of the Earth below, the Cosmos above, and the haunted, bustling world of the Human in between. For the next three minutes, you will become a bridge. You will stand at the threshold of three realms and allow their whispers to move through your flesh. Do not seek answers; simply notice the sensations.</p>
+            <h1>Three-Part Standing Meditation</h1>
+            <p class="subtitle">A Practice for Somatic Balance and Nervous System Regulation</p>
+            <p>This sequence is an invitation to cultivate interoceptive awareness—the ability to sense the internal state of your body. By moving through three distinct postures, we explore the balance of complementary energies (Yin and Yang): the stability of grounding, the integration of our core, and the expansiveness of reaching. This structured practice provides a safe container for your creative, moment-to-moment experience.</p>
         </header>
 
         <section class="section">
             <h2>Preparation</h2>
-            <p>Find a quiet space where you will not be disturbed. Stand with your feet shoulder-width apart, knees soft, spine aligned but not rigid. Close your eyes or soften your gaze. Take one deep breath and release it with a sigh, letting the mask of the day fall away.</p>
+            <p style="text-align: center; max-width: 65ch; margin: 0 auto;">Find a comfortable place to stand with your feet about shoulder-width apart. Allow your knees to be soft, not locked. Let your spine be long and your shoulders relaxed. Take a few gentle breaths to settle into your body and the present moment.</p>
         </section>
 
-        <div class="realms-container">
-            <article class="realm">
-                <h3><span class="realm-number">I.</span> The Realm of Earth <br>(The Root)</h3>
-                <p><strong>The Posture:</strong> Let your arms hang heavy by your sides. Gently turn your palms to face behind you. Let your arms drift a few inches away from your body with a subtle bend in your elbows. Feel as though your fingertips are heavy, dripping with ink, pulling towards the dark soil beneath the floor.</p>
+        <div class="postures-container">
+            <article class="posture">
+                <h3>Posture I: Grounding <span class="posture-aspect">(Yin Aspect)</span></h3>
+                <p><strong>The Posture (1 Minute):</strong> Allow your arms to hang comfortably by your sides. Let your elbows have a slight bend. Feel the pull of gravity on your body, connecting you to the floor and the earth beneath it. This posture emphasizes stability, reception, and physical presence.</p>
                 <h4>Somatic Inquiry</h4>
                 <ul>
-                    <li>What is the texture of the ground felt through the soles of your feet?</li>
-                    <li>What is the weight of your own history, felt in the marrow of your leg bones?</li>
-                    <li>If a tremor were to rise from the Earth's core, where in your body would you feel it first?</li>
-                    <li>What forgotten things are buried here in the dark soil of your being?</li>
+                    <li>Notice the sensations in the soles of your feet. Do you feel pressure, texture, or temperature?</li>
+                    <li>Can you sense the weight of your body settling downwards through your skeleton?</li>
+                    <li>Where do you feel the most stability in this posture? Your feet, your legs, your hips?</li>
+                    <li>What is the felt sense of "groundedness" in your body right now?</li>
                 </ul>
             </article>
 
-            <article class="realm">
-                <h3><span class="realm-number">II.</span> The Realm of Man <br>(The Heart)</h3>
-                <p><strong>The Posture:</strong> Slowly, as if moving through deep water, raise your arms in front of you to chest height. Your elbows should be bent and lower than your hands, your palms facing each other as if you are holding a large, invisible, fragile sphere. You are embracing a phantom.</p>
+            <article class="posture">
+                <h3>Posture II: Centering <span class="posture-aspect">(Core Integration)</span></h3>
+                <p><strong>The Posture (1 Minute):</strong> Slowly bring your arms forward to about chest height. Bend your elbows and face your palms toward each other, as if holding a large, lightweight ball. This posture brings awareness to your body's center, integrating the upper and lower halves.</p>
                 <h4>Somatic Inquiry</h4>
                 <ul>
-                    <li>What is the temperature in the sphere between your palms? A warmth, a chill, a static crackle?</li>
-                    <li>Feel your pulse. Is it a steady drum, a frantic messenger, or a faint echo?</li>
-                    <li>What unconscious shapes do your hands want to make around this sphere?</li>
-                    <li>What faces, relationships, or archetypes flicker in the space you hold?</li>
+                    <li>What subtle sensations (warmth, tingling, coolness) do you notice in your hands and arms?</li>
+                    <li>Bring your awareness to your breath or heartbeat. Notice its natural rhythm without needing to change it.</li>
+                    <li>What is the quality of the space you are holding? Does it feel expansive, dense, or neutral?</li>
+                    <li>How does this posture affect your sense of being centered in your own physical space?</li>
                 </ul>
             </article>
 
-            <article class="realm">
-                <h3><span class="realm-number">III.</span> The Realm of Heaven <br>(The Crown)</h3>
-                <p><strong>The Posture:</strong> Release the sphere. Let your arms float upwards, reaching towards the sky above your head. As they reach their peak, rise onto the balls of your feet, balancing on the precipice. Stretch your fingers as if to touch a cold, distant star. You are an antenna for the void.</p>
+            <article class="posture">
+                <h3>Posture III: Reaching <span class="posture-aspect">(Yang Aspect)</span></h3>
+                <p><strong>The Posture (1 Minute):</strong> Gently raise your arms overhead, continuing the upward movement by rising onto the balls of your feet. Lengthen through your spine toward the ceiling. This posture emphasizes expansion, gentle activation, and creating space in the body.</p>
                  <h4>Somatic Inquiry</h4>
                 <ul>
-                    <li>What is the pressure of the empty space above your skull? Vast, heavy, or liberating?</li>
-                    <li>Notice the subtle tremble in your muscles. What is the frequency of this vibration?</li>
-                    <li>If you could pull a silent piece of knowledge from the collective unconscious, how would it feel?</li>
-                    <li>What color is the silence of the cosmos? Can you sense it behind your eyes?</li>
+                    <li>Notice the feeling of length through your spine and the top of your head. Where do you feel expansion?</li>
+                    <li>As you balance, notice the micro-adjustments in your feet and ankles. What is this experience of active stability like?</li>
+                    <li>What is the quality of your awareness in this expansive state? Is it focused, broad, or something else?</li>
+                    <li>In this posture, what is your relationship to the physical space around and above you?</li>
                 </ul>
             </article>
         </div>
-
-        <section class="section">
-            <h2>Integration: The Return</h2>
-            <p>Slowly, lower your heels back to the floor. Let your arms float down through the air, returning to your sides. Stand in stillness for a final moment. You have journeyed through three worlds and returned to yourself.</p>
-            <footer>
-                <p>Which realm felt most familiar? Which felt most alien? What single sensation, image, or word has followed you back from your journey? This is your artifact from the descent. Hold it. It has something to tell you.</p>
-            </footer>
-        </section>
+        
+        <footer>
+            <h2>Integration</h2>
+            <p>Slowly lower your heels, then let your arms float back down to your sides. Stand in stillness for a few moments, noticing any shifts in your physical or internal state. The goal is not to feel a certain way, but simply to notice what is present. Carry this awareness with you as you move into the rest of your day.</p>
+        </footer>
         
     </main>
 
