@@ -50,8 +50,39 @@
             box-shadow: 8px 8px 0px var(--shadow-purple);
             border-radius: 0.5rem;
             padding: 1.5rem 2rem;
-            margin-bottom: 4rem;
+            margin-bottom: 4rem; /* Adjusted for tighter spacing */
         }
+
+        /* Logo styling */
+        .not-just-right-logo {
+            width: 80px; /* Smaller size */
+            height: 80px;
+            border: 3px dashed var(--link-blue);
+            border-radius: 50%; /* Make it round */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            color: var(--header-color);
+            transform: rotate(-5deg); /* Keep the slightly imperfect tilt */
+            margin-right: 1.5rem; /* Space between logo and text */
+            flex-shrink: 0; /* Prevent it from shrinking */
+        }
+
+        /* Header Intro */
+        .intro-container {
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Vertically center logo and text */
+            justify-content: center;
+            max-width: 800px; /* Constrain width for a less sprawling intro */
+            margin: 1.5rem auto 0;
+            text-align: left; /* Align text to the left within its container */
+        }
+        .intro-text {
+            flex-grow: 1;
+        }
+
 
         /* Large Yin-Yang for Header */
         .yin-yang-large {
@@ -124,6 +155,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
+            margin-top: 2rem;
         }
         
         @media (min-width: 992px) {
@@ -140,6 +172,12 @@
         <header style="text-align: center; margin: 2rem 0 4rem;">
             <h1 class="text-shadow-green" style="font-size: 2.5rem; color: var(--header-color); margin-bottom: 0.5rem;">The Mind-Body Dialectic</h1>
             <p class="game-font" style="font-size: 1.25rem; color: var(--alt-text);">A Creativity & Structure Guide</p>
+            <div class="intro-container">
+                <div class="not-just-right-logo game-font">NJRE</div>
+                <p class="intro-text">
+                    This practice balances <strong>Structure</strong> (safety, framework) with <strong>Creativity</strong> (your unique experience). It's a somatic exploration designed to help you track your body's wisdom.
+                </p>
+            </div>
         </header>
 
         <main>
@@ -168,7 +206,7 @@
                         <h3>Part I: The Foundation <br>(Establishing Structure)</h3>
                         <p><strong>The Posture (1 Minute):</strong> Stand with your feet grounded, arms resting by your sides. This first posture is the foundational structure from which all creativity can safely emerge. Connect with the physical support of the ground beneath you.</p>
                         <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Notice the sensation of your feet on the floor. What information does this stable contact provide?</li>
+                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Notice the sensation of your feet on the floor. What information does this stable contact provide to your nervous system?</li>
                             <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Feel the gentle pull of gravity. Can you allow your body to be supported by your skeleton without unnecessary tension?</li>
                             <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>What does it feel like to simply *be* in your body, here and now, within this foundational shape?</li>
                         </ul>
