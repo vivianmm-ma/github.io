@@ -50,70 +50,36 @@
             box-shadow: 8px 8px 0px var(--shadow-purple);
             border-radius: 0.5rem;
             padding: 1.5rem 2rem;
-            margin-bottom: 4rem; /* Adjusted for tighter spacing */
+            margin-bottom: 3rem;
         }
 
         /* Logo styling */
         .not-just-right-logo {
-            width: 80px; /* Smaller size */
+            width: 80px;
             height: 80px;
             border: 3px dashed var(--link-blue);
-            border-radius: 50%; /* Make it round */
+            border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-family: 'Courier New', Courier, monospace;
             font-size: 1.2rem;
             color: var(--header-color);
-            transform: rotate(-5deg); /* Keep the slightly imperfect tilt */
-            margin-right: 1.5rem; /* Space between logo and text */
-            flex-shrink: 0; /* Prevent it from shrinking */
+            transform: rotate(-5deg);
+            margin-right: 1.5rem;
+            flex-shrink: 0;
         }
 
-        /* Header Intro */
         .intro-container {
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; /* Vertically center logo and text */
+            display: flex;
+            align-items: center;
             justify-content: center;
-            max-width: 800px; /* Constrain width for a less sprawling intro */
+            max-width: 800px;
             margin: 1.5rem auto 0;
-            text-align: left; /* Align text to the left within its container */
+            text-align: left;
         }
         .intro-text {
             flex-grow: 1;
-        }
-
-
-        /* Large Yin-Yang for Header */
-        .yin-yang-large {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            border-color: var(--header-color);
-            border-style: solid;
-            border-width: 4px;
-            border-radius: 50%;
-            background: linear-gradient(to bottom, var(--link-blue) 50%, var(--card-bg) 50%);
-            margin: 1rem auto;
-        }
-        .yin-yang-large::before,
-        .yin-yang-large::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 2px solid var(--header-color);
-        }
-        .yin-yang-large::before {
-            top: 15px;
-            background-color: var(--card-bg);
-        }
-        .yin-yang-large::after {
-            bottom: 15px;
-            background-color: var(--link-blue);
         }
 
         /* Small Yin-Yang for Lists */
@@ -169,7 +135,7 @@
 
     <div class="container">
 
-        <header style="text-align: center; margin: 2rem 0 4rem;">
+        <header style="text-align: center; margin: 2rem 0 3rem;">
             <h1 class="text-shadow-green" style="font-size: 2.5rem; color: var(--header-color); margin-bottom: 0.5rem;">The Mind-Body Dialectic</h1>
             <p class="game-font" style="font-size: 1.25rem; color: var(--alt-text);">A Creativity & Structure Guide</p>
             <div class="intro-container">
@@ -182,21 +148,10 @@
 
         <main>
             <section class="card">
-                <h2 style="font-size: 2rem; text-align: center; margin-bottom: 2rem; color: var(--header-color);">Player 1: Start Game</h2>
-                <div style="display: grid; grid-template-columns: 1fr; md:grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: center; text-align: center;">
-                    <div style="@media (min-width: 768px){grid-column: 1;}">
-                        <h3 style="font-size: 1.25rem; font-weight: bold; color: var(--link-blue);">Yin / Structure</h3>
-                        <p class="game-font" style="font-size: 0.8rem; color: var(--alt-text);">Safety, Rest, Boundaries, The Body. The Foundational. <br> <span style="color: #e53e3e;">Too much leads to: STAGNATION</span></p>
-                    </div>
-                    <div style="@media (min-width: 768px){grid-column: 2;}">
-                        <div class="yin-yang-large"></div>
-                    </div>
-                    <div style="@media (min-width: 768px){grid-column: 3;}">
-                        <h3 style="font-size: 1.25rem; font-weight: bold; color: var(--link-blue);">Yang / Creativity</h3>
-                        <p class="game-font" style="font-size: 0.8rem; color: var(--alt-text);">Action, Growth, Adaptation, The Response. The Emergent. <br> <span style="color: #e53e3e;">Too much leads to: CHAOS</span></p>
-                    </div>
-                </div>
-                <p style="text-align: center; margin-top: 2.5rem; font-size: 1.1rem; color: var(--header-color);">Healing is not about winning. It's about finding the <span class="game-font" style="font-weight: bold; color: var(--accent-green);">dynamic equilibrium</span> between these forces.</p>
+                <h2 style="font-size: 1.8rem; text-align: center; margin-bottom: 1.5rem; color: var(--header-color);">Why This Works: A Somatic View</h2>
+                <p style="margin-bottom: 1rem;">Trauma isn't just a mental event; it's stored in the body as incomplete survival responses (fight, flight, freeze) and somatic memory. Dissociation is a natural coping mechanism that disconnects us from these overwhelming physical sensations. This practice is a powerful tool to gently reverse that process.</p>
+                <p>By intentionally focusing on physical sensations—your feet on the ground, your body in space—you are actively anchoring your awareness back into the present moment. This is a direct antidote to dissociation. From a TCM perspective, these movements are also believed to cleanse and harmonize the 12 primary meridians, releasing stored energetic stagnation.</p>
+                <h4 class="game-font" style="font-size: 1rem; color: var(--link-blue); text-align: center; margin-top: 2rem;">This can be a powerful resource for: Trauma Recovery, Dissociation, Chronic Stress, and Anxiety.</h4>
             </section>
 
             <section>
