@@ -153,6 +153,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 1rem;
         }
 
         .submit-btn:hover {
@@ -190,6 +191,9 @@
             justify-content: center;
             min-height: 140px;
         }
+        .score-card .score-label {
+            font-size: 1rem;
+        }
 
         .score-card .score-value {
             font-size: 2.5rem;
@@ -202,7 +206,7 @@
             text-align: center;
             font-size: 1.8rem;
         }
-        #interpretation-section h4 {
+        #interpretation-section h4, .interpretation-key-card h4 {
             color: var(--heading-color);
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
@@ -217,11 +221,11 @@
             margin-top: 1rem;
         }
         
-        #additional-indicators ul {
+        #additional-indicators ul, .interpretation-key-card ul {
             list-style-type: none;
             padding-left: 0;
         }
-        #additional-indicators li {
+        #additional-indicators li, .interpretation-key-card li {
             margin-bottom: 1rem;
         }
 
@@ -231,7 +235,7 @@
 
         #results-textarea {
             width: 100%;
-            height: 200px;
+            height: 220px;
             padding: 1rem;
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -293,7 +297,7 @@
                 <p>For each statement, rate how frequently you have felt this way over the last week or two. This section helps identify which state you tend to inhabit: the safe "Window of Tolerance," a state of hyperarousal, or a state of hypoarousal.</p>
                 
                 <div class="question-group" id="part1-a">
-                    <h3>The Social Engagement System (Ventral Vagal / Window of Tolerance)</h3>
+                    <h3>The Social Engagement System (Parasympathetic / Ventral Vagal)</h3>
                     <!-- Item 1 -->
                     <div class="question-item">
                         <label>1. I have felt calm and at ease.</label>
@@ -352,7 +356,7 @@
                 </div>
 
                 <div class="question-group" id="part1-b">
-                    <h3>The Mobilizing System (Sympathetic / Hyperarousal)</h3>
+                    <h3>The Mobilizing System (Sympathetic / Fight-or-Flight)</h3>
                     <!-- Item 6 -->
                     <div class="question-item">
                         <label>6. My heart felt like it was beating faster or harder than usual.</label>
@@ -422,7 +426,7 @@
                 </div>
 
                 <div class="question-group" id="part1-c">
-                    <h3>The Immobilizing System (Dorsal Vagal / Hypoarousal)</h3>
+                    <h3>The Immobilizing System (Dorsal Vagal / Freeze)</h3>
                      <!-- Item 12 -->
                     <div class="question-item">
                         <label>12. I felt numb, either emotionally or physically.</label>
@@ -682,6 +686,33 @@
             <button type="submit" class="submit-btn">Calculate My Baseline</button>
         </form>
 
+        <div class="card interpretation-key-card">
+             <h2>Understanding Your Scores (Interpretation Key)</h2>
+             <h4>Part 1 & 2: Quantitative Scores</h4>
+             <ul>
+                 <li><strong>Parasympathetic / Ventral Vagal Score (Range 5-25):</strong> A higher score indicates a greater capacity for safety, connection, and regulation. A score of 20+ suggests this is your primary experience.</li>
+                 <li><strong>Sympathetic / Fight-or-Flight Score (Range 6-30):</strong> A higher score indicates a greater tendency toward a mobilized state of hyperarousal (anxiety, anger). A score of 18+ suggests this state is significantly present.</li>
+                 <li><strong>Dorsal Vagal / Freeze Score (Range 6-30):</strong> A higher score indicates a greater tendency toward a shutdown state of hypoarousal (numbness, disconnection). A score of 18+ suggests this state is significantly present.</li>
+                 <li><strong>Somatic Dysregulation Score (Range 12-60):</strong> This score reflects how much stress is physically held in your body. A higher score indicates more dysregulation.
+                     <ul style="padding-left: 20px; margin-top: 10px;">
+                         <li><strong>12-28 (Low):</strong> Your body shows minimal signs of chronic dysregulation.</li>
+                         <li><strong>29-44 (Moderate):</strong> Your body is holding a noticeable level of stress.</li>
+                         <li><strong>45-60 (High):</strong> Your body is showing significant signs of being stuck in a survival state.</li>
+                     </ul>
+                 </li>
+             </ul>
+             <h4>Part 3: Qualitative Indicators</h4>
+             <p>The final four questions provide crucial context. For example, feeling unsafe in your body or becoming anxious with a deep breath are strong indicators of a dysregulated nervous system, regardless of your other scores.</p>
+        </div>
+        
+        <div class="card" id="why-it-matters-static">
+            <h3>Why Your Starting Point Matters</h3>
+            <div class="profile-card">
+                <p>The purpose of this screening is not to achieve a "good" score, but to accurately identify your nervous system's unique starting point. Everyone's path to regulation is different. Chronic patterns of hyperarousal (Fight/Flight) are often at the root of anxiety disorders, while chronic hypoarousal (Freeze) is strongly linked to depression and dissociative conditions. For example, if you indicate that a deep breath makes you anxious, your nervous system currently perceives this common calming technique as a threat. Therefore, your starting point for regulation work will be different from someone who finds it calming. You may need to begin with more foundational safety-building exercises before breathwork becomes an effective tool. Understanding these nuances is the key to effective nervous system retraining.</p>
+            </div>
+        </div>
+
+
         <section id="results-section">
             <div class="card">
                 <h2>Your Assessment Results</h2>
@@ -694,15 +725,15 @@
                 
                 <div class="results-grid">
                      <div class="score-card">
-                        <div class="score-label">Ventral Vagal (Safety)</div>
+                        <div class="score-label">Parasympathetic / Ventral Vagal (Safety & Social Engagement)</div>
                         <div class="score-value" id="vv-score">0</div>
                     </div>
                     <div class="score-card">
-                        <div class="score-label">Sympathetic (Mobilized)</div>
+                        <div class="score-label">Sympathetic / Fight-or-Flight (Mobilized)</div>
                         <div class="score-value" id="symp-score">0</div>
                     </div>
                     <div class="score-card">
-                        <div class="score-label">Dorsal Vagal (Shutdown)</div>
+                        <div class="score-label">Dorsal Vagal / Freeze (Shutdown)</div>
                         <div class="score-value" id="dv-score">0</div>
                     </div>
                      <div class="score-card">
@@ -767,7 +798,8 @@
                 // --- Part 3 Data Capture ---
                 const feltSafety = document.querySelector('input[name="p3q1"]:checked').dataset.text;
                 const socialComfort = document.querySelector('input[name="p3q2"]:checked').dataset.text;
-                const breathReaction = document.querySelector('input[name="p3q3"]:checked').dataset.text;
+                const breathReactionRadio = document.querySelector('input[name="p3q3"]:checked');
+                const breathReaction = breathReactionRadio.dataset.text;
                 const chronicity = document.querySelector('input[name="p3q4"]:checked').dataset.text;
 
                 // --- Display Raw Scores ---
@@ -780,11 +812,11 @@
                 // 1. Dominant State Interpretation
                 let dominantStateHTML = '<h3>Your Dominant Nervous System State</h3>';
                 if (scoreB > 18 && scoreC > 18) {
-                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Frozen Driver (Sympathetic + Dorsal Vagal)</h4><p>Your scores suggest a state of burnout, where your system feels stuck with the "brakes and gas" on at the same time. This is a highly draining state where your body is simultaneously revved up to fight/flee and shut down in a freeze response. It often manifests as feeling anxious but exhausted, vigilant but numb.</p></div>`;
+                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Frozen Driver (Sympathetic + Dorsal Vagal)</h4><p>Your scores suggest a state of burnout, where your system feels stuck with the "brakes and gas" on at the same time. This is a highly draining state where your body is simultaneously revved up for a Fight/Flight response and shut down in a Freeze response. It often manifests as feeling anxious but exhausted, vigilant but numb.</p></div>`;
                 } else if (scoreB > scoreA && scoreB > scoreC) {
-                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Mobilized Protector (Sympathetic)</h4><p>Your scores indicate a primary state of Sympathetic hyperarousal (fight-or-flight). This is your nervous system's way of generating a massive amount of energy to face a perceived threat. It's a state of "too much" energy, where your body is primed for action, even if the threat isn't conscious or obvious. This leads to feelings of anxiety, restlessness, and physical tension.</p></div>`;
+                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Mobilized Protector (Sympathetic)</h4><p>Your scores indicate a primary state of Sympathetic hyperarousal (Fight-or-Flight). This is your nervous system's way of generating a massive amount of energy to face a perceived threat. It's a state of "too much" energy, where your body is primed for action, even if the threat isn't conscious or obvious. This leads to feelings of anxiety, restlessness, and physical tension.</p></div>`;
                 } else if (scoreC > scoreA && scoreC > scoreB) {
-                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Conserving Collapser (Dorsal Vagal)</h4><p>Your scores point to a primary state of Dorsal Vagal hypoarousal (freeze/shutdown). This is your nervous system's most extreme defense when fight or flight feels impossible or futile. It's a state of "not enough" energy, a protective collapse to conserve resources and emotionally/physically numb out from an overwhelming experience. This can feel like fatigue, fogginess, or disconnection.</p></div>`;
+                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Conserving Collapser (Dorsal Vagal)</h4><p>Your scores point to a primary state of Dorsal Vagal hypoarousal (Freeze/Shutdown). This is your nervous system's most extreme defense when fight or flight feels impossible or futile. It's a state of "not enough" energy, a protective collapse to conserve resources and emotionally/physically numb out from an overwhelming experience. This can feel like fatigue, fogginess, or disconnection.</p></div>`;
                 } else {
                      dominantStateHTML += `<div class="profile-card"><h4>Profile: The Resilient Regulator (Ventral Vagal)</h4><p>Your scores suggest your primary state is Ventral Vagal, well within your 'Window of Tolerance.' You experience a strong sense of safety and connection, and your nervous system has a high capacity to handle stress and return to a state of calm and social engagement.</p></div>`;
                 }
@@ -816,7 +848,7 @@
                     <ul>
                         <li><strong>Overall Felt Safety:</strong> You reported feeling: <strong>${feltSafety}</strong>. This is a core indicator of your nervous system's baseline. A sense of unsafety can keep the body in a constant state of low-level defense.</li>
                         <li><strong>Comfort Around Others:</strong> You reported feeling: <strong>${socialComfort}</strong>. Difficulty feeling at ease around others can signal a hypervigilant nervous system that neurocepts (unconsciously detects) threat in social situations.</li>
-                        <li><strong>Reaction to Deep Breath:</strong> Your reaction is: <strong>${breathReaction}</strong>. For a dysregulated system, a deep breath can paradoxically feel threatening. An anxious response is valuable information that your system needs gentler ways to find regulation first.</li>
+                        <li><strong>Reaction to Deep Breath:</strong> Your reaction is: <strong>${breathReaction}</strong>. As mentioned above, if this is an anxious reaction, it is valuable information that your system needs gentler ways to find regulation first.</li>
                         <li><strong>Chronicity:</strong> You've been feeling this way for: <strong>${chronicity}</strong>. This helps distinguish between an acute stress response and a chronic, deeply embedded nervous system pattern.</li>
                     </ul>
                 `;
@@ -837,9 +869,9 @@ Reaction to Deep Breath: ${breathReaction}
 Chronicity of Pattern: ${chronicity}
 
 --- Raw Scores for Reference ---
-Ventral Vagal (Safety): ${scoreA} / 25
-Sympathetic (Mobilized): ${scoreB} / 30
-Dorsal Vagal (Shutdown): ${scoreC} / 30
+Parasympathetic / Ventral Vagal: ${scoreA} / 25
+Sympathetic / Fight-or-Flight: ${scoreB} / 30
+Dorsal Vagal / Freeze: ${scoreC} / 30
 Somatic Dysregulation: ${somaticScore} / 60
 `;
                 document.getElementById('results-textarea').value = resultsText.trim();
