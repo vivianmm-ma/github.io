@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nervous System State Inventory</title>
+    <title>Test the State of Your Nervous System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -174,7 +174,7 @@
 
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             text-align: center;
             margin-bottom: 2rem;
@@ -185,6 +185,10 @@
             padding: 1.5rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 140px;
         }
 
         .score-card .score-value {
@@ -265,13 +269,13 @@
 
     <div class="container">
         <header>
-            <h1>The Nervous System State Inventory</h1>
-            <p class="subtitle">A Somatic & Autonomic Baseline Assessment</p>
+            <h1>Test the State of Your Nervous System</h1>
+            <p class="subtitle">A Screening Tool for Somatic & Autonomic Patterns</p>
         </header>
 
         <div class="card disclaimer">
             <h3>Important Disclaimer</h3>
-            <p>This tool is for educational and informational purposes only and is not a substitute for professional medical or psychological advice, diagnosis, or treatment. It was designed by Vivian Mitchell, a researcher with a Master's degree in Applied Clinical Psychology. The results are intended to provide a personal baseline and a map for self-discovery, not to diagnose any condition.</p>
+            <p>This screening tool is for educational and informational purposes only and is not a substitute for professional medical or psychological advice, diagnosis, or treatment. It was designed by Vivian Mitchell, a researcher with a Master's degree in Applied Clinical Psychology. The results are intended to provide a personal baseline and a map for self-discovery, not to diagnose any condition.</p>
         </div>
 
         <form id="assessment-form">
@@ -507,39 +511,59 @@
                              <label><span>5</span><input type="radio" name="p2q2" value="1"><span>Deep, easy, and full</span></label>
                         </div>
                     </div>
+                    <div class="question-item">
+                        <label>3. Gait Pattern: How would you describe your typical way of walking?</label>
+                        <div class="likert-scale">
+                             <label><span>1</span><input type="radio" name="p2q3" value="1" required><span>Light and grounded</span></label>
+                             <label><span>2</span><input type="radio" name="p2q3" value="2"><span>Mostly grounded</span></label>
+                             <label><span>3</span><input type="radio" name="p2q3" value="3"><span>Average / Unsure</span></label>
+                             <label><span>4</span><input type="radio" name="p2q3" value="4"><span>Somewhat heavy</span></label>
+                             <label><span>5</span><input type="radio" name="p2q3" value="5"><span>Heavy / "Falling" into feet</span></label>
+                        </div>
+                    </div>
+                     <div class="question-item">
+                        <label>4. Pelvic Floor Awareness: How easy is it for you to consciously sense and gently tense your pelvic floor muscles?</label>
+                        <div class="likert-scale">
+                             <label><span>1</span><input type="radio" name="p2q4" value="1" required><span>Easy to sense & control</span></label>
+                             <label><span>2</span><input type="radio" name="p2q4" value="2"><span>Mostly can sense</span></label>
+                             <label><span>3</span><input type="radio" name="p2q4" value="3"><span>Vague sense / Unsure</span></label>
+                             <label><span>4</span><input type="radio" name="p2q4" value="4"><span>Difficult to sense</span></label>
+                             <label><span>5</span><input type="radio" name="p2q4" value="5"><span>Cannot sense / control</span></label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="question-group">
                     <h3>Subsection B: Direct Indicators of Vagal Tone</h3>
                      <div class="question-item">
-                        <label>3. Swallowing Test: How difficult is it to swallow three times quickly in a row?</label>
+                        <label>5. Swallowing Test: How difficult is it to swallow three times quickly in a row?</label>
                         <div class="likert-scale">
-                            <label><span>1</span><input type="radio" name="p2q3" value="1" required><span>Very easy</span></label>
-                            <label><span>2</span><input type="radio" name="p2q3" value="2"><span>Slight difficulty</span></label>
-                            <label><span>3</span><input type="radio" name="p2q3" value="3"><span>Moderately difficult</span></label>
-                            <label><span>4</span><input type="radio" name="p2q3" value="4"><span>Very difficult</span></label>
-                            <label><span>5</span><input type="radio" name="p2q3" value="5"><span>Nearly impossible</span></label>
+                            <label><span>1</span><input type="radio" name="p2q5" value="1" required><span>Very easy</span></label>
+                            <label><span>2</span><input type="radio" name="p2q5" value="2"><span>Slight difficulty</span></label>
+                            <label><span>3</span><input type="radio" name="p2q5" value="3"><span>Moderately difficult</span></label>
+                            <label><span>4</span><input type="radio" name="p2q5" value="4"><span>Very difficult</span></label>
+                            <label><span>5</span><input type="radio" name="p2q5" value="5"><span>Nearly impossible</span></label>
                         </div>
                     </div>
                     <div class="question-item">
-                        <label>4. Oculocardiac Reflex Check: After gently covering your closed eyes with your hands for 30 seconds, how do you feel?</label>
+                        <label>6. Oculocardiac Reflex Check: After gently covering your closed eyes with your hands for 30 seconds, how do you feel?</label>
                          <p class="note"><b>Safety:</b> Do not attempt if you have glaucoma, a detached retina, eye injury, or a known cardiac condition. Stop if you feel pain or significant dizziness.</p>
                         <div class="likert-scale">
-                            <label><span>1</span><input type="radio" name="p2q4" value="5" required><span>Significantly more anxious/dizzy</span></label>
-                            <label><span>2</span><input type="radio" name="p2q4" value="4"><span>Slightly anxious</span></label>
-                            <label><span>3</span><input type="radio" name="p2q4" value="3"><span>Neutral / No change</span></label>
-                            <label><span>4</span><input type="radio" name="p2q4" value="2"><span>Slightly calmer</span></label>
-                            <label><span>5</span><input type="radio" name="p2q4" value="1"><span>Significantly calmer</span></label>
+                            <label><span>1</span><input type="radio" name="p2q6" value="5" required><span>Significantly more anxious/dizzy</span></label>
+                            <label><span>2</span><input type="radio" name="p2q6" value="4"><span>Slightly anxious</span></label>
+                            <label><span>3</span><input type="radio" name="p2q6" value="3"><span>Neutral / No change</span></label>
+                            <label><span>4</span><input type="radio" name="p2q6" value="2"><span>Slightly calmer</span></label>
+                            <label><span>5</span><input type="radio" name="p2q6" value="1"><span>Significantly calmer</span></label>
                         </div>
                     </div>
                     <div class="question-item">
-                        <label>5. Vocal Resonance Test: When you hum a long, steady note, what is the quality of the sound?</label>
+                        <label>7. Vocal Resonance Test: When you hum a long, steady note, what is the quality of the sound?</label>
                          <div class="likert-scale">
-                            <label><span>1</span><input type="radio" name="p2q5" value="1" required><span>Strong & Resonant</span></label>
-                            <label><span>2</span><input type="radio" name="p2q5" value="2"><span>Mostly steady</span></label>
-                            <label><span>3</span><input type="radio" name="p2q5" value="3"><span>Somewhat shaky</span></label>
-                            <label><span>4</span><input type="radio" name="p2q5" value="4"><span>Weak / Wavering</span></label>
-                            <label><span>5</span><input type="radio" name="p2q5" value="5"><span>Run out of breath</span></label>
+                            <label><span>1</span><input type="radio" name="p2q7" value="1" required><span>Strong & Resonant</span></label>
+                            <label><span>2</span><input type="radio" name="p2q7" value="2"><span>Mostly steady</span></label>
+                            <label><span>3</span><input type="radio" name="p2q7" value="3"><span>Somewhat shaky</span></label>
+                            <label><span>4</span><input type="radio" name="p2q7" value="4"><span>Weak / Wavering</span></label>
+                            <label><span>5</span><input type="radio" name="p2q7" value="5"><span>Run out of breath</span></label>
                         </div>
                     </div>
                 </div>
@@ -547,43 +571,53 @@
                 <div class="question-group">
                     <h3>Subsection C: Proprioceptive & Interoceptive Awareness</h3>
                     <div class="question-item">
-                        <label>6. Peripheral Circulation: How would you describe the temperature regulation of your hands and feet?</label>
+                        <label>8. General Body Temperature: How would you describe your overall body temperature regulation?</label>
                         <div class="likert-scale">
-                           <label><span>1</span><input type="radio" name="p2q6" value="1" required><span>Consistently comfortable</span></label>
-                            <label><span>2</span><input type="radio" name="p2q6" value="2"><span>Mostly regulated</span></label>
-                            <label><span>3</span><input type="radio" name="p2q6" value="3"><span>Sometimes dysregulated</span></label>
-                            <label><span>4</span><input type="radio" name="p2q6" value="4"><span>Often dysregulated</span></label>
-                            <label><span>5</span><input type="radio" name="p2q6" value="5"><span>Consistently too cold or hot</span></label>
-                        </div>
-                    </div>
-                    <div class="question-item">
-                        <label>7. Body Coordination: How would you rate your general level of clumsiness?</label>
-                        <div class="likert-scale">
-                           <label><span>1</span><input type="radio" name="p2q7" value="1" required><span>Very coordinated</span></label>
-                            <label><span>2</span><input type="radio" name="p2q7" value="2"><span>Mostly coordinated</span></label>
-                            <label><span>3</span><input type="radio" name="p2q7" value="3"><span>Average</span></label>
-                            <label><span>4</span><input type="radio" name="p2q7" value="4"><span>Somewhat clumsy</span></label>
-                            <label><span>5</span><input type="radio" name="p2q7" value="5"><span>Very clumsy</span></label>
-                        </div>
-                    </div>
-                    <div class="question-item">
-                        <label>8. Interoception - Hunger Cues: My ability to notice and respond to my body's hunger signals feels...</label>
-                         <div class="likert-scale">
-                           <label><span>1</span><input type="radio" name="p2q8" value="1" required><span>Balanced and clear</span></label>
-                            <label><span>2</span><input type="radio" name="p2q8" value="2"><span>Mostly balanced</span></label>
-                            <label><span>3</span><input type="radio" name="p2q8" value="3"><span>Sometimes weak or urgent</span></label>
-                            <label><span>4</span><input type="radio" name="p2q8" value="4"><span>Often weak or urgent</span></label>
-                            <label><span>5</span><input type="radio" name="p2q8" value="5"><span>Barely noticeable or overwhelming</span></label>
+                           <label><span>1</span><input type="radio" name="p2q8" value="1" required><span>Consistently comfortable</span></label>
+                            <label><span>2</span><input type="radio" name="p2q8" value="2"><span>Mostly regulated</span></label>
+                            <label><span>3</span><input type="radio" name="p2q8" value="3"><span>Sometimes dysregulated</span></label>
+                            <label><span>4</span><input type="radio" name="p2q8" value="4"><span>Often dysregulated</span></label>
+                            <label><span>5</span><input type="radio" name="p2q8" value="5"><span>Consistently too cold or hot</span></label>
                         </div>
                     </div>
                      <div class="question-item">
-                        <label>9. Interoception - Thirst Cues: My ability to notice and respond to my body's thirst signals feels...</label>
+                        <label>9. Peripheral Circulation: How would you describe the temperature regulation of your hands and feet?</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p2q9" value="1" required><span>Consistently comfortable</span></label>
+                            <label><span>2</span><input type="radio" name="p2q9" value="2"><span>Mostly regulated</span></label>
+                            <label><span>3</span><input type="radio" name="p2q9" value="3"><span>Sometimes dysregulated</span></label>
+                            <label><span>4</span><input type="radio" name="p2q9" value="4"><span>Often dysregulated</span></label>
+                            <label><span>5</span><input type="radio" name="p2q9" value="5"><span>Consistently too cold or hot</span></label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>10. Body Coordination / Dropping Things: How would you rate your general level of clumsiness or frequency of dropping things?</label>
+                        <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p2q10" value="1" required><span>Very coordinated</span></label>
+                            <label><span>2</span><input type="radio" name="p2q10" value="2"><span>Mostly coordinated</span></label>
+                            <label><span>3</span><input type="radio" name="p2q10" value="3"><span>Average</span></label>
+                            <label><span>4</span><input type="radio" name="p2q10" value="4"><span>Somewhat clumsy</span></label>
+                            <label><span>5</span><input type="radio" name="p2q10" value="5"><span>Very clumsy / Drop things often</span></label>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <label>11. Interoception - Hunger Cues: My ability to notice and respond to my body's hunger signals feels...</label>
                          <div class="likert-scale">
-                           <label><span>1</span><input type="radio" name="p2q9" value="1" required><span>Balanced and clear</span></label>
-                            <label><span>2</span><input type="radio" name="p2q9" value="2"><span>Mostly balanced</span></label>
-                            <label><span>3</span><input type="radio" name="p2q9" value="3"><span>Sometimes weak or urgent</span></label>
-                            <label><span>4</span><input type="radio" name="p2q9" value="4"><span>Often weak or urgent</span></label>
-                            <label><span>5</span><input type="radio" name="p2q9" value="5"><span>Barely noticeable or overwhelming</span></label>
+                           <label><span>1</span><input type="radio" name="p2q11" value="1" required><span>Balanced and clear</span></label>
+                            <label><span>2</span><input type="radio" name="p2q11" value="2"><span>Mostly balanced</span></label>
+                            <label><span>3</span><input type="radio" name="p2q11" value="3"><span>Sometimes weak or urgent</span></label>
+                            <label><span>4</span><input type="radio" name="p2q11" value="4"><span>Often weak or urgent</span></label>
+                            <label><span>5</span><input type="radio" name="p2q11" value="5"><span>Barely noticeable or overwhelming</span></label>
+                        </div>
+                    </div>
+                     <div class="question-item">
+                        <label>12. Interoception - Thirst Cues: My ability to notice and respond to my body's thirst signals feels...</label>
+                         <div class="likert-scale">
+                           <label><span>1</span><input type="radio" name="p2q12" value="1" required><span>Balanced and clear</span></label>
+                            <label><span>2</span><input type="radio" name="p2q12" value="2"><span>Mostly balanced</span></label>
+                            <label><span>3</span><input type="radio" name="p2q12" value="3"><span>Sometimes weak or urgent</span></label>
+                            <label><span>4</span><input type="radio" name="p2q12" value="4"><span>Often weak or urgent</span></label>
+                            <label><span>5</span><input type="radio" name="p2q12" value="5"><span>Barely noticeable or overwhelming</span></label>
                         </div>
                     </div>
                 </div>
@@ -669,7 +703,7 @@
 
                 // --- Part 2 Scoring ---
                 let somaticScore = 0;
-                for (let i = 1; i <= 9; i++) {
+                for (let i = 1; i <= 12; i++) { // Updated loop to 12
                     somaticScore += parseInt(document.querySelector(`input[name="p2q${i}"]:checked`).value);
                 }
                 
@@ -698,8 +732,8 @@
                 const selfReportedDysregulation = scoreB + scoreC;
                 const selfReportedMin = 12; // Min possible scoreB + scoreC
                 const selfReportedMax = 60; // Max possible scoreB + scoreC
-                const somaticMin = 9;       // Min possible somaticScore
-                const somaticMax = 45;      // Max possible somaticScore
+                const somaticMin = 12;       // Min possible somaticScore (12 questions)
+                const somaticMax = 60;      // Max possible somaticScore (12 questions)
                 
                 const selfReportedPercent = ((selfReportedDysregulation - selfReportedMin) / (selfReportedMax - selfReportedMin)) * 100;
                 const somaticPercent = ((somaticScore - somaticMin) / (somaticMax - somaticMin)) * 100;
@@ -727,7 +761,7 @@ Mind-Body Profile: ${document.querySelector('#mind-body-interpretation h4').text
 Ventral Vagal (Safety): ${scoreA} / 25
 Sympathetic (Mobilized): ${scoreB} / 30
 Dorsal Vagal (Shutdown): ${scoreC} / 30
-Somatic Dysregulation: ${somaticScore} / 45
+Somatic Dysregulation: ${somaticScore} / 60
 `;
                 document.getElementById('results-textarea').value = resultsText.trim();
                 
