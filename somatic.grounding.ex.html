@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creativity & Structure | The Mind-Body Dialectic</title>
     <style>
-        /*
-         NOTE: The special pixel font 'Press Start 2P' from the example cannot be used
-         as this file must be self-contained without external links to Google Fonts.
-         A standard monospace font has been used for headers to retain a retro feel.
-        */
         :root {
             --bg-color: #bbb4fe;
             --card-bg: #e8e6ff;
@@ -25,8 +20,8 @@
             font-family: Georgia, 'Times New Roman', Times, serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-size: 18px;
-            line-height: 1.6;
+            font-size: 16px; /* Slightly smaller base font for tighter feel */
+            line-height: 1.5;
             padding: 1rem;
         }
 
@@ -36,7 +31,7 @@
         }
 
         .container {
-            max-width: 1200px; /* Increased max-width for bigger cards */
+            max-width: 1000px; /* Adjusted max-width for tighter feel */
             margin: 0 auto;
         }
 
@@ -49,30 +44,30 @@
             border: 4px solid var(--accent-green);
             box-shadow: 8px 8px 0px var(--shadow-purple);
             border-radius: 0.5rem;
-            padding: 2rem 2.5rem; /* Slightly more padding to feel 'bigger' */
-            margin-bottom: 3rem;
+            padding: 1.25rem 1.75rem; /* Reduced padding for tighter cards */
+            margin-bottom: 2rem; /* Reduced margin between cards */
         }
 
         /* Tighter spacing for the top informational card */
         #why-it-works-card {
-            padding: 1.5rem 2rem;
-            margin-bottom: 2.5rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
         }
 
         /* Logo styling */
         .not-just-right-logo {
-            width: 80px;
-            height: 80px;
+            width: 70px; /* Slightly smaller logo */
+            height: 70px;
             border: 3px dashed var(--link-blue);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--header-color);
             transform: rotate(-5deg);
-            margin-right: 1.5rem;
+            margin-right: 1rem; /* Reduced margin */
             flex-shrink: 0;
         }
 
@@ -80,19 +75,75 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            max-width: 800px;
-            margin: 1.5rem auto 0;
+            max-width: 700px; /* Constrain width more */
+            margin: 1rem auto 0; /* Reduced margin */
             text-align: left;
         }
         .intro-text {
             flex-grow: 1;
+            font-size: 0.95rem; /* Smaller text for intro */
         }
+
+        /* Custom Yin-Yang for "Mind-Body Dialectic" section */
+        .yin-yang-dialectic-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1.5rem 0; /* Centered with vertical margin */
+            gap: 1.5rem;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+        .dialectic-term {
+            text-align: center;
+            flex-basis: 150px; /* Give terms a base width */
+        }
+        .dialectic-term h3 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .dialectic-term p {
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .yin-yang-dialectic {
+            position: relative;
+            width: 90px; /* Smaller yin-yang */
+            height: 90px;
+            border-color: var(--header-color);
+            border-style: solid;
+            border-width: 3px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--link-blue) 50%, var(--card-bg) 50%);
+            flex-shrink: 0;
+        }
+        .yin-yang-dialectic::before,
+        .yin-yang-dialectic::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--header-color);
+        }
+        .yin-yang-dialectic::before {
+            top: 10px;
+            background-color: var(--card-bg);
+        }
+        .yin-yang-dialectic::after {
+            bottom: 10px;
+            background-color: var(--link-blue);
+        }
+
 
         /* Small Yin-Yang for Lists */
         .yin-yang-small {
             position: relative;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-color: var(--header-color);
             border-style: solid;
             border-width: 1px;
@@ -100,7 +151,8 @@
             background: linear-gradient(to bottom, var(--link-blue) 50%, var(--card-bg) 50%);
             display: inline-block;
             vertical-align: middle;
-            margin-right: 0.75em;
+            margin-right: 0.5em; /* Tighter spacing */
+            flex-shrink: 0;
         }
         .yin-yang-small::before,
         .yin-yang-small::after {
@@ -108,8 +160,8 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
         }
         .yin-yang-small::before {
@@ -126,87 +178,230 @@
         .postures-container {
             display: grid;
             grid-template-columns: 1fr; /* Default to single column for mobile */
-            gap: 2.5rem; /* Increased gap */
-            margin-top: 2rem;
+            gap: 2rem; /* Reduced gap */
+            margin-top: 1.5rem; /* Reduced margin */
         }
         
         /* Media query for 2x2 grid on wider screens */
-        @media (min-width: 800px) {
+        @media (min-width: 768px) {
             .postures-container {
                 grid-template-columns: 1fr 1fr; /* Two equal columns */
             }
         }
-        
+
+        .posture-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .posture-card h3 {
+            margin-bottom: 0.75rem;
+        }
+        .posture-card p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .posture-card ul {
+            text-align: left;
+            padding-left: 0;
+            list-style: none;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+        .posture-card li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        /* Stick Figure Styles - NEW */
+        .stick-figure {
+            width: 80px;
+            height: 100px;
+            position: relative;
+            margin: 1rem auto; /* Center the figure */
+            border-bottom: 2px solid var(--text-color); /* Ground line */
+        }
+        .head {
+            width: 15px;
+            height: 15px;
+            background: var(--text-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .body {
+            width: 2px;
+            height: 35px;
+            background: var(--text-color);
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .arm, .leg {
+            width: 2px;
+            height: 25px;
+            background: var(--text-color);
+            position: absolute;
+            transform-origin: top;
+        }
+        /* Specific pose adjustments */
+
+        /* Pose 1: Opening the Gates (Palms forward, fingers up) */
+        .pose-1 .left-arm { top: 20px; left: calc(50% - 15px); transform: rotate(-45deg); }
+        .pose-1 .right-arm { top: 20px; left: calc(50% + 15px); transform: rotate(45deg); }
+        .pose-1 .left-leg { top: 50px; left: calc(50% - 5px); transform: rotate(5deg); }
+        .pose-1 .right-leg { top: 50px; left: calc(50% + 5px); transform: rotate(-5deg); }
+
+        /* Pose 2: Gathering from Heaven (Arms overhead, on toes) */
+        .pose-2 .left-arm { top: -10px; left: calc(50% - 10px); transform: rotate(-10deg); height: 45px;}
+        .pose-2 .right-arm { top: -10px; left: calc(50% + 10px); transform: rotate(10deg); height: 45px;}
+        .pose-2 .left-leg { top: 55px; left: calc(50% - 3px); height: 30px; }
+        .pose-2 .right-leg { top: 55px; left: calc(50% + 3px); height: 30px; }
+        .pose-2 .body { height: 40px; } /* Slightly stretched body for rising */
+
+        /* Pose 3: Releasing to Earth (Dangling forward) */
+        .pose-3 .head { top: 30px; }
+        .pose-3 .body { top: 40px; transform: translateX(-50%) rotate(15deg); transform-origin: top; height: 30px; }
+        .pose-3 .left-arm { top: 40px; left: calc(50% - 5px); transform: rotate(70deg); }
+        .pose-3 .right-arm { top: 40px; left: calc(50% + 5px); transform: rotate(-70deg); }
+        .pose-3 .left-leg { top: 65px; left: calc(50% - 5px); transform: rotate(5deg); }
+        .pose-3 .right-leg { top: 65px; left: calc(50% + 5px); transform: rotate(-5deg); }
+
+        /* Pose 4: Sealing the Qi (Hands over lower abdomen) */
+        .pose-4 .left-arm { top: 35px; left: calc(50% - 10px); height: 20px; transform: rotate(-10deg); }
+        .pose-4 .right-arm { top: 35px; left: calc(50% + 10px); height: 20px; transform: rotate(10deg); }
+        .pose-4 .left-leg { top: 50px; left: calc(50% - 5px); transform: rotate(5deg); }
+        .pose-4 .right-leg { top: 50px; left: calc(50% + 5px); transform: rotate(-5deg); }
+        .pose-4 .body { height: 35px; } /* Normal body height */
+
+        /* Footer styling */
+        footer {
+            margin-top: 2rem;
+            padding: 1.5rem 0; /* Reduced padding */
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
 
-        <header style="text-align: center; margin: 2rem 0 3rem;">
-            <h1 class="text-shadow-green" style="font-size: 2.5rem; color: var(--header-color); margin-bottom: 0.5rem;">The Mind-Body Dialectic</h1>
-            <p class="game-font" style="font-size: 1.25rem; color: var(--alt-text);">A Creativity & Structure Guide</p>
+        <header style="text-align: center; margin: 2rem 0 2rem;">
+            <h1 class="text-shadow-green" style="font-size: 2.2rem; color: var(--header-color); margin-bottom: 0.25rem;">The Mind-Body Dialectic</h1>
+            <p class="game-font" style="font-size: 1.1rem; color: var(--alt-text);">A Creativity & Structure Guide</p>
             <div class="intro-container">
                 <div class="not-just-right-logo game-font">NJRE</div>
                 <p class="intro-text">
-                    This practice balances <strong>Structure</strong> (safety, framework) with <strong>Creativity</strong> (your unique experience). It's a somatic exploration designed to help you track your body's wisdom.
+                    This practice cultivates dynamic equilibrium. It balances <strong>Structure</strong> (safety, framework) with <strong>Creativity</strong> (your unique, unfolding experience). Engage your somatic wisdom, gently anchoring awareness into the present.
                 </p>
             </div>
         </header>
 
         <main>
+            <section class="card">
+                <h2 style="font-size: 1.6rem; text-align: center; margin-bottom: 1rem; color: var(--header-color);">The Dialectic: Yin & Yang of Being</h2>
+                <div class="yin-yang-dialectic-container">
+                    <div class="dialectic-term" style="color: var(--link-blue);">
+                        <h3>Yin / Structure</h3>
+                        <p class="game-font" style="color: var(--alt-text);">Safety, Rest, Boundaries, The Foundational Body. <br> <span style="color: #e53e3e;">Too much: STAGNATION</span></p>
+                    </div>
+                    <div class="yin-yang-dialectic"></div>
+                    <div class="dialectic-term" style="color: var(--link-blue);">
+                        <h3>Yang / Creativity</h3>
+                        <p class="game-font" style="color: var(--alt-text);">Action, Growth, Adaptation, The Emergent Response. <br> <span style="color: #e53e3e;">Too much: CHAOS</span></p>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--header-color); margin-top: 1rem;">Healing is finding the <span class="game-font" style="font-weight: bold; color: var(--accent-green);">dynamic equilibrium</span> between these forces.</p>
+            </section>
+
             <section class="card" id="why-it-works-card">
-                <h2 style="font-size: 1.8rem; text-align: center; margin-bottom: 1.5rem; color: var(--header-color);">Why This Works: A Somatic View</h2>
-                <p style="margin-bottom: 1rem;">Trauma isn't just a mental event; it's stored in the body as incomplete survival responses (fight, flight, freeze) and somatic memory. Dissociation is a natural coping mechanism that disconnects us from these overwhelming physical sensations. This practice is a powerful tool to gently reverse that process.</p>
-                <p>By intentionally focusing on physical sensations—your feet on the ground, your body in space—you are actively anchoring your awareness back into the present moment. This is a direct antidote to dissociation. From a TCM perspective, these movements are also believed to cleanse and harmonize the 12 primary meridians, releasing stored energetic stagnation.</p>
-                <h4 class="game-font" style="font-size: 1rem; color: var(--link-blue); text-align: center; margin-top: 2rem;">This can be a powerful resource for: Trauma Recovery, Dissociation, Chronic Stress, and Anxiety.</h4>
+                <h2 style="font-size: 1.6rem; text-align: center; margin-bottom: 1rem; color: var(--header-color);">Why This Works: A Somatic & Energetic View</h2>
+                <p style="margin-bottom: 0.75rem; font-size: 0.9rem;">Trauma isn't just a mental event; it's stored in the body as incomplete survival responses (fight, flight, freeze) and somatic memory. Dissociation is a natural coping mechanism that disconnects us from these overwhelming physical sensations. This practice directly counters dissociation.</p>
+                <p style="font-size: 0.9rem;">By intentionally focusing on physical sensations and directed movement, you anchor your awareness back into the present. This re-establishes safety and presence. From a Traditional Chinese Medicine (TCM) and Daoist perspective, these movements cleanse and harmonize the 12 primary meridians, releasing energetic stagnation and cultivating vital *Qi*.</p>
+                <h4 class="game-font" style="font-size: 0.9rem; color: var(--link-blue); text-align: center; margin-top: 1.5rem;">Powerful resource for: Trauma Recovery, Dissociation, Chronic Stress, and Anxiety.</h4>
             </section>
 
             <section>
-                <h2 style="font-size: 2rem; text-align: center; margin-bottom: 2rem; color: var(--header-color);">Level 1: The Practice</h2>
+                <h2 style="font-size: 2rem; text-align: center; margin-bottom: 1.5rem; color: var(--header-color);">Level 1: The Practice</h2>
                 <div class="postures-container">
-                    <article class="card">
+                    <article class="card posture-card">
                         <h3>Part I: Opening the Gates</h3>
-                        <p><strong>The Posture (1 Minute):</strong> Stand with elbows bent at your sides, palms facing forward with fingers pointing up. This posture, similar to "Warding Off" in Tai Chi, establishes your energetic space and presence. It opens the heart and lung meridians.</p>
-                        <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Notice the sensations in your palms. Does it feel like you are pushing, holding, or receiving energy?</li>
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Feel the gentle opening across your chest. Breathe into this space.</li>
+                        <div class="stick-figure pose-1">
+                            <div class="head"></div>
+                            <div class="body"></div>
+                            <div class="arm left-arm"></div>
+                            <div class="arm right-arm"></div>
+                            <div class="leg left-leg"></div>
+                            <div class="leg right-leg"></div>
+                        </div>
+                        <p><strong>The Posture (1 Minute):</strong> Stand with elbows bent at your sides, palms facing forward with fingers pointing up. This posture, like "Warding Off" in Tai Chi, establishes your energetic space. It gently opens the heart and lung meridians.</p>
+                        <ul style="margin-top: 0.75rem;">
+                            <li><span class="yin-yang-small"></span>Notice sensations in your palms. Are you pushing, holding, or receiving?</li>
+                            <li><span class="yin-yang-small"></span>Feel the gentle opening across your chest. Breathe into this space.</li>
                         </ul>
                     </article>
 
-                    <article class="card">
+                    <article class="card posture-card">
                         <h3>Part II: Gathering from Heaven</h3>
-                        <p><strong>The Posture (1 Minute):</strong> Raise your arms overhead, rising onto the balls of your feet. In Daoist practice, this connects you to the expansive Yang energy of Heaven. You are gathering clarity, light, and inspiration from above.</p>
-                         <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>As you reach, imagine drawing down pure, clear energy through the crown of your head and into your body.</li>
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Notice the active stability required to balance. Feel the connection from your toes to your fingertips.</li>
+                        <div class="stick-figure pose-2">
+                            <div class="head"></div>
+                            <div class="body"></div>
+                            <div class="arm left-arm"></div>
+                            <div class="arm right-arm"></div>
+                            <div class="leg left-leg"></div>
+                            <div class="leg right-leg"></div>
+                        </div>
+                        <p><strong>The Posture (1 Minute):</strong> Raise your arms overhead, rising onto the balls of your feet. This connects you to the expansive Yang energy of Heaven, gathering clarity, light, and inspiration.</p>
+                         <ul style="margin-top: 0.75rem;">
+                            <li><span class="yin-yang-small"></span>As you reach, imagine drawing down pure energy through your crown.</li>
+                            <li><span class="yin-yang-small"></span>Feel the connection from toes to fingertips. Effort and ease in balance.</li>
                         </ul>
                     </article>
 
-                    <article class="card">
+                    <article class="card posture-card">
                         <h3>Part III: Releasing to Earth</h3>
-                        <p><strong>The Posture (1 Minute):</strong> Lower your heels and let your arms and upper body hang down toward the floor. This posture releases "turbid" or stagnant Qi back into the Earth, which has the power to cleanse and transform it. You are letting go of what no longer serves you.</p>
-                         <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>With each exhale, imagine releasing any tension, stress, or heavy energy through your hands and feet into the ground.</li>
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>What is the physical sensation of "letting go" in your neck, shoulders, and back?</li>
+                        <div class="stick-figure pose-3">
+                            <div class="head"></div>
+                            <div class="body"></div>
+                            <div class="arm left-arm"></div>
+                            <div class="arm right-arm"></div>
+                            <div class="leg left-leg"></div>
+                            <div class="leg right-leg"></div>
+                        </div>
+                        <p><strong>The Posture (1 Minute):</strong> Lower heels, let your arms and upper body hang towards the floor. This releases "turbid" or stagnant Qi back into the Earth, letting go of what no longer serves you.</p>
+                         <ul style="margin-top: 0.75rem;">
+                            <li><span class="yin-yang-small"></span>Exhale, imagine tension releasing through hands & feet into the ground.</li>
+                            <li><span class="yin-yang-small"></span>Sense the physical "letting go" in your neck, shoulders, and back.</li>
                         </ul>
                     </article>
 
-                     <article class="card">
+                     <article class="card posture-card">
                         <h3>Part IV: Sealing the Qi</h3>
-                        <p><strong>The Posture (1 Minute):</strong> Slowly roll up to a standing position and bring your hands to rest over your lower abdomen, one hand over the other. This is your lower Dantian, the body's primary energy center. This closing pose is crucial for gathering and storing the fresh Qi you've cultivated.</p>
-                         <ul style="list-style: none; padding-left: 0; margin-top: 1.5rem;">
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Breathe into this center. Can you sense a feeling of warmth, fullness, or calm settling in this area?</li>
-                            <li style="margin-bottom: 1rem;"><span class="yin-yang-small"></span>Take a moment to simply be with the integrated energy, allowing it to nourish your system.</li>
+                        <div class="stick-figure pose-4">
+                            <div class="head"></div>
+                            <div class="body"></div>
+                            <div class="arm left-arm"></div>
+                            <div class="arm right-arm"></div>
+                            <div class="leg left-leg"></div>
+                            <div class="leg right-leg"></div>
+                        </div>
+                        <p><strong>The Posture (1 Minute):</strong> Slowly roll up to standing, hands resting over your lower abdomen (lower Dantian). This closes the practice, gathering and storing the fresh Qi you've cultivated.</p>
+                         <ul style="margin-top: 0.75rem;">
+                            <li><span class="yin-yang-small"></span>Breathe into this center. Sense warmth, fullness, or calm settling.</li>
+                            <li><span class="yin-yang-small"></span>Be with the integrated energy, allowing it to nourish your system.</li>
                         </ul>
                     </article>
                 </div>
             </section>
         </main>
 
-        <footer style="text-align: center; margin-top: 2rem; padding: 2rem 0;">
-            <p class="game-font" style="font-size: 1rem; color: var(--alt-text);">Embrace the 'Not Just Right'. Find Your Kindness.</p>
-            <p style="font-size: 0.8rem; color: var(--header-color);">This is your strategy guide, not the whole game. Consult a master-level healer for your unique quest.</p>
+        <footer style="text-align: center; margin-top: 1.5rem; padding: 1.25rem 0;">
+            <p class="game-font" style="font-size: 0.9rem; color: var(--alt-text);">Embrace the 'Not Just Right'. Find Your Kindness.</p>
+            <p style="font-size: 0.75rem; color: var(--header-color);">This is your strategy guide, not the whole game. Consult a master-level healer for your unique quest.</p>
         </footer>
 
     </div>
