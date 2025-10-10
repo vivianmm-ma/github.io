@@ -196,16 +196,25 @@
         #interpretation-section h3 {
             color: var(--accent-color);
             text-align: center;
+            font-size: 1.8rem;
         }
         #interpretation-section h4 {
             color: var(--heading-color);
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
+        }
+        
+        .profile-card {
+            background-color: rgba(85, 166, 161, 0.1);
+            border-left: 5px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
         }
 
         .copy-results {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         #results-textarea {
@@ -513,7 +522,7 @@
                         </div>
                     </div>
                     <div class="question-item">
-                        <label>4. Oculocardiac Reflex Check: After gently resting palms on closed eyes for 30s, how do you feel?</label>
+                        <label>4. Oculocardiac Reflex Check: After gently covering your closed eyes with your hands for 30 seconds, how do you feel?</label>
                          <p class="note"><b>Safety:</b> Do not attempt if you have glaucoma, a detached retina, eye injury, or a known cardiac condition. Stop if you feel pain or significant dizziness.</p>
                         <div class="likert-scale">
                             <label><span>1</span><input type="radio" name="p2q4" value="5" required><span>Significantly more anxious/dizzy</span></label>
@@ -585,31 +594,35 @@
 
         <section id="results-section">
             <div class="card">
-                <h2>Your Quantitative Analysis</h2>
+                <h2>Your Assessment Results</h2>
+                
+                <div id="interpretation-section">
+                    <div id="dominant-state-interpretation"></div>
+                    <div id="mind-body-interpretation"></div>
+                </div>
+                
                 <div class="results-grid">
-                    <div class="score-card">
-                        <div class="score-label">Net Regulation Score</div>
-                        <div class="score-value" id="net-reg-score">0</div>
+                     <div class="score-card">
+                        <div class="score-label">Ventral Vagal (Safety)</div>
+                        <div class="score-value" id="vv-score">0</div>
                     </div>
                     <div class="score-card">
-                        <div class="score-label">Somatic Dysregulation Score</div>
+                        <div class="score-label">Sympathetic (Mobilized)</div>
+                        <div class="score-value" id="symp-score">0</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-label">Dorsal Vagal (Shutdown)</div>
+                        <div class="score-value" id="dv-score">0</div>
+                    </div>
+                     <div class="score-card">
+                        <div class="score-label">Somatic Dysregulation</div>
                         <div class="score-value" id="somatic-score">0</div>
                     </div>
-                    <div class="score-card">
-                        <div class="score-label">Brain-Body Cohesion Score</div>
-                        <div class="score-value" id="cohesion-score">0%</div>
-                    </div>
                 </div>
 
-                <div id="interpretation-section">
-                    <h3>Interpretation Key</h3>
-                    <div id="interpretation-text">
-                        <p>Complete the assessment to see your results.</p>
-                    </div>
-                </div>
 
                 <div class="copy-results">
-                    <h3>Copy Your Results</h3>
+                    <h4>Copy Your Results</h4>
                     <p>You can copy the summary below to save for your records.</p>
                     <textarea id="results-textarea" readonly></textarea>
                     <button type="button" class="copy-btn" id="copy-btn">Copy to Clipboard</button>
@@ -617,14 +630,14 @@
 
                 <div class="sources-section">
                     <h3>Scientific Foundations and Key References</h3>
-                    <p class="note">The structure and items in this assessment are informed by several key scientific concepts. The primary sources below provide a deeper understanding of the principles at work.</p>
+                    <p class="note">The structure and items in this assessment are informed by key scientific concepts. The sources below provide a deeper understanding of the principles at work.</p>
                     <ul>
                         <li>Porges, S. W. (2011). <em>The polyvagal theory: Neurophysiological foundations of emotions, attachment, communication, and self-regulation</em>. W. W. Norton & Company.</li>
-                        <li>Dana, D. (2018). <em>The polyvagal theory in therapy: Engaging the rhythm of regulation</em>. W. W. Norton & Company.</li>
-                        <li>Ogden, P., & Minton, K. (2000). Sensorimotor psychotherapy: One method for processing traumatic memory. <em>Traumatology, 6</em>(3), 53-72.</li>
-                        <li>Siegel, D. J. (1999). <em>The developing mind: Toward a neurobiology of interpersonal experience</em>. Guilford Press.</li>
+                        <li>Ogden, P., Minton, K., & Pain, C. (2006). <em>Trauma and the body: A sensorimotor approach to psychotherapy</em>. W. W. Norton & Company.</li>
                         <li>Levine, P. A. (1997). <em>Waking the tiger: Healing trauma</em>. North Atlantic Books.</li>
-                        <li>Critchley, H. D., & Garfinkel, S. N. (2017). Interoception and emotion. <em>Current Opinion in Psychology, 17</em>, 1–7.</li>
+                        <li>Stone, L. A., & Nielson, K. A. (2001). Intact physiological response to arousal with impaired emotional recognition in alexithymia. <em>Psychotherapy and Psychosomatics, 70</em>(2), 92-102.</li>
+                         <li>Mahler, K. (n.d.). <em>Interoception and Trauma.</em> Kelly Mahler. Retrieved from https://www.kelly-mahler.com/what-is-interoception/interoception-and-trauma/</li>
+                        <li>Frewen, P. A., Lanius, R. A., Dozois, D. J., Neufeld, R. W., Pain, C., & Hopper, J. W. (2008). Clinical and neural correlates of alexithymia in posttraumatic stress disorder. <em>Journal of abnormal psychology, 117</em>(1), 171–181.</li>
                     </ul>
                 </div>
             </div>
@@ -660,73 +673,61 @@
                     somaticScore += parseInt(document.querySelector(`input[name="p2q${i}"]:checked`).value);
                 }
                 
-                // --- New Metric Calculations ---
-                const selfReportedDysregulation = scoreB + scoreC;
-                const netRegulationScore = scoreA - selfReportedDysregulation;
+                // --- Display Raw Scores ---
+                document.getElementById('vv-score').textContent = scoreA;
+                document.getElementById('symp-score').textContent = scoreB;
+                document.getElementById('dv-score').textContent = scoreC;
+                document.getElementById('somatic-score').textContent = somaticScore;
 
+                // --- Interpretation Logic ---
+                // 1. Dominant State Interpretation
+                let dominantStateHTML = '<h3>Your Dominant Nervous System State</h3>';
+                if (scoreB > 18 && scoreC > 18) {
+                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Frozen Driver (Sympathetic + Dorsal Vagal)</h4><p>Your scores suggest a state of burnout, where your system feels stuck with the "brakes and gas" on at the same time. This is a highly draining state where your body is simultaneously revved up to fight/flee and shut down in a freeze response. It often manifests as feeling anxious but exhausted, vigilant but numb.</p></div>`;
+                } else if (scoreB > scoreA && scoreB > scoreC) {
+                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Mobilized Protector (Sympathetic)</h4><p>Your scores indicate a primary state of Sympathetic hyperarousal (fight-or-flight). This is your nervous system's way of generating a massive amount of energy to face a perceived threat. It's a state of "too much" energy, where your body is primed for action, even if the threat isn't conscious or obvious. This leads to feelings of anxiety, restlessness, and physical tension.</p></div>`;
+                } else if (scoreC > scoreA && scoreC > scoreB) {
+                    dominantStateHTML += `<div class="profile-card"><h4>Profile: The Conserving Collapser (Dorsal Vagal)</h4><p>Your scores point to a primary state of Dorsal Vagal hypoarousal (freeze/shutdown). This is your nervous system's most extreme defense when fight or flight feels impossible or futile. It's a state of "not enough" energy, a protective collapse to conserve resources and emotionally/physically numb out from an overwhelming experience. This can feel like fatigue, fogginess, or disconnection.</p></div>`;
+                } else {
+                     dominantStateHTML += `<div class="profile-card"><h4>Profile: The Resilient Regulator (Ventral Vagal)</h4><p>Your scores suggest your primary state is Ventral Vagal, well within your 'Window of Tolerance.' You experience a strong sense of safety and connection, and your nervous system has a high capacity to handle stress and return to a state of calm and social engagement.</p></div>`;
+                }
+                document.getElementById('dominant-state-interpretation').innerHTML = dominantStateHTML;
+                
+                // 2. Mind-Body Connection Profile
                 // Normalize scores to a 0-100 scale for comparison
-                const selfReportedMin = 12; // Min possible scoreB + scoreC (6+6)
-                const selfReportedMax = 60; // Max possible scoreB + scoreC (30+30)
+                const selfReportedDysregulation = scoreB + scoreC;
+                const selfReportedMin = 12; // Min possible scoreB + scoreC
+                const selfReportedMax = 60; // Max possible scoreB + scoreC
                 const somaticMin = 9;       // Min possible somaticScore
                 const somaticMax = 45;      // Max possible somaticScore
                 
                 const selfReportedPercent = ((selfReportedDysregulation - selfReportedMin) / (selfReportedMax - selfReportedMin)) * 100;
                 const somaticPercent = ((somaticScore - somaticMin) / (somaticMax - somaticMin)) * 100;
-
-                const cohesionScore = 100 - Math.abs(selfReportedPercent - somaticPercent);
-
-
-                // --- Display Scores ---
-                document.getElementById('net-reg-score').textContent = netRegulationScore;
-                document.getElementById('somatic-score').textContent = somaticScore;
-                document.getElementById('cohesion-score').textContent = `${cohesionScore.toFixed(0)}%`;
                 
-                // --- Interpretation Logic ---
-                let interpretationHTML = `
-                    <h4>Net Regulation Score (Your Score: ${netRegulationScore})</h4>
-                    <p>This score compares your experiences of safety (Ventral Vagal) against distress (Sympathetic + Dorsal Vagal). A positive score suggests a greater capacity for regulation, while a negative score suggests distress states are more dominant.</p>
-                     <ul>
-                        <li><strong>Above 0:</strong> Indicates a surplus of regulatory capacity.</li>
-                        <li><strong>0 to -25:</strong> Indicates a mild to moderate prevalence of distress states.</li>
-                        <li><strong>Below -25:</strong> Indicates a significant prevalence of distress states.</li>
-                    </ul>
-
-                    <h4>Somatic Dysregulation Score (Your Score: ${somaticScore} / 45)</h4>
-                    <p>This score reflects how much stress is physically held in your body. A higher score indicates more somatic dysregulation.</p>
-                    <ul>
-                        <li><strong>9-21 (Low):</strong> Your body shows minimal signs of chronic dysregulation.</li>
-                        <li><strong>22-34 (Moderate):</strong> Your body is holding a noticeable level of stress.</li>
-                        <li><strong>35-45 (High):</strong> Your body shows significant signs of being stuck in a survival state.</li>
-                    </ul>
-
-                    <h4>Brain-Body Cohesion Score (Your Score: ${cohesionScore.toFixed(0)}%)</h4>
-                    <p>This score reveals the level of agreement between your self-reported emotional state and your body's physical signals. 100% indicates perfect alignment.</p>
-                `;
-
-                let cohesionInterpretation = '';
-                if (cohesionScore >= 75) {
-                    cohesionInterpretation = '<p><strong>High Cohesion:</strong> Your self-perception is strongly aligned with your body\'s physical reality. Whether you feel calm or stressed, your mind and body are telling a similar story. This is a strong foundation for regulation.</p>';
-                } else if (cohesionScore >= 40) {
-                    cohesionInterpretation = '<p><strong>Moderate Cohesion:</strong> There is a noticeable disconnect between your self-reported feelings and your body\'s physical signals. You might be cognitively minimizing stress that your body is holding, or feeling mentally distressed while your body is in a different state.</p>';
+                let mindBodyHTML = '<h3>Your Mind-Body Connection Profile</h3>';
+                // Define thresholds: low is < 35%, high is > 65%
+                if (selfReportedPercent < 35 && somaticPercent > 65) {
+                    mindBodyHTML += `<div class="profile-card"><h4>Profile: Cognitive Override (Body-Disconnect)</h4><p>Your results show a significant disconnect: you report relatively low emotional distress, but your body is showing high signs of physical dysregulation. This is a common and intelligent adaptation to chronic stress or trauma, where the mind learns to ignore or "override" the body's distress signals to function. Research suggests this pattern, sometimes related to alexithymia, can lead to a "decoupling" between subjective feelings and physiological reality. Reconnecting with your body's subtle cues is a key step in healing.</p></div>`;
+                } else if (selfReportedPercent > 65 && somaticPercent < 35) {
+                     mindBodyHTML += `<div class="profile-card"><h4>Profile: Somatic Amplification (Mind-Dominant)</h4><p>Your results show a disconnect where you report high emotional distress, but your body's baseline physical dysregulation is relatively low. This can suggest a pattern where the mind is highly attuned to—and may amplify or catastrophically interpret—bodily sensations. Your thoughts and feelings about stress are very powerful, and learning to differentiate between a physical signal and the mind's story about it is an important step.</p></div>`;
                 } else {
-                    cohesionInterpretation = `<p><strong>Significant Disconnect:</strong> There's a major discrepancy between your self-perception and your body's reality. This is a crucial area for exploration. It often indicates a pattern of overriding or ignoring the body's signals, a common adaptation to chronic stress or trauma.</p>`;
+                     mindBodyHTML += `<div class="profile-card"><h4>Profile: Aligned Connection</h4><p>Your self-reported emotional state and your body's physical signals are telling a consistent story. Whether you are feeling regulated or dysregulated, your mind and body are in sync. This strong connection is the foundation of interoceptive awareness and a powerful asset for building greater regulation and resilience.</p></div>`;
                 }
+                document.getElementById('mind-body-interpretation').innerHTML = mindBodyHTML;
 
-                document.getElementById('interpretation-text').innerHTML = interpretationHTML + cohesionInterpretation;
 
                 // --- Update Copy Text Area ---
                 const resultsText = `
 Nervous System Assessment Results
 ----------------------------------
-CORE METRICS:
-Net Regulation Score: ${netRegulationScore}
-Somatic Dysregulation Score: ${somaticScore} / 45
-Brain-Body Cohesion: ${cohesionScore.toFixed(0)}%
+Dominant State Profile: ${document.querySelector('#dominant-state-interpretation h4').textContent}
+Mind-Body Profile: ${document.querySelector('#mind-body-interpretation h4').textContent}
 
-DETAILED SCORES (FOR REFERENCE):
-Ventral Vagal (Safe/Social): ${scoreA} / 25
+--- Raw Scores for Reference ---
+Ventral Vagal (Safety): ${scoreA} / 25
 Sympathetic (Mobilized): ${scoreB} / 30
 Dorsal Vagal (Shutdown): ${scoreC} / 30
+Somatic Dysregulation: ${somaticScore} / 45
 `;
                 document.getElementById('results-textarea').value = resultsText.trim();
                 
