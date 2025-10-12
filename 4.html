@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creativity & Structure | Nervous System Deep Dive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2a0f0f; /* Deep, dark maroon */
+            --card-bg: #402222;
+            --text-color: #e3dcd2; /* Soft, warm off-white */
+            --heading-color: #fffaf0;
+            --accent-color: #e0af68; /* Gentle gold/amber */
+            --accent-hover: #f0c388;
+            --border-color: #5c3d3d;
+            --danger-color: #ff8787;
+            --calm-color: #87CEEB;
+            --font-serif: 'Lora', serif;
+            --font-game: 'Press Start 2P', cursive;
+        }
+
+        /* General Styles */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            line-height: 1.8;
+            margin: 0;
+            padding: 2rem 1.5rem;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-game);
+            color: var(--heading-color);
+            font-weight: normal;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-shadow: 3px 3px 0px var(--bg-color), 5px 5px 0px #000;
+        }
+         @media (min-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 3px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+        }
+        
+        .card h2 {
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        /* Header Navigation */
+        .site-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        .header-link {
+            font-family: var(--font-game);
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s ease;
+        }
+        .header-link:hover {
+            color: var(--accent-hover);
+        }
+        .header-yin-yang {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--text-color) 50%, var(--card-bg) 50%);
+        }
+        .header-yin-yang::before,
+        .header-yin-yang::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid var(--accent-color);
+        }
+        .header-yin-yang::before {
+            top: 7px;
+            background-color: var(--card-bg);
+        }
+        .header-yin-yang::after {
+            bottom: 7px;
+            background-color: var(--text-color);
+        }
+
+        strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-game);
+            color: var(--bg-color);
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .grid-2-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .grid-box {
+            border: 2px dashed var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            height: 100%;
+        }
+        .grid-box h3 {
+            font-size: 1.2rem;
+            color: var(--accent-hover);
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .pixel-art-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        .pixel-art-large {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+        }
+
+        .sources-section ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 0.9rem;
+        }
+        .sources-section li {
+            margin-bottom: 0.75rem;
+        }
+        .note {
+            font-size: 0.9rem;
+            color: #bdaea1;
+            font-style: italic;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: var(--border-color);
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="site-header">
+            <a href="index.html" class="header-yin-yang"></a>
+            <a href="index.html" class="header-link">Back to Home</a>
+        </header>
+
+        <main>
+            <h1>Why the Nervous System is Key</h1>
+            
+            <section class="card">
+                <h2>Thinking vs. Reacting</h2>
+                <p>To understand mental and physical health, we must first understand the body's control panel: the nervous system. When you are calm and feel safe, you are using your whole brain. But when you are in a state of heightened arousal—what we call "fight-or-flight"—your brain fundamentally changes how it operates. You stop thinking and start reacting.</p>
+            </section>
+            
+            <section class="card">
+                <h2>Your Brain's Two Captains</h2>
+                <p>Imagine your brain has two captains, each with a different job.</p>
+                <div class="grid-2-col">
+                    <div class="grid-box">
+                        <h3>The Amygdala (Ancient Smoke Detector)</h3>
+                        <p>This is a very old, primal part of your brain. Its only job is to scan for danger and sound the alarm. It works on pure emotion and instinct. When it senses a threat, it triggers your fight-or-flight response instantly, before you even have time to think about it.</p>
+                    </div>
+                    <div class="grid-box">
+                        <h3>The Prefrontal Cortex (Modern Watchtower)</h3>
+                        <p>This is the most advanced part of your brain, responsible for logic, planning, and self-control. It's the part that doesn't fully develop until you're 25 or even 30. It can look at a situation, analyze it, and tell the amygdala, "It's okay, that's not a real threat."</p>
+                    </div>
+                </div>
+                 <div class="pixel-art-container">
+                     <svg class="pixel-art-large" viewBox="0 0 64 64" style="image-rendering: pixelated;">
+                        <!-- Brain shape -->
+                        <rect fill="var(--border-color)" x="22" y="10" width="20" height="4"/>
+                        <rect fill="var(--border-color)" x="18" y="14" width="28" height="4"/>
+                        <rect fill="var(--border-color)" x="14" y="18" width="36" height="20"/>
+                        <rect fill="var(--border-color)" x="18" y="38" width="28" height="4"/>
+                        <rect fill="var(--border-color)" x="26" y="42" width="12" height="4"/>
+                        <!-- PFC (blue) -->
+                        <rect fill="var(--calm-color)" x="18" y="18" width="12" height="8"/>
+                        <!-- Amygdala (red) -->
+                        <rect fill="var(--danger-color)" x="26" y="28" width="12" height="8"/>
+                        <rect fill="#FFC0CB" x="30" y="30" width="4" height="4"/>
+                     </svg>
+                 </div>
+                 <p>When you're in a fight-or-flight state, your brain performs an "amygdala hijack." It pulls energy and resources *away* from your logical Prefrontal Cortex and gives it all to your reactive Amygdala. In this state, <strong>emotions are the most powerful currency.</strong> You aren't thinking, you're feeling and reacting. This is not a choice; it's a built-in survival mechanism.</p>
+            </section>
+
+            <section class="card">
+                <h2>The Neurodivergent Amplifier</h2>
+                <p>For neurodivergent individuals (Autism, ADHD), this system can be even more sensitive. Remember: <strong>with great sensory awareness comes great sensory sensitivity.</strong> A neurodivergent brain takes in more sensory data, which means the amygdala has more information to scan for potential threats. This makes it easier to become overstimulated and enter a fight-or-flight state.</p>
+                <p>This is why sensory accommodations—like noise-canceling headphones or sunglasses—are so effective. They are a form of self-care that helps everyone by reducing the amount of data the amygdala has to process, allowing the Prefrontal Cortex to stay online.</p>
+            </section>
+            
+            <section class="card">
+                 <h2>Reclaiming Your Power</h2>
+                 <p>The root of our struggles is not just our genes (nature) or what has happened to us (nurture), but also our body's <strong>reaction</strong> to it. The good news is that we have the power to retrain this reaction.</p>
+                 <p>It doesn't matter if you've had terrible things happen or have challenging genetics. Through practice, you can teach your nervous system that it is safe, calm your amygdala, and bring your prefrontal cortex back online. This workbook will guide you on that journey.</p>
+                 <p style="text-align: center; font-style: italic; margin-top: 2rem;"><strong>Your mental health is not your fault, but it is your responsibility.</strong></p>
+            </section>
+            
+            <section class="card sources-section">
+                <h3 style="color:var(--accent-color); font-size:1.2rem;">Key Scientific Sources</h3>
+                <p class="note" style="margin-bottom: 1.5rem;">The concepts on this page are informed by established neuroscience. For deeper reading, consider these sources.</p>
+               <ul>
+                   <li>LeDoux, J. E. (2015). <em>Anxious: Using the brain to understand and treat fear and anxiety</em>. Viking.</li>
+                   <li>Arnsten, A. F. (2009). Stress signalling pathways that impair prefrontal cortex structure and function. <em>Nature reviews neuroscience, 10</em>(6), 410-422.</li>
+                   <li>Goleman, D. (1995). <em>Emotional Intelligence</em>. Bantam Books. (Popularized the "amygdala hijack" concept).</li>
+               </ul>
+           </section>
+
+            <section style="text-align:center;">
+                <a href="index.html" class="btn">Continue Your Journey</a>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Creativity & Structure</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
