@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creativity & Structure | Enhancing Cognitive Creativity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2a0f0f; /* Deep, dark maroon */
+            --card-bg: #402222;
+            --text-color: #e3dcd2; /* Soft, warm off-white */
+            --heading-color: #fffaf0;
+            --accent-color: #e0af68; /* Gentle gold/amber */
+            --accent-hover: #f0c388;
+            --border-color: #5c3d3d;
+            --font-serif: 'Lora', serif;
+            --font-game: 'Press Start 2P', cursive;
+        }
+
+        /* General Styles */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            line-height: 1.8;
+            margin: 0;
+            padding: 2rem 1.5rem;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-game);
+            color: var(--heading-color);
+            font-weight: normal;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-shadow: 3px 3px 0px var(--bg-color), 5px 5px 0px #000;
+        }
+         @media (min-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 3px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+        }
+        
+        .card h2 {
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Header Navigation */
+        .site-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        .header-link {
+            font-family: var(--font-game);
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s ease;
+        }
+        .header-link:hover {
+            color: var(--accent-hover);
+        }
+        .header-yin-yang {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--text-color) 50%, var(--card-bg) 50%);
+        }
+        .header-yin-yang::before,
+        .header-yin-yang::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid var(--accent-color);
+        }
+        .header-yin-yang::before {
+            top: 7px;
+            background-color: var(--card-bg);
+        }
+        .header-yin-yang::after {
+            bottom: 7px;
+            background-color: var(--text-color);
+        }
+
+        strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-game);
+            color: var(--bg-color);
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        .blank-textarea {
+            font-family: var(--font-serif);
+            border: 2px solid var(--border-color);
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 4px;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .worksheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            table-layout: fixed;
+        }
+        .worksheet-table th, .worksheet-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+        }
+        .worksheet-table th {
+            font-family: var(--font-game);
+            font-size: 0.7rem;
+            color: var(--accent-hover);
+        }
+        .worksheet-table textarea {
+            min-height: 150px;
+        }
+
+        .grid-2-col, .grid-3-col {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .grid-2-col { grid-template-columns: 1fr; }
+        .grid-3-col { grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+            .grid-2-col { grid-template-columns: 1fr 1fr; }
+            .grid-3-col { grid-template-columns: 1fr 1fr 1fr; }
+        }
+        .grid-box {
+            border: 2px dashed var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .grid-box h3 {
+            font-size: 1.1rem;
+            color: var(--accent-hover);
+            margin-top: 0;
+            text-align: center;
+        }
+         .pixel-art-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            height: 80px;
+        }
+
+        .if-then-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .if-then-box {
+            width: 80%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            background-color: var(--bg-color);
+        }
+        .if-then-arrow {
+            font-family: var(--font-game);
+            color: var(--accent-color);
+            font-size: 2rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: var(--border-color);
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="site-header">
+            <a href="index.html" class="header-yin-yang"></a>
+            <a href="index.html" class="header-link">Back to Home</a>
+        </header>
+
+        <main>
+            <h1>Enhancing Cognitive Creativity</h1>
+            
+            <section class="card">
+                <h2>A Mentalization Activity</h2>
+                <p><strong>Mentalization</strong> is a powerful "top-down" tool for breaking free from rigid thinking patterns common in anxiety, PTSD, and OCD. It's the ability to understand our own minds and the minds of others—to see the thoughts, feelings, and intentions that drive behavior. This practice helps calm the nervous system because it allows us to see the whole picture (the "roots") instead of just reacting to one branch of the tree (the "leaf").</p>
+            </section>
+            
+             <section class="card">
+                <h2>Why This is a Nervous System Tool</h2>
+                <p>This may seem like a purely mental exercise, but it is a potent nervous system tool. When we are stuck in reactive, black-and-white thinking, our amygdala (the brain's smoke detector) is in charge. Mentalization is the practice of bringing our prefrontal cortex (the thinking, rational part) back online. It is a skill that must be practiced like <strong>building a muscle</strong>. The more you try, the easier it gets to see the whole picture and respond with intention rather than react from a place of fear.</p>
+            </section>
+            
+            <section class="card">
+                <h2>An Intro to Behavioral Therapy</h2>
+                <p>To understand why this works, we can look to basic behaviorism. There are two primary ways to influence behavior:</p>
+                <div class="grid-2-col">
+                    <div class="grid-box">
+                        <h3>Punishment</h3>
+                        <div class="pixel-art-container">
+                            <svg viewBox="0 0 64 64" style="image-rendering: pixelated; width:64px; height:64px;">
+                                <rect fill="#fffaf0" x="12" y="12" width="40" height="40"/>
+                                <rect fill="#ff8787" x="24" y="20" width="16" height="8"/><rect fill="#ff8787" x="24" y="28" width="8" height="16"/>
+                            </svg>
+                        </div>
+                        <p>This relies on adding a negative consequence to stop a behavior. It is driven by fear and <strong>external motivation</strong>. It does not create lasting change.</p>
+                    </div>
+                     <div class="grid-box">
+                        <h3>Reinforcement</h3>
+                         <div class="pixel-art-container">
+                             <svg viewBox="0 0 64 64" style="image-rendering: pixelated; width:64px; height:64px;">
+                                <rect fill="#e0af68" x="16" y="20" width="8" height="24"/><rect fill="#b08968" x="40" y="20" width="8" height="24"/>
+                                <rect fill="#e0af68" x="24" y="16" width="8" height="8"/><rect fill="#b08968" x="32" y="16" width="8" height="8"/>
+                                <rect fill="#402222" x="24" y="32" width="16" height="4"/>
+                            </svg>
+                        </div>
+                        <p>This relies on adding a positive consequence to encourage a behavior. True, lasting change comes from <strong>internal motivation</strong>, which is built by understanding cause and effect.</p>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem;">This exercise helps you build that internal motivation. By seeing the cause-and-effect link between your thoughts and feelings, you become your own agent of change. This enhances problem-solving, builds cognitive flexibility that can lessen the chances of dementia, and empowers you to see progress on your somatic healing journey, even when it feels slow.</p>
+            </section>
+
+            <section class="card">
+                <h2>The Power of Cause & Effect</h2>
+                <p>This is a skill you can practice everywhere. For example, when my dog barks at an echo, my first impulse might be frustration. Here's how we can apply mentalization:</p>
+                <div class="if-then-container">
+                    <div class="if-then-box"><strong>IF:</strong> Dog barks at echo (Behavior)</div>
+                    <div class="if-then-arrow">↓</div>
+                    <div class="if-then-box"><strong>Mentalize:</strong> He's not being "bad"; he's scared because he doesn't understand the cause of the sound.</div>
+                    <div class="if-then-arrow">↓</div>
+                     <div class="if-then-box"><strong>THEN:</strong> Demonstrate that my voice also echoes, then soothe him. This teaches cause and effect, reducing his fear.</div>
+                </div>
+                 <p style="margin-top: 1.5rem;">We can do the same for ourselves by tracing our reactions back to their source.</p>
+            </section>
+
+            <section class="card">
+                <h2>Step 1: Describe the Event</h2>
+                 <svg viewBox="0 0 64 64" style="image-rendering: pixelated; width:80px; height:80px; margin: 0 auto 1rem auto; display:block;">
+                    <rect fill="var(--text-color)" x="14" y="10" width="36" height="44"/>
+                    <rect fill="var(--card-bg)" x="18" y="14" width="28" height="36"/>
+                    <rect fill="var(--accent-color)" x="22" y="18" width="20" height="4"/>
+                    <rect fill="var(--text-color)" x="22" y="26" width="20" height="2"/>
+                    <rect fill="var(--text-color)" x="22" y="32" width="20" height="2"/>
+                    <rect fill="var(--text-color)" x="22" y="38" width="20" height="2"/>
+                    <rect fill="var(--text-color)" x="22" y="44" width="20" height="2"/>
+                </svg>
+                <p style="text-align:center;">Recall a recent interaction where you felt misunderstood or experienced conflict. Write a brief description of the event from your point of view.</p>
+                <textarea class="blank-textarea" rows="5" placeholder="Describe what happened here..."></textarea>
+            </section>
+            
+            <section class="card">
+                <h2>Step 2: The Self-Compassionate Reframe</h2>
+                <p>Now, let's look at the situation with kindness. Punishing yourself doesn't help; understanding does. Consider these prompts:</p>
+                <div class="grid-3-col">
+                    <div class="grid-box">
+                        <h3>Common Humanity</h3>
+                         <div class="pixel-art-container">
+                             <svg viewBox="0 0 64 64" style="image-rendering: pixelated; width:64px; height:64px;">
+                                <rect fill="var(--accent-color)" x="14" y="20" width="8" height="8"/><rect fill="var(--accent-color)" x="10" y="28" width="16" height="20"/>
+                                <rect fill="var(--text-color)" x="28" y="16" width="8" height="8"/><rect fill="var(--text-color)" x="24" y="24" width="16" height="24"/>
+                                <rect fill="#b08968" x="42" y="20" width="8" height="8"/><rect fill="#b08968" x="38" y="28" width="16" height="20"/>
+                            </svg>
+                        </div>
+                        <p>Is it possible the other person was struggling? Maybe they were short with you because they are depressed or in pain. Many people experience this.</p>
+                    </div>
+                     <div class="grid-box">
+                        <h3>Your Own State</h3>
+                         <div class="pixel-art-container">
+                             <svg viewBox="0 0 64 64" style="image-rendering: pixelated; width:64px; height:64px;">
+                                <rect fill="var(--text-color)" x="28" y="16" width="8" height="8"/><rect fill="var(--text-color)" x="24" y="24" width="16" height="24"/>
+                                <path fill="#ff8787" d="M32 30 C 36 26, 38 26, 40 30 S 38 38, 32 40 C 26 38, 24 34, 26 30 Z"/>
+                             </svg>
+                        </div>
+                        <p>Were you tired, hungry, or already stressed? How might that have influenced your reaction?</p>
+                    </div>
+                     <div class="grid-box">
+                        <h3>Dynamic Equilibrium</h3>
+                        <div class="pixel-art-container">
+                            <svg viewBox="0 0 64 64" style="image-rendering: pixelated; width:64px; height:64px;">
+                               <rect fill="var(--accent-color)" x="12" y="48" width="40" height="4"/>
+                               <rect fill="var(--accent-color)" x="30" y="40" width="4" height="8"/>
+                               <rect fill="var(--accent-color)" x="4" y="36" width="56" height="4"/>
+                               <rect fill="#ff8787" x="8" y="28" width="12" height="8"/>
+                               <rect fill="#e3dcd2" x="44" y="28" width="12" height="8"/>
+                           </svg>
+                       </div>
+                        <p>It's not about letting yourself off the hook; it's about balancing accountability and kindness. For example, if I'm late, punishing myself only makes me less present. The compassionate action is to apologize, then recenter to be fully present.</p>
+                    </div>
+                </div>
+            </section>
+
+             <section class="card">
+                <h2>Step 3: Reflective Writing Chart (for One Week)</h2>
+                <p style="text-align:center;">Use this table to practice mentalizing each day. Pick one significant interaction and explore it from all angles.</p>
+                <div style="overflow-x: auto;">
+                    <table class="worksheet-table">
+                        <thead>
+                            <tr>
+                                <th>Event/Interaction</th>
+                                <th>My Thoughts</th>
+                                <th>My Emotions (1-10)</th>
+                                <th>My Behavior</th>
+                                <th>Alternative Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><textarea class="blank-textarea" placeholder="Day 1..."></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                            </tr>
+                             <tr>
+                                <td><textarea class="blank-textarea" placeholder="Day 2..."></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                                <td><textarea class="blank-textarea"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <section class="card">
+                <h2>What Insights Have You Gained?</h2>
+                 <svg viewBox="0 0 64 64" style="image-rendering: pixelated; width:80px; height:80px; margin: 0 auto 1rem auto; display:block;">
+                    <rect fill="var(--accent-color)" x="24" y="12" width="16" height="8"/>
+                    <rect fill="var(--accent-color)" x="20" y="20" width="24" height="24"/>
+                    <rect fill="var(--accent-hover)" x="28" y="24" width="8" height="16"/>
+                    <rect fill="var(--accent-hover)" x="24" y="28" width="16" height="8"/>
+                    <rect fill="var(--border-color)" x="28" y="44" width="8" height="8"/>
+                </svg>
+                <p style="text-align:center;">After a week of practice, what have you learned about yourself and others? How might this affect your future interactions?</p>
+                <textarea class="blank-textarea" rows="5" placeholder="Reflect on your insights here..."></textarea>
+            </section>
+
+            <section style="text-align:center;">
+                <a href="index.html" class="btn">Continue Your Journey</a>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Creativity & Structure</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
