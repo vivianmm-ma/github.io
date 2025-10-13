@@ -71,6 +71,11 @@
             text-align: center;
             margin-bottom: 2rem;
             color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         /* Header Navigation */
@@ -214,6 +219,10 @@
             font-size: 1rem;
             color: var(--accent-hover);
         }
+        .pixel-icon {
+            width: 32px;
+            height: 32px;
+        }
 
         footer {
             margin-top: 4rem;
@@ -304,35 +313,38 @@
     
     <script>
         const cardData = [
-            // Visual 👁️
-            { text: 'Natural lighting', category: 'Visual 👁️' }, { text: 'Dim or warm lighting', category: 'Visual 👁️' }, { text: 'Bright or cool lighting', category: 'Visual 👁️' },
-            { text: 'Minimalist & organized spaces', category: 'Visual 👁️' }, { text: 'Vibrant colors & patterns', category: 'Visual 👁️' },
-            // Auditory 🔊
-            { text: 'Quiet', category: 'Auditory 🔊' }, { text: 'Steady background noise (white, brown, etc.)', category: 'Auditory 🔊' }, { text: 'Music or TV in background', category: 'Auditory 🔊' },
-            { text: 'A specific song on repeat', category: 'Auditory 🔊' },
-            // Olfactory 👃
-            { text: 'Subtle or mild scents', category: 'Olfactory 👃' }, { text: 'Fresh or clean smells', category: 'Olfactory 👃' }, { text: 'Food-related scents', category: 'Olfactory 👃' },
-            { text: 'Earthy or herbal scents', category: 'Olfactory 👃' },
-            // Tactile ✋
-            { text: 'Light touch', category: 'Tactile ✋' }, { text: 'Deep pressure', category: 'Tactile ✋' }, { text: 'Using a fidget toy', category: 'Tactile ✋' },
-            { text: 'Soft textures (blankets, etc)', category: 'Tactile ✋' }, { text: 'Petting an animal', category: 'Tactile ✋' }, { text: 'A warm bath or shower', category: 'Tactile ✋' },
-            // Oral 👅
-            { text: 'Chewing gum', category: 'Oral 👅' }, { text: 'A crunchy snack', category: 'Oral 👅' }, { text: 'A warm beverage', category: 'Oral 👅' },
-            { text: 'Hard candy or a lollipop', category: 'Oral 👅' }, { text: 'A carbonated drink', category: 'Oral 👅' },
-            // Clothing 👕
+            { text: 'Natural lighting', category: 'Visual (Sight) 👁️' }, { text: 'Dim or warm lighting', category: 'Visual (Sight) 👁️' }, { text: 'Bright or cool lighting', category: 'Visual (Sight) 👁️' },
+            { text: 'Minimalist & organized spaces', category: 'Visual (Sight) 👁️' }, { text: 'Vibrant colors & patterns', category: 'Visual (Sight) 👁️' },
+            { text: 'Quiet', category: 'Auditory (Sound) 🔊' }, { text: 'Steady background noise (white, brown, etc.)', category: 'Auditory (Sound) 🔊' }, { text: 'Music or TV in background', category: 'Auditory (Sound) 🔊' },
+            { text: 'A specific song on repeat', category: 'Auditory (Sound) 🔊' },
+            { text: 'Subtle or mild scents', category: 'Olfactory (Smell) 👃' }, { text: 'Fresh or clean smells', category: 'Olfactory (Smell) 👃' }, { text: 'Food-related scents', category: 'Olfactory (Smell) 👃' },
+            { text: 'Earthy or herbal scents', category: 'Olfactory (Smell) 👃' },
+            { text: 'Light touch', category: 'Tactile (Touch) ✋' }, { text: 'Deep pressure', category: 'Tactile (Touch) ✋' }, { text: 'Using a fidget toy', category: 'Tactile (Touch) ✋' },
+            { text: 'Soft textures (blankets, etc)', category: 'Tactile (Touch) ✋' }, { text: 'Petting an animal', category: 'Tactile (Touch) ✋' }, { text: 'A warm bath or shower', category: 'Tactile (Touch) ✋' },
+            { text: 'Chewing gum', category: 'Oral (Taste/Mouth) 👅' }, { text: 'A crunchy snack', category: 'Oral (Taste/Mouth) 👅' }, { text: 'A warm beverage', category: 'Oral (Taste/Mouth) 👅' },
+            { text: 'Hard candy or a lollipop', category: 'Oral (Taste/Mouth) 👅' }, { text: 'A carbonated drink', category: 'Oral (Taste/Mouth) 👅' },
             { text: 'Loose-fitting clothing', category: 'Clothing 👕' }, { text: 'Tight/Compression clothing', category: 'Clothing 👕' }, { text: 'Soft, tagless materials', category: 'Clothing 👕' },
-            // Movement 🤸
             { text: 'Gentle rocking or swaying', category: 'Movement 🤸' }, { text: 'Swinging', category: 'Movement 🤸' }, { text: 'Jumping or bouncing', category: 'Movement 🤸' },
             { text: 'Repetitive movements (stimming/pacing)', category: 'Movement 🤸' },
-            // Environment 🌳
             { text: 'Being outdoors', category: 'Environment 🌳' }, { text: 'Being indoors', category: 'Environment 🌳' }, { text: 'An open space', category: 'Environment 🌳' }, { text: 'A small, cozy nook', category: 'Environment 🌳' },
-            // Temperature 🌡️
             { text: 'A cool environment', category: 'Temperature 🌡️' }, { text: 'A warm environment', category: 'Temperature 🌡️' }, { text: 'A gentle breeze or fan', category: 'Temperature 🌡️' },
-            // Social 👥
             { text: 'Being in a large crowd', category: 'Social 👥' }, { text: 'A small group of familiar people', category: 'Social 👥' }, { text: 'Being alone', category: 'Social 👥' },
-            // Proprioceptive 💪
             { text: 'Lifting heavy items', category: 'Proprioceptive 💪' }, { text: 'Using a weighted blanket or lap pad', category: 'Proprioceptive 💪' }
         ];
+
+        const pixelIcons = {
+            'Visual (Sight) 👁️': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><rect fill="var(--accent-color)" x="6" y="12" width="20" height="8"/><rect fill="#fff" x="10" y="14" width="4" height="4"/><rect fill="var(--bg-color)" x="11" y="15" width="2" height="2"/><rect fill="var(--accent-color)" x="18" y="14" width="4" height="4"/></svg>`,
+            'Auditory (Sound) 🔊': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M12 8 L12 24 L16 24 L22 30 L22 2 L16 8 Z M4 12 L8 12 L8 20 L4 20 Z"/></svg>`,
+            'Olfactory (Smell) 👃': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M16 4 A 8 8 0 0 0 8 12 L 8 16 L 12 16 L 12 12 A 4 4 0 0 1 16 8 A 4 4 0 0 1 20 12 L 20 16 L 24 16 L 24 12 A 8 8 0 0 0 16 4 M 8 20 L 8 24 L 24 24 L 24 20 Z "/></svg>`,
+            'Tactile (Touch) ✋': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M10 2 L 10 12 L 8 12 L 8 14 L 6 14 L 6 18 L 4 18 L 4 22 L 6 22 L 6 26 L 8 26 L 8 28 L 10 28 L 10 30 L 22 30 L 22 18 L 20 18 L 20 14 L 18 14 L 18 10 L 16 10 L 16 2 Z"/></svg>`,
+            'Oral (Taste/Mouth) 👅': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M8 8 C 4 8 4 16 8 16 L 24 16 C 28 16 28 8 24 8 Z M 8 18 L 24 18 L 24 24 L 8 24 Z"/></svg>`,
+            'Clothing 👕': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M6 4 L 12 4 L 14 8 L 18 8 L 20 4 L 26 4 L 24 14 L 28 18 L 28 28 L 4 28 L 4 18 L 8 14 Z"/></svg>`,
+            'Movement 🤸': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M14 4 L 18 4 L 18 8 L 14 8 Z M 10 8 L 22 8 L 22 12 L 10 12 Z M 12 12 L 20 12 L 20 20 L 12 20 Z M 8 20 L 12 20 L 12 28 L 8 28 Z M 20 20 L 24 20 L 24 28 L 20 28 Z"/></svg>`,
+            'Environment 🌳': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M14 4 L 18 4 L 18 12 L 22 12 L 16 20 L 10 12 L 14 12 Z M 8 22 L 24 22 L 24 28 L 8 28 Z"/></svg>`,
+            'Temperature 🌡️': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><rect fill="var(--accent-color)" x="14" y="2" width="4" height="20"/><circle fill="var(--accent-color)" cx="16" cy="26" r="6"/><rect fill="var(--bg-color)" x="15" y="10" width="2" height="12"/><circle fill="var(--bg-color)" cx="16" cy="26" r="3"/></svg>`,
+            'Social 👥': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M6 4h4v4h-4z M10 8h4v4h-4z M14 12h4v4h-4z M18 8h4v4h-4z M22 4h4v4h-4z M8 16h16v12h-16z"/></svg>`,
+            'Proprioceptive 💪': `<svg class="pixel-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M8 12 H 24 V 20 H 8 Z M 4 10 L 8 10 L 8 22 L 4 22 Z M 24 10 L 28 10 L 28 22 L 24 22 Z"/></svg>`,
+        }
 
         function populateWorksheet() {
             const worksheetContainer = document.getElementById('worksheet-container');
@@ -346,7 +358,8 @@
                 card.className = 'card';
                 
                 const title = document.createElement('h2');
-                title.textContent = category;
+                const icon = pixelIcons[category] || '';
+                title.innerHTML = `${icon} ${category}`;
                 card.appendChild(title);
                 
                 const table = document.createElement('table');
@@ -374,7 +387,6 @@
                     tbody.appendChild(row);
                 });
                 
-                // Add blank rows for custom entries
                 for (let i = 0; i < 3; i++) {
                      const row = document.createElement('tr');
                     row.innerHTML = `
