@@ -204,13 +204,13 @@
             accent-color: var(--accent-color);
         }
         
-        .summary-grid {
+        .summary-grid, .worksheet-row {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
         }
          @media (min-width: 768px) {
-            .summary-grid {
+            .summary-grid, .worksheet-row {
                 grid-template-columns: 1fr 1fr;
             }
         }
@@ -220,8 +220,15 @@
             color: var(--accent-hover);
         }
         .pixel-icon {
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 48px;
+        }
+        
+        .decorative-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         footer {
@@ -244,19 +251,30 @@
             <h1>Build Your Sensory Toolkit</h1>
             
             <section class="card">
-                <h2>The First Step in Regulation</h2>
+                <h2>
+                    <svg class="decorative-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M16 4 L20 12 L28 12 L22 18 L24 26 L16 20 L8 26 L10 18 L4 12 L12 12 Z"/></svg>
+                    The First Step in Regulation
+                    <svg class="decorative-icon" viewBox="0 0 32 32" style="image-rendering: pixelated;"><path fill="var(--accent-color)" d="M16 4 L20 12 L28 12 L22 18 L24 26 L16 20 L8 26 L10 18 L4 12 L12 12 Z"/></svg>
+                </h2>
                 <p>Before we can tackle complex trauma responses, we need to establish a baseline of safety. A sensory toolkit is a practical, powerful first step that anyone can begin, regardless of your starting point. It's about consciously identifying what your nervous system finds calming (soothers) and what it finds agitating (triggers).</p>
                 <p>Not everyone knows what's bothering them or has the words to describe it. This worksheet is designed to help you discover your unique sensory profile. Remember, sensory accommodations are a standard of care for neurodivergent individuals, but they are beneficial for <strong>everyone</strong>. This is universal self-care.</p>
             </section>
             
              <section class="card">
-                <h2>From the Author's Toolkit</h2>
+                <h2>
+                    <svg class="decorative-icon" viewBox="0 0 32 32" style="image-rendering: pixelated; width: 32px; height: 32px;"><path fill="#ff8787" d="M16 10 C 24 2, 32 2, 36 10 S 32 26, 16 34 C 0 26, 0 18, 16 10 Z"/></svg>
+                    From the Author's Toolkit
+                    <svg class="decorative-icon" viewBox="0 0 32 32" style="image-rendering: pixelated; width: 32px; height: 32px;"><path fill="#ff8787" d="M16 10 C 24 2, 32 2, 36 10 S 32 26, 16 34 C 0 26, 0 18, 16 10 Z"/></svg>
+                </h2>
                 <p>As a clinician who has spent the last eight years refining these techniques, I rely heavily on my own sensory toolkit. The goal is portability and discretion. For example, I always have a small, smooth fidget toy in my pocket. No one knows it's there, but it provides constant, calming tactile input. I have bins of different fidgets at home and in my office because my ADHD brain craves novelty.</p>
                 <p>I also use scent heavily. A small bottle of calming lotion at my desk or a soothing spray in my bag allows for a quick sensory reset. Taste is powerful, too. A strong flavor, like a mint or a piece of sour candy, can cut through rising anxiety. I always have sparkling water for this reason—it engages multiple senses at once. These small, consistent acts of self-regulation are the foundation of a resilient nervous system.</p>
             </section>
 
              <section class="card">
-                <h2>How To Use This Worksheet</h2>
+                <h2>
+                     <svg class="decorative-icon" viewBox="0 0 64 64" style="image-rendering: pixelated; width:32px; height: 32px;"><rect fill="var(--accent-color)" x="24" y="12" width="16" height="8"/><rect fill="var(--accent-color)" x="20" y="20" width="24" height="24"/><rect fill="var(--accent-hover)" x="28" y="24" width="8" height="16"/><rect fill="var(--accent-hover)" x="24" y="28" width="16" height="8"/><rect fill="var(--border-color)" x="28" y="44" width="8" height="8"/></svg>
+                    How To Use This Worksheet
+                </h2>
                 <p>Go through the items for each sensory category below. For each item, place a check or an "X" in the box that best describes your reaction to it. Use the blank rows at the bottom of each table to add your own ideas. The goal is not to fill every box, but to build awareness of your unique patterns.</p>
             </section>
             
@@ -353,54 +371,80 @@
                 return acc;
             }, {});
 
-            for (const category in groupedCards) {
-                const card = document.createElement('div');
-                card.className = 'card';
-                
-                const title = document.createElement('h2');
-                const icon = pixelIcons[category] || '';
-                title.innerHTML = `${icon} ${category}`;
-                card.appendChild(title);
-                
-                const table = document.createElement('table');
-                table.className = 'worksheet-table';
-                
-                table.innerHTML = `
-                    <thead>
-                        <tr>
-                            <th>Sensory Item</th>
-                            <th>Like / Soother</th>
-                            <th>Dislike / Trigger</th>
-                        </tr>
-                    </thead>
-                `;
-                
-                const tbody = document.createElement('tbody');
-                
-                groupedCards[category].forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.text}</td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    `;
-                    tbody.appendChild(row);
-                });
-                
-                for (let i = 0; i < 3; i++) {
-                     const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td><input type="text" class="blank-input" placeholder="Add your own..."></td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    `;
-                    tbody.appendChild(row);
+            const categories = Object.keys(groupedCards);
+
+            for(let i = 0; i < categories.length; i += 2) {
+                const row = document.createElement('div');
+                row.className = 'worksheet-row';
+
+                // Category 1
+                const cat1 = categories[i];
+                if (cat1) {
+                    row.appendChild(createCategoryCard(cat1, groupedCards[cat1]));
                 }
                 
-                table.appendChild(tbody);
-                card.appendChild(table);
-                worksheetContainer.appendChild(card);
+                // Category 2
+                const cat2 = categories[i+1];
+                 if (cat2) {
+                    row.appendChild(createCategoryCard(cat2, groupedCards[cat2]));
+                } else {
+                    // Add an empty div to maintain grid structure if odd number of categories
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.style.padding = '2.5rem'; // Match card padding
+                    row.appendChild(emptyDiv);
+                }
+
+                worksheetContainer.appendChild(row);
             }
+        }
+
+        function createCategoryCard(category, items) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const title = document.createElement('h2');
+            const icon = pixelIcons[category] || '';
+            title.innerHTML = `${icon} ${category}`;
+            card.appendChild(title);
+            
+            const table = document.createElement('table');
+            table.className = 'worksheet-table';
+            
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Sensory Item</th>
+                        <th>Like / Soother</th>
+                        <th>Dislike / Trigger</th>
+                    </tr>
+                </thead>
+            `;
+            
+            const tbody = document.createElement('tbody');
+            
+            items.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.text}</td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            for (let i = 0; i < 3; i++) {
+                 const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="text" class="blank-input" placeholder="Add your own..."></td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                `;
+                tbody.appendChild(row);
+            }
+            
+            table.appendChild(tbody);
+            card.appendChild(table);
+            return card;
         }
 
         document.addEventListener('DOMContentLoaded', populateWorksheet);
