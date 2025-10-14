@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somatic Map of Trauma Responses and Flow State</title>
+    <style>
+        /* Base styles - using a sans-serif font stack for readability without external links */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .infographic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a4e66;
+            padding: 20px 0;
+            margin: 0;
+            background-color: #e0f2f1;
+            font-size: 1.8em;
+            border-bottom: 4px solid #009688;
+        }
+
+        /* --- Grid Layout for the Table --- */
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1.5fr 2.5fr 2fr; /* 5 Columns */
+            font-size: 0.9em;
+            text-align: left;
+        }
+
+        /* Header Styling */
+        .header-cell {
+            background-color: #1a4e66;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 15px 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .header-cell:last-child {
+            border-right: none;
+        }
+
+        /* Data Row Styling */
+        .data-row {
+            display: contents; /* Allows the contained cells to adhere to the parent grid */
+        }
+
+        .data-row > div {
+            padding: 15px 10px;
+            border-bottom: 1px solid #eee;
+            border-right: 1px solid #f4f4f9;
+            transition: background-color 0.3s ease;
+        }
+        .data-row > div:last-child {
+            border-right: none;
+        }
+
+        /* Hover effect for better readability */
+        .data-row:hover > div {
+            background-color: #e6f7ff;
+        }
+
+        /* State-Specific Styling (Color Coding) */
+        .state-cell {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #1a4e66; /* Default for all states */
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+
+        .fight .state-cell { background-color: #ffcccc; color: #cc0000; }
+        .flight .state-cell { background-color: #ffe0b3; color: #ff9900; }
+        .freeze .state-cell { background-color: #d1e3ff; color: #004d99; }
+        .fawn .state-cell { background-color: #e6ffe6; color: #008000; }
+        .flow .state-cell { background-color: #e0d1ff; color: #6600cc; }
+        
+        /* Alternating row colors for better visibility */
+        .data-row:nth-child(even) > div { background-color: #fcfcfc; }
+        
+        /* Specific state background colors for all cells in the row */
+        .fight:nth-child(odd) > div:not(.state-cell) { background-color: #fff5f5; }
+        .flight:nth-child(odd) > div:not(.state-cell) { background-color: #fff9f0; }
+        .freeze:nth-child(odd) > div:not(.state-cell) { background-color: #f0f6ff; }
+        .fawn:nth-child(odd) > div:not(.state-cell) { background-color: #f5fff5; }
+        .flow:nth-child(odd) > div:not(.state-cell) { background-color: #f7f0ff; }
+
+        /* Flow state is the resolution, give it a final touch */
+        .flow > div {
+            border-bottom: 3px solid #6600cc !important;
+        }
+
+        /* --- Media Query for Mobile Responsiveness (Stacked Cards) --- */
+        @media (max-width: 900px) {
+            .infographic-grid {
+                display: block; /* Switch back to block layout for stacking */
+                border: none;
+            }
+
+            .header-cell {
+                display: none; /* Hide the main grid header */
+            }
+
+            /* Treat each row as a distinct card */
+            .data-row {
+                display: block;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+            }
+
+            /* Cell styling for stacked layout */
+            .data-row > div {
+                display: block;
+                width: auto;
+                border-bottom: 1px solid #f0f0f0;
+                border-right: none;
+                padding: 10px 15px;
+                background-color: #ffffff !important; /* Ensure white background inside card */
+            }
+
+            /* Title for each cell */
+            .data-row > div:before {
+                content: attr(data-label);
+                display: block;
+                font-weight: bold;
+                color: #1a4e66;
+                margin-bottom: 5px;
+            }
+            
+            /* Remove the label for the state itself */
+            .state-cell:before { content: none; }
+            .state-cell { padding: 15px !important; } /* Restore padding for the main title bar */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infographic-container">
+        <h1>Somatic Map: Trauma Responses to Flow State</h1>
+        <div class="infographic-grid">
+
+            <div class="header-cell">State</div>
+            <div class="header-cell">Imbalance / Strategy</div>
+            <div class="header-cell">The Body's Armor (Tension Areas)</div>
+            <div class="header-cell">Physiological & Muscular Manifestations</div>
+            <div class="header-cell">Mental / Cognitive Correlates</div>
+
+            <div class="data-row fight">
+                <div class="state-cell">🔥 **FIGHT**</div>
+                <div data-label="Imbalance / Strategy">Pathological Creativity (High Sympathetic Activation)</div>
+                <div data-label="The Body's Armor (Tension Areas)">**Jaw, Neck, Shoulders, Arms, Upper Back**</div>
+                <div data-label="Physiological & Muscular Manifestations">Chronic muscle tension (**hypertonicity**). Jaw clenching (Bruxism/TMJ). Heart palpitations or chronic high blood pressure (Hypertension). Headaches/Migraines from neck tension.</div>
+                <div data-label="Mental / Cognitive Correlates">Irritability, rage, hypervigilance. Feeling of being physically **"armored"** or braced.</div>
+            </div>
+
+            <div class="data-row flight">
+                <div class="state-cell">🏃 **FLIGHT**</div>
+                <div data-label="Imbalance / Strategy">Pathological Creativity (High Sympathetic Activation)</div>
+                <div data-label="The Body's Armor (Tension Areas)">**Legs, Hips (Psoas Muscle), Lower Back, Diaphragm**</div>
+                <div data-label="Physiological & Muscular Manifestations">Chronic, deep tension in the hip flexors (iliopsoas). Shallow, rapid, upper-chest breathing. Restless Legs Syndrome (RLS). Postural issues, sciatica.</div>
+                <div data-label="Mental / Cognitive Correlates">Restlessness (Akathisia). Panic disorders, avoidance behaviors. Adrenal/HPA Axis dysfunction from constant overdrive.</div>
+            </div>
+
+            <div class="data-row freeze">
+                <div class="state-cell">🧊 **FREEZE**</div>
+                <div data-label="Imbalance / Strategy">Pathological Structure (Dorsal Vagal Shutdown/Immobility)</div>
+                <div data-label="The Body's Armor (Tension Areas)">**Deep Core, Diaphragm, Systemic Rigidity/Collapse**</div>
+                <div data-label="Physiological & Muscular Manifestations">Systemic physical rigidity. Diaphragm is locked down. Can lead to muscular **hypotonicity** (low muscle tone) or collapse (e.g., in POTS/CFS).</div>
+                <div data-label="Mental / Cognitive Correlates">Dissociation, Depersonalization, Derealization. **Obsessive-Compulsive Disorder** as a search for external structure. Profound fatigue.</div>
+            </div>
+
+            <div class="data-row fawn">
+                <div class="state-cell">🤝 **FAWN**</div>
+                <div data-label="Imbalance / Strategy">Pathological Structure (A desperate attempt at co-regulation/safety)</div>
+                <div data-label="The Body's Armor (Tension Areas)">**Chest, Throat, Pelvic Floor, Diaphragm**</div>
+                <div data-label="Physiological & Muscular Manifestations">Physical constriction of the laryngeal muscles (**Globus Sensation**). Tension around the heart/lungs. Chronic pelvic floor tension. Protective posture (hunched shoulders).</div>
+                <div data-label="Mental / Cognitive Correlates">Codependency, chronic people-pleasing. **Suppression** of one's own emotional expression and needs.</div>
+            </div>
+
+            <div class="data-row flow">
+                <div class="state-cell">✨ **FLOW**</div>
+                <div data-label="Imbalance / Strategy">Dynamic Equilibrium (Ventral Vagal/Social Engagement)</div>
+                <div data-label="The Body's Armor (Tension Areas)">**Relaxed but Engaged Core. Loose, Fluid Muscles.**</div>
+                <div data-label="Physiological & Muscular Manifestations">Deep, diaphragmatic breathing with a **longer exhale** than inhale. Good **vagal tone**. Muscles move freely without bracing. Open posture and fluid movement.</div>
+                <div data-label="Mental / Cognitive Correlates">Calmness, social connection, creativity, emotional stability. **Grounded and present** in the moment.</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
