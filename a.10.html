@@ -151,7 +151,7 @@
         .infographic-container {
             border-radius: 12px;
             box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
-            overflow: hidden;
+            overflow: auto; /* Changed for better scrolling on smaller wide tables */
             background-color: var(--card-bg);
             border: 3px solid var(--border-color);
         }
@@ -161,6 +161,7 @@
             grid-template-columns: 1fr 1.2fr 1.5fr 2.5fr 2fr;
             font-size: 1rem;
             text-align: left;
+            min-width: 800px; /* ensure table doesn't collapse too much */
         }
 
         .header-cell {
@@ -172,6 +173,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border-right: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
         .header-cell:last-child {
             border-right: none;
@@ -186,6 +188,7 @@
             border-bottom: 1px solid var(--border-color);
             border-right: 1px solid var(--border-color);
             font-size: 0.9rem;
+            background-color: var(--card-bg);
         }
         .data-row > div:last-child {
             border-right: none;
@@ -194,17 +197,15 @@
         .state-cell {
             font-family: var(--font-game);
             font-size: 1rem;
+            color: var(--heading-color);
         }
 
-        .fight .state-cell { background-color: #6d2828; color: #ffacac; }
-        .flight .state-cell { background-color: #7a4a1d; color: #ffd19a; }
-        .freeze .state-cell { background-color: #1e3a5f; color: #c2d8ff; }
-        .fawn .state-cell { background-color: #2c5e2c; color: #b8e9b8; }
-        .flow .state-cell { background-color: #3b2e5e; color: #dcd0ff; }
+        .fight > .state-cell { background-color: #6d2828; }
+        .flight > .state-cell { background-color: #7a4a1d; }
+        .freeze > .state-cell { background-color: #1e3a5f; }
+        .fawn > .state-cell { background-color: #2c5e2c; }
+        .flow > .state-cell { background-color: #3b2e5e; }
         
-        .data-row:nth-child(even) > div { background-color: var(--card-bg); }
-        .data-row:nth-child(odd) > div { background-color: #4f2e2e; }
-
         .flow > div {
             border-bottom: none !important;
         }
@@ -219,17 +220,22 @@
             .data-row {
                 display: block;
                 margin-bottom: 2rem;
-                border: 1px solid var(--border-color);
+                border: 2px solid var(--border-color);
                 border-radius: 8px;
                 box-shadow: none;
                 overflow: hidden;
+            }
+             .data-row:last-child {
+                margin-bottom: 0;
             }
             .data-row > div {
                 display: block;
                 width: auto;
                 border-bottom: 1px solid var(--border-color);
                 border-right: none;
-                background-color: var(--card-bg) !important;
+            }
+            .data-row > div:last-child {
+                border-bottom: none;
             }
             .data-row > div:before {
                 content: attr(data-label);
@@ -342,3 +348,4 @@
 
 </body>
 </html>
+
