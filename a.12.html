@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creativity & Structure | Regulation Toolkit</title>
+    <!-- New Title -->
+    <title>Creativity & Structure | Somatic Cost of Stress</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -16,6 +17,17 @@
             --accent-color: #e0af68; /* Gentle gold/amber */
             --accent-hover: #f0c388;
             --border-color: #5c3d3d;
+            
+            /* Pixel brain colors */
+            --brain-frontal: #e0af68; /* Accent */
+            --brain-parietal: #f0c388; /* Accent Hover */
+            --brain-occipital: #a37c4b; /* Darker Accent */
+            --brain-temporal: #b9915a;
+            --brain-cerebellum: #8a6a43;
+            --brain-brainstem: var(--text-color);
+            --brain-corpus: #fffaf0; /* Heading color */
+            --brain-bg: transparent;
+
             --font-serif: 'Lora', serif;
             --font-game: 'Press Start 2P', cursive;
         }
@@ -53,7 +65,8 @@
         }
          @media (min-width: 768px) {
             h1 {
-                font-size: 2.8rem;
+                /* Larger H1 for this page title */
+                font-size: 2.5rem;
             }
         }
 
@@ -64,6 +77,7 @@
             padding: 2.5rem;
             margin-bottom: 2rem;
             box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+            overflow: hidden; /* Contains pixel art */
         }
         
         .card h2 {
@@ -134,25 +148,26 @@
             font-weight: 600;
         }
         
-        .btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.8rem 1.8rem;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: var(--font-game);
-            color: var(--bg-color);
-            background-color: var(--accent-color);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.2s ease, transform 0.2s ease;
+        /* List for screenshot content */
+        .content-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
         }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
+        .content-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        .content-list li::before {
+            content: '»'; /* Pixel-friendly arrow */
+            font-family: var(--font-game);
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
         }
         
         .resource-list {
@@ -184,21 +199,6 @@
             display: block;
         }
         
-        .blank-textarea {
-            font-family: var(--font-serif);
-            border: 2px solid var(--border-color);
-            padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
-            border-radius: 4px;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            min-height: 120px;
-        }
-        
-        /* Pixel Art Divider */
         .pixel-divider {
             height: 4px;
             background-image: linear-gradient(to right, 
@@ -209,48 +209,107 @@
                 var(--accent-color) 75%, 
                 var(--border-color) 75%);
             background-size: 16px 4px;
-            image-rendering: pixelated;
+            image-rendering: pixelated; /* Ensures the pixelated look */
             border: none;
             margin: 2.5rem auto 2rem;
             width: 80%;
         }
-
-        /* Infographic Styles */
+        
+        /* --- Pixel Brain Infographic (Copied from toolkit.html) --- */
         .infographic-container {
-            text-align: center;
-            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
         }
+
+        @media (min-width: 768px) {
+            .infographic-container {
+                flex-direction: row;
+            }
+        }
+        
+        .pixel-brain-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            /* Base size for one pixel. Grid is 20x16 */
+            --pixel-size: 12px; 
+            width: calc(20 * var(--pixel-size));
+            height: calc(16 * var(--pixel-size));
+            
+             /* Make it responsive */
+            @media (max-width: 767px) {
+                --pixel-size: 10px;
+            }
+            @media (max-width: 480px) {
+                --pixel-size: 8px;
+            }
+        }
+
+        .pixel-brain-grid {
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--border-color);
+            image-rendering: pixelated;
+        }
+
+        /* Pixel Colors */
+        .p-bg { background-color: var(--brain-bg); }
+        .p-fr { background-color: var(--brain-frontal); }
+        .p-pa { background-color: var(--brain-parietal); }
+        .p-oc { background-color: var(--brain-occipital); }
+        .p-te { background-color: var(--brain-temporal); }
+        .p-ce { background-color: var(--brain-cerebellum); }
+        .p-bs { background-color: var(--brain-brainstem); }
+        .p-co { background-color: var(--brain-corpus); }
+        
+        /* Brain Labels */
+        .p-label {
+            position: absolute;
+            font-family: var(--font-game);
+            font-size: 10px;
+            color: var(--heading-color);
+            padding: 2px 4px;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+        .p-label.l-fr { top: 0; left: 0; }
+        .p-label.l-pa { top: 0; right: 0; }
+        .p-label.l-oc { top: 50%; right: -25px; }
+        .p-label.l-te { bottom: 10%; left: -30px; }
+        .p-label.l-co { top: 40%; left: 25%; }
+        .p-label.l-ce { bottom: -20px; right: 20%; }
+        .p-label.l-bs { bottom: -20px; left: 35%; }
+        
+        /* Label lines */
+        .p-label::before {
+            content: '';
+            position: absolute;
+            background-color: var(--accent-hover);
+        }
+        .p-label.l-fr::before { width: 2px; height: 20px; top: 100%; left: 50%; }
+        .p-label.l-pa::before { width: 2px; height: 20px; top: 100%; left: 50%; }
+        .p-label.l-oc::before { width: 20px; height: 2px; top: 50%; right: 100%; }
+        .p-label.l-te::before { width: 20px; height: 2px; top: 50%; left: 100%; }
+        .p-label.l-co::before { width: 2px; height: 15px; top: 100%; left: 50%; }
+        .p-label.l-ce::before { width: 2px; height: 10px; bottom: 100%; left: 50%; }
+        .p-label.l-bs::before { width: 2px; height: 10px; bottom: 100%; left: 50%; }
+
         .infographic-text {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: left;
-            padding: 1rem;
-            border-left: 4px solid var(--accent-color);
-            background-color: rgba(0,0,0,0.1);
-            border-radius: 8px;
+            flex-grow: 1;
+        }
+        .infographic-text p {
+            margin: 0 0 1rem 0;
+            font-size: 0.95rem;
         }
         .infographic-text strong {
-            font-size: 1.1em;
+            font-size: 1rem;
+            color: var(--accent-hover);
         }
-        /* Style for the list inside the infographic text */
-        .infographic-text ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .infographic-text li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-        .infographic-text li::before {
-            content: '»';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
+        /* --- End Pixel Brain --- */
 
         footer {
             margin-top: 4rem;
@@ -270,59 +329,125 @@
         </header>
 
         <main>
-            <h1>Nervous System Regulation Toolkit</h1>
+            <h1>Regulation is Life or Death: The Somatic Cost of Stress</h1>
             
             <section class="card">
-                <h2>Building Your Arsenal</h2>
-                <p>This is not a shopping list. It is an exploration of potential tools to help regulate your nervous system. Some items cost money, while others are free. Some require space, others fit in your pocket. The goal is to creatively build a structure of support that works for your unique life and circumstances. Use these examples as inspiration for your own journey. Remember: <strong>you are in control</strong>. Listen to your body; it will tell you what it needs.</p>
-
-                <hr class="pixel-divider">
-
-                <div class="infographic-container">
-                    <h2>Your Brain: The Regulation Hub</h2>
-                    <div class="infographic-text">
-                        <p>At the core of your nervous system regulation is your amazing brain! Here's a look at some key areas and their "communication" roles:</p>
-                        <ul>
-                            <li><strong>Corpus Callosum:</strong> This central "information superhighway" connects the two hemispheres of your brain, allowing them to communicate and integrate complex information. A well-regulated nervous system relies on this seamless communication.</li>
-                            <li><strong>Frontal Lobe (Front):</strong> Your decision-maker and planner, involved in conscious regulation and assessing safety.</li>
-                            <li><strong>Parietal Lobe (Top-Back):</strong> Processes sensory information like touch, temperature, and pain, key for body awareness and grounding.</li>
-                            <li><strong>Temporal Lobe (Sides):</strong> Important for hearing, memory, and emotions, influencing how you perceive and respond to your environment.</li>
-                            <li><strong>Occipital Lobe (Back):</strong> Your visual processing center, impacting how you "see" the world around you and interpret visual cues.</li>
-                            <li><strong>Cerebellum (Lower-Back):</strong> Often thought of for balance and coordination, it also plays a role in emotional regulation and cognitive function.</li>
-                            <li><strong>Brainstem (Base):</strong> The primitive part of the brain that controls vital functions like breathing, heart rate, and sleep—fundamental to your body's survival responses.</li>
-                        </ul>
-                        <p>All these areas work together, constantly sending signals to keep you safe, responsive, and regulated. When one area is over- or under-activated, it can impact your overall sense of calm and safety.</p>
-                    </div>
-                </div>
+                <p>We all know that being overwhelmed can lead to injury, but for individuals with structural vulnerabilities, <strong>emotional regulation is literally a matter of structural stability.</strong> This framework explains how stress physically changes the brain and body, and how intentional somatic work is the key to healing.</p>
             </section>
             
             <section class="card">
-                <h2>An Example Toolkit (From the Author)</h2>
+                <h2>1. The Neurobiological Basis of System Collapse</h2>
                 
-                <h3>💊 Supplements</h3>
-                <ul class="resource-list">
-                    <li><span class="item-name">Optimize Minerals (~$50):</span> A comprehensive liquid mineral supplement. <span class="item-details">Why it helps: Provides foundational nutrients like magnesium, zinc, and B vitamins for nervous system function. Note: High Vitamin C can impact ADHD medication absorption. Where to find: TikTok Shop, brand's website. iHerb.com has similar blends.</span></li>
-                    <li><span class="item-name">Vitamin D3/K2 Patches (~$20):</span> A patch that delivers vitamins through the skin. <span class="item-details">Why it helps: Excellent alternative when high body tension (a "Freeze" response) impairs stomach absorption. Where to find: PatchAid.com or iHerb.com.</span></li>
-                    <li><span class="item-name">Magnesium Glycinate (~$15-30):</span> A highly absorbable form of magnesium. <span class="item-details">Why it helps: Crucial for mood and relaxing the "Fight/Flight" muscle armor. Where to find: iHerb.com, most pharmacies.</span></li>
-                </ul>
+                <h3>A. Toxic Stress, Neuroinflammation, and the Brain</h3>
+                
+                <p>Chronic trauma and toxic stress trigger sustained high levels of cortisol and systemic inflammation, leading to <strong>neuroinflammation</strong>—inflammation within the brain. This impairs neural signaling and damages key regulatory structures. Over time, this chronic stress leads to <strong>muscle atrophy</strong> and <strong>weakening of existing neurological pathways</strong> (neuroplasticity), creating structural points of failure in the body and brain.</p>
+
+                <!-- 
+                  This is the pixel brain infographic.
+                  It's especially relevant here since the text below
+                  talks about the Amygdala, Cerebellum, and Corpus Callosum.
+                -->
+                <hr class="pixel-divider">
+                <div class="infographic-container">
+                    <div class="pixel-brain-wrapper">
+                        <!-- This grid is 20 pixels wide by 16 pixels tall. -->
+                        <div class="pixel-brain-grid">
+                            <!-- Row 1 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 2 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 3 -->
+                            <div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 4 -->
+                            <div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 5 -->
+                            <div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 6 -->
+                            <div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 7 -->
+                            <div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 8 -->
+                            <div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-te"></div><div class="p-co"></div><div class="p-co"></div><div class="p-co"></div><div class="p-te"></div><div class="p-te"></div><div class="p-pa"></div><div class="p-pa"></div><div class="p-oc"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 9 -->
+                            <div class="p-bg"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-fr"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-pa"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-oc"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 10 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-fr"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 11 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-bs"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 12 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-te"></div><div class="p-te"></div><div class="p-te"></div><div class="p-bs"></div><div class="p-bs"></div><div class="p-bs"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 13 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bs"></div><div class="p-bs"></div><div class="p-bs"></div><div class="p-bg"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 14 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bs"></div><div class="p-bs"></div><div class="p-bs"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-ce"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 15 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bs"></div><div class="p-bs"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                            <!-- Row 16 -->
+                            <div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div><div class="p-bg"></div>
+                        </div>
+                        
+                        <!-- Labels -->
+                        <div class="p-label l-fr">Frontal Lobe</div>
+                        <div class="p-label l-pa">Parietal Lobe</div>
+                        <div class="p-label l-co">Corpus Callosum</div>
+                        <div class="p-label l-te">Temporal Lobe</div>
+                        <div class="p-label l-oc">Occipital Lobe</div>
+                        <div class="p-label l-ce">Cerebellum</div>
+                        <div class="p-label l-bs">Brainstem</div>
+                    </div>
+                    <div class="infographic-text">
+                        <p><strong>Your Brain: The Regulation Hub</strong></p>
+                        <p>Regulation involves all parts of the brain working together. The new content below details how stress impacts these specific areas, leading to dysfunction.</p>
+                        <p><strong>Corpus Callosum:</strong> The "Integrator."</p>
+                        <p><strong>Cerebellum:</strong> The "Coordinator."</p>
+                        <p><strong>Brainstem:</strong> The "Reptile Brain."</p>
+                    </div>
+                </div>
                 
                 <hr class="pixel-divider">
 
-                <h3>🥨 Sensory & Grounding Tools</h3>
+                <!-- Using the resource-list style for the table content -->
                 <ul class="resource-list">
-                    <li><span class="item-name">Earthing / Grounding Mats:</span> A mat that plugs into the ground port of an outlet. <span class="item-details">Why it helps: Connects you to the earth's electrical field, which can be deeply calming. Be wary of knockoffs; stick to the official Earthing.com brand. Cheaper options like a pillowcase (~$40) are available.</span></li>
-                    <li><span class="item-name">Fidget Toys (Variety):</span> Small, handheld objects like NeeDoh balls, Crazy Aaron's Thinking Putty, or "Nice Cube" chewable fidgets. <span class="item-details">Why it helps: Provides a discreet outlet for restless (Flight) energy and can help with focus for ADHD brains. Keep a bin at home/office. Where to find: NeeDoh at Walmart, Target. Chewlery online.</span></li>
-                    <li><span class="item-name">Chewable Tools (Gum, Ice) (~$1-10):</span> Simple gum, ice cubes, or even strong mouthwash. <span class="item-details">Why it helps: Provides intense oral sensory input to the jaw and Vagus nerve, which can ground you quickly.</span></li>
-                    <li><span class="item-name">Tamarind Candy (e.g., De La Rosa Pulparindo) (~$5-15):</span> A strong, sharp sweet-and-sour taste. <span class="item-details">Why it helps: Provides intense oral sensory input that can "cut through" a dissociative state (Freeze). Research suggests Tamarind may help remove microplastics. Where to find: Mexican grocery stores, Walmart.</span></li>
-                    <li><span class="item-name">Aromatherapy (Calming Spray, Oils) (~$10-30):</span> Essential oils like lavender, chamomile, or vetiver. <span class="item-details">Why it helps: Scent is directly linked to the brain's emotional centers. A calming scent can act as a safety cue. Where to find: Health food stores, online.</span></li>
-                    <li><span class="item-name">Heating Pads (~$20-40):</span> Microwavable, often filled with rice or flaxseed. <span class="item-details">Why it helps: Activates the tactile sense with warmth and gentle pressure to soothe physical tension and cramping. Can be placed on the eyes to gently stimulate the oculocardiac reflex.</span></li>
-                    <li><span class="item-name">Regulating Snack (e.g., Protein Cookie) (~$3-10):</span> A simple, nutrient-dense snack. <span class="item-details">Why it helps: Having a stable, easy-to-digest meal on deck (like a protein cookie or bar) stabilizes blood sugar, which is critical for emotional regulation.</span></li>
-                    <li><span class="item-name">Co-Regulation (Friend, Pet) (Free):</span> The presence of a safe person or animal. <span class="item-details">Why it helps: Our nervous systems are designed to attune to others. A hug, a calm conversation, or petting a dog can be one of the most powerful regulators available.</span></li>
+                    <li>
+                        <span class="item-name">Amygdala: The Alarm Center</span>
+                        <p>Threat detection, emotional memory, and fear response.</p>
+                        <span class="item-details"><strong>Dysfunction (Anxiety/Dissociation/PTSD):</strong> Hyperactive, leading to constant hypervigilance. The <strong>seven senses</strong> are filtered here, making sensory input feel overwhelming and dangerous.</span>
+                    </li>
+                    <li>
+                        <span class="item-name">Cerebellum: The Coordinator</span>
+                        <p>Unconscious motor control, balance, and proprioception.</p>
+                        <span class="item-details"><strong>Dysfunction (OCD/Motor Dysfunction):</strong> Receives chaotic sensory input from tense fascia and hypermobile joints, impairing motor planning and stability. This fuels rigid, repetitive behaviors.</span>
+                    </li>
+                    <li>
+                        <span class="item-name">Corpus Callosum (CC): The Integrator</span>
+                        <p>Connects left/right hemispheres for complex thought and emotion.</p>
+                        <span class="item-details"><strong>Dysfunction (Dissociation/Bipolar/TBI):</strong> Impairment or structural difference hinders communication, manifesting as cognitive/emotional <strong>compartmentalization</strong> (the root of dissociation) and rapid mood switches.</span>
+                    </li>
                 </ul>
 
-                <hr class="pixel-divider">
+                <h3 style="margin-top: 3rem;">B. The Somatic Manifestation of Emotional Distress</h3>
+                <p>When an individual experiences emotions, it immediately translates into physical action (the somatic loop). When the brain is stressed, it panics and partially shuts down, leading to structural defense mechanisms:</p>
+                
+                <ul class="content-list">
+                    <li>
+                        <strong>Emotional Trauma Creates Weakness:</strong> A significant neurological response (like panic or depression) does not impact all areas equally. It weakens the areas already under stress (e.g., the CC or cerebellum). This creates structural weakness in the body's protective pathways.
+                    </li>
+                    <li>
+                        <strong>The Physical Risk:</strong> If the body is a piece of paper and stress is a small tear, any subsequent major force (like a fall) will cause the paper to <strong>break at the point of the existing tear.</strong> The atrophy and weakness caused by trauma dictate where the body will physically fail (e.g., a subluxation or injury).
+                    </li>
+                    <li>
+                        <strong>The Disconnect:</strong> Tasks that require quick switching (like multitasking, changing computer tabs, or listening and talking simultaneously) become difficult because the CC pathway is impaired, manifesting as panic and avoidance.
+                    </li>
+                </ul>
 
-                <h3>🏃‍♀️ Bodywork & Movement</h3>
-                <ul class="resource-list">
-                     <li><span class="item-name">Porch Swing (~$100):</span> Provides gentle, rhythmic vestibular (movement) input. <span class="item-details">Why it helps: Rocking is one of the most primal ways to soothe the nervous system and exit a Fight/Flight state. Where to find: Walmart, Target, hardware stores.</span></li>
-                    <li><span class="item-name">Thera Cane (~$30):</span> A simple S-shaped tool for self-massage. <span class="item-details">Why it helps: Applies deep, targeted pressure to trigger points in the "Body Armor" of a Fight or Flight response. Where to find
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Creativity & Structure</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
