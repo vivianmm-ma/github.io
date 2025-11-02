@@ -1,0 +1,57 @@
+/*
+  Pixel Art Controller
+  - Base pixel size is set by 'font-size'.
+  - Colors are set with CSS variables for easy editing.
+*/
+.pixel-controller {
+  /* --- Change this value to scale the art! --- */
+  font-size: 10px; 
+
+  /* Color Palette */
+  --b: #333333;  /* Body */
+  --g: #888888;  /* Shoulders / Joysticks */
+  --w: #FFFFFF;  /* D-pad */
+  --c: #EEEEEE;  /* Center bar */
+  --r: #F44336;  /* Red button */
+  --y: #FFEB3B;  /* Yellow button */
+  --gr: #4CAF50; /* Green button */
+  --bl: #2196F3; /* Blue button */
+
+  /* This single 'pixel' is the anchor for all the shadows */
+  width: 1em;
+  height: 1em;
+  
+  /* Make sure shadows are relative to this div */
+  position: relative; 
+  
+  /* All the pixels are drawn with box-shadow */
+  /* format: [X-offset] [Y-offset] [color] */
+  box-shadow: 
+    /* Shoulders (Row 0-1) */
+    3em 0em var(--g), 4em 0em var(--g), 11em 0em var(--g), 12em 0em var(--g),
+    2em 1em var(--g), 3em 1em var(--g), 4em 1em var(--g), 11em 1em var(--g), 12em 1em var(--g), 13em 1em var(--g),
+    
+    /* Main Body (Row 2-8) */
+    1em 2em var(--b), 2em 2em var(--b), 3em 2em var(--b), 4em 2em var(--b), 5em 2em var(--b), 6em 2em var(--b), 7em 2em var(--b), 8em 2em var(--b), 9em 2em var(--b), 10em 2em var(--b), 11em 2em var(--b), 12em 2em var(--b), 13em 2em var(--b), 14em 2em var(--b),
+    0em 3em var(--b), 1em 3em var(--b), 2em 3em var(--b), 3em 3em var(--b), 4em 3em var(--b), 5em 3em var(--b), 6em 3em var(--b), 7em 3em var(--b), 8em 3em var(--b), 9em 3em var(--b), 10em 3em var(--b), 11em 3em var(--b), 12em 3em var(--b), 13em 3em var(--b), 14em 3em var(--b), 15em 3em var(--b),
+    0em 4em var(--b), 1em 4em var(--b), 2em 4em var(--b), 3em 4em var(--b), 4em 4em var(--b), 5em 4em var(--b), 6em 4em var(--b), 7em 4em var(--b), 8em 4em var(--b), 9em 4em var(--b), 10em 4em var(--b), 11em 4em var(--b), 12em 4em var(--b), 13em 4em var(--b), 14em 4em var(--b), 15em 4em var(--b),
+    0em 5em var(--b), 1em 5em var(--b), 2em 5em var(--b), 3em 5em var(--b), 4em 5em var(--b), 5em 5em var(--b), 6em 5em var(--b), 7em 5em var(--b), 8em 5em var(--b), 9em 5em var(--b), 10em 5em var(--b), 11em 5em var(--b), 12em 5em var(--b), 13em 5em var(--b), 14em 5em var(--b), 15em 5em var(--b),
+    0em 6em var(--b), 1em 6em var(--b), 2em 6em var(--b), 3em 6em var(--b), 4em 6em var(--b), 5em 6em var(--b), 6em 6em var(--b), 7em 6em var(--b), 8em 6em var(--b), 9em 6em var(--b), 10em 6em var(--b), 11em 6em var(--b), 12em 6em var(--b), 13em 6em var(--b), 14em 6em var(--b), 15em 6em var(--b),
+    1em 7em var(--b), 2em 7em var(--b), 3em 7em var(--b), 4em 7em var(--b), 5em 7em var(--b), 6em 7em var(--b), 7em 7em var(--b), 8em 7em var(--b), 9em 7em var(--b), 10em 7em var(--b), 11em 7em var(--b), 12em 7em var(--b), 13em 7em var(--b), 14em 7em var(--b),
+    2em 8em var(--b), 3em 8em var(--b), 4em 8em var(--b), 5em 8em var(--b), 6em 8em var(--b), 7em 8em var(--b), 8em 8em var(--b), 9em 8em var(--b), 10em 8em var(--b), 11em 8em var(--b), 12em 8em var(--b), 13em 8em var(--b),
+    
+    /* D-pad */
+    2em 4em var(--w), 3em 4em var(--w), 4em 4em var(--w),
+    3em 3em var(--w), 3em 5em var(--w),
+    
+    /* Buttons */
+    11em 3em var(--y), 13em 3em var(--r),
+    10em 4em var(--gr), 12em 4em var(--bl),
+    
+    /* Joysticks */
+    5em 6em var(--g), 6em 6em var(--g),
+    9em 6em var(--g), 10em 6em var(--g),
+    
+    /* Center Bar */
+    6em 3em var(--c), 7em 3em var(--c), 8em 3em var(--c), 9em 3em var(--c);
+}
