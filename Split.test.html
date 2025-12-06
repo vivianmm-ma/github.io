@@ -1,0 +1,225 @@
+<!DOCTYPE html><!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somatic Trust Index (Mind-Body Integration)</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f8; /* Soft background */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 flex items-start justify-center min-h-screen">
+
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-xl p-6 md:p-10 border-t-8 border-indigo-600">
+        <!-- Header -->
+        <h1 class="text-3xl font-extrabold text-indigo-800 mb-2">The Somatic Trust Index</h1>
+        <p class="text-lg text-gray-600 mb-6">A Self-Assessment of Mind-Body Integration</p>
+
+        <!-- Instructions -->
+        <div class="mb-8 p-4 bg-indigo-50 border-l-4 border-indigo-400 rounded-md">
+            <p class="text-sm font-semibold text-indigo-700">Instructions:</p>
+            <p class="text-sm text-indigo-600 mt-1">Rate each statement based on how accurately it describes your experience *most of the time*.</p>
+        </div>
+
+        <form id="somatic-trust-form" class="space-y-6">
+
+            <!-- Question Template -->
+            <div id="q1" class="question-block p-4 border border-gray-200 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">1. Interoception (Physiological Need): When my body feels shaky, irritable, or unsteady, my first thought is usually, "What food, water, or rest does my body need?"</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q1" value="1" class="form-radio text-indigo-600 h-4 w-4" required>
+                        <span class="ml-2 text-gray-700">1: No, I strongly disagree</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q1" value="2" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">2: SometiSometimesSometimesmes/Neutral</span>
+                    </labelabell>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q1" value="3" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">3: Yes, I strongly agree</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div id="q2" class="question-block p-4 border border-gray-200 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">2. Affect Tolerance (Emotional Processing): When I feel an intense emotion (e.g., fear, anger, panic), I am able to notice the feeling in my body *before* I react or try to control it.</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q2" value="1" class="form-radio text-indigo-600 h-4 w-4" required>
+                        <span class="ml-2 text-gray-700">1: No, I strongly disagree</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q2" value="2" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">2: Sometimes/Neutral</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q2" value="3" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">3: Yes, I strongly agree</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="q3" class="question-block p-4 border border-gray-200 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">3. Neuroception (Environmental Safety): When I am home alone and doing nothing, my body feels genuinely calm, safe, and still, without the need for constant hypervigilance.</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q3" value="1" class="form-radio text-indigo-600 h-4 w-4" required>
+                        <span class="ml-2 text-gray-700">1: No, I strongly disagree</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q3" value="2" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">2: Sometimes/Neutral</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q3" value="3" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">3: Yes, I strongly agree</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="q4" class="question-block p-4 border border-gray-200 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">4. Proprioception (Physical Stability): Even when walking on uneven ground or standing still (e.g., in a busy crowd), I generally feel my feet are firmly planted and my balance is reliable.</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q4" value="1" class="form-radio text-indigo-600 h-4 w-4" required>
+                        <span class="ml-2 text-gray-700">1: No, I strongly disagree</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q4" value="2" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">2: Sometimes/Neutral</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q4" value="3" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">3: Yes, I strongly agree</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="q5" class="question-block p-4 border border-gray-200 rounded-lg">
+                <p class="font-medium text-gray-800 mb-3">5. Body as Ally (Collaboration): I view my physical body as a collaborative partner and supportive tool for achieving my goals, not as an obstacle, a source of fear, or a burden.</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q5" value="1" class="form-radio text-indigo-600 h-4 w-4" required>
+                        <span class="ml-2 text-gray-700">1: No, I strongly disagree</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q5" value="2" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">2: Sometimes/Neutral</span>
+                    </label>
+                    <label class="flex items-center text-sm">
+                        <input type="radio" name="q5" value="3" class="form-radio text-indigo-600 h-4 w-4">
+                        <span class="ml-2 text-gray-700">3: Yes, I strongly agree</span>
+                    </label>
+                </div>
+            </div>
+            
+            <button type="button" onclick="calculateScore()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Calculate Somatic Trust Score
+            </button>
+        </form>
+
+        <!-- Results Area -->
+        <div id="results-container" class="mt-8 hidden p-6 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50">
+            <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                Your Score: <span id="final-score" class="ml-3 text-4xl font-extrabold text-indigo-600">0</span> / 15
+            </h2>
+            <div id="interpretation-box" class="p-4 rounded-lg">
+                <p class="font-semibold text-lg mb-2" id="interpretation-title"></p>
+                <p class="text-gray-700" id="interpretation-text"></p>
+            </div>
+        </div>
+
+        <!-- Error/Validation Message -->
+        <div id="error-message" class="mt-4 p-3 bg-red-100 text-red-700 border border-red-300 rounded-lg hidden">
+            Please answer all 5 questions before calculating your score.
+        </div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const form = document.getElementById('somatic-trust-form');
+            const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
+            let totalScore = 0;
+            let allAnswered = true;
+
+            // Hide previous results and errors
+            document.getElementById('results-container').classList.add('hidden');
+            document.getElementById('error-message').classList.add('hidden');
+
+            // 1. Calculate Score
+            for (const qName of questions) {
+                const selected = form.elements[qName];
+                let value = 0;
+                let found = false;
+                
+                // Find the selected radio button value
+                for (let i = 0; i < selected.length; i++) {
+                    if (selected[i].checked) {
+                        value = parseInt(selected[i].value);
+                        found = true;
+                        break;
+                    }
+                }
+                
+                if (!found) {
+                    allAnswered = false;
+                    break;
+                }
+                totalScore += value;
+            }
+
+            // 2. Handle Validation
+            if (!allAnswered) {
+                document.getElementById('error-message').classList.remove('hidden');
+                return;
+            }
+
+            // 3. Determine Interpretation
+            let title = "";
+            let text = "";
+            let colorClass = "";
+
+            if (totalScore >= 13 && totalScore <= 15) {
+                title = "High Somatic Trust / Integration";
+                text = "Your nervous system largely perceives safety. You have a reliable connection to your body's needs and are integrating past trauma. You are likely moving through life with resilience and ease.";
+                colorClass = "bg-green-100 text-green-800 border-green-300";
+            } else if (totalScore >= 8 && totalScore <= 12) {
+                title = "Moderate Disintegration / The Liminal Space";
+                text = "You are in the critical phase of healing. Your cognitive mind knows you are safe, but your body is still actively rewiring out of survival mode. The focus now is on gentle, intentional somatic repair and patience as you transition to lasting safety.";
+                colorClass = "bg-yellow-100 text-yellow-800 border-yellow-400";
+            } else if (totalScore >= 5 && totalScore <= 7) {
+                title = "High Disintegration / Survival Mode Dominant";
+                text = "Your nervous system is likely on high alert. Your body is interpreting internal cues (like hunger) and external stimuli (like noise) as life-or-death threats. The immediate goal is to establish foundational felt-safety through intentional grounding and awareness.";
+                colorClass = "bg-red-100 text-red-800 border-red-400";
+            } else {
+                // Fallback for unexpected score range
+                title = "Score Calculated";
+                text = "Review your answers and interpretation ranges.";
+                colorClass = "bg-gray-200 text-gray-800 border-gray-400";
+            }
+
+            // 4. Display Results
+            document.getElementById('final-score').textContent = totalScore;
+            document.getElementById('interpretation-title').textContent = title;
+            document.getElementById('interpretation-text').textContent = text;
+            
+            const interpretationBox = document.getElementById('interpretation-box');
+            interpretationBox.className = `p-4 rounded-lg border ${colorClass}`; // Apply border and color
+            
+            document.getElementById('results-container').classList.remove('hidden');
+            
+            // Scroll to the results for visibility
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
