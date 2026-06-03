@@ -1,23 +1,4 @@
 <!DOCTYPE html>
-    <div class="main-container">
-        
-        <!-- ===== START OF REUSABLE HEADER CODE ===== -->
-        <a href="https://www.cindnesskult.com" class="sticker-link">
-            <div class="sticker-container">
-                <div class="curved-text-container">
-                    <!-- JS will populate this -->
-                </div>
-                <div class="yin-yang"></div>
-                <p class="bottom-text">not just right</p>
-            </div>
-        </a>
-        
-        <header class="site-header">
-
-        </header>
-        <!-- ===== END OF REUSABLE HEADER CODE ===== -->
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,7 +12,7 @@
             background-color: #0a0a0a;
             color: #f0f0f0;
             font-family: 'Press Start 2P', 'Courier New', Courier, monospace;
-            font-size: 16px;
+            font-size: 14px;
             line-height: 1.8;
             margin: 0;
             padding: 20px;
@@ -51,6 +32,7 @@
             padding: 20px;
             box-shadow: 0 0 15px #5c5cff, inset 0 0 10px #5c5cff33;
             border-radius: 8px;
+            box-sizing: border-box;
         }
 
         header {
@@ -61,14 +43,14 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #ffcc00;
             text-shadow: 3px 3px 0 #c00;
             margin: 0;
         }
 
         .subtitle {
-            font-size: 1rem;
+            font-size: 0.8rem;
             color: #00ff00;
             margin-top: 10px;
             animation: blink 1.5s step-end infinite;
@@ -87,7 +69,7 @@
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: #ff7f50; /* Coral color */
             margin-bottom: 20px;
             display: flex;
@@ -99,7 +81,7 @@
             content: '>';
             margin-right: 15px;
             color: #00ff00;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             animation: bounce 1s infinite;
         }
         
@@ -138,9 +120,17 @@
         }
         
         h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #ffcc00;
             margin-top: 0;
+            line-height: 1.4;
+        }
+
+        .code-tag {
+            color: #00ffff;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 10px;
         }
         
         .analogy {
@@ -152,12 +142,46 @@
             border-left: 3px solid #ff7f50;
         }
         
-        ul {
+        ul, ol {
             padding-left: 25px;
         }
         
         li {
             margin-bottom: 10px;
+        }
+
+        /* --- Vintage Grid Table Style --- */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 3px solid #5c5cff;
+            font-size: 0.75rem;
+            background-color: #111;
+        }
+
+        th {
+            background-color: #00005a;
+            color: #ffcc00;
+            padding: 10px;
+            border: 2px solid #5c5cff;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border: 2px solid #5c5cff;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background-color: #1a1a2e;
         }
 
         /* --- Footer --- */
@@ -166,41 +190,62 @@
             margin-top: 30px;
             padding-top: 20px;
             border-top: 4px solid #5c5cff;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #aaaaaa;
+            line-height: 1.6;
         }
-        
-        footer a {
-            color: #00ff00;
-            text-decoration: none;
+
+        .references-section {
+            text-align: left;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #0a0a0a;
+            border: 2px dashed #ff7f50;
+            font-size: 0.7rem;
+            line-height: 1.6;
         }
-        
-        footer a:hover {
-            color: #ffcc00;
-            text-decoration: underline;
+
+        .references-section p {
+            margin: 0 0 10px 0;
+            padding-left: 20px;
+            text-indent: -20px;
         }
 
         /* --- Responsive Design --- */
         @media (max-width: 600px) {
             body {
-                font-size: 14px;
+                font-size: 12px;
                 padding: 10px;
             }
             h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.1rem;
+            }
+            h3 {
+                font-size: 0.95rem;
+            }
+            table {
+                font-size: 0.65rem;
             }
             .game-container {
                 padding: 15px;
             }
         }
-
     </style>
 </head>
 <body>
 
+    <div class="main-container" style="width:100%; max-width:900px; display:flex; flex-direction:column; align-items:center;">
+        <a href="https://www.cindnesskult.com" class="sticker-link" style="text-decoration:none; color:inherit;">
+            <div class="sticker-container" style="text-align:center; margin-bottom:15px;">
+                <div class="curved-text-container"></div>
+                <div class="yin-yang" style="margin: 0 auto;"></div>
+                <p class="bottom-text" style="font-size:0.7rem; color:#ffcc00; margin:5px 0 0 0;">not just right</p>
+            </div>
+        </a>
+        <header class="site-header"></header>
     <div class="game-container">
         <header>
             <h1>DISSOCIATION QUEST</h1>
@@ -208,7 +253,6 @@
         </header>
 
         <main>
-            <!-- LEVEL 1: WHAT IS DISSOCIATION? -->
             <section id="level1" class="level">
                 <h2>Level 1: The Glitch</h2>
                 <div class="dialogue-box">
@@ -224,7 +268,6 @@
                 </div>
             </section>
 
-            <!-- BONUS LEVEL: NORMALIZING DISSOCIATION -->
             <section id="level1-5" class="level">
                 <h2>Bonus Level: Common Glitches</h2>
                 <div class="dialogue-box">
@@ -240,7 +283,6 @@
                 </div>
             </section>
 
-            <!-- LEVEL 2: DISSOCIATIVE DISORDERS -->
             <section id="level2" class="level">
                 <h2>Level 2: The Boss Battles</h2>
                 <div class="dialogue-box">
@@ -249,16 +291,15 @@
                     </p>
                 </div>
 
-                <!-- Boss 1: PTSD with Dissociative Symptoms -->
                 <div class="disorder-card">
                     <h3>PTSD (with Dissociative Symptoms)</h3>
                     <p>This isn't a separate disorder, but a subtype of Post-Traumatic Stress Disorder. In addition to standard PTSD symptoms, the person persistently experiences Depersonalization or Derealization.</p>
                     <span class="analogy">Game Analogy: You won a tough boss battle in the past, but now you have a permanent "Confusion" or "Fog" status effect that clouds your screen.</span>
                 </div>
 
-                <!-- Boss 2: Depersonalization/Derealization Disorder -->
                 <div class="disorder-card">
                     <h3>Depersonalization/Derealization Disorder</h3>
+                    <span class="code-tag">DSM-5-TR Code: 300.6 (F48.1)</span>
                     <p>This involves ongoing or recurring feelings of being detached from oneself (depersonalization) or from reality (derealization), even without other PTSD symptoms.</p>
                     <ul>
                         <li><strong>Depersonalization:</strong> Feeling like you're an outside observer of your own thoughts, feelings, or body.</li>
@@ -267,33 +308,89 @@
                     <span class="analogy">Game Analogy: Playing in a permanent third-person view (Depersonalization) or feeling like the game world is a fake, glitching set (Derealization).</span>
                 </div>
 
-                <!-- Boss 3: Dissociative Amnesia -->
                 <div class="disorder-card">
                     <h3>Dissociative Amnesia</h3>
+                    <span class="code-tag">DSM-5-TR Code: 300.12 (F44.0)</span>
                     <p>This involves an inability to recall important personal information, usually related to a traumatic or stressful event. It's more severe than normal forgetfulness. Sometimes, this includes a "fugue state," a rare side quest where a person travels to a new location with no memory of their past identity.</p>
                     <span class="analogy">Game Analogy: A crucial part of your save file is corrupted and cannot be loaded.</span>
                 </div>
 
-                <!-- Boss 4: OSDD -->
                 <div class="disorder-card">
                     <h3>Other Specified Dissociative Disorder (OSDD)</h3>
-                    <p>This is a category for players with significant dissociative symptoms that don't quite fit another diagnosis. The two most common forms are:</p>
+                    <span class="code-tag">DSM-5-TR Code: 300.15 (F44.89)</span>
+                    <p>This is the diagnostic home for players with significant, distressing dissociative symptoms that cause massive impairment but don't match the strict criteria for DID or Amnesia. The DSM-5-TR officially recognizes four distinct example types:</p>
+                    
+                    <h4 style="color:#ff7f50; margin-top:15px; font-size:0.9rem;">Type 1: Chronic and recurrent syndromes of mixed dissociative symptoms</h4>
+                    <p style="font-size:0.85rem;">This applies to structures that mirror DID but miss one critical boundary feature:</p>
                     <ul>
-                        <li><strong>OSDD-1a:</strong> Features identity states that are not as distinct or separate as in DID.</li>
-                        <li><strong>OSDD-1b:</strong> Features distinct identity states, but without the significant amnesia between them.</li>
+                        <li><strong>Subtype A (Less Distinct Parts):</strong> Gaps in memory (amnesia walls) are active, but internal states lack separate names or complex individual traits. They present as the same identity at different ages (e.g., an internal child part taking control during stress).</li>
+                        <li><strong>Subtype B (Distinct Parts Without Amnesia):</strong> Highly distinct alternate states (alters) with their own names, agency, and traits are present, but <strong>amnesia walls are completely absent</strong>. The user maintains continuous shared memory.</li>
                     </ul>
-                    <span class="analogy">Game Analogy: Like playing a co-op game with yourself. For 1a, it's like having different "costume presets" for one character. For 1b, it's like having two separate characters on screen at once (split-screen), and you are aware of what both are doing.</span>
+                    <span class="analogy">Game Analogy: Co-op mode with yourself. For Subtype A, it's alternate character costume presets. For Subtype B, it's playing in continuous split-screen mode where you remember what both characters do.</span>
+
+                    <h4 style="color:#ff7f50; margin-top:15px; font-size:0.9rem;">Type 2: Identity disturbance due to prolonged and intense coercive persuasion</h4>
+                    <p style="font-size:0.85rem;">A profound structural split or spacing out that occurs after long-term systemic control (e.g., cult indoctrination, thought reform, or extended captivity/abuse setups) where an identity framework is forced on you to survive.</p>
+                    
+                    <h4 style="color:#ff7f50; margin-top:15px; font-size:0.9rem;">Type 3: Acute dissociative reactions to stressful events</h4>
+                    <p style="font-size:0.85rem;">Short-term, immediate trauma waves lasting from <strong>a few hours to a maximum of 1 month</strong>. Features a sudden narrowing of consciousness, localized amnesias, or sudden functional alterations (like emotional muteness or psychogenic paralysis).</p>
+
+                    <h4 style="color:#ff7f50; margin-top:15px; font-size:0.9rem;">Type 4: Dissociative trance</h4>
+                    <p style="font-size:0.85rem;">A sudden, profound narrowing or complete loss of awareness regarding immediate surroundings. The player becomes completely unresponsive to external touch or speech, sometimes performing involuntary, repetitive movements. *Excludes culturally or religiously accepted practices.*</p>
                 </div>
 
-                <!-- Boss 5: DID -->
                 <div class="disorder-card">
                     <h3>Dissociative Identity Disorder (DID)</h3>
+                    <span class="code-tag">DSM-5-TR Code: 300.14 (F44.81)</span>
                     <p>This is characterized by having two or more distinct identity states, or "alters." It's as if there are multiple player characters in one game, but you don't always control who is playing or remember what happened when another was active.</p>
                     <span class="analogy">Game Analogy: Your controller gets passed between different players, each with their own play style and memories of the game.</span>
                 </div>
             </section>
 
-            <!-- LEVEL 3: THE GAME'S LORE -->
+            <section id="system-matrix" class="level">
+                <h2>Advanced Diagnostics: Code Verification</h2>
+                <div class="dialogue-box">
+                    <p>To avoid diagnostic errors, clinicians use the <strong>SCID-D</strong> framework to separate primary structural dissociation from neighboring conditions like Borderline Personality Disorder (BPD).</p>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Condition</th>
+                                <th>Identity Architecture</th>
+                                <th>Memory Mechanics</th>
+                                <th>Behavioral Flags</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>DID</strong></td>
+                                <td>Multiple highly distinct alters.</td>
+                                <td>Amnesia walls active. Everyday blackouts and time loss.</td>
+                                <td>Sudden shifts in executive control; unexplainable tracking logs.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>OSDD (Distinct Parts Type)</strong></td>
+                                <td>Multiple highly distinct alters.</td>
+                                <td>Amnesia walls absent. Continuous co-consciousness.</td>
+                                <td>An alter takes over speech/body actions while the host watches.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>OSDD (Trance Type)</strong></td>
+                                <td>Temporary shutdown of core conscious agency.</td>
+                                <td>Localized memory erasure for the duration of the trance state.</td>
+                                <td>Profound unresponsiveness to inputs; rigid freezing or repetitive loops.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Borderline Personality Disorder (BPD)</strong></td>
+                                <td><strong>Single Identity Architecture.</strong> Fluid, unstable self-image.</td>
+                                <td>Amnesia is rare. Dissociation is transient and triggered by attachment threats.</td>
+                                <td>High behavioral impulsivity/recklessness; emotional storms; fear of abandonment.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
             <section id="level3" class="level">
                 <h2>Level 3: The Game's Lore</h2>
                 <div class="dialogue-box">
@@ -309,7 +406,6 @@
                 </div>
             </section>
             
-            <!-- LEVEL 4: ADVANCED MECHANICS -->
             <section id="level4" class="level">
                 <h2>Level 4: Advanced Mechanics</h2>
                 <div class="dialogue-box">
@@ -331,14 +427,51 @@
                     <p>This is the experience where one part of the self is in control (fronting) while another part is aware and observing in the background. It's the opposite of having amnesia between parts.</p>
                     <span class="analogy">Game Analogy: True split-screen co-op. Player 1 is actively playing, but Player 2 is watching from their corner of the screen, fully aware of what's happening in the game.</span>
                 </div>
+
+                <div class="disorder-card" style="border-color: #ff3333;">
+                    <h3>Somatic Debuffs: The Physical System Load</h3>
+                    <p>Dissociation is not just a software glitch; it is a hardware safety lock—a permanent biological "freeze" response managed by the dorsal vagal pathway. Operating with a severed mind-body connection alters the body's internal chemistry over time, causing severe physical health impacts:</p>
+                    <ul>
+                        <li><strong>Autoimmune System Overload:</strong> Chronic dysregulation can trigger inflammatory loops, leaving players prone to conditions like Fibromyalgia, Chronic Fatigue Syndrome (ME/CFS), Rheumatoid Arthritis, Lupus, and Irritable Bower Syndrome (IBS).</li>
+                        <li><strong>Somatoform Failures:</strong> Trauma that cannot be integrated into awareness translates directly into sensory hardware errors: unexplained pelvic pain, migraines, and psychogenic tremors or non-epileptic seizures.</li>
+                        <li><strong>Musculoskeletal Tension:</strong> Subconsciously "bracing" against historical trauma causes profound permanent muscular tightness and joint subluxations. Targeted physical therapy is often required to break down these physical armor presets.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="level5" class="level">
+                <h2>Level 5: Re-Anchoring (Locking Back Into Life)</h2>
+                <div class="dialogue-box">
+                    <p>If dissociation means your system <strong>"locked out"</strong> of life because the reality map was once too dangerous to stay connected to, then <strong>recovery is the quest to safely lock back in.</strong> The goal is moving your system from defensive preservation back into active, vital gameplay.</p>
+                    
+                    <h3 style="margin-top:20px; color:#00ff00;">Gold-Standard Co-Op Skills:</h3>
+                    <ol>
+                        <li><strong>Sensory-Rich Grounding:</strong> Retraining your internal security system. This isn't silent meditation (which can sometimes loop your spacing out); it is using active sensory inputs to anchor your character to the immediate room, the true current calendar year, and safety.</li>
+                        <li><strong>Somatic Psychology:</strong> Working with your hardware. Interventions like Somatic Experiencing or Sensorimotor Psychotherapy safely guide your system out of a permanent freeze state by helping you slowly track and tolerate internal bodily signals.</li>
+                        <li><strong>Physical Therapy & Bodywork:</strong> Actively guiding your muscular and structural framing out of defensive survival bracing positions to restore real-time mobility and physical safety.</li>
+                        <li><strong>Parts Integration & Internal Co-Op:</strong> Frameworks like Internal Family Systems (IFS) focus on creating empathy, communication, and coordinate loops between internal parts, lowering system friction and restoring a unified agency.</li>
+                    </ol>
+
+                    <h3 style="margin-top:20px; color:#ffcc00;">A Message of Hope</h3>
+                    <p>Your dissociation is not a hardware defect; it is absolute proof of your system's creative survival intelligence. The brain possesses immense neuroplasticity. With the right therapeutic support, intentional somatic anchoring, and patient care, your nervous system can step out of the fog, drop its shields, and safely reclaim your presence in the game of life.</p>
+                </div>
             </section>
         </main>
 
         <footer>
-            <p>This quest is for informational purposes only. If these challenges feel familiar, consider seeking support from a mental health professional to help you navigate the game.</p>
+            <p>This quest is for informational and psychoeducational purposes only. If these challenges feel familiar, consider seeking support from a trauma-informed mental health professional to help you navigate the game.</p>
             <p>Knowledge is power. Quest complete.</p>
+            
+            <div class="references-section">
+                <h4 style="color:#ffcc00; margin:0 0 10px 0; font-size:0.8rem;">[ARCHIVED DATA: REFERENCES]</h4>
+                <p>American Psychiatric Association. (2022). <em>Diagnostic and statistical manual of mental disorders</em> (5th ed., text rev.). https://doi.org/10.1176/appi.books.9780890425787</p>
+                <p>Brand, B. L., Loewenstein, R. J., & Spiegel, D. (2014). Dispelling myths about dissociative identity disorder treatment: An empirically based approach. <em>Harvard Review of Psychiatry</em>, <em>22</em>(5), 273–289. https://doi.org/10.1097/HRP.0000000000000054</p>
+                <p>Ogden, P., Minton, K., & Pain, C. (2006). <em>Trauma and the body: A sensorimotor approach to psychotherapy</em>. W. W. Norton & Company.</p>
+                <p>Schore, A. N. (2009). Right brain affect regulation: An essential mechanism of development, trauma, and cortical–subcortical integration. <em>Development and Psychopathology</em>, <em>21</em>(4), 987–1003. https://doi.org/10.1017/S095457940999003X</p>
+                <p>Steinberg, M. (1994). <em>Structured Clinical Interview for DSM-IV Dissociative Disorders (SCID-D)</em>. American Psychiatric Product.</p>
+                <p>van der Kolk, B. A. (2014). <em>The body keeps the score: Brain, mind, and body in the healing of trauma</em>. Viking Books.</p>
+            </div>
         </footer>
     </div>
-
-</body>
+    </div> </body>
 </html>
