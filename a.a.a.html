@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Neuro-Mechanical Animal | Somatic Healing</title>
+    <style>
+        /* Low Blue Light & Da Vinci Inspired Aesthetic */
+        :root {
+            --bg-color: #1a1612;          /* Deep, warm canvas/charcoal */
+            --card-bg: #26201a;           /* Slightly lighter warm tone for structural depth */
+            --text-primary: #f4ebd9;      /* Soft, warm antique white to eliminate harsh glare */
+            --text-secondary: #c8bda8;    /* Muted parchment tone */
+            --gold-accent: #d4af37;       /* Classical muted gold */
+            --gold-hover: #f3e5ab;        /* Soft cream-gold for interactive feedback */
+            --border-color: #4a3e31;      /* Architectural, low-contrast separation lines */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header & Philosophy Section */
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--gold-accent);
+            font-size: 2.5rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .intro-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        h2 {
+            color: var(--gold-accent);
+            font-size: 1.8rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        /* Practitioner / About Section */
+        .about-section {
+            margin-bottom: 50px;
+        }
+
+        .meta-info {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        /* Bundles & Offerings Section */
+        .offerings-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .offerings-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bundle-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bundle-card.featured {
+            border: 2px solid var(--gold-accent);
+            position: relative;
+        }
+
+        .bundle-card.featured::top {
+            content: "RECOMMENDED";
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            background-color: var(--gold-accent);
+            color: var(--bg-color);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 2px;
+            letter-spacing: 1px;
+        }
+
+        .price {
+            font-size: 1.6rem;
+            color: var(--gold-accent);
+            margin: 15px 0;
+            font-family: sans-serif;
+        }
+
+        /* Buttons (Pure CSS, Link-ready) */
+        .btn {
+            display: inline-block;
+            text-align: center;
+            background-color: transparent;
+            color: var(--gold-accent);
+            border: 1px solid var(--gold-accent);
+            padding: 12px 24px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+            margin-top: auto;
+        }
+
+        .btn:hover {
+            background-color: var(--gold-accent);
+            color: var(--bg-color);
+        }
+
+        .btn-filled {
+            display: block;
+            text-align: center;
+            background-color: var(--gold-accent);
+            color: var(--bg-color);
+            border: 1px solid var(--gold-accent);
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+            margin: 30px 0;
+        }
+
+        .btn-filled:hover {
+            background-color: var(--gold-hover);
+            border-color: var(--gold-hover);
+        }
+
+        /* Rates Section */
+        .rates-box {
+            background-color: var(--card-bg);
+            border-left: 3px solid var(--gold-accent);
+            padding: 20px 25px;
+            margin-bottom: 50px;
+        }
+
+        .rates-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .rates-box li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: 30px;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            color: var(--gold-accent);
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>The Neuro-Mechanical Animal</h1>
+            <div class="subtitle">Somatic Healing & Nervous System Regulation</div>
+            
+            <div class="intro-box">
+                <p>Welcome to <strong>The Neuro-Mechanical Animal</strong>. Within this healing structure, we recognize that the creative animal (you) is intricately guided through neuro-mechanical means. Everything we think, feel, and create is an ongoing dialogue between the brain working in tandem with the physical body.</p>
+            </div>
+        </header>
+
+        <section class="about-section">
+            <h2>What is Somatic Healing?</h2>
+            <p>In times of trauma and chronic stress, we naturally lose touch with our physical selves. When forced into states of fight, flight, or survival mode, our nervous system becomes dysregulated. Over time, this manifests as shallow breathing, physical tension, and deeply grooved physical holding patterns that we don't know how to break free from.</p>
+            <p>Somatic healing is the deliberate re-establishment of the connection between the mind and the body. By working with physiological patterns directly, we address somatic dissociation—the feeling of being detached or floating away from yourself—and safely reattach the brain's processing to the body's lived experience.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>About the Practitioner</h2>
+            <div class="meta-info">
+                Vivian Mitchell, APCC #16067 | Advanced Clinical Psychology Practitioner & Practicing Therapist<br>
+                Location: California (Virtual Sessions) | Email: <a href="mailto:vivianmorganmitchell@gmail.com" style="color: var(--gold-accent); text-decoration: none;">vivianmorganmitchell@gmail.com</a>
+            </div>
+            <p>My journey in psychological work spans over a decade, completing a full circle from my early foundations as a university tutor in biological psychology to deep research in social psychology and cognitive development. As a published researcher, I have worked across a diverse array of social services and mental healthcare settings.</p>
+            <p>In my practice, I work extensively with youth, teenagers, and adults, specializing in neurodivergence (ADHD, Autism), LGBTQI+ support, dissociative disorders, and complex trauma. Witnessing firsthand how deeply trauma embeds itself within the physiology has led me to specialize in somatic healing, helping individuals find safety back within their own framework.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>Digital Guides & Manuals</h2>
+            <p style="margin-bottom: 25px;">Self-paced regulatory tools grounded in biological mechanics to support your daily practice.</p>
+            
+            <div class="offerings-container">
+                <div class="bundle-card">
+                    <div>
+                        <h3>Mitochondrial Healing Food Guide</h3>
+                        <p class="price">$7</p>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary);">A precise blueprint detailing optimal foods to consume and specific elements to avoid to support cellular energy, reduce systemic inflammation, and enhance vitality.</p>
+                    </div>
+                    <a href="#" class="btn">Purchase Guide</a>
+                </div>
+
+                <div class="bundle-card">
+                    <div>
+                        <h3>Order of Digestion & Enteric Regulation</h3>
+                        <p class="price">$7</p>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary);">A practical handbook focused on balancing the gut-brain axis, optimizing metabolic sequencing, and calming the enteric nervous system to restore true baseline stability.</p>
+                    </div>
+                    <a href="#" class="btn">Purchase Guide</a>
+                </div>
+            </div>
+
+            <div class="bundle-card featured" style="margin-bottom: 40px;">
+                <div>
+                    <h3>The Complete Regulation Bundle</h3>
+                    <p class="price">$10</p>
+                    <p>Acquire both foundational manuals together. This combined resource pairs structural metabolic support with targeted enteric nervous system regulation for a comprehensive approach to somatic wellness.</p>
+                </div>
+                <a href="#" class="btn" style="margin-top: 15px;">Buy the Bundle</a>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>Somatic Healing Sessions</h2>
+            <p>Work directly with me through virtual somatic healing sessions tailored to your nervous system architecture.</p>
+            
+            <div class="rates-box">
+                <ul>
+                    <li><strong>Initial Intake & Assessment Session:</strong> $175</li>
+                    <li><strong>Subsequent Individual Sessions:</strong> $125</li>
+                    <li><strong>Somatic Package (5 Sessions):</strong> $500</li>
+                </ul>
+            </div>
+
+            <a href="#" class="btn-filled">Book a Somatic Healing Session</a>
+        </section>
+
+        <section class="about-section">
+            <h2>Answers to Common Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How is somatic healing different from traditional psychotherapy?</div>
+                <div class="faq-content">
+                    <p>Traditional psychotherapy heavily emphasizes cognitive processing, verbal narrative, clinical pathology, and diagnostic frameworks. Somatic healing focuses directly on structural bodywork and physiological state regulation. Rather than just talking through an experience, we work directly on the body's physical integration of stress and dissociation, physically reattaching the mind to real-time physical feedback.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do you accept insurance?</div>
+                <div class="faq-content">
+                    <p>No, insurance is not accepted for somatic healing services. If you are located within the state of California and strictly require formal mental health psychotherapy, you are welcome to reach out to me directly to discuss traditional therapeutic care pathways under my APCC registration.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What should I expect from the initial sessions?</div>
+                <div class="faq-content">
+                    <p>True physiological changes take time; we generally recommend a baseline commitment of at least five sessions to begin shifting deeply grooved somatic holding patterns. Your initial intake session is dedicated to gathering your unique developmental history and physiological background. From there, you will receive tailored somatic recommendations, digital guides, and introductory movement or breathing exercises to begin tracking your nervous system independently.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 The Neuro-Mechanical Animal. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 5px;">Vivian Mitchell, APCC #16067. Supervised by a licensed clinical professional.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
